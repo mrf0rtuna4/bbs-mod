@@ -1,0 +1,75 @@
+package mchorse.bbs_mod.camera.controller;
+
+import mchorse.bbs_mod.camera.Camera;
+import mchorse.bbs_mod.camera.data.Position;
+
+public class RunnerCameraController extends CameraWorkCameraController
+{
+    public int ticks;
+
+    private float lastTransition = 0;
+    private Position manual;
+    // TODO: private UIFilmPanel panel;
+
+    public RunnerCameraController(/* UIFilmPanel panel */)
+    {
+        super();
+
+        // this.panel = panel;
+        this.context.playing = false;
+    }
+
+    public boolean isRunning()
+    {
+        return this.context.playing;
+    }
+
+    public void toggle(int ticks)
+    {
+        this.context.playing = !this.context.playing;
+        this.ticks = ticks;
+    }
+
+    public void setManual(Position manual)
+    {
+        this.manual = manual;
+
+        if (manual != null)
+        {
+            manual.copy(this.position);
+        }
+    }
+
+    public void update()
+    {
+        if (this.context.playing && this.manual == null)
+        {
+            this.ticks += 1;
+
+            if (this.ticks >= this.context.clips.calculateDuration())
+            {
+                this.context.playing = false;
+            }
+        }
+    }
+
+    @Override
+    public void setup(Camera camera, float transition)
+    {
+        if (this.context.playing)
+        {
+            this.lastTransition = transition;
+        }
+
+        if (this.manual != null)
+        {
+            this.manual.apply(camera);
+        }
+        else if (this.context.clips != null)
+        {
+            this.apply(camera, this.ticks, this.context.playing ? transition : this.lastTransition);
+        }
+
+        // this.panel.getController().handleCamera(camera, transition);
+    }
+}
