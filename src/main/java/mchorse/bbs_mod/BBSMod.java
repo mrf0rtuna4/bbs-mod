@@ -59,8 +59,6 @@ public class BBSMod implements ModInitializer
         FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ActorEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.8F)).build()
     );
 
-    private static Recording recording = new Recording();
-
     /**
      * Main folder, where all the other folders are located.
      */
@@ -156,69 +154,5 @@ public class BBSMod implements ModInitializer
 
         /* Entities */
         FabricDefaultAttributeRegistry.register(ACTOR_ENTITY, ActorEntity.createActorAttributes());
-
-        /* World */
-        ServerTickEvents.START_SERVER_TICK.register((e) -> tickServer());
-        ServerLifecycleEvents.SERVER_STOPPED.register((e) -> recording.reset(null));
-
-        /* Network*/
-        ServerPlayNetworking.registerGlobalReceiver(PLAY_PACKET_ID, (server, player, handler, buf, responseSender) -> handlePlayPacket(server, player));
-        ServerPlayNetworking.registerGlobalReceiver(RECORD_PACKET_ID, (server, player, handler, buf, responseSender) ->
-        {
-            byte[] bytes = buf.readByteArray();
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-
-            try
-            {
-                BaseType baseType = DataStorage.readFromStream(inputStream);
-                Replay replay = new Replay("...");
-
-                replay.fromData(baseType);
-
-                recording.replay = replay;
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private static void tickServer()
-    {
-        recording.serverTick();
-    }
-
-    private static void handlePlayPacket(MinecraftServer server, ServerPlayerEntity player)
-    {
-        double x = player.getX();
-        double y = player.getY();
-        double z = player.getZ();
-        int distance = 10;
-        Box box = new Box(x - distance, y - distance, z - distance, x + distance, y + distance, z + distance);
-        ActorEntity closestActor = server.getOverworld().getClosestEntity(ActorEntity.class, TargetPredicate.DEFAULT, player, distance, distance, distance, box);
-
-        if (recording.state == Recording.State.IDLE && closestActor != null)
-        {
-            player.sendMessage(Text.literal("Started playback!"));
-
-            recording.play(closestActor);
-        }
-    }
-
-    private void handleRecordPacket(ServerPlayerEntity player)
-    {
-        if (recording.state.isIdle())
-        {
-            player.sendMessage(Text.literal("Started recording!"));
-
-            recording.record(player);
-        }
-        else if (recording.state.isRecording())
-        {
-            player.sendMessage(Text.literal("Stopped recording!"));
-
-            recording.state = Recording.State.IDLE;
-        }
     }
 }
