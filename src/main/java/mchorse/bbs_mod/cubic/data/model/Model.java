@@ -1,6 +1,8 @@
 package mchorse.bbs_mod.cubic.data.model;
 
 import mchorse.bbs_mod.math.molang.MolangParser;
+import mchorse.bbs_mod.utils.pose.Pose;
+import mchorse.bbs_mod.utils.pose.PoseTransform;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +51,45 @@ public class Model
             this.nextIndex += 1;
 
             this.fillGroups(group.children);
+        }
+    }
+
+    public void apply(Pose pose)
+    {
+        if (pose.isEmpty())
+        {
+            return;
+        }
+
+        for (Map.Entry<String, PoseTransform> entry : pose.transforms.entrySet())
+        {
+            PoseTransform transform = entry.getValue();
+            ModelGroup group = this.getGroup(entry.getKey());
+
+            if (pose.staticPose)
+            {
+                group.current.copy(group.initial);
+            }
+            else if (transform.fix > 0F)
+            {
+                group.current.lerp(group.initial, transform.fix);
+            }
+
+            if (group != null)
+            {
+                group.current.translate.add(transform.translate);
+                group.current.scale.add(transform.scale).sub(1, 1, 1);
+                group.current.rotate.add(
+                        (float) Math.toDegrees(transform.rotate.x),
+                        (float) Math.toDegrees(transform.rotate.y),
+                        (float) Math.toDegrees(transform.rotate.z)
+                );
+                group.current.rotate2.add(
+                        (float) Math.toDegrees(transform.rotate2.x),
+                        (float) Math.toDegrees(transform.rotate2.y),
+                        (float) Math.toDegrees(transform.rotate2.z)
+                );
+            }
         }
     }
 
