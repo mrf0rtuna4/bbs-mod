@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
@@ -24,22 +23,13 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
-
-import java.lang.reflect.Field;
-import java.util.Collections;
 
 public class BBSModClient implements ClientModInitializer
 {
@@ -48,71 +38,11 @@ public class BBSModClient implements ClientModInitializer
     private static KeyBinding keyPlay;
     private static KeyBinding keyRecord;
 
+    public static boolean lockCamera = false;
+
     public static TextureManager getTextures()
     {
         return textures;
-    }
-
-    public static void handleCameraASM()
-    {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        Camera camera = mc.gameRenderer.getCamera();
-        Entity oldEntity = camera.getFocusedEntity();
-        ClientWorld world = mc.world;
-        LivingEntity entity = new LivingEntity(BBSMod.ACTOR_ENTITY, world)
-        {
-            @Override
-            public Iterable<ItemStack> getArmorItems()
-            {
-                return Collections.emptyList();
-            }
-
-            @Override
-            public ItemStack getEquippedStack(EquipmentSlot slot)
-            {
-                return ItemStack.EMPTY;
-            }
-
-            @Override
-            public void equipStack(EquipmentSlot slot, ItemStack stack)
-            {}
-
-            @Override
-            public Arm getMainArm()
-            {
-                return Arm.RIGHT;
-            }
-        };
-
-        entity.setPosition(0, -59, -5);
-        entity.lastRenderX = 0;
-        entity.lastRenderY = -59;
-        entity.lastRenderZ = -5;
-        entity.prevX = 0;
-        entity.prevY = -59;
-        entity.prevZ = -5;
-        entity.setYaw(0F);
-        entity.prevYaw = 0F;
-        entity.setHeadYaw(0F);
-        entity.prevHeadYaw = 0F;
-        entity.setBodyYaw(0F);
-        entity.prevBodyYaw = 0F;
-        entity.setPitch(0F);
-        entity.prevPitch = 0F;
-
-        camera.update(world, entity, false, false, mc.getTickDelta());
-
-        try
-        {
-            Field focusedEntity = camera.getClass().getDeclaredField("focusedEntity");
-
-            focusedEntity.setAccessible(true);
-            focusedEntity.set(camera, oldEntity);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     @Override

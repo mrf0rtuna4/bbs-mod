@@ -10,9 +10,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GameRenderer.class)
 public class GameRendererMixin
 {
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/Camera;update(Lnet/minecraft/world/BlockView;Lnet/minecraft/entity/Entity;ZZF)V", shift = At.Shift.AFTER), method = "renderWorld")
-    private void run(CallbackInfo info)
+    @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
+    public void onBob(CallbackInfo ci)
     {
-        BBSModClient.handleCameraASM();
+        if (BBSModClient.lockCamera)
+        {
+            ci.cancel();
+        }
     }
 }
