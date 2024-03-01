@@ -3,10 +3,9 @@ package mchorse.bbs_mod.settings.values;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.FloatType;
 import mchorse.bbs_mod.settings.values.base.BaseValueNumber;
-import mchorse.bbs_mod.settings.values.base.IValueUIProvider;
 import mchorse.bbs_mod.utils.math.MathUtils;
 
-public class ValueFloat extends BaseValueNumber<Float> implements IValueUIProvider
+public class ValueFloat extends BaseValueNumber<Float>
 {
     public ValueFloat(String id, Float defaultValue)
     {
@@ -23,16 +22,6 @@ public class ValueFloat extends BaseValueNumber<Float> implements IValueUIProvid
     {
         return MathUtils.clamp(value, this.min, this.max);
     }
-
-//    @Override
-//    public List<UIElement> getFields(UIElement ui)
-//    {
-//        UITrackpad trackpad = UIValueFactory.floatUI(this, null);
-//
-//        trackpad.w(90);
-//
-//        return Arrays.asList(UIValueFactory.column(trackpad, this));
-//    }
 
     @Override
     public BaseType toData()

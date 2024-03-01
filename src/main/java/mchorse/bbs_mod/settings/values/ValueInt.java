@@ -4,14 +4,13 @@ import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.IntType;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.settings.values.base.BaseValueNumber;
-import mchorse.bbs_mod.settings.values.base.IValueUIProvider;
 import mchorse.bbs_mod.utils.math.MathUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ValueInt extends BaseValueNumber<Integer> implements IValueUIProvider
+public class ValueInt extends BaseValueNumber<Integer>
 {
     private Subtype subtype = Subtype.INTEGER;
     private List<IKey> labels;
@@ -35,6 +34,11 @@ public class ValueInt extends BaseValueNumber<Integer> implements IValueUIProvid
     public Subtype getSubtype()
     {
         return this.subtype;
+    }
+
+    public List<IKey> getLabels()
+    {
+        return this.labels;
     }
 
     public ValueInt subtype(Subtype subtype)
@@ -61,40 +65,6 @@ public class ValueInt extends BaseValueNumber<Integer> implements IValueUIProvid
 
         return this.subtype(Subtype.MODES);
     }
-
-//    @Override
-//    public List<UIElement> getFields(UIElement ui)
-//    {
-//        if (this.subtype == Subtype.COLOR || this.subtype == Subtype.COLOR_ALPHA)
-//        {
-//            UIColor color = UIValueFactory.colorUI(this, null);
-//
-//            color.w(90);
-//
-//            return Arrays.asList(UIValueFactory.column(color, this));
-//        }
-//        else if (this.subtype == Subtype.MODES)
-//        {
-//            UICirculate button = new UICirculate(null);
-//
-//            for (IKey key : this.labels)
-//            {
-//                button.addLabel(key);
-//            }
-//
-//            button.callback = (b) -> this.set(button.getValue());
-//            button.setValue(this.get());
-//            button.w(90);
-//
-//            return Arrays.asList(UIValueFactory.column(button, this));
-//        }
-//
-//        UITrackpad trackpad = UIValueFactory.intUI(this, null);
-//
-//        trackpad.w(90);
-//
-//        return Arrays.asList(UIValueFactory.column(trackpad, this));
-//    }
 
     @Override
     public BaseType toData()

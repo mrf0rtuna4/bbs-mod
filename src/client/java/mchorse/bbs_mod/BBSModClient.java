@@ -1,9 +1,13 @@
 package mchorse.bbs_mod;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import mchorse.bbs_mod.audio.SoundManager;
 import mchorse.bbs_mod.client.renderer.ActorEntityRenderer;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
+import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.ui.TestScreen;
+import mchorse.bbs_mod.ui.utils.icons.Icons;
+import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -31,9 +35,13 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
+import java.io.File;
+
 public class BBSModClient implements ClientModInitializer
 {
     private static TextureManager textures;
+    private static SoundManager sounds;
+    private static L10n l10n;
 
     private static KeyBinding keyPlay;
     private static KeyBinding keyRecord;
@@ -45,10 +53,26 @@ public class BBSModClient implements ClientModInitializer
         return textures;
     }
 
+    public static SoundManager getSounds()
+    {
+        return sounds;
+    }
+
+    public static L10n getL10n()
+    {
+        return l10n;
+    }
+
     @Override
     public void onInitializeClient()
     {
         textures = new TextureManager(BBSMod.getProvider());
+        sounds = new SoundManager(BBSMod.getProvider());
+        l10n = new L10n();
+
+        KeybindSettings.registerClasses();
+
+        BBSMod.setupConfig(Icons.KEY_CAP, "keybinds", new File(BBSMod.getSettingsFolder(), "keybinds.json"), KeybindSettings::register);
 
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(

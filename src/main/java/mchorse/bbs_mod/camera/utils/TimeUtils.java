@@ -37,16 +37,4 @@ public class TimeUtils
     {
         return BBSSettings.editorSeconds.get() ? (int) Math.round(time * 20) : (int) time;
     }
-
-    /* TODO: public static void configure(UITrackpad element, int defaultValue)
-    {
-        if (BBSSettings.editorSeconds.get())
-        {
-            element.values(0.1D, 0.05D, 0.25D).limit(defaultValue / 20D, Double.POSITIVE_INFINITY, false);
-        }
-        else
-        {
-            element.values(1.0D).limit(defaultValue, Double.POSITIVE_INFINITY, true);
-        }
-    } */
 }

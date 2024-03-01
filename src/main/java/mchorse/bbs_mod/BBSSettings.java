@@ -1,5 +1,6 @@
 package mchorse.bbs_mod;
 
+import mchorse.bbs_mod.film.tts.ValueVoiceColors;
 import mchorse.bbs_mod.settings.SettingsBuilder;
 import mchorse.bbs_mod.settings.values.ValueBoolean;
 import mchorse.bbs_mod.settings.values.ValueColors;
@@ -70,6 +71,9 @@ public class BBSSettings
     public static ValueInt audioWaveformHeight;
     public static ValueBoolean audioWaveformFilename;
     public static ValueBoolean audioWaveformTime;
+
+    public static ValueString elevenLabsToken;
+    public static ValueVoiceColors elevenVoiceColors;
 
     public static int primaryColor()
     {
@@ -181,5 +185,11 @@ public class BBSSettings
         audioWaveformHeight = builder.getInt("waveform_height", 24, 10, 40);
         audioWaveformFilename = builder.getBoolean("waveform_filename", false);
         audioWaveformTime = builder.getBoolean("waveform_time", false);
+
+        builder.category("elevenlabs");
+        elevenLabsToken = builder.getString("token", "");
+        elevenVoiceColors = new ValueVoiceColors("colors");
+
+        builder.register(elevenVoiceColors);
     }
 }

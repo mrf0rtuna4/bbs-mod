@@ -1,29 +1,10 @@
 package mchorse.bbs_mod.l10n.keys;
 
-import mchorse.bbs_mod.BBSMod;
-
 import java.util.List;
 
 public interface IKey
 {
     public static final IKey EMPTY = new StringKey("");
-
-    public static IKey lang(String key)
-    {
-        return BBSMod.getL10n().getKey(key);
-    }
-
-    public static IKey lang(String key, String content, IKey reference)
-    {
-        LangKey langKey = BBSMod.getL10n().getKey(key, content);
-
-        if (reference instanceof LangKey)
-        {
-            langKey.reference = (LangKey) reference;
-        }
-
-        return langKey;
-    }
 
     /**
      * This method is used to create an IKey that contains raw string data.

@@ -3,10 +3,9 @@ package mchorse.bbs_mod.settings.values;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.LongType;
 import mchorse.bbs_mod.settings.values.base.BaseValueNumber;
-import mchorse.bbs_mod.settings.values.base.IValueUIProvider;
 import mchorse.bbs_mod.utils.math.MathUtils;
 
-public class ValueLong extends BaseValueNumber<Long> implements IValueUIProvider
+public class ValueLong extends BaseValueNumber<Long>
 {
     public ValueLong(String id, Long defaultValue)
     {
@@ -23,16 +22,6 @@ public class ValueLong extends BaseValueNumber<Long> implements IValueUIProvider
     {
         return MathUtils.clamp(value, this.min, this.max);
     }
-
-//    @Override
-//    public List<UIElement> getFields(UIElement ui)
-//    {
-//        UITrackpad trackpad = UIValueFactory.longUI(this, null);
-//
-//        trackpad.w(90);
-//
-//        return Arrays.asList(UIValueFactory.column(trackpad, this));
-//    }
 
     @Override
     public BaseType toData()

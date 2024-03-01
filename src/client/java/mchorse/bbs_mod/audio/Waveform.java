@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.audio;
 
 import mchorse.bbs_mod.graphics.texture.Texture;
+import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.resources.Pixels;
 import org.lwjgl.opengl.GL11;
@@ -182,7 +183,7 @@ public class Waveform
     /**
      * Draw the waveform out of multiple sprites of desired cropped region
      */
-    /* TODO: public void render(Batcher2D batcher, int color, int x, int y, int w, int h, float startTime, float endTime)
+    public void render(Batcher2D batcher, int color, int x, int y, int w, int h, float startTime, float endTime)
     {
         float offset = 0;
 
@@ -206,5 +207,5 @@ public class Waveform
             offset = spriteEnd;
             x += u2 - u1;
         }
-    } */
+    }
 }

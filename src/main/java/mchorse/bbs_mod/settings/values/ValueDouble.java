@@ -3,10 +3,9 @@ package mchorse.bbs_mod.settings.values;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.DoubleType;
 import mchorse.bbs_mod.settings.values.base.BaseValueNumber;
-import mchorse.bbs_mod.settings.values.base.IValueUIProvider;
 import mchorse.bbs_mod.utils.math.MathUtils;
 
-public class ValueDouble extends BaseValueNumber<Double> implements IValueUIProvider
+public class ValueDouble extends BaseValueNumber<Double>
 {
     public ValueDouble(String id, Double defaultValue)
     {
@@ -23,16 +22,6 @@ public class ValueDouble extends BaseValueNumber<Double> implements IValueUIProv
     {
         return MathUtils.clamp(value, this.min, this.max);
     }
-
-//    @Override
-//    public List<UIElement> getFields(UIElement ui)
-//    {
-//        UITrackpad trackpad = UIValueFactory.doubleUI(this, null);
-//
-//        trackpad.w(90);
-//
-//        return Arrays.asList(UIValueFactory.column(trackpad, this));
-//    }
 
     @Override
     public BaseType toData()
