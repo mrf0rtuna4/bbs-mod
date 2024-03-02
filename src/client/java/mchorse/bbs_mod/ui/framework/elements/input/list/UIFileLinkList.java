@@ -1,6 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.input.list;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -63,7 +63,7 @@ public class UIFileLinkList extends UIList<UIFileLinkList.FileLink>
         {
             this.clear();
 
-            for (String source : BBS.getProvider().getSourceKeys())
+            for (String source : BBSMod.getProvider().getSourceKeys())
             {
                 this.add(new FileLink(source, new Link(source, ""), true));
             }
@@ -74,7 +74,7 @@ public class UIFileLinkList extends UIList<UIFileLinkList.FileLink>
         }
         else
         {
-            Collection<Link> links = BBS.getProvider().getLinksFromPath(link, false);
+            Collection<Link> links = BBSMod.getProvider().getLinksFromPath(link, false);
 
             if (fastForward && links.size() == 1)
             {

@@ -215,7 +215,7 @@ public abstract class UIBaseMenu
     protected void preRenderMenu(UIRenderingContext context)
     {}
 
-    public void renderInWorld(RenderingContext context)
+    public void renderInWorld()
     {}
 
     public static class UIRootElement extends UIElement implements IViewport

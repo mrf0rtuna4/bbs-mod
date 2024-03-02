@@ -2,6 +2,7 @@ package mchorse.bbs_mod.camera.controller;
 
 import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.camera.data.Position;
+import mchorse.bbs_mod.ui.film.UIFilmPanel;
 
 public class RunnerCameraController extends CameraWorkCameraController
 {
@@ -9,13 +10,13 @@ public class RunnerCameraController extends CameraWorkCameraController
 
     private float lastTransition = 0;
     private Position manual;
-    // TODO: private UIFilmPanel panel;
+    private UIFilmPanel panel;
 
-    public RunnerCameraController(/* UIFilmPanel panel */)
+    public RunnerCameraController(UIFilmPanel panel)
     {
         super();
 
-        // this.panel = panel;
+        this.panel = panel;
         this.context.playing = false;
     }
 
@@ -70,6 +71,6 @@ public class RunnerCameraController extends CameraWorkCameraController
             this.apply(camera, this.ticks, this.context.playing ? transition : this.lastTransition);
         }
 
-        // this.panel.getController().handleCamera(camera, transition);
+        this.panel.getController().handleCamera(camera, transition);
     }
 }

@@ -1,19 +1,15 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
+import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.camera.Camera;
-import mchorse.bbs_mod.graphics.GLStates;
-import mchorse.bbs_mod.graphics.MatrixStack;
-import mchorse.bbs_mod.graphics.shaders.CommonShaderAccess;
-import mchorse.bbs_mod.graphics.shaders.Shader;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
+import mchorse.bbs_mod.entity.ActorEntity;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
-import mchorse.bbs_mod.utils.joml.Matrices;
+import mchorse.bbs_mod.utils.joml.Vectors;
 import mchorse.bbs_mod.utils.math.MathUtils;
-import mchorse.bbs_mod.world.entities.Entity;
-import mchorse.bbs_mod.world.entities.architect.EntityArchitect;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
 import org.joml.Intersectiond;
 import org.joml.Matrix3d;
 import org.joml.Vector3d;
@@ -65,8 +61,8 @@ public abstract class UIModelRenderer extends UIElement
     {
         super();
 
-        this.entity = EntityArchitect.createDummy();
-        this.entity.basic.grounded = true;
+        this.entity = new ActorEntity(BBSMod.ACTOR_ENTITY, null);
+        this.entity.setOnGround(true);
         this.reset();
     }
 
@@ -168,7 +164,7 @@ public abstract class UIModelRenderer extends UIElement
     {
         this.updateLogic(context);
 
-        Camera camera = context.render.getCamera();
+        /* TODO: Camera camera = context.render.getCamera();
 
         context.render.setCamera(this.camera);
         rendering = true;
@@ -181,7 +177,7 @@ public abstract class UIModelRenderer extends UIElement
 
         context.render.setCamera(camera);
 
-        super.render(context);
+        super.render(context); */
     }
 
     private void updateLogic(UIContext context)
@@ -209,7 +205,7 @@ public abstract class UIModelRenderer extends UIElement
     protected void update()
     {
         this.timer += 1;
-        this.entity.basic.ticks = this.timer;
+        this.entity.age = this.timer;
     }
 
     /**
@@ -217,13 +213,13 @@ public abstract class UIModelRenderer extends UIElement
      */
     private void renderModel(UIContext context)
     {
-        GLStates.setupDepthFunction3D();
+        /* TODO: GLStates.setupDepthFunction3D();
 
         this.setupPosition(context);
         this.setupViewport(context);
 
         /* Drawing begins */
-        context.render.getUBO().update(this.camera.projection, this.camera.view);
+        /* context.render.getUBO().update(this.camera.projection, this.camera.view);
 
         MatrixStack stack = context.render.stack;
 
@@ -240,11 +236,11 @@ public abstract class UIModelRenderer extends UIElement
         stack.pop();
 
         /* Return back to orthographic projection */
-        GLStates.resetViewport();
+        /* GLStates.resetViewport();
 
         context.render.getUBO().update(context.render.projection, Matrices.EMPTY_4F);
 
-        GLStates.setupDepthFunction2D();
+        GLStates.setupDepthFunction2D(); */
     }
 
     protected void setupPosition(UIContext context)
@@ -292,7 +288,7 @@ public abstract class UIModelRenderer extends UIElement
     {
         Vector3d vector = new Vector3d();
         Vector3d origin = new Vector3d(this.cachedCamera.position).sub(this.cachedPos);
-        Vector3d destination = new Vector3d(this.cachedCamera.getMouseDirection(context.mouseX, context.mouseY, this.area)).mul(this.distance * 2).add(origin);
+        Vector3d destination = Vectors.EMPTY_3D; // TODO: new Vector3d(this.cachedCamera.getMouseDirection(context.mouseX, context.mouseY, this.area)).mul(this.distance * 2).add(origin);
         Intersectiond.intersectLineSegmentPlane(origin.x, origin.y, origin.z, destination.x, destination.y, destination.z, this.plane.x, this.plane.y, this.plane.z, 0, vector);
 
         return vector;
@@ -310,11 +306,13 @@ public abstract class UIModelRenderer extends UIElement
     {
         GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
 
-        float rx = (float) Math.round(Window.width / (double) context.menu.width);
-        float ry = (float) Math.round(Window.height / (double) context.menu.height);
+        MinecraftClient mc = MinecraftClient.getInstance();
+
+        float rx = (float) Math.round(mc.getWindow().getWidth() / (double) context.menu.width);
+        float ry = (float) Math.round(mc.getWindow().getHeight() / (double) context.menu.height);
 
         int vx = (int) (this.area.x * rx);
-        int vy = (int) (Window.height - (this.area.y + this.area.h) * ry);
+        int vy = (int) (mc.getWindow().getHeight() - (this.area.y + this.area.h) * ry);
         int vw = (int) (this.area.w * rx);
         int vh = (int) (this.area.h * ry);
 
@@ -322,7 +320,7 @@ public abstract class UIModelRenderer extends UIElement
         this.camera.updatePerspectiveProjection(vw, vh);
         this.camera.updateView();
 
-        context.render.stack.reset();
+        // TODO: context.render.stack.reset();
     }
 
     /**
@@ -336,7 +334,7 @@ public abstract class UIModelRenderer extends UIElement
      */
     protected void renderGrid(UIContext context)
     {
-        Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA);
+        /* TODO: Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA);
         VAOBuilder builder = context.render.getVAO().setup(shader);
 
         CommonShaderAccess.setModelView(shader, context.render.stack);
@@ -370,6 +368,6 @@ public abstract class UIModelRenderer extends UIElement
             }
         }
 
-        builder.render(GL11.GL_LINES);
+        builder.render(GL11.GL_LINES); */
     }
 }

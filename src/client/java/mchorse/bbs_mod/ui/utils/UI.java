@@ -1,10 +1,9 @@
 package mchorse.bbs_mod.ui.utils;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.UIKeys;
-import mchorse.bbs_mod.ui.film.utils.UICameraUtils;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
@@ -70,7 +69,7 @@ public class UI
 
     public static UILabel label(IKey label)
     {
-        return label(label, BBS.getRender().getFont().getHeight());
+        return label(label, BBSModClient.getDefaultFont().getHeight());
     }
 
     public static UILabel label(IKey label, int height)
@@ -128,7 +127,7 @@ public class UI
                     action = menu.action(Icons.ADD, UIKeys.C_INTERPOLATION.get(interpolation.key), () -> consumer.accept(interpolation));
                 }
 
-                interpolation.setupKeybind(action, UICameraUtils.KEYS_CATEGORY);
+                // TODO: interpolation.setupKeybind(action, UICameraUtils.KEYS_CATEGORY);
             }
         });
     }

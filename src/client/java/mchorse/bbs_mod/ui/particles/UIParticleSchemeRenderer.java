@@ -1,14 +1,6 @@
 package mchorse.bbs_mod.ui.particles;
 
-import mchorse.bbs_mod.graphics.Draw;
-import mchorse.bbs_mod.graphics.GLStates;
-import mchorse.bbs_mod.graphics.RenderingContext;
-import mchorse.bbs_mod.graphics.shaders.CommonShaderAccess;
-import mchorse.bbs_mod.graphics.shaders.Shader;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.particles.ParticleScheme;
-import mchorse.bbs_mod.particles.components.expiration.ParticleComponentKillPlane;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.utils.UIModelRenderer;
@@ -53,7 +45,7 @@ public class UIParticleSchemeRenderer extends UIModelRenderer
             return;
         }
 
-        this.emitter.setupCameraProperties(this.camera);
+        /* TODO: this.emitter.setupCameraProperties(this.camera);
         this.emitter.rotation.identity();
 
         Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_NORMAL_UV_LIGHT_RGBA);
@@ -66,10 +58,10 @@ public class UIParticleSchemeRenderer extends UIModelRenderer
         if (plane.a != 0 || plane.b != 0 || plane.c != 0)
         {
             this.renderPlane(context.render, plane.a, plane.b, plane.c, plane.d);
-        }
+        } */
     }
 
-    private void renderPlane(RenderingContext context, float a, float b, float c, float d)
+    /* TODO: private void renderPlane(RenderingContext context, float a, float b, float c, float d)
     {
         Shader basic = context.getShaders().get(VBOAttributes.VERTEX_RGBA);
         VAOBuilder buffer = context.getVAO().setup(basic);
@@ -131,5 +123,5 @@ public class UIParticleSchemeRenderer extends UIModelRenderer
         builder.begin();
         Draw.axis(builder, 1F, 0.01F);
         builder.render();
-    }
+    } */
 }

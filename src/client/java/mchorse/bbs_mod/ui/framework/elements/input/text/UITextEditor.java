@@ -1,6 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.resources.Link;
@@ -38,7 +38,7 @@ public class UITextEditor extends UITextarea<HighlightedTextLine>
     @Override
     protected FontRenderer getFont()
     {
-        return BBS.getFonts().getRenderer(Link.assets("fonts/bbs_round_mono.json"));
+        return BBSModClient.getFonts().getRenderer(Link.assets("fonts/bbs_round_mono.json"));
     }
 
     public UITextEditor highlighter(ISyntaxHighlighter highlighter)

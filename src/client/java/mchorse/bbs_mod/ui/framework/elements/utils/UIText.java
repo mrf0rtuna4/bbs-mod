@@ -1,6 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
@@ -46,7 +46,7 @@ public class UIText extends UIElement implements ITextColoring
 
     private int height()
     {
-        FontRenderer font = BBS.getRender().getFont();
+        FontRenderer font = BBSModClient.getDefaultFont();
         int height = Math.max(this.lines, 1) * this.lineHeight - (this.lineHeight - font.getHeight());
 
         return height + this.paddingV * 2;

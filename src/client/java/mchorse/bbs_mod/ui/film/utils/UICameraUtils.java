@@ -40,14 +40,14 @@ public class UICameraUtils
 
                 if (interpolation == current)
                 {
-                    action = menu.action(Icons.ADD, interpolation.getName(), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
                 }
                 else
                 {
-                    action = menu.action(Icons.ADD, interpolation.getName(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), () -> consumer.accept(interpolation));
                 }
 
-                interpolation.setupKeybind(action, KEYS_CATEGORY);
+                // TODO: interpolation.setupKeybind(action, KEYS_CATEGORY);
             }
         });
     }
@@ -62,16 +62,17 @@ public class UICameraUtils
             {
                 ContextAction action;
 
+                // TODO: Fix names
                 if (interpolation == current)
                 {
-                    action = menu.action(Icons.ADD, interpolation.getName(), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
                 }
                 else
                 {
-                    action = menu.action(Icons.ADD, interpolation.getName(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), () -> consumer.accept(interpolation));
                 }
 
-                interpolation.setupKeybind(action, KEYS_CATEGORY);
+                // TODO: interpolation.setupKeybind(action, KEYS_CATEGORY);
             }
         });
     }

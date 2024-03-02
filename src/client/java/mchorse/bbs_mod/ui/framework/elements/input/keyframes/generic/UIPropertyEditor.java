@@ -420,7 +420,7 @@ public class UIPropertyEditor extends UIElement
             this.editor = null;
         }
 
-        this.editor = frame.getFactory().createUI(frame, this);
+        this.editor = null; //TODO: frame.getFactory().createUI(frame, this);
 
         if (this.editor != null)
         {

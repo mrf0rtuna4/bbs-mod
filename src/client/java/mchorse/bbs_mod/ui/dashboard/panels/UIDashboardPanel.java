@@ -1,6 +1,5 @@
 package mchorse.bbs_mod.ui.dashboard.panels;
 
-import mchorse.bbs_mod.graphics.RenderingContext;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 
@@ -49,6 +48,6 @@ public class UIDashboardPanel extends UIElement
     public void update()
     {}
 
-    public void renderInWorld(RenderingContext context)
+    public void renderInWorld()
     {}
 }

@@ -76,7 +76,7 @@ public class UIScreenplayEditor extends UIElement
         this.masterBar = UI.row(this.master, this.save, this.subtitles, this.generate);
         this.masterBar.relative(this).x(10).y(10).w(1F, -20).h(20);
 
-        this.editor = new UIClipsPanel(panel, BBS.getFactoryScreenplayClips());
+        this.editor = new UIClipsPanel(panel, BBSMod.getFactoryScreenplayClips());
         this.editor.relative(this).y(40).w(1F).h(1F, -40);
         this.editor.clips.context((menu) ->
         {
@@ -125,7 +125,7 @@ public class UIScreenplayEditor extends UIElement
         ElevenLabsAPI.generateStandard(context, UIFilmPanel.getVoiceLines().getFolder(), clips, (result) ->
         {
             /* Post runnable is necessary because callback is calling from non-main thread */
-            context.render.postRunnable(() ->
+            BBSMod.schedule(() ->
             {
                 if (result.clip != null && result.status == ElevenLabsResult.Status.GENERATED)
                 {

@@ -1,6 +1,6 @@
 package mchorse.bbs_mod.ui.utils;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.graphics.Framebuffer;
@@ -52,7 +52,7 @@ public class StencilFormFramebuffer
             return;
         }
 
-        this.framebuffer = BBS.getFramebuffers().getFramebuffer(id, (framebuffer) ->
+        this.framebuffer = BBSModClient.getFramebuffers().getFramebuffer(id, (framebuffer) ->
         {
             Texture texture = new Texture();
 
@@ -88,7 +88,7 @@ public class StencilFormFramebuffer
     public void apply(UIContext context)
     {
         context.render.getStencil().setup();
-        context.render.setShaders(context.render.getPickingShaders());
+        // TODO: context.render.setShaders(context.render.getPickingShaders());
 
         this.apply();
     }
@@ -135,7 +135,7 @@ public class StencilFormFramebuffer
         this.indexMap.clear();
         this.indexMap.putAll(context.render.getStencil().indexMap);
 
-        context.render.setShaders(null);
+        // TODO: context.render.setShaders(null);
         context.render.getStencil().reset();
     }
 

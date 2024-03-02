@@ -3,11 +3,25 @@ package mchorse.bbs_mod;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.audio.SoundManager;
 import mchorse.bbs_mod.client.renderer.ActorEntityRenderer;
+import mchorse.bbs_mod.forms.categories.FormCategories;
+import mchorse.bbs_mod.graphics.FramebufferManager;
+import mchorse.bbs_mod.graphics.text.FontManager;
+import mchorse.bbs_mod.graphics.text.FontRenderer;
+import mchorse.bbs_mod.graphics.text.format.BoldFontFormat;
+import mchorse.bbs_mod.graphics.text.format.ColorFontFormat;
+import mchorse.bbs_mod.graphics.text.format.IFontFormat;
+import mchorse.bbs_mod.graphics.text.format.ItalicFontFormat;
+import mchorse.bbs_mod.graphics.text.format.RainbowFontFormat;
+import mchorse.bbs_mod.graphics.text.format.ResetFontFormat;
+import mchorse.bbs_mod.graphics.text.format.ShakeFontFormat;
+import mchorse.bbs_mod.graphics.text.format.WaveFontFormat;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
+import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.TestScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
+import mchorse.bbs_mod.utils.factory.MapFactory;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -40,8 +54,15 @@ import java.io.File;
 public class BBSModClient implements ClientModInitializer
 {
     private static TextureManager textures;
+    private static FontManager fonts;
+    private static FramebufferManager framebuffers;
     private static SoundManager sounds;
     private static L10n l10n;
+
+    private static FontRenderer defaultFont;
+    private static FormCategories formCategories;
+
+    private static MapFactory<IFontFormat, Void> factoryFontFormats;
 
     private static KeyBinding keyPlay;
     private static KeyBinding keyRecord;
@@ -51,6 +72,16 @@ public class BBSModClient implements ClientModInitializer
     public static TextureManager getTextures()
     {
         return textures;
+    }
+
+    public static FontManager getFonts()
+    {
+        return fonts;
+    }
+
+    public static FramebufferManager getFramebuffers()
+    {
+        return framebuffers;
     }
 
     public static SoundManager getSounds()
@@ -63,16 +94,48 @@ public class BBSModClient implements ClientModInitializer
         return l10n;
     }
 
+    public static FormCategories getFormCategories()
+    {
+        return formCategories;
+    }
+
+    public static FontRenderer getDefaultFont()
+    {
+        return defaultFont;
+    }
+
+    public static MapFactory<IFontFormat, Void> getFactoryFontFormats()
+    {
+        return factoryFontFormats;
+    }
+
     @Override
     public void onInitializeClient()
     {
         textures = new TextureManager(BBSMod.getProvider());
+        fonts = new FontManager(BBSMod.getProvider());
+        framebuffers = new FramebufferManager();
         sounds = new SoundManager(BBSMod.getProvider());
         l10n = new L10n();
+
+        formCategories = new FormCategories();
+        formCategories.setup();
+
+        defaultFont = fonts.getRenderer(Link.assets("fonts/bbs_round.json"));
 
         KeybindSettings.registerClasses();
 
         BBSMod.setupConfig(Icons.KEY_CAP, "keybinds", new File(BBSMod.getSettingsFolder(), "keybinds.json"), KeybindSettings::register);
+
+        /* Register entity components */
+        factoryFontFormats = new MapFactory<IFontFormat, Void>()
+            .register(Link.bbs("color"), ColorFontFormat.class, null)
+            .register(Link.bbs("italic"), ItalicFontFormat.class, null)
+            .register(Link.bbs("bold"), BoldFontFormat.class, null)
+            .register(Link.bbs("reset"), ResetFontFormat.class, null)
+            .register(Link.bbs("rainbow"), RainbowFontFormat.class, null)
+            .register(Link.bbs("shake"), ShakeFontFormat.class, null)
+            .register(Link.bbs("wave"), WaveFontFormat.class, null);
 
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(

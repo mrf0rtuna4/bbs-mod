@@ -1,11 +1,5 @@
 package mchorse.bbs_mod.ui.utils.renderers;
 
-import mchorse.bbs_mod.graphics.line.LineBuilder;
-import mchorse.bbs_mod.graphics.line.SolidColorLineRenderer;
-import mchorse.bbs_mod.graphics.shaders.CommonShaderAccess;
-import mchorse.bbs_mod.graphics.shaders.Shader;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.tooltips.styles.TooltipStyle;
 import mchorse.bbs_mod.ui.utils.Area;
@@ -13,7 +7,6 @@ import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.IInterpolation;
 import mchorse.bbs_mod.utils.math.MathUtils;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -35,7 +28,7 @@ public class InterpolationRenderer
         int h = 130;
 
         TooltipStyle style = TooltipStyle.get();
-        String tooltip = interp.getTooltip().get();
+        String tooltip = ""; // TODO: interp.getTooltip().get();
         List<String> lines = context.font.split(tooltip, w - 20);
         int ah = lines.isEmpty() ? 0 : lines.size() * (context.font.getHeight() + 4);
 
@@ -55,14 +48,16 @@ public class InterpolationRenderer
 
         fg.a = 0.2F;
 
-        context.batcher.textShadow(interp.getName().get(), x + 10, y + 10, font);
+        String name = ""; // TODO: interp.getName().get();
+
+        context.batcher.textShadow(name, x + 10, y + 10, font);
 
         for (int i = 0; i < lines.size(); i++)
         {
             context.batcher.textShadow(lines.get(i), x + 10, y + h - 5 + i * (context.font.getHeight() + 4), font);
         }
 
-        Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA_2D);
+        /* Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA_2D);
         VAOBuilder builder = context.batcher.begin(GL11.GL_LINES, shader, null);
 
         CommonShaderAccess.setModelView(shader);
@@ -101,7 +96,7 @@ public class InterpolationRenderer
             line.add(x1, y1);
         }
 
-        line.render(context.batcher, SolidColorLineRenderer.get(fg));
+        line.render(context.batcher, SolidColorLineRenderer.get(fg)); */
 
         context.batcher.text("A", x + 14, (int)(y + h - 10 - padding / 2) + 4, font);
         context.batcher.text("B", x + w - 19, (int)(y + 20 + padding / 2) - context.font.getHeight() - 4, font);

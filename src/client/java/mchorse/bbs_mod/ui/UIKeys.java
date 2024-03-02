@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui;
 
+import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.l10n.keys.KeyCollection;
@@ -759,7 +760,7 @@ public class UIKeys
 
     /* Key collections */
     public static final KeyCollection C_CLIP = new KeyCollection("bbs.ui.camera.clips.^")
-        .load(BBS.getFactoryCameraClips().getStringKeys());
+        .load(BBSMod.getFactoryCameraClips().getStringKeys());
     public static final KeyCollection C_CURVE_TYPE = new KeyCollection("bbs.ui.snowstorm.curves.types.^")
         .load(EnumUtils.getKeys(ParticleCurveType.class, (c) -> c.id));
     public static final KeyCollection C_INTERPOLATION = new KeyCollection("interpolations.^")

@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text;
 
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.IFocusedUIElement;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
@@ -14,7 +15,7 @@ public abstract class UIBaseTextbox extends UIElement implements IFocusedUIEleme
         super();
 
         this.textbox = new Textbox(this::userInput);
-        this.textbox.setFont(BBS.getRender().getFont());
+        this.textbox.setFont(BBSModClient.getDefaultFont());
     }
 
     protected void userInput(String string)

@@ -1,11 +1,11 @@
 package mchorse.bbs_mod.ui.framework.elements.input;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSMod;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.MapType;
 import mchorse.bbs_mod.graphics.texture.Texture;
-import mchorse.bbs_mod.graphics.window.IFileDropListener;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
@@ -43,7 +43,7 @@ import java.util.function.Consumer;
  * This bad boy allows picking a texture from the file browser, and also 
  * it allows creating multi-skins. See {@link MultiLink} for more information.
  */
-public class UITexturePicker extends UIElement implements IFileDropListener
+public class UITexturePicker extends UIElement
 {
     public UIElement right;
     public UITextbox text;
@@ -209,10 +209,9 @@ public class UITexturePicker extends UIElement implements IFileDropListener
         }
     }
 
-    @Override
     public void acceptFilePaths(String[] paths)
     {
-        File target = BBS.getProvider().getFile(this.picker.path);
+        File target = BBSMod.getProvider().getFile(this.picker.path);
 
         if (target == null || !target.isDirectory())
         {
@@ -250,7 +249,7 @@ public class UITexturePicker extends UIElement implements IFileDropListener
 
     public void openFolder()
     {
-        File target = BBS.getProvider().getFile(this.picker.path);
+        File target = BBSMod.getProvider().getFile(this.picker.path);
 
         if (target != null && target.isDirectory())
         {
@@ -292,7 +291,7 @@ public class UITexturePicker extends UIElement implements IFileDropListener
 
     public void updateFolderButton()
     {
-        File target = BBS.getProvider().getFile(this.picker.path);
+        File target = BBSMod.getProvider().getFile(this.picker.path);
 
         this.folder.setEnabled(target != null && target.isDirectory());
     }
@@ -372,7 +371,7 @@ public class UITexturePicker extends UIElement implements IFileDropListener
      */
     protected void selectCurrent(Link link)
     {
-        if (link != null && !BBS.getTextures().has(link))
+        if (link != null && !BBSModClient.getTextures().has(link))
         {
             return;
         }
@@ -570,7 +569,7 @@ public class UITexturePicker extends UIElement implements IFileDropListener
         /* Refresh the list */
         if (this.lastChecked.checkRepeat())
         {
-            File file = BBS.getProvider().getFile(this.picker.path);
+            File file = BBSMod.getProvider().getFile(this.picker.path);
             int scroll = this.picker.scroll.scroll;
 
             if (file != null)

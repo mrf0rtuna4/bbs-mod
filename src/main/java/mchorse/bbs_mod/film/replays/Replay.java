@@ -1,15 +1,22 @@
 package mchorse.bbs_mod.film.replays;
 
+import mchorse.bbs_mod.forms.FormUtils;
+import mchorse.bbs_mod.forms.forms.Form;
+import mchorse.bbs_mod.forms.properties.IFormProperty;
+import mchorse.bbs_mod.settings.values.ValueForm;
 import mchorse.bbs_mod.settings.values.ValueGroup;
+import mchorse.bbs_mod.settings.values.base.BaseValue;
+import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeChannel;
+import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeSegment;
 import net.minecraft.entity.LivingEntity;
 
 import java.util.List;
 
 public class Replay extends ValueGroup
 {
-    // public final ValueForm form = new ValueForm("form");
+    public final ValueForm form = new ValueForm("form");
     public final ReplayKeyframes keyframes = new ReplayKeyframes("keyframes");
-    // public final FormProperties properties = new FormProperties("properties");
+    public final FormProperties properties = new FormProperties("properties");
 
     public Replay(String id)
     {
@@ -30,9 +37,9 @@ public class Replay extends ValueGroup
         this.keyframes.apply(tick, actor, groups);
     }
 
-    /* TODO: public void applyProperties(int tick, LivingEntity entity, boolean playing)
+    public void applyProperties(int tick, LivingEntity entity, boolean playing)
     {
-        Form form = entity.get(FormComponent.class).form;
+        Form form = null; // TODO: entity.get(FormComponent.class).form;
 
         if (form == null)
         {
@@ -84,5 +91,5 @@ public class Replay extends ValueGroup
                 }
             }
         }
-    } */
+    }
 }

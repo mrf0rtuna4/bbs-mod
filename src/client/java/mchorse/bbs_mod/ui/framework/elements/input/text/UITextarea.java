@@ -1,12 +1,9 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.graphics.shaders.Shader;
 import mchorse.bbs_mod.graphics.text.FontRenderer;
-import mchorse.bbs_mod.graphics.vao.VAO;
 import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.IFocusedUIElement;
@@ -110,7 +107,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
 
     protected FontRenderer getFont()
     {
-        return BBS.getRender().getFont();
+        return BBSModClient.getDefaultFont();
     }
 
     public UITextarea<T> background()
@@ -1376,7 +1373,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
 
         context.batcher.flush();
 
-        Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
+        /* TODO: Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
         VAOBuilder builder = context.render.getVAO().setup(shader, VAO.INDICES).stack(context.render.stack);
 
         builder.begin();
@@ -1444,9 +1441,9 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
             y += textLine.getLines() * this.lineHeight;
         }
 
-        font.bindTexture(context.render);
+        font.bindTexture(BBSModClient.getTextures());
 
-        builder.render();
+        builder.render(); */
 
         if (renderCursor)
         {

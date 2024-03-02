@@ -1,11 +1,9 @@
 package mchorse.bbs_mod.ui.film.replays;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.audio.SoundPlayer;
 import mchorse.bbs_mod.audio.Waveform;
-import mchorse.bbs_mod.bridge.IBridgeWorld;
-import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.film.Film;
 import mchorse.bbs_mod.film.replays.Replay;
 import mchorse.bbs_mod.film.replays.ReplayKeyframes;
@@ -39,11 +37,6 @@ import mchorse.bbs_mod.utils.keyframes.KeyframeChannel;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframe;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeChannel;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeSegment;
-import mchorse.bbs_mod.utils.math.MathUtils;
-import mchorse.bbs_mod.voxel.raytracing.RayTraceResult;
-import mchorse.bbs_mod.voxel.raytracing.RayTraceType;
-import mchorse.bbs_mod.voxel.raytracing.RayTracer;
-import mchorse.bbs_mod.world.World;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -368,7 +361,7 @@ public class UIReplaysEditor extends UIElement
         }
         else if (context.mouseButton == 1 && this.isVisible())
         {
-            RayTraceResult traceResult = new RayTraceResult();
+            /* TODO: RayTraceResult traceResult = new RayTraceResult();
             World world = context.menu.bridge.get(IBridgeWorld.class).getWorld();
             Camera camera = this.filmPanel.getCamera();
 
@@ -386,7 +379,7 @@ public class UIReplaysEditor extends UIElement
                 });
 
                 return true;
-            }
+            } */
         }
 
         return false;
@@ -408,7 +401,7 @@ public class UIReplaysEditor extends UIElement
             scale = propertyEditor.properties.getScaleX();
         }
 
-        for (SoundPlayer file : BBS.getSounds().getPlayers())
+        for (SoundPlayer file : BBSModClient.getSounds().getPlayers())
         {
             Waveform wave = file.getBuffer().getWaveform();
 

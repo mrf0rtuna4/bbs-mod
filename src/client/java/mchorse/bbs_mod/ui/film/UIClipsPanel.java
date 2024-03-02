@@ -117,7 +117,7 @@ public class UIClipsPanel extends UIElement implements IUIClipsDelegate
 
             this.clips.embedView(null);
 
-            UIClip panel = (UIClip) this.factory.getData(clip).panelUI.getConstructors()[0].newInstance(clip, this);
+            UIClip panel = null; // TODO: (UIClip) this.factory.getData(clip).panelUI.getConstructors()[0].newInstance(clip, this);
 
             this.panel = panel;
             this.panel.relative(this).x(1F, -160).w(160).h(1F);

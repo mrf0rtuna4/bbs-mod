@@ -1,6 +1,10 @@
 package mchorse.bbs_mod.camera;
 
 import mchorse.bbs_mod.camera.data.Position;
+import mchorse.bbs_mod.graphics.window.Window;
+import mchorse.bbs_mod.ui.Keys;
+import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.utils.keys.KeyCombo;
 import mchorse.bbs_mod.utils.joml.Matrices;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import org.joml.Matrix3f;
@@ -8,6 +12,7 @@ import org.joml.Vector3d;
 import org.joml.Vector3f;
 import org.joml.Vector3i;
 import org.joml.Vector4i;
+import org.lwjgl.glfw.GLFW;
 
 /**
  * Orbit camera class.
@@ -60,7 +65,7 @@ public class OrbitCamera
         return this.velocityAngle;
     }
 
-    /* TODO: public boolean canStart(UIContext context)
+    public boolean canStart(UIContext context)
     {
         if (context.mouseButton == 2)
         {
@@ -68,7 +73,7 @@ public class OrbitCamera
         }
 
         return context.mouseButton == 0 && Window.isKeyPressed(GLFW.GLFW_KEY_SPACE);
-    } */
+    }
 
     public void from(Position position)
     {
@@ -143,10 +148,10 @@ public class OrbitCamera
         return 1 / 180F;
     }
 
-    /* protected float getSpeed()
+    protected float getSpeed()
     {
         return Window.isCtrlPressed() ? this.high : (Window.isAltPressed() ? this.low : this.normal);
-    } */
+    }
 
     protected Vector3f rotateVector(float x, float y, float z)
     {
@@ -200,7 +205,7 @@ public class OrbitCamera
         return hasChanged;
     }
 
-    /* TODO: public boolean keyPressed(UIContext context)
+    public boolean keyPressed(UIContext context)
     {
         int x = this.getFactor(context, Keys.FLIGHT_LEFT, Keys.FLIGHT_RIGHT, this.velocityPosition.x);
         int y = this.getFactor(context, Keys.FLIGHT_UP, Keys.FLIGHT_DOWN, this.velocityPosition.y);
@@ -283,5 +288,5 @@ public class OrbitCamera
         }
 
         return changed;
-    } */
+    }
 }

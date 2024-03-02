@@ -1,9 +1,8 @@
 package mchorse.bbs_mod.ui.film.replays;
 
-import mchorse.bbs_mod.bridge.IBridgeWorld;
-import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.film.Film;
 import mchorse.bbs_mod.film.replays.Replay;
+import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.settings.values.ValueForm;
 import mchorse.bbs_mod.ui.UIKeys;
@@ -15,10 +14,6 @@ import mchorse.bbs_mod.ui.utils.UIDataUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
-import mchorse.bbs_mod.voxel.raytracing.RayTraceResult;
-import mchorse.bbs_mod.voxel.raytracing.RayTraceType;
-import mchorse.bbs_mod.voxel.raytracing.RayTracer;
-import mchorse.bbs_mod.world.World;
 import org.joml.Vector3d;
 
 import java.util.List;
@@ -70,7 +65,7 @@ public class UIReplayList extends UIList<Replay>
 
     private void addReplay()
     {
-        World world = this.getContext().menu.bridge.get(IBridgeWorld.class).getWorld();
+        /* TODO: World world = this.getContext().menu.bridge.get(IBridgeWorld.class).getWorld();
         RayTraceResult result = new RayTraceResult();
         Camera camera = this.panel.getCamera();
 
@@ -82,7 +77,7 @@ public class UIReplayList extends UIList<Replay>
             position.set(camera.getLookDirection()).mul(5F).add(camera.position);
         }
 
-        this.addReplay(position, camera.rotation.x, camera.rotation.y + MathUtils.PI);
+        this.addReplay(position, camera.rotation.x, camera.rotation.y + MathUtils.PI); */
     }
 
     public void addReplay(Vector3d position, float pitch, float yaw)
@@ -185,7 +180,7 @@ public class UIReplayList extends UIList<Replay>
 
             y -= 10;
 
-            form.getRenderer().renderUI(context, x, y, x + 40, y + 40);
+            FormUtilsClient.renderUI(form, context, x, y, x + 40, y + 40);
 
             context.batcher.unclip(context);
         }

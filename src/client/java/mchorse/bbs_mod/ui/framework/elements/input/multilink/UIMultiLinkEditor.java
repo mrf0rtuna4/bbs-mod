@@ -1,13 +1,8 @@
 package mchorse.bbs_mod.ui.framework.elements.input.multilink;
 
-import mchorse.bbs_mod.BBS;
-import mchorse.bbs_mod.graphics.RenderingContext;
-import mchorse.bbs_mod.graphics.shaders.CommonShaderAccess;
-import mchorse.bbs_mod.graphics.shaders.Shader;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.texture.Texture;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.graphics.window.Window;
-import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIToggle;
@@ -17,14 +12,13 @@ import mchorse.bbs_mod.ui.framework.elements.input.UITrackpad;
 import mchorse.bbs_mod.ui.framework.elements.utils.UICanvasEditor;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.UI;
-import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.resources.FilteredLink;
 
 public class UIMultiLinkEditor extends UICanvasEditor
 {
-    public static Shader multiLinkShader;
+    // TODO: public static Shader multiLinkShader;
 
     public UITexturePicker picker;
     public FilteredLink link;
@@ -96,7 +90,7 @@ public class UIMultiLinkEditor extends UICanvasEditor
 
         for (FilteredLink child : this.picker.multiLink.children)
         {
-            Texture texture = BBS.getTextures().getTexture(child.path);
+            Texture texture = BBSModClient.getTextures().getTexture(child.path);
 
             w = Math.max(w, child.getWidth(texture.width));
             h = Math.max(h, child.getHeight(texture.height));
@@ -115,7 +109,7 @@ public class UIMultiLinkEditor extends UICanvasEditor
         {
             try
             {
-                Texture texture = BBS.getTextures().getTexture(child.path);
+                Texture texture = BBSModClient.getTextures().getTexture(child.path);
 
                 w = Math.max(w, child.getWidth(texture.width));
                 h = Math.max(h, child.getHeight(texture.height));
@@ -225,7 +219,7 @@ public class UIMultiLinkEditor extends UICanvasEditor
                     context.batcher.box(area.x, area.y, area.ex(), area.ey(), Colors.setA(Colors.RED, 0.25F));
                 }
 
-                Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
+                /* TODO: Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
 
                 if (needsMultLinkShader)
                 {
@@ -239,17 +233,17 @@ public class UIMultiLinkEditor extends UICanvasEditor
                 context.render.getTextures().bind(Icons.ATLAS, 5);
                 texture.bind(0);
 
-                context.batcher.texturedBox(shader, texture, child.color, area.x, area.y, area.w, area.h, 0, 0, texture.width, texture.height);
+                context.batcher.texturedBox(shader, texture, child.color, area.x, area.y, area.w, area.h, 0, 0, texture.width, texture.height); */
             }
         }
     }
 
-    private void ensureShaderCreated(RenderingContext context)
+    private void ensureShaderCreated()
     {
-        if (multiLinkShader == null)
+        /* TODO: if (multiLinkShader == null)
         {
             multiLinkShader = new Shader(Link.assets("shaders/ui/vertex_uv_rgba_2d-multilink.glsl"), VBOAttributes.VERTEX_UV_RGBA_2D);
             multiLinkShader.onInitialize(CommonShaderAccess::initializeTexture).attachUBO(context.getUBO(), "u_matrices");
-        }
+        } */
     }
 }

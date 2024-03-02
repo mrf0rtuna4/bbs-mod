@@ -7,9 +7,9 @@ import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.utils.clips.Clip;
 import mchorse.bbs_mod.utils.clips.ClipContext;
 
-public class AudioClienClip extends AudioClip
+public class AudioClientClip extends AudioClip
 {
-    public AudioClienClip()
+    public AudioClientClip()
     {
         super();
     }
@@ -81,6 +81,6 @@ public class AudioClienClip extends AudioClip
     @Override
     protected Clip create()
     {
-        return new AudioClienClip();
+        return new AudioClientClip();
     }
 }

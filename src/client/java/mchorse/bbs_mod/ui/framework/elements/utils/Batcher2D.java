@@ -1,19 +1,17 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
-import mchorse.bbs_mod.graphics.GLStates;
-import mchorse.bbs_mod.graphics.RenderingContext;
-import mchorse.bbs_mod.graphics.shaders.Shader;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.graphics.vao.VBOAttributes;
-import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icon;
 import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.MinecraftClient;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -26,24 +24,16 @@ public class Batcher2D
     private static final Color c3 = new Color();
     private static final Color c4 = new Color();
 
-    private RenderingContext context;
     private VAOBuilder builder;
 
     private int mode;
-    private Shader shader;
+    private Object shader;
     private Texture texture;
 
     private Stack<Area> scissors = new Stack<>();
 
-    public Batcher2D(RenderingContext context)
-    {
-        this.context = context;
-    }
-
-    public RenderingContext getContext()
-    {
-        return this.context;
-    }
+    public Batcher2D()
+    {}
 
     /* Screen space clipping */
 
@@ -85,15 +75,17 @@ public class Batcher2D
     private void scissorArea(int x, int y, int w, int h, int sw, int sh)
     {
         /* Clipping area around scroll area */
-        float rx = (float) Math.round(Window.width / (double) sw);
-        float ry = (float) Math.round(Window.height / (double) sh);
+        MinecraftClient mc = MinecraftClient.getInstance();
+
+        float rx = (float) Math.round(mc.getWindow().getWidth() / (double) sw);
+        float ry = (float) Math.round(mc.getWindow().getHeight() / (double) sh);
 
         int xx = (int) (x * rx);
-        int yy = (int) (Window.height - (y + h) * ry);
+        int yy = (int) (mc.getWindow().getHeight() - (y + h) * ry);
         int ww = (int) (w * rx);
         int hh = (int) (h * ry);
 
-        GLStates.scissorTest(true);
+        // TODO: GLStates.scissorTest(true);
 
         if (ww == 0 || hh == 0)
         {
@@ -101,7 +93,7 @@ public class Batcher2D
         }
         else
         {
-            GLStates.scissor(xx, yy, ww, hh);
+            // TODO: GLStates.scissor(xx, yy, ww, hh);
         }
     }
 
@@ -117,7 +109,7 @@ public class Batcher2D
 
         if (this.scissors.isEmpty())
         {
-            GLStates.scissorTest(false);
+            // TODO: GLStates.scissorTest(false);
         }
         else
         {
@@ -351,7 +343,7 @@ public class Batcher2D
         x -= icon.w * ax;
         y -= icon.h * ay;
 
-        this.texturedBox(this.context.getTextures().getTexture(icon.texture), color, x, y, icon.w, icon.h, icon.x, icon.y, icon.x + icon.w, icon.y + icon.h, icon.textureW, icon.textureH);
+        this.texturedBox(BBSModClient.getTextures().getTexture(icon.texture), color, x, y, icon.w, icon.h, icon.x, icon.y, icon.x + icon.w, icon.y + icon.h, icon.textureW, icon.textureH);
     }
 
     public void iconArea(Icon icon, float x, float y, float w, float h)
@@ -361,7 +353,7 @@ public class Batcher2D
 
     public void iconArea(Icon icon, int color, float x, float y, float w, float h)
     {
-        this.texturedArea(this.context.getTextures().getTexture(icon.texture), color, x, y, w, h, icon.x, icon.y, icon.w, icon.h, icon.textureW, icon.textureH);
+        this.texturedArea(BBSModClient.getTextures().getTexture(icon.texture), color, x, y, w, h, icon.x, icon.y, icon.w, icon.h, icon.textureW, icon.textureH);
     }
 
     public void outlinedIcon(Icon icon, float x, float y, float ax, float ay)
@@ -393,7 +385,7 @@ public class Batcher2D
         this.texturedBox(texture, color, x, y, w, h, 0, 0, w, h, (int) w, (int) h);
     }
 
-    public void fullTexturedBox(Shader shader, Texture texture, int color, float x, float y, float w, float h)
+    public void fullTexturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h)
     {
         this.texturedBox(shader, texture, color, x, y, w, h, 0, 0, w, h, (int) w, (int) h);
     }
@@ -430,17 +422,17 @@ public class Batcher2D
 
     /* Textured box (with shader) */
 
-    public void texturedBox(Shader shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2)
+    public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2)
     {
         this.texturedBox(shader, texture, color, x, y, w, h, u1, v1, u2, v2, texture.width, texture.height);
     }
 
-    public void texturedBox(Shader shader, Texture texture, int color, float x, float y, float w, float h, float u, float v)
+    public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u, float v)
     {
         this.texturedBox(shader, texture, color, x, y, w, h, u, v, u + w, v + h, texture.width, texture.height);
     }
 
-    public void texturedBox(Shader shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
+    public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
         this.begin(shader, texture);
 
@@ -475,27 +467,27 @@ public class Batcher2D
 
     public void text(String label, float x, float y, int color)
     {
-        this.text(this.context.getFont(), label, x, y, color, false);
+        this.text(BBSModClient.getDefaultFont(), label, x, y, color, false);
     }
 
     public void text(String label, float x, float y)
     {
-        this.text(this.context.getFont(), label, x, y, Colors.WHITE, false);
+        this.text(BBSModClient.getDefaultFont(), label, x, y, Colors.WHITE, false);
     }
 
     public void textShadow(String label, float x, float y)
     {
-        this.text(this.context.getFont(), label, x, y, Colors.WHITE, true);
+        this.text(BBSModClient.getDefaultFont(), label, x, y, Colors.WHITE, true);
     }
 
     public void textShadow(String label, float x, float y, int color)
     {
-        this.text(this.context.getFont(), label, x, y, color, true);
+        this.text(BBSModClient.getDefaultFont(), label, x, y, color, true);
     }
 
     public void text(String label, float x, float y, int color, boolean shadow)
     {
-        this.text(this.context.getFont(), label, x, y, color, shadow);
+        this.text(BBSModClient.getDefaultFont(), label, x, y, color, shadow);
     }
 
     /* Text */
@@ -522,7 +514,7 @@ public class Batcher2D
 
     public void text(FontRenderer font, String label, float x, float y, int color, boolean shadow)
     {
-        VAOBuilder builder = this.begin(VBOAttributes.VERTEX_UV_RGBA_2D, this.context.getTextures().getTexture(font.texture));
+        VAOBuilder builder = this.begin(VBOAttributes.VERTEX_UV_RGBA_2D, BBSModClient.getTextures().getTexture(font.texture));
 
         font.build(builder, label, (int) x, (int) y, 0, color, shadow);
     }
@@ -590,30 +582,30 @@ public class Batcher2D
 
     public VAOBuilder begin(VBOAttributes attributes)
     {
-        return this.begin(GL11.GL_TRIANGLES, this.context.getShaders().get(attributes), null);
+        return this.begin(GL11.GL_TRIANGLES, null, null);
     }
 
     public VAOBuilder begin(VBOAttributes attributes, Texture texture)
     {
-        return this.begin(GL11.GL_TRIANGLES, this.context.getShaders().get(attributes), texture);
+        return this.begin(GL11.GL_TRIANGLES, null, texture);
     }
 
     public VAOBuilder begin(int mode, VBOAttributes attributes, Texture texture)
     {
-        return this.begin(mode, this.context.getShaders().get(attributes), texture);
+        return this.begin(mode, null, texture);
     }
 
-    public VAOBuilder begin(Shader shader)
+    public VAOBuilder begin(Object shader)
     {
         return this.begin(GL11.GL_TRIANGLES, shader, null);
     }
 
-    public VAOBuilder begin(Shader shader, Texture texture)
+    public VAOBuilder begin(Object shader, Texture texture)
     {
         return this.begin(GL11.GL_TRIANGLES, shader, texture);
     }
 
-    public VAOBuilder begin(int mode, Shader shader, Texture texture)
+    public VAOBuilder begin(int mode, Object shader, Texture texture)
     {
         if (this.shader == shader && this.texture == texture && this.mode == mode)
         {
@@ -622,7 +614,7 @@ public class Batcher2D
 
         this.flush();
 
-        this.builder = this.context.getVAO().setup(shader).stack(this.context.stack);
+        this.builder = null; // TODO: this.context.getVAO().setup(shader).stack(this.context.stack);
         this.mode = mode;
         this.shader = shader;
         this.texture = texture;

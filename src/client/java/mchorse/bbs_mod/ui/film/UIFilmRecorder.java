@@ -1,15 +1,8 @@
 package mchorse.bbs_mod.ui.film;
 
-import mchorse.bbs_mod.bridge.IBridgeVideoScreenshot;
 import mchorse.bbs_mod.graphics.Framebuffer;
-import mchorse.bbs_mod.l10n.keys.IKey;
-import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
-import mchorse.bbs_mod.ui.framework.elements.overlay.UIMessageOverlayPanel;
-import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
-import mchorse.bbs_mod.ui.utils.UIUtils;
-import mchorse.bbs_mod.utils.recording.VideoRecorder;
 import org.lwjgl.glfw.GLFW;
 
 public class UIFilmRecorder extends UIElement
@@ -30,7 +23,7 @@ public class UIFilmRecorder extends UIElement
 
     public boolean isRecording()
     {
-        return this.getRecorder().isRecording();
+        return false; // TODO: this.getRecorder().isRecording();
     }
 
     private UIContext getUIContext()
@@ -38,9 +31,9 @@ public class UIFilmRecorder extends UIElement
         return this.editor.getContext();
     }
 
-    private VideoRecorder getRecorder()
+    private Object getRecorder()
     {
-        return this.getUIContext().menu.bridge.get(IBridgeVideoScreenshot.class).getVideoRecorder();
+        return null; // TODO: this.getUIContext().menu.bridge.get(IBridgeVideoScreenshot.class).getVideoRecorder();
     }
 
     private boolean isRunning()
@@ -50,12 +43,12 @@ public class UIFilmRecorder extends UIElement
 
     public void openMovies()
     {
-        UIUtils.openFolder(this.getRecorder().movies);
+        // TODO: UIUtils.openFolder(this.getRecorder().movies);
     }
 
     public void startRecording(int duration, Framebuffer framebuffer)
     {
-        VideoRecorder recorder = this.getRecorder();
+        /* TODO: VideoRecorder recorder = this.getRecorder();
         UIContext context = this.getUIContext();
 
         if (this.isRunning() || recorder.isRecording() || duration <= 0)
@@ -76,19 +69,18 @@ public class UIFilmRecorder extends UIElement
             return;
         }
 
-        // this.editor.getController().createEntities();
         this.editor.setCursor(0);
         this.editor.togglePlayback();
         context.menu.main.setEnabled(false);
         context.menu.overlay.add(this);
-        context.menu.getRoot().add(this.exit);
+        context.menu.getRoot().add(this.exit); */
     }
 
     public void stop()
     {
         UIContext context = this.getUIContext();
 
-        context.render.postRunnable(this.exit::removeFromParent);
+        /* TODO: context.render.postRunnable(this.exit::removeFromParent);
 
         if (this.getRecorder().isRecording())
         {
@@ -105,7 +97,7 @@ public class UIFilmRecorder extends UIElement
 
             context.menu.main.setEnabled(true);
             context.render.postRunnable(this::removeFromParent);
-        }
+        } */
     }
 
     @Override
@@ -115,7 +107,7 @@ public class UIFilmRecorder extends UIElement
 
         int ticks = this.editor.getCursor();
 
-        if (!this.getRecorder().isRecording())
+        if (!this.isRecording())
         {
             return;
         }

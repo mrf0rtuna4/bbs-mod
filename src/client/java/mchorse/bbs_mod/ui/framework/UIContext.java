@@ -49,6 +49,7 @@ public class UIContext implements IViewportStack
     private char inputCharacter;
 
     /* Render states */
+    private float transition;
     private long tick;
 
     public UIViewportStack viewportStack = new UIViewportStack();
@@ -66,14 +67,19 @@ public class UIContext implements IViewportStack
         return this.tick;
     }
 
+    public void setTransition(float transition)
+    {
+        this.transition = transition;
+    }
+
     public float getTransition()
     {
-        return this.render.getTransition();
+        return this.transition;
     }
 
     public float getTickTransition()
     {
-        return this.tick + this.render.getTransition();
+        return this.tick + this.transition;
     }
 
     public void setup(UIRenderingContext context)
@@ -419,7 +425,7 @@ public class UIContext implements IViewportStack
     public void shiftX(int x)
     {
         this.mouseX += x;
-        this.render.stack.translate(-x, 0, 0);
+        // TODO: this.render.stack.translate(-x, 0, 0);
         this.viewportStack.shiftX(x);
     }
 
@@ -427,7 +433,7 @@ public class UIContext implements IViewportStack
     public void shiftY(int y)
     {
         this.mouseY += y;
-        this.render.stack.translate(0, -y, 0);
+        // TODO: this.render.stack.translate(0, -y, 0);
         this.viewportStack.shiftY(y);
     }
 
@@ -451,7 +457,7 @@ public class UIContext implements IViewportStack
 
     public void resetMatrix()
     {
-        this.render.stack.identity();
+        // TODO: this.render.stack.identity();
     }
 
     public void update()

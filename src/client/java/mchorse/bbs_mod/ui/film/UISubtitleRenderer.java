@@ -1,32 +1,14 @@
 package mchorse.bbs_mod.ui.film;
 
-import mchorse.bbs_mod.BBS;
 import mchorse.bbs_mod.camera.clips.misc.Subtitle;
 import mchorse.bbs_mod.graphics.Framebuffer;
-import mchorse.bbs_mod.graphics.GLStates;
-import mchorse.bbs_mod.graphics.RenderingContext;
-import mchorse.bbs_mod.graphics.shaders.CommonShaderAccess;
-import mchorse.bbs_mod.graphics.shaders.Shader;
-import mchorse.bbs_mod.graphics.shaders.uniforms.UniformVector2;
-import mchorse.bbs_mod.graphics.text.TextUtils;
-import mchorse.bbs_mod.graphics.texture.Texture;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
-import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.framework.UIContext;
-import mchorse.bbs_mod.utils.colors.Colors;
-import mchorse.bbs_mod.utils.joml.Matrices;
-import mchorse.bbs_mod.utils.pose.Transform;
-import org.joml.Matrix4f;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL30;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class UISubtitleRenderer
 {
-    public static Shader blurShader;
+    /* TODO: public static Shader blurShader;
 
     private static void ensureShaderCreated(RenderingContext context)
     {
@@ -51,7 +33,7 @@ public class UISubtitleRenderer
 
             f.unbind();
         });
-    }
+    } */
 
     public static void renderSubtitles(UIContext context, Framebuffer main, List<Subtitle> subtitles)
     {
@@ -60,7 +42,7 @@ public class UISubtitleRenderer
             return;
         }
 
-        int width = main.getMainTexture().width;
+        /* int width = main.getMainTexture().width;
         int height = main.getMainTexture().height;
 
         ensureShaderCreated(context.render);
@@ -130,7 +112,7 @@ public class UISubtitleRenderer
             context.batcher.flush();
 
             /* Render the texture */
-            main.apply();
+            /* main.apply();
 
             context.render.getUBO().update(ortho, Matrices.EMPTY_4F);
 
@@ -156,6 +138,6 @@ public class UISubtitleRenderer
 
         context.render.getUBO().update(context.render.projection, Matrices.EMPTY_4F);
 
-        GLStates.cullFaces(true);
+        GLStates.cullFaces(true); */
     }
 }

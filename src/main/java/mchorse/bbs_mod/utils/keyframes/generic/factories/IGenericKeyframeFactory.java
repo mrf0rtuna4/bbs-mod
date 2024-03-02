@@ -12,6 +12,4 @@ public interface IGenericKeyframeFactory <T>
     public T copy(T value);
 
     public T interpolate(T a, T b, IInterpolation interpolation, float x);
-
-    // TODO: public UIKeyframeFactory<T> createUI(GenericKeyframe<T> keyframe, UIPropertyEditor editor);
 }

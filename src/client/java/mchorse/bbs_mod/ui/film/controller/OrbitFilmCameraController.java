@@ -72,11 +72,11 @@ public class OrbitFilmCameraController implements ICameraController
         {
             Vector3d offset = new Vector3d(Matrices.rotation(this.rotation.x, this.rotation.y));
 
-            offset.mul(this.distance);
+            /* TODO: offset.mul(this.distance);
             entity.basic.prevPosition.lerp(entity.basic.position, transition, camera.position);
             camera.position.add(offset);
             camera.position.add(0, entity.basic.hitbox.h / 2, 0);
-            camera.rotation.set(-this.rotation.x, -this.rotation.y, 0);
+            camera.rotation.set(-this.rotation.x, -this.rotation.y, 0); */
         }
     }
 

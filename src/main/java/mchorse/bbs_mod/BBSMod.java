@@ -26,6 +26,12 @@ import mchorse.bbs_mod.camera.clips.overwrite.IdleClip;
 import mchorse.bbs_mod.camera.clips.overwrite.KeyframeClip;
 import mchorse.bbs_mod.camera.clips.overwrite.PathClip;
 import mchorse.bbs_mod.entity.ActorEntity;
+import mchorse.bbs_mod.forms.FormArchitect;
+import mchorse.bbs_mod.forms.forms.BillboardForm;
+import mchorse.bbs_mod.forms.forms.ExtrudedForm;
+import mchorse.bbs_mod.forms.forms.LabelForm;
+import mchorse.bbs_mod.forms.forms.ModelForm;
+import mchorse.bbs_mod.forms.forms.ParticleForm;
 import mchorse.bbs_mod.resources.AssetProvider;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.resources.packs.ExternalAssetsSourcePack;
@@ -68,6 +74,7 @@ public class BBSMod implements ModInitializer
 
     /* Foundation services */
     private static SettingsManager settings;
+    private static FormArchitect forms;
 
     private static MapFactory<Clip, ClipFactoryData> factoryCameraClips;
     private static MapFactory<Clip, ClipFactoryData> factoryScreenplayClips;
@@ -154,6 +161,11 @@ public class BBSMod implements ModInitializer
         return settings;
     }
 
+    public static FormArchitect getForms()
+    {
+        return forms;
+    }
+
     public static MapFactory<Clip, ClipFactoryData> getFactoryCameraClips()
     {
         return factoryCameraClips;
@@ -185,6 +197,13 @@ public class BBSMod implements ModInitializer
         provider.register(new InternalAssetsSourcePack());
 
         settings = new SettingsManager();
+        forms = new FormArchitect();
+        forms
+            .register(Link.bbs("billboard"), BillboardForm.class, null)
+            .register(Link.bbs("label"), LabelForm.class, null)
+            .register(Link.bbs("model"), ModelForm.class, null)
+            .register(Link.bbs("particle"), ParticleForm.class, null)
+            .register(Link.bbs("extruded"), ExtrudedForm.class, null);
 
         /* Register camera clips */
         factoryCameraClips = new MapFactory<Clip, ClipFactoryData>()

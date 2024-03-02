@@ -1,13 +1,9 @@
 package mchorse.bbs_mod.ui.film;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSMod;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.audio.AudioRenderer;
-import mchorse.bbs_mod.bridge.IBridgeCamera;
-import mchorse.bbs_mod.bridge.IBridgeRender;
-import mchorse.bbs_mod.bridge.IBridgeVideoScreenshot;
 import mchorse.bbs_mod.camera.Camera;
-import mchorse.bbs_mod.camera.clips.misc.SubtitleClip;
 import mchorse.bbs_mod.camera.clips.overwrite.IdleClip;
 import mchorse.bbs_mod.camera.controller.CameraController;
 import mchorse.bbs_mod.camera.controller.RunnerCameraController;
@@ -17,16 +13,13 @@ import mchorse.bbs_mod.film.Film;
 import mchorse.bbs_mod.film.VoiceLines;
 import mchorse.bbs_mod.film.replays.Replay;
 import mchorse.bbs_mod.forms.FormUtils;
-import mchorse.bbs_mod.game.utils.ContentType;
 import mchorse.bbs_mod.graphics.Framebuffer;
-import mchorse.bbs_mod.graphics.GLStates;
-import mchorse.bbs_mod.graphics.RenderingContext;
 import mchorse.bbs_mod.graphics.texture.Texture;
-import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.settings.values.ValueGroup;
 import mchorse.bbs_mod.settings.values.base.BaseValue;
+import mchorse.bbs_mod.ui.ContentType;
 import mchorse.bbs_mod.ui.Keys;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
@@ -56,7 +49,6 @@ import mchorse.bbs_mod.utils.keyframes.KeyframeChannel;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeChannel;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeSegment;
 import mchorse.bbs_mod.utils.math.MathUtils;
-import mchorse.bbs_mod.utils.recording.ScreenshotRecorder;
 import mchorse.bbs_mod.utils.undo.CompoundUndo;
 import mchorse.bbs_mod.utils.undo.IUndo;
 import mchorse.bbs_mod.utils.undo.UndoManager;
@@ -127,12 +119,12 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
     {
         super(dashboard);
 
-        this.runner = new RunnerCameraController(dashboard.bridge, this);
+        this.runner = new RunnerCameraController(this);
 
         this.main = new UIElement();
         this.main.relative(this.editor).w(0.75F).h(1F);
 
-        this.cameraClips = new UIClipsPanel(this, BBS.getFactoryCameraClips());
+        this.cameraClips = new UIClipsPanel(this, BBSMod.getFactoryCameraClips());
         this.cameraClips.relative(this.main).full();
 
         this.recorder = new UIFilmRecorder(this);
@@ -152,9 +144,9 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         this.record.tooltip(UIKeys.CAMERA_TOOLTIPS_RECORD, Direction.LEFT);
         this.screenshot = new UIIcon(Icons.CAMERA, (b) ->
         {
-            ScreenshotRecorder recorder = this.dashboard.bridge.get(IBridgeVideoScreenshot.class).getScreenshotRecorder();
+            /* TODO: ScreenshotRecorder recorder = this.dashboard.bridge.get(IBridgeVideoScreenshot.class).getScreenshotRecorder();
 
-            recorder.takeScreenshot(Window.isAltPressed() ? null : recorder.getScreenshotFile(), this.getFramebuffer().getMainTexture());
+            recorder.takeScreenshot(Window.isAltPressed() ? null : recorder.getScreenshotFile(), this.getFramebuffer().getMainTexture()); */
         });
         this.screenshot.tooltip(UIKeys.FILM_SCREENSHOT, Direction.LEFT);
         this.openVideos = new UIIcon(Icons.FILM, (b) -> this.recorder.openMovies());
@@ -229,7 +221,7 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public Framebuffer getFramebuffer()
     {
-        return BBS.getFramebuffers().getFramebuffer(Link.bbs("camera"), (framebuffer) ->
+        return BBSModClient.getFramebuffers().getFramebuffer(Link.bbs("camera"), (framebuffer) ->
         {
             Texture texture = new Texture();
             int width = BBSSettings.videoWidth.get();
@@ -388,11 +380,6 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         this.setFlight(false);
         cameraController.add(this.runner);
         this.dashboard.getRoot().prepend(this.renderableOverlay);
-
-        if (this.dashboard.isWalkMode())
-        {
-            this.dashboard.toggleWalkMode();
-        }
     }
 
     @Override
@@ -468,7 +455,7 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         if (data != null)
         {
             voiceLines.delete();
-            voiceLines = new VoiceLines(BBS.getAssetsPath("audio/elevenlabs/" + data.getId()));
+            voiceLines = new VoiceLines(BBSMod.getAssetsPath("audio/elevenlabs/" + data.getId()));
 
             data.preCallback(this::handlePreValues);
             data.postCallback(this::handlePostValues);
@@ -854,12 +841,12 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         Area area = this.getFramebufferArea(viewport);
 
         /* Render the scene to framebuffer */
-        GLStates.setupDepthFunction3D();
+        /* TODO: GLStates.setupDepthFunction3D();
         this.dashboard.bridge.get(IBridgeRender.class).renderSceneTo(this.camera, framebuffer, 0, true, 0, (fb) ->
         {
             UISubtitleRenderer.renderSubtitles(context, fb, SubtitleClip.getSubtitles(this.runner.getContext()));
         });
-        GLStates.setupDepthFunction2D();
+        GLStates.setupDepthFunction2D(); */
 
         viewport.render(context.batcher, Colors.A90);
         context.batcher.texturedBox(texture, Colors.WHITE, area.x, area.y, area.w, area.h, 0, height, width, 0, width, height);
@@ -908,15 +895,15 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         int w = (int) (area.w * BBSSettings.audioWaveformWidth.get());
         int x = area.x(0.5F, w);
 
-        AudioRenderer.renderAll(context.batcher, x, this.area.y + 10, w, BBSSettings.audioWaveformHeight.get(), this.dashboard.width, this.dashboard.height);
+        // TODO: AudioRenderer.renderAll(context.batcher, x, this.area.y + 10, w, BBSSettings.audioWaveformHeight.get(), this.dashboard.width, this.dashboard.height);
     }
 
     @Override
-    public void renderInWorld(RenderingContext context)
+    public void renderInWorld()
     {
-        super.renderInWorld(context);
+        super.renderInWorld();
 
-        this.controller.renderFrame(context);
+        this.controller.renderFrame();
     }
 
     /* IUICameraWorkDelegate implementation */
@@ -933,12 +920,12 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public Camera getWorldCamera()
     {
-        return this.dashboard.bridge.get(IBridgeCamera.class).getCamera();
+        return null; // TODO: this.dashboard.bridge.get(IBridgeCamera.class).getCamera();
     }
 
     public CameraController getCameraController()
     {
-        return this.dashboard.bridge.get(IBridgeCamera.class).getCameraController();
+        return null; // TODO: this.dashboard.bridge.get(IBridgeCamera.class).getCameraController();
     }
 
     public int getCursor()

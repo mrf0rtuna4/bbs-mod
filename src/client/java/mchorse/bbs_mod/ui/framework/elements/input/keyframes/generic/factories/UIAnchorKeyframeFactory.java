@@ -1,26 +1,11 @@
 package mchorse.bbs_mod.ui.framework.elements.input.keyframes.generic.factories;
 
-import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.forms.properties.AnchorProperty;
-import mchorse.bbs_mod.graphics.MatrixStack;
-import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.film.UIFilmPanel;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
 import mchorse.bbs_mod.ui.framework.elements.input.keyframes.generic.UIPropertyEditor;
-import mchorse.bbs_mod.ui.utils.icons.Icons;
-import mchorse.bbs_mod.utils.CollectionUtils;
-import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframe;
-import mchorse.bbs_mod.world.entities.Entity;
-import mchorse.bbs_mod.world.entities.components.FormComponent;
-import org.joml.Matrix4f;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class UIAnchorKeyframeFactory extends UIKeyframeFactory<AnchorProperty.Anchor>
 {
@@ -39,7 +24,7 @@ public class UIAnchorKeyframeFactory extends UIKeyframeFactory<AnchorProperty.An
 
     private void displayActors()
     {
-        this.getContext().replaceContextMenu((menu) ->
+        /* TODO: this.getContext().replaceContextMenu((menu) ->
         {
             UIFilmPanel panel = this.getPanel();
             int value = this.keyframe.getValue().actor;
@@ -62,12 +47,12 @@ public class UIAnchorKeyframeFactory extends UIKeyframeFactory<AnchorProperty.An
                     menu.action(Icons.CLOSE, label, () -> this.setActor(actor));
                 }
             }
-        });
+        }); */
     }
 
     private void displayAttachments()
     {
-        UIFilmPanel panel = this.getPanel();
+        /* TODO: UIFilmPanel panel = this.getPanel();
         int index = this.keyframe.getValue().actor;
 
         if (!CollectionUtils.inRange(panel.getController().entities, index))
@@ -112,7 +97,7 @@ public class UIAnchorKeyframeFactory extends UIKeyframeFactory<AnchorProperty.An
                     menu.action(Icons.LIMB, IKey.raw(attachment), () -> this.setAttachment(attachment));
                 }
             }
-        });
+        }); */
     }
 
     private void setActor(int actor)

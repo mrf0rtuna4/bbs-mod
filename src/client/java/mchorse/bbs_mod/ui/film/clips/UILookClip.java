@@ -1,9 +1,6 @@
 package mchorse.bbs_mod.ui.film.clips;
 
-import mchorse.bbs_mod.bridge.IBridgeWorld;
-import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.camera.clips.modifiers.LookClip;
-import mchorse.bbs_mod.settings.values.base.BaseValue;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.film.IUIClipsDelegate;
 import mchorse.bbs_mod.ui.film.clips.modules.UIPointModule;
@@ -11,13 +8,7 @@ import mchorse.bbs_mod.ui.film.utils.UITextboxHelp;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIToggle;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
-import mchorse.bbs_mod.voxel.raytracing.RayTraceResult;
-import mchorse.bbs_mod.voxel.raytracing.RayTraceType;
-import mchorse.bbs_mod.voxel.raytracing.RayTracer;
-import mchorse.bbs_mod.world.World;
 import net.minecraft.client.MinecraftClient;
-import org.joml.Vector3d;
-import org.joml.Vector3i;
 
 public class UILookClip extends UIClip<LookClip>
 {
@@ -95,7 +86,7 @@ public class UILookClip extends UIClip<LookClip>
 
     private void rayTrace(boolean center)
     {
-        Camera camera = this.editor.getCamera();
+        /* TODO: Camera camera = this.editor.getCamera();
         World world = MinecraftClient.getInstance().world;
         RayTraceResult result = new RayTraceResult();
 
@@ -114,6 +105,6 @@ public class UILookClip extends UIClip<LookClip>
 
             BaseValue.edit(this.clip.block, (block) -> block.get().set(vec.x, vec.y, vec.z));
             this.fillData();
-        }
+        } */
     }
 }

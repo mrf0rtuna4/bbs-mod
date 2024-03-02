@@ -1,6 +1,6 @@
 package mchorse.bbs_mod.ui.utils;
 
-import mchorse.bbs_mod.BBS;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.audio.SoundPlayer;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.resources.Link;
@@ -97,7 +97,7 @@ public class UIUtils
 
     public static void playClick(float pitch)
     {
-        SoundPlayer player = BBS.getSounds().play(Link.assets("sounds/click.ogg"));
+        SoundPlayer player = BBSModClient.getSounds().play(Link.assets("sounds/click.ogg"));
 
         if (player != null)
         {

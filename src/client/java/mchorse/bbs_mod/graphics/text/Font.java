@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.graphics.text;
 
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.data.IMapSerializable;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.MapType;
@@ -149,7 +150,7 @@ public class Font implements IMapSerializable
 
             if (baseType.isMap())
             {
-                IFontFormat format = BBS.getFactoryFontFormats().fromData(baseType.asMap());
+                IFontFormat format = BBSModClient.getFactoryFontFormats().fromData(baseType.asMap());
 
                 if (format != null)
                 {
@@ -185,7 +186,7 @@ public class Font implements IMapSerializable
 
         for (IFontFormat format : this.formats.values())
         {
-            formats.put(String.valueOf(format.getControlCharacter()), BBS.getFactoryFontFormats().toData(format));
+            formats.put(String.valueOf(format.getControlCharacter()), BBSModClient.getFactoryFontFormats().toData(format));
         }
 
         for (Glyph glyph : this.glyphs)
