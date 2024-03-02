@@ -1,8 +1,9 @@
 package mchorse.bbs_mod.graphics.text.builders;
 
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.utils.colors.Color;
+import net.minecraft.client.render.BufferBuilder;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class ColoredTextBuilder3D extends BaseColoredTextBuilder
@@ -29,14 +30,17 @@ public class ColoredTextBuilder3D extends BaseColoredTextBuilder
     }
 
     @Override
-    public VAOBuilder put(VAOBuilder builder, float x, float y, float u, float v, float tw, float th, Color color)
+    public BufferBuilder put(BufferBuilder builder, Matrix4f matrix4f, float x, float y, float u, float v, float tw, float th, Color color)
     {
         if (this.multiply)
         {
-            return builder.xyz(x + this.offset.x, y + this.offset.y, this.offset.z)
-                .xyz(0F, 0F, 1F)
-                .uv(u, v, tw, th)
-                .rgba(this.color.r * color.r, this.color.g * color.g, this.color.b * color.b, this.color.a * color.a);
+            builder.vertex(x + this.offset.x, y + this.offset.y, this.offset.z)
+                .vertex(0F, 0F, 1F)
+                .texture(u / tw, v / th)
+                .color(this.color.r * color.r, this.color.g * color.g, this.color.b * color.b, this.color.a * color.a)
+                .next();
+
+            return builder;
         }
 
         Color c = this.color;
@@ -46,9 +50,12 @@ public class ColoredTextBuilder3D extends BaseColoredTextBuilder
             c = color;
         }
 
-        return builder.xyz(x + this.offset.x, y + this.offset.y, this.offset.z)
-            .xyz(0F, 0F, 1F)
-            .uv(u, v, tw, th)
-            .rgba(c.r, c.g, c.b, this.color.a * color.a);
+        builder.vertex(x + this.offset.x, y + this.offset.y, this.offset.z)
+            .vertex(0F, 0F, 1F)
+            .texture(u / tw, v / th)
+            .color(c.r, c.g, c.b, this.color.a * color.a)
+            .next();
+
+        return builder;
     }
 }

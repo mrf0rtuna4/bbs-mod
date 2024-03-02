@@ -1,8 +1,9 @@
 package mchorse.bbs_mod.graphics.text.builders;
 
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.utils.colors.Color;
+import net.minecraft.client.render.BufferBuilder;
+import org.joml.Matrix4f;
 
 public interface ITextBuilder
 {
@@ -13,5 +14,5 @@ public interface ITextBuilder
 
     public VBOAttributes getAttributes();
 
-    public VAOBuilder put(VAOBuilder builder, float x, float y, float u, float v, float tw, float th, Color color);
+    public BufferBuilder put(BufferBuilder builder, Matrix4f matrix4f, float x, float y, float u, float v, float tw, float th, Color color);
 }

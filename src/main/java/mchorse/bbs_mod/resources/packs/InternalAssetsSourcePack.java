@@ -17,16 +17,18 @@ import java.util.zip.ZipFile;
 public class InternalAssetsSourcePack implements ISourcePack
 {
     private String prefix;
+    private String internalPrefix;
     private Class clazz;
 
     public InternalAssetsSourcePack()
     {
-        this("assets", InternalAssetsSourcePack.class);
+        this("assets", "assets/bbs", InternalAssetsSourcePack.class);
     }
 
-    public InternalAssetsSourcePack(String prefix, Class clazz)
+    public InternalAssetsSourcePack(String prefix, String internalPrefix, Class clazz)
     {
         this.prefix = prefix;
+        this.internalPrefix = internalPrefix;
         this.clazz = clazz;
     }
 
@@ -39,13 +41,13 @@ public class InternalAssetsSourcePack implements ISourcePack
     @Override
     public boolean hasAsset(Link link)
     {
-        return this.clazz.getClassLoader().getResource(this.prefix + "/" + link.path) != null;
+        return this.clazz.getClassLoader().getResource(this.internalPrefix + "/" + link.path) != null;
     }
 
     @Override
     public InputStream getAsset(Link link) throws IOException
     {
-        return this.clazz.getClassLoader().getResourceAsStream(this.prefix + "/" + link.path);
+        return this.clazz.getClassLoader().getResourceAsStream(this.internalPrefix + "/" + link.path);
     }
 
     @Override
@@ -90,14 +92,14 @@ public class InternalAssetsSourcePack implements ISourcePack
      */
     private File getResourcesFolder(File file)
     {
-        if (new File(file, this.prefix).exists())
+        if (new File(file, this.internalPrefix).exists())
         {
             return file;
         }
 
         for (File subFile : file.getParentFile().listFiles())
         {
-            if (new File(subFile, this.prefix).exists())
+            if (new File(subFile, this.internalPrefix).exists())
             {
                 return subFile;
             }
@@ -108,7 +110,7 @@ public class InternalAssetsSourcePack implements ISourcePack
 
     private void getLinksFromFolder(File folder, Link link, Collection<Link> links, boolean recursive)
     {
-        File file = new File(folder, this.prefix + "/" + link.path);
+        File file = new File(folder, this.internalPrefix + "/" + link.path);
 
         ExternalAssetsSourcePack.getLinksFromPathRecursively(file, links, link, link.path, recursive ? 9999 : 1);
     }
@@ -134,7 +136,7 @@ public class InternalAssetsSourcePack implements ISourcePack
         while (it.hasMoreElements())
         {
             String name = it.nextElement().getName();
-            String assets = this.prefix + "/";
+            String assets = this.internalPrefix + "/";
             String path = assets + link.path;
 
             if (name.startsWith(path))

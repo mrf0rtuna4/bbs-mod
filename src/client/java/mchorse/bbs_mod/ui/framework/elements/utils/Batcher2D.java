@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.texture.Texture;
@@ -8,32 +9,29 @@ import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icon;
-import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.colors.Colors;
-import mchorse.bbs_mod.utils.math.MathUtils;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
-import java.util.Stack;
 
 public class Batcher2D
 {
-    private static final Color c1 = new Color();
-    private static final Color c2 = new Color();
-    private static final Color c3 = new Color();
-    private static final Color c4 = new Color();
+    private DrawContext context;
 
-    private VAOBuilder builder;
-
-    private int mode;
-    private Object shader;
-    private Texture texture;
-
-    private Stack<Area> scissors = new Stack<>();
-
-    public Batcher2D()
-    {}
+    public Batcher2D(DrawContext context)
+    {
+        this.context = context;
+    }
 
     /* Screen space clipping */
 
@@ -52,49 +50,7 @@ public class Batcher2D
      */
     public void clip(int x, int y, int w, int h, int sw, int sh)
     {
-        Area scissor = this.scissors.isEmpty() ? null : this.scissors.peek();
-
-        /* If it was scissored before, then clamp to the bounds of the last one */
-        if (scissor != null)
-        {
-            w += Math.min(x - scissor.x, 0);
-            h += Math.min(y - scissor.y, 0);
-            x = MathUtils.clamp(x, scissor.x, scissor.ex());
-            y = MathUtils.clamp(y, scissor.y, scissor.ey());
-            w = MathUtils.clamp(w, 0, scissor.ex() - x);
-            h = MathUtils.clamp(h, 0, scissor.ey() - y);
-        }
-
-        this.flush();
-
-        scissor = new Area(x, y, w, h);
-        this.scissorArea(x, y, w, h, sw, sh);
-        this.scissors.add(scissor);
-    }
-
-    private void scissorArea(int x, int y, int w, int h, int sw, int sh)
-    {
-        /* Clipping area around scroll area */
-        MinecraftClient mc = MinecraftClient.getInstance();
-
-        float rx = (float) Math.round(mc.getWindow().getWidth() / (double) sw);
-        float ry = (float) Math.round(mc.getWindow().getHeight() / (double) sh);
-
-        int xx = (int) (x * rx);
-        int yy = (int) (mc.getWindow().getHeight() - (y + h) * ry);
-        int ww = (int) (w * rx);
-        int hh = (int) (h * ry);
-
-        // TODO: GLStates.scissorTest(true);
-
-        if (ww == 0 || hh == 0)
-        {
-            GL11.glScissor(0, 0, 1, 1);
-        }
-        else
-        {
-            // TODO: GLStates.scissor(xx, yy, ww, hh);
-        }
+        this.context.enableScissor(x, y, x + w, y + h);
     }
 
     public void unclip(UIContext context)
@@ -104,19 +60,7 @@ public class Batcher2D
 
     public void unclip(int sw, int sh)
     {
-        this.flush();
-        this.scissors.pop();
-
-        if (this.scissors.isEmpty())
-        {
-            // TODO: GLStates.scissorTest(false);
-        }
-        else
-        {
-            Area area = this.scissors.peek();
-
-            this.scissorArea(area.x, area.y, area.w, area.h, sw, sh);
-        }
+        this.context.disableScissor();
     }
 
     /* Solid rectangles */
@@ -143,22 +87,16 @@ public class Batcher2D
 
     public void box(float x, float y, float w, float h, int color1, int color2, int color3, int color4)
     {
-        this.begin(VBOAttributes.VERTEX_RGBA_2D);
-
-        c1.set(color1);
-        c2.set(color2);
-        c3.set(color3);
-        c4.set(color4);
+        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        VertexConsumer builder = this.context.getVertexConsumers().getBuffer(RenderLayer.getGui());
 
         /* c1 ---- c2
          * |        |
          * c3 ---- c4 */
-        this.builder.xy(x, y).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x, y + h).rgba(c3.r, c3.g, c3.b, c3.a);
-        this.builder.xy(x + w, y + h).rgba(c4.r, c4.g, c4.b, c4.a);
-        this.builder.xy(x, y).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x + w, y + h).rgba(c4.r, c4.g, c4.b, c4.a);
-        this.builder.xy(x + w, y).rgba(c2.r, c2.g, c2.b, c2.a);
+        builder.vertex(matrix4f, x, y, 0).color(color1).next();
+        builder.vertex(matrix4f, x, y + h, 0).color(color3).next();
+        builder.vertex(matrix4f, x + w, y + h, 0).color(color4).next();
+        builder.vertex(matrix4f, x + w, y, 0).color(color2).next();
     }
 
     public void dropShadow(int left, int top, int right, int bottom, int offset, int opaque, int shadow)
@@ -170,48 +108,38 @@ public class Batcher2D
         right += offset;
         bottom += offset;
 
-        c1.set(opaque);
-        c2.set(shadow);
+        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        VertexConsumer builder = this.context.getVertexConsumers().getBuffer(RenderLayer.getGui());
 
         /* Draw opaque part */
-        this.builder.xy(right - offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left + offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left + offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right - offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left + offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right - offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
+        builder.vertex(matrix4f, left + offset, top + offset, 0).color(opaque).next();
+        builder.vertex(matrix4f,left + offset, bottom - offset, 0).color(opaque).next();
+        builder.vertex(matrix4f, right - offset, bottom - offset, 0).color(opaque).next();
+        builder.vertex(matrix4f, right - offset, top + offset, 0).color(opaque).next();
 
         /* Draw top shadow */
-        this.builder.xy(right, top).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(left, top).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(left + offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right, top).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(left + offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right - offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
+        builder.vertex(matrix4f, left, top, 0).color(shadow).next();
+        builder.vertex(matrix4f,left + offset, top + offset, 0).color(opaque).next();
+        builder.vertex(matrix4f, right - offset, top + offset, 0).color(opaque).next();
+        builder.vertex(matrix4f, right, top, 0).color(shadow).next();
 
         /* Draw bottom shadow */
-        this.builder.xy(right - offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left + offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left, bottom).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(right - offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left, bottom).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(right, bottom).rgba(c2.r, c2.g, c2.b, c2.a);
+        builder.vertex(matrix4f, left + offset, bottom - offset, 0).color(opaque).next();
+        builder.vertex(matrix4f,left, bottom, 0).color(shadow).next();
+        builder.vertex(matrix4f, right, bottom, 0).color(shadow).next();
+        builder.vertex(matrix4f, right - offset, bottom - offset, 0).color(opaque).next();
 
         /* Draw left shadow */
-        this.builder.xy(left + offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left, top).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(left, bottom).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(left + offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(left, bottom).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(left + offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
+        builder.vertex(matrix4f, left, top, 0).color(shadow).next();
+        builder.vertex(matrix4f, left, bottom, 0).color(shadow).next();
+        builder.vertex(matrix4f, left + offset, bottom - offset, 0).color(opaque).next();
+        builder.vertex(matrix4f,left + offset, top + offset, 0).color(opaque).next();
 
         /* Draw right shadow */
-        this.builder.xy(right, top).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(right - offset, top + offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right - offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right, top).rgba(c2.r, c2.g, c2.b, c2.a);
-        this.builder.xy(right - offset, bottom - offset).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(right, bottom).rgba(c2.r, c2.g, c2.b, c2.a);
+        builder.vertex(matrix4f, right - offset, top + offset, 0).color(opaque).next();
+        builder.vertex(matrix4f, right - offset, bottom - offset, 0).color(opaque).next();
+        builder.vertex(matrix4f, right, bottom, 0).color(shadow).next();
+        builder.vertex(matrix4f,right, top, 0).color(shadow).next();
     }
 
     /* Gradients */
@@ -228,20 +156,17 @@ public class Batcher2D
 
     public void dropCircleShadow(int x, int y, int radius, int segments, int opaque, int shadow)
     {
-        c1.set(opaque);
-        c2.set(shadow);
+        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        this.flush();
-
-        VAOBuilder builder = this.begin(GL11.GL_TRIANGLE_FAN, VBOAttributes.VERTEX_RGBA_2D, null);
-
-        builder.xy(x, y).rgba(c1.r, c1.g, c1.b, c1.a);
+        builder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
+        builder.vertex(matrix4f, x, y, 0F).color(opaque).next();
 
         for (int i = 0; i <= segments; i ++)
         {
             double a = i / (double) segments * Math.PI * 2 - Math.PI / 2;
 
-            builder.xy((float) (x - Math.cos(a) * radius), (float) (y + Math.sin(a) * radius)).rgba(c2.r, c2.g, c2.b, c2.a);
+            builder.vertex(matrix4f, (float) (x - Math.cos(a) * radius), (float) (y + Math.sin(a) * radius), 0F).color(shadow).next();
         }
     }
 
@@ -254,38 +179,39 @@ public class Batcher2D
             return;
         }
 
-        c1.set(opaque);
-        c2.set(shadow);
-
-        this.flush();
-
-        VAOBuilder builder = this.begin(GL11.GL_TRIANGLE_FAN, VBOAttributes.VERTEX_RGBA_2D, null);
+        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
         /* Draw opaque base */
-        builder.xy(x, y).rgba(c1.r, c1.g, c1.b, c1.a);
+        builder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
+        builder.vertex(matrix4f, x, y, 0F).color(opaque).next();
 
         for (int i = 0; i <= segments; i ++)
         {
             double a = i / (double) segments * Math.PI * 2 - Math.PI / 2;
 
-            builder.xy((int) (x - Math.cos(a) * offset), (int) (y + Math.sin(a) * offset)).rgba(c1.r, c1.g, c1.b, c1.a);
+            builder.vertex(matrix4f, (int) (x - Math.cos(a) * offset), (int) (y + Math.sin(a) * offset), 0F).color(opaque).next();
         }
 
+        BufferRenderer.drawWithGlobalProgram(builder.end());
+
         /* Draw outer shadow */
-        builder = this.begin(VBOAttributes.VERTEX_RGBA_2D);
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR);
 
         for (int i = 0; i < segments; i ++)
         {
             double alpha1 = i / (double) segments * Math.PI * 2 - Math.PI / 2;
             double alpha2 = (i + 1) / (double) segments * Math.PI * 2 - Math.PI / 2;
 
-            builder.xy((float) (x - Math.cos(alpha2) * offset), (float) (y + Math.sin(alpha2) * offset)).rgba(c1.r, c1.g, c1.b, c1.a);
-            builder.xy((float) (x - Math.cos(alpha1) * offset), (float) (y + Math.sin(alpha1) * offset)).rgba(c1.r, c1.g, c1.b, c1.a);
-            builder.xy((float) (x - Math.cos(alpha1) * radius), (float) (y + Math.sin(alpha1) * radius)).rgba(c2.r, c2.g, c2.b, c2.a);
-            builder.xy((float) (x - Math.cos(alpha2) * offset), (float) (y + Math.sin(alpha2) * offset)).rgba(c1.r, c1.g, c1.b, c1.a);
-            builder.xy((float) (x - Math.cos(alpha1) * radius), (float) (y + Math.sin(alpha1) * radius)).rgba(c2.r, c2.g, c2.b, c2.a);
-            builder.xy((float) (x - Math.cos(alpha2) * radius), (float) (y + Math.sin(alpha2) * radius)).rgba(c2.r, c2.g, c2.b, c2.a);
+            builder.vertex(matrix4f, (float) (x - Math.cos(alpha2) * offset), (float) (y + Math.sin(alpha2) * offset), 0F).color(opaque).next();
+            builder.vertex(matrix4f, (float) (x - Math.cos(alpha1) * offset), (float) (y + Math.sin(alpha1) * offset), 0F).color(opaque).next();
+            builder.vertex(matrix4f, (float) (x - Math.cos(alpha1) * radius), (float) (y + Math.sin(alpha1) * radius), 0F).color(shadow).next();
+            builder.vertex(matrix4f, (float) (x - Math.cos(alpha2) * offset), (float) (y + Math.sin(alpha2) * offset), 0F).color(opaque).next();
+            builder.vertex(matrix4f, (float) (x - Math.cos(alpha1) * radius), (float) (y + Math.sin(alpha1) * radius), 0F).color(shadow).next();
+            builder.vertex(matrix4f, (float) (x - Math.cos(alpha2) * radius), (float) (y + Math.sin(alpha2) * radius), 0F).color(shadow).next();
         }
+
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     /* Outline methods */
@@ -404,20 +330,23 @@ public class Batcher2D
     {
         this.begin(VBOAttributes.VERTEX_UV_RGBA_2D, texture);
 
-        c1.set(color);
-
         this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
     }
 
     private void fillTexturedBox(float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
-        /* 0, 1, 2, 0, 2, 3 */
-        this.builder.xy(x, y + h).uv(u1, v2, textureW, textureH).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x + w, y + h).uv(u2, v2, textureW, textureH).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x + w, y).uv(u2, v1, textureW, textureH).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x, y + h).uv(u1, v2, textureW, textureH).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x + w, y).uv(u2, v1, textureW, textureH).rgba(c1.r, c1.g, c1.b, c1.a);
-        this.builder.xy(x, y).uv(u1, v1, textureW, textureH).rgba(c1.r, c1.g, c1.b, c1.a);
+        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE);
+        builder.vertex(matrix4f, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).next();
+        builder.vertex(matrix4f, x + w, y + h, 0F).texture(u2 / (float) textureW, v2 / (float) textureH).next();
+        builder.vertex(matrix4f, x + w, y, 0F).texture(u2 / (float) textureW, v1 / (float) textureH).next();
+        builder.vertex(matrix4f, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).next();
+        builder.vertex(matrix4f, x + w, y, 0F).texture(u2 / (float) textureW, v1 / (float) textureH).next();
+        builder.vertex(matrix4f, x, y, 0F).texture(u1 / (float) textureW, v1 / (float) textureH).next();
+
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     /* Textured box (with shader) */
@@ -435,8 +364,6 @@ public class Batcher2D
     public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
         this.begin(shader, texture);
-
-        c1.set(color);
 
         this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
     }
@@ -514,9 +441,16 @@ public class Batcher2D
 
     public void text(FontRenderer font, String label, float x, float y, int color, boolean shadow)
     {
-        VAOBuilder builder = this.begin(VBOAttributes.VERTEX_UV_RGBA_2D, BBSModClient.getTextures().getTexture(font.texture));
+        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        font.build(builder, label, (int) x, (int) y, 0, color, shadow);
+        RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(font.texture).id);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR);
+        int index = font.build(builder, matrix4f, label, (int) x, (int) y, 0, color, shadow);
+
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     /* Text helpers */
@@ -592,7 +526,7 @@ public class Batcher2D
 
     public VAOBuilder begin(int mode, VBOAttributes attributes, Texture texture)
     {
-        return this.begin(mode, null, texture);
+        return this.begin(mode, (Object) null, texture);
     }
 
     public VAOBuilder begin(Object shader)
@@ -607,45 +541,11 @@ public class Batcher2D
 
     public VAOBuilder begin(int mode, Object shader, Texture texture)
     {
-        if (this.shader == shader && this.texture == texture && this.mode == mode)
-        {
-            return this.builder;
-        }
-
-        this.flush();
-
-        this.builder = null; // TODO: this.context.getVAO().setup(shader).stack(this.context.stack);
-        this.mode = mode;
-        this.shader = shader;
-        this.texture = texture;
-
-        this.builder.begin();
-
-        return this.builder;
+        return null;
     }
 
     public void flush()
     {
-        if (this.shader == null)
-        {
-            return;
-        }
-
-        if (this.texture != null)
-        {
-            this.texture.bind();
-        }
-
-        this.builder.render(this.mode);
-
-        this.reset();
-    }
-
-    public void reset()
-    {
-        this.mode = 0;
-        this.builder = null;
-        this.shader = null;
-        this.texture = null;
+        this.context.draw();
     }
 }

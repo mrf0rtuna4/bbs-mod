@@ -6,12 +6,13 @@ import mchorse.bbs_mod.graphics.text.builders.ITextBuilder;
 import mchorse.bbs_mod.graphics.text.format.IFontFormat;
 import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.pose.MatrixStack;
+import net.minecraft.client.render.BufferBuilder;
+import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -78,12 +79,12 @@ public class FontRenderer
         this.updateSize();
     }
 
-    public int build(VAOBuilder builder, String label, int x, int y, int index, int c, boolean shadow)
+    public int build(BufferBuilder builder, Matrix4f matrix4f, String label, int x, int y, int index, int c, boolean shadow)
     {
-        return this.build(null, builder, label, x, y, index, c, shadow);
+        return this.build(null, builder, matrix4f, label, x, y, index, c, shadow);
     }
 
-    public int build(MatrixStack stack, VAOBuilder builder, String label, int x, int y, int index, int c, boolean shadow)
+    public int build(MatrixStack stack, BufferBuilder builder, Matrix4f matrix4f, String label, int x, int y, int index, int c, boolean shadow)
     {
         if (Colors.getAlpha(c) <= 0F)
         {
@@ -97,22 +98,20 @@ public class FontRenderer
             int shadowColor = Colors.mulRGB(c, 0.15F);
 
             textBuilder.setMultiplicative(true);
-            index = this.buildVAO(stack, x, y + 1, label, builder, textBuilder.color(shadowColor), index);
+            index = this.buildVAO(stack, x, y + 1, label, builder, matrix4f, textBuilder.color(shadowColor), index);
             textBuilder.setMultiplicative(false);
         }
 
-        return this.buildVAO(stack, x, y, label, builder, textBuilder.color(c), index);
+        return this.buildVAO(stack, x, y, label, builder, matrix4f, textBuilder.color(c), index);
     }
 
-    public int buildVAO(int lx, int ly, String text, VAOBuilder builder, ITextBuilder textBuilder)
+    public int buildVAO(int lx, int ly, String text, BufferBuilder builder, Matrix4f matrix4f, ITextBuilder textBuilder)
     {
-        return this.buildVAO(null, lx, ly, text, builder, textBuilder, 0);
+        return this.buildVAO(null, lx, ly, text, builder, matrix4f, textBuilder, 0);
     }
 
-    public int buildVAO(MatrixStack stack, int lx, int ly, String text, VAOBuilder builder, ITextBuilder textBuilder, int j)
+    public int buildVAO(MatrixStack stack, int lx, int ly, String text, BufferBuilder builder, Matrix4f matrix4f, ITextBuilder textBuilder, int j)
     {
-        final int VERTICES_PER_QUAD = 4;
-
         float tw = this.w;
         float th = this.h;
 
@@ -189,16 +188,12 @@ public class FontRenderer
                     float x4 = p.x;
                     float y4 = p.y;
 
-                    textBuilder.put(builder, x1, y1, tile.x, tile.y, tw, th, color);
-                    textBuilder.put(builder, x2, y2, tile.x, tile.y + tile.h, tw, th, color);
-                    textBuilder.put(builder, x3, y3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
-                    textBuilder.put(builder, x4, y4, tile.x + tile.w, tile.y, tw, th, color);
-
-                    if (!builder.hasIndex())
-                    {
-                        textBuilder.put(builder, x1, y1, tile.x, tile.y, tw, th, color);
-                        textBuilder.put(builder, x3, y3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
-                    }
+                    textBuilder.put(builder, matrix4f, x1, y1, tile.x, tile.y, tw, th, color);
+                    textBuilder.put(builder, matrix4f, x2, y2, tile.x, tile.y + tile.h, tw, th, color);
+                    textBuilder.put(builder, matrix4f, x3, y3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
+                    textBuilder.put(builder, matrix4f, x4, y4, tile.x + tile.w, tile.y, tw, th, color);
+                    textBuilder.put(builder, matrix4f, x1, y1, tile.x, tile.y, tw, th, color);
+                    textBuilder.put(builder, matrix4f, x3, y3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
 
                     if (this.context.bold)
                     {
@@ -218,38 +213,12 @@ public class FontRenderer
                         float bx4 = p.x;
                         float by4 = p.y;
 
-                        textBuilder.put(builder, bx1, by1, tile.x, tile.y, tw, th, color);
-                        textBuilder.put(builder, bx2, by2, tile.x, tile.y + tile.h, tw, th, color);
-                        textBuilder.put(builder, bx3, by3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
-                        textBuilder.put(builder, bx4, by4, tile.x + tile.w, tile.y, tw, th, color);
-
-                        if (!builder.hasIndex())
-                        {
-                            textBuilder.put(builder, bx1, by1, tile.x, tile.y, tw, th, color);
-                            textBuilder.put(builder, bx3, by3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
-                        }
-                    }
-
-                    if (builder.hasIndex())
-                    {
-                        builder.index(j * VERTICES_PER_QUAD);
-                        builder.index(j * VERTICES_PER_QUAD + 1);
-                        builder.index(j * VERTICES_PER_QUAD + 2);
-                        builder.index(j * VERTICES_PER_QUAD + 3);
-                        builder.index(j * VERTICES_PER_QUAD);
-                        builder.index(j * VERTICES_PER_QUAD + 2);
-
-                        if (this.context.bold)
-                        {
-                            j += 1;
-
-                            builder.index(j * VERTICES_PER_QUAD);
-                            builder.index(j * VERTICES_PER_QUAD + 1);
-                            builder.index(j * VERTICES_PER_QUAD + 2);
-                            builder.index(j * VERTICES_PER_QUAD + 3);
-                            builder.index(j * VERTICES_PER_QUAD);
-                            builder.index(j * VERTICES_PER_QUAD + 2);
-                        }
+                        textBuilder.put(builder, matrix4f, bx1, by1, tile.x, tile.y, tw, th, color);
+                        textBuilder.put(builder, matrix4f, bx2, by2, tile.x, tile.y + tile.h, tw, th, color);
+                        textBuilder.put(builder, matrix4f, bx3, by3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
+                        textBuilder.put(builder, matrix4f, bx4, by4, tile.x + tile.w, tile.y, tw, th, color);
+                        textBuilder.put(builder, matrix4f, bx1, by1, tile.x, tile.y, tw, th, color);
+                        textBuilder.put(builder, matrix4f, bx3, by3, tile.x + tile.w, tile.y + tile.h, tw, th, color);
                     }
 
                     color = this.context.color;

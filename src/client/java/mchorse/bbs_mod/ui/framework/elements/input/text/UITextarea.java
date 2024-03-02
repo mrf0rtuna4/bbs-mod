@@ -1473,7 +1473,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
 
     protected int renderTextLine(FontRenderer font, VAOBuilder builder, String line, int index, int i, int j, int nx, int ny)
     {
-        return font.build(builder, line, nx, ny, index, this.textColor, this.textShadow);
+        return index; // TODO: font.build(builder, line, nx, ny, index, this.textColor, this.textShadow);
     }
 
     protected void renderBackground(UIContext context)

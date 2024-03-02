@@ -7,6 +7,7 @@ import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
 import mchorse.bbs_mod.ui.framework.elements.utils.StencilMap;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.world.World;
 
 public class UIRenderingContext
@@ -15,9 +16,9 @@ public class UIRenderingContext
 
     private StencilMap stencil = new StencilMap();
 
-    public UIRenderingContext()
+    public UIRenderingContext(DrawContext context)
     {
-        this.batcher = new Batcher2D();
+        this.batcher = new Batcher2D(context);
     }
 
     public StencilMap getStencil()

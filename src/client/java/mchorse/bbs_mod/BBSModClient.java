@@ -19,10 +19,13 @@ import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.TestScreen;
+import mchorse.bbs_mod.ui.UITestMenu;
+import mchorse.bbs_mod.ui.framework.UIScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
 import mchorse.bbs_mod.utils.factory.MapFactory;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -121,8 +124,6 @@ public class BBSModClient implements ClientModInitializer
         formCategories = new FormCategories();
         formCategories.setup();
 
-        defaultFont = fonts.getRenderer(Link.assets("fonts/bbs_round.json"));
-
         KeybindSettings.registerClasses();
 
         BBSMod.setupConfig(Icons.KEY_CAP, "keybinds", new File(BBSMod.getSettingsFolder(), "keybinds.json"), KeybindSettings::register);
@@ -136,6 +137,11 @@ public class BBSModClient implements ClientModInitializer
             .register(Link.bbs("rainbow"), RainbowFontFormat.class, null)
             .register(Link.bbs("shake"), ShakeFontFormat.class, null)
             .register(Link.bbs("wave"), WaveFontFormat.class, null);
+
+        ClientLifecycleEvents.CLIENT_STARTED.register((e) ->
+        {
+            defaultFont = fonts.getRenderer(Link.assets("fonts/bbs_round.json"));
+        });
 
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -161,7 +167,7 @@ public class BBSModClient implements ClientModInitializer
 
             while (keyRecord.wasPressed())
             {
-                // ...
+                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Hello"), new UITestMenu()));
             }
         });
 

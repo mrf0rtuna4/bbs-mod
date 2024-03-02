@@ -394,7 +394,7 @@ public class UITextEditor extends UITextarea<HighlightedTextLine>
 
             for (TextSegment segment : segments)
             {
-                index = font.build(builder, segment.text, nx, ny, index, segment.color, shadow);
+                // TODO: index = font.build(builder, segment.text, nx, ny, index, segment.color, shadow);
 
                 nx += segment.width;
             }
