@@ -23,6 +23,7 @@ import mchorse.bbs_mod.ui.UITestMenu;
 import mchorse.bbs_mod.ui.framework.UIScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
+import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.factory.MapFactory;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
@@ -210,28 +211,28 @@ public class BBSModClient implements ClientModInitializer
     {
         WorldRenderEvents.BEFORE_ENTITIES.register((listener) ->
         {
-            MatrixStack matrixStack = listener.matrixStack();
+            MatrixStack stack = listener.matrixStack();
             Vec3d pos = listener.camera().getPos();
 
-            matrixStack.push();
-            matrixStack.translate(0 - pos.x, (-58) - pos.y, 0 - pos.z);
-            matrixStack.scale(0.5f, 0.5f, 0.5f);
-            matrixStack.multiply(listener.camera().getRotation());
-            matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f));
-            MatrixStack.Entry entry = matrixStack.peek();
-            Matrix4f matrix4f = entry.getPositionMatrix();
-            Matrix3f matrix3f = entry.getNormalMatrix();
+            stack.push();
+            stack.translate(0 - pos.x, (-58) - pos.y, 0 - pos.z);
+            stack.scale(0.5f, 0.5f, 0.5f);
+            stack.multiply(listener.camera().getRotation());
+            stack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f));
+            MatrixStack.Entry entry = stack.peek();
+            Matrix4f mv = entry.getPositionMatrix();
+            Matrix3f normal = entry.getNormalMatrix();
             VertexConsumer vertexConsumer = listener.consumers().getBuffer(RenderLayer.getEntityCutout(new Identifier("bbs:icon.png")));
-            vertex(vertexConsumer, matrix4f, matrix3f, LightmapTextureManager.pack(15, 15), 0.0f, 0, 0, 1);
-            vertex(vertexConsumer, matrix4f, matrix3f, LightmapTextureManager.pack(15, 15), 1.0f, 0, 1, 1);
-            vertex(vertexConsumer, matrix4f, matrix3f, LightmapTextureManager.pack(15, 15), 1.0f, 1, 1, 0);
-            vertex(vertexConsumer, matrix4f, matrix3f, LightmapTextureManager.pack(15, 15), 0.0f, 1, 0, 0);
-            matrixStack.pop();
+            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 0.0f, 0, 0, 1);
+            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 1.0f, 0, 1, 1);
+            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 1.0f, 1, 1, 0);
+            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 0.0f, 1, 0, 0);
+            stack.pop();
         });
     }
 
     private static void vertex(VertexConsumer buffer, Matrix4f matrix, Matrix3f normalMatrix, int light, float x, int y, int u, int v)
     {
-        buffer.vertex(matrix, x - 0.5f, (float)y - 0.5f, 0.0f).color(255, 255, 255, 255).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, 0.0f, 1.0f, 0.0f).next();
+        buffer.vertex(matrix, x - 0.5f, (float)y - 0.5f, 0.0f).color(Colors.WHITE).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, 0.0f, 1.0f, 0.0f).next();
     }
 }
