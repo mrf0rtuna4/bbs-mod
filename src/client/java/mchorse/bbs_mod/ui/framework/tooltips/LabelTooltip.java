@@ -2,6 +2,7 @@ package mchorse.bbs_mod.ui.framework.tooltips;
 
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.tooltips.styles.TooltipStyle;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.utils.Direction;
@@ -43,7 +44,8 @@ public class LabelTooltip implements ITooltip
             return;
         }
 
-        List<String> strings = context.font.split(label, this.width);
+        FontRenderer font = context.batcher.getFont();
+        List<String> strings = font.wrap(label, this.width);
 
         if (strings.isEmpty())
         {
@@ -69,14 +71,15 @@ public class LabelTooltip implements ITooltip
         {
             context.batcher.text(line, Area.SHARED.x, Area.SHARED.y, style.getTextColor());
 
-            Area.SHARED.y += context.font.getHeight() + 4;
+            Area.SHARED.y += font.getHeight() + 4;
         }
     }
 
     private void calculate(UIContext context, List<String> strings, Direction dir, Area elementArea, Area targetArea)
     {
-        int w = strings.size() == 1 ? context.font.getWidth(strings.get(0)) : this.width;
-        int h = (context.font.getHeight() + 4) * strings.size() - 4;
+        FontRenderer font = context.batcher.getFont();
+        int w = strings.size() == 1 ? font.getWidth(strings.get(0)) : this.width;
+        int h = (font.getHeight() + 4) * strings.size() - 4;
         int x = elementArea.x(dir.anchorX) - (int) (w * (1 - dir.anchorX)) + 6 * dir.factorX;
         int y = elementArea.y(dir.anchorY) - (int) (h * (1 - dir.anchorY)) + 6 * dir.factorY;
 

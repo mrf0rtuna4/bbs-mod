@@ -1,9 +1,9 @@
 package mchorse.bbs_mod.ui.utils.context;
 
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.icons.Icon;
 import mchorse.bbs_mod.utils.colors.Colors;
 
@@ -47,7 +47,7 @@ public class ContextAction
         this.renderBackground(context, x, y, w, h, hover, selected);
 
         context.batcher.icon(this.icon, x + 2, y + h / 2, 0, 0.5F);
-        context.batcher.text(font, this.label.get(), x + 22, y + (h - font.getHeight()) / 2 + 1, Colors.WHITE, false);
+        context.batcher.text(this.label.get(), x + 22, y + (h - font.getHeight()) / 2 + 1, Colors.WHITE, false);
     }
 
     protected void renderBackground(UIContext context, int x, int y, int w, int h, boolean hover, boolean selected)

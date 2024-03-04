@@ -2,6 +2,7 @@ package mchorse.bbs_mod.ui.framework.notifications;
 
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.utils.colors.Colors;
 
 import java.util.ArrayList;
@@ -41,15 +42,16 @@ public class UINotifications
 
     public void render(UIContext context)
     {
+        FontRenderer font = context.batcher.getFont();
         int w = 200;
         int y = 0;
         int lineMargin = 5;
-        int lineHeight = context.font.getHeight() + lineMargin;
+        int lineHeight = font.getHeight() + lineMargin;
 
         for (int i = this.notifications.size() - 1; i >= 0; i--)
         {
             Notification notification = this.notifications.get(i);
-            List<String> splits = context.font.split(notification.message.get(), w - 10);
+            List<String> splits = font.wrap(notification.message.get(), w - 10);
             int ly = 5;
             int h = 10 + splits.size() * lineHeight - lineMargin;
             int x = context.menu.width - (int) (w * notification.getFactor(context.getTransition()));

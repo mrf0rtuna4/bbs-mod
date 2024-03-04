@@ -5,6 +5,7 @@ import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.keys.KeyAction;
 import mchorse.bbs_mod.ui.utils.keys.KeyCombo;
 import mchorse.bbs_mod.utils.colors.Colors;
@@ -118,14 +119,15 @@ public class UIKeybind extends UIElement
     public void render(UIContext context)
     {
         String label = this.combo.keys.isEmpty() ? UIKeys.GENERAL_NONE.get() : this.combo.getKeyCombo();
-        int w = context.font.getWidth(label) - 1;
+        FontRenderer font = context.batcher.getFont();
+        int w = font.getWidth(label) - 1;
 
         if (this.reading)
         {
             this.area.render(context.batcher, Colors.A100 | BBSSettings.primaryColor.get());
 
             int x = this.area.mx(w);
-            int y = this.area.my() + context.font.getHeight() - 1;
+            int y = this.area.my() + font.getHeight() - 1;
             float a = (float) Math.sin(context.getTickTransition() / 2D);
             int c = Colors.setA(Colors.WHITE, a * 0.5F + 0.5F);
 
@@ -136,7 +138,7 @@ public class UIKeybind extends UIElement
             this.area.render(context.batcher, Colors.A100);
         }
 
-        context.batcher.textShadow(label, this.area.mx(w), this.area.my() - context.font.getHeight() / 2);
+        context.batcher.textShadow(label, this.area.mx(w), this.area.my() - font.getHeight() / 2);
 
         super.render(context);
     }

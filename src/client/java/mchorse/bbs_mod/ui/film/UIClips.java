@@ -23,6 +23,7 @@ import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
 import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.Scale;
 import mchorse.bbs_mod.ui.utils.ScrollArea;
@@ -96,7 +97,8 @@ public class UIClips extends UIElement
     public static void renderCursor(UIContext context, String label, Area area, int x)
     {
         /* Draw the marker */
-        int width = context.font.getWidth(label) + 3;
+        FontRenderer font = context.batcher.getFont();
+        int width = font.getWidth(label) + 3;
 
         context.batcher.box(x, area.y, x + 2, area.ey(), Colors.CURSOR);
 
@@ -107,7 +109,7 @@ public class UIClips extends UIElement
         }
 
         /* Draw the tick label */
-        context.batcher.textCard(context.font, label, x + 4, area.ey() - 2 - context.font.getHeight(), Colors.WHITE, Colors.setA(Colors.CURSOR, 0.75F), 2);
+        context.batcher.textCard(label, x + 4, area.ey() - 2 - font.getHeight(), Colors.WHITE, Colors.setA(Colors.CURSOR, 0.75F), 2);
     }
 
     public UIClips(IUIClipsDelegate delegate, IFactory<Clip, ClipFactoryData> factory)
@@ -1269,7 +1271,7 @@ public class UIClips extends UIElement
             {
                 int c = Colors.setA(Colors.WHITE, alpha);
 
-                context.batcher.textShadow(value, xx + 3, y + h - 2 - context.font.getHeight(), c);
+                context.batcher.textShadow(value, xx + 3, y + h - 2 - context.batcher.getFont().getHeight(), c);
             }
         }
     }

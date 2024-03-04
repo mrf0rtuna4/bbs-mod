@@ -1,9 +1,9 @@
 package mchorse.bbs_mod.ui.framework.elements.buttons;
 
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.elements.utils.ITextColoring;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.colors.Colors;
@@ -86,7 +86,7 @@ public class UIToggle extends UIClickable<UIToggle> implements ITextColoring
     @Override
     protected void renderSkin(UIContext context)
     {
-        FontRenderer font = context.font;
+        FontRenderer font = context.batcher.getFont();
         String label = font.limitToWidth(this.label.get(), this.area.w - 18);
 
         context.batcher.text(label, this.area.x, this.area.my(font.getHeight()), this.color, this.textShadow);

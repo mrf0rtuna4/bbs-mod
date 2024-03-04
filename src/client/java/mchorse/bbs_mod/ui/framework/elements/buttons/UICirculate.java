@@ -3,6 +3,7 @@ package mchorse.bbs_mod.ui.framework.elements.buttons;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.utils.colors.Colors;
 
 import java.util.ArrayList;
@@ -133,9 +134,10 @@ public class UICirculate extends UIClickable<UICirculate>
 
         this.area.render(context.batcher, color);
 
-        String label = context.font.limitToWidth(this.label.get(), this.area.w - 4);
-        int x = this.area.mx(context.font.getWidth(label));
-        int y = this.area.my(context.font.getHeight());
+        FontRenderer font = context.batcher.getFont();
+        String label = font.limitToWidth(this.label.get(), this.area.w - 4);
+        int x = this.area.mx(font.getWidth(label));
+        int y = this.area.my(font.getHeight());
 
         context.batcher.textShadow(label, x, y, Colors.mulRGB(Colors.WHITE, this.hover ? 0.9F : 1F));
 

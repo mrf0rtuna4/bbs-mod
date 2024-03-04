@@ -1,10 +1,10 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text;
 
-import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.IFocusedUIElement;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.input.text.utils.Textbox;
+import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
 
 public abstract class UIBaseTextbox extends UIElement implements IFocusedUIElement
 {
@@ -15,7 +15,7 @@ public abstract class UIBaseTextbox extends UIElement implements IFocusedUIEleme
         super();
 
         this.textbox = new Textbox(this::userInput);
-        this.textbox.setFont(BBSModClient.getDefaultFont());
+        this.textbox.setFont(Batcher2D.getDefaultTextRenderer());
     }
 
     protected void userInput(String string)

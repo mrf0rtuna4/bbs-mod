@@ -1,8 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.BBSModClient;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.graphics.vao.VBOAttributes;
@@ -10,10 +8,10 @@ import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icon;
 import mchorse.bbs_mod.utils.colors.Colors;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumer;
@@ -26,11 +24,27 @@ import java.util.List;
 
 public class Batcher2D
 {
+    private static FontRenderer fontRenderer = new FontRenderer();
+
     private DrawContext context;
+    private FontRenderer font;
+
+    public static FontRenderer getDefaultTextRenderer()
+    {
+        fontRenderer.setRenderer(MinecraftClient.getInstance().textRenderer);
+
+        return fontRenderer;
+    }
 
     public Batcher2D(DrawContext context)
     {
         this.context = context;
+        this.font = getDefaultTextRenderer();
+    }
+
+    public FontRenderer getFont()
+    {
+        return this.font;
     }
 
     /* Screen space clipping */
@@ -394,87 +408,51 @@ public class Batcher2D
 
     public void text(String label, float x, float y, int color)
     {
-        this.text(BBSModClient.getDefaultFont(), label, x, y, color, false);
+        this.text(label, x, y, color, false);
     }
 
     public void text(String label, float x, float y)
     {
-        this.text(BBSModClient.getDefaultFont(), label, x, y, Colors.WHITE, false);
+        this.text(label, x, y, Colors.WHITE, false);
     }
 
     public void textShadow(String label, float x, float y)
     {
-        this.text(BBSModClient.getDefaultFont(), label, x, y, Colors.WHITE, true);
+        this.text(label, x, y, Colors.WHITE, true);
     }
 
     public void textShadow(String label, float x, float y, int color)
     {
-        this.text(BBSModClient.getDefaultFont(), label, x, y, color, true);
+        this.text(label, x, y, color, true);
     }
 
     public void text(String label, float x, float y, int color, boolean shadow)
     {
-        this.text(BBSModClient.getDefaultFont(), label, x, y, color, shadow);
-    }
-
-    /* Text */
-
-    public void text(FontRenderer font, String label, float x, float y, int color)
-    {
-        this.text(font, label, x, y, color, false);
-    }
-
-    public void text(FontRenderer font, String label, float x, float y)
-    {
-        this.text(font, label, x, y, Colors.WHITE, false);
-    }
-
-    public void textShadow(FontRenderer font, String label, float x, float y)
-    {
-        this.text(font, label, x, y, Colors.WHITE, true);
-    }
-
-    public void textShadow(FontRenderer font, String label, float x, float y, int color)
-    {
-        this.text(font, label, x, y, color, true);
-    }
-
-    public void text(FontRenderer font, String label, float x, float y, int color, boolean shadow)
-    {
-        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
-        BufferBuilder builder = Tessellator.getInstance().getBuffer();
-
-        RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(font.texture).id);
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-
-        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR);
-        int index = font.build(builder, matrix4f, label, (int) x, (int) y, 0, color, shadow);
-
-        BufferRenderer.drawWithGlobalProgram(builder.end());
+        this.context.drawText(this.font.getRenderer(), label, (int) x, (int) y, color, shadow);
     }
 
     /* Text helpers */
 
-    public int wallText(FontRenderer font, String text, int x, int y, int color, int width)
+    public int wallText(String text, int x, int y, int color, int width)
     {
-        return this.wallText(font, text, x, y, color, width, 12);
+        return this.wallText(text, x, y, color, width, 12);
     }
 
-    public int wallText(FontRenderer font, String text, int x, int y, int color, int width, int lineHeight)
+    public int wallText(String text, int x, int y, int color, int width, int lineHeight)
     {
-        return this.wallText(font, text, x, y, color, width, lineHeight, 0F, 0F);
+        return this.wallText(text, x, y, color, width, lineHeight, 0F, 0F);
     }
 
-    public int wallText(FontRenderer font, String text, int x, int y, int color, int width, int lineHeight, float ax, float ay)
+    public int wallText(String text, int x, int y, int color, int width, int lineHeight, float ax, float ay)
     {
-        List<String> list = font.split(text, width);
-        int h = (lineHeight * (list.size() - 1)) + font.getHeight();
+        List<String> list = this.font.wrap(text, width);
+        int h = (lineHeight * (list.size() - 1)) + this.font.getHeight();
 
         y -= h * ay;
 
         for (String string : list)
         {
-            this.text(font, string, (int) (x + (width - font.getWidth(string)) * ax), y, color, true);
+            this.text(string.toString(), (int) (x + (width - this.font.getWidth(string)) * ax), y, color, true);
 
             y += lineHeight;
         }
@@ -482,34 +460,34 @@ public class Batcher2D
         return h;
     }
 
-    public void textCard(FontRenderer font, String text, float x, float y)
+    public void textCard(String text, float x, float y)
     {
-        this.textCard(font, text, x, y, Colors.WHITE, Colors.A50);
+        this.textCard(text, x, y, Colors.WHITE, Colors.A50);
     }
 
     /**
      * In this context, text card is a text with some background behind it
      */
-    public void textCard(FontRenderer font, String text, float x, float y, int color, int background)
+    public void textCard(String text, float x, float y, int color, int background)
     {
-        this.textCard(font, text, x, y, color, background, 3);
+        this.textCard(text, x, y, color, background, 3);
     }
 
-    public void textCard(FontRenderer font, String text, float x, float y, int color, int background, float offset)
+    public void textCard(String text, float x, float y, int color, int background, float offset)
     {
-        this.textCard(font, text, x, y, color, background, offset, true);
+        this.textCard(text, x, y, color, background, offset, true);
     }
 
-    public void textCard(FontRenderer font, String text, float x, float y, int color, int background, float offset, boolean shadow)
+    public void textCard(String text, float x, float y, int color, int background, float offset, boolean shadow)
     {
         int a = background >> 24 & 0xff;
 
         if (a != 0)
         {
-            this.box(x - offset, y - offset, x + font.getWidth(text) + offset - 1, y + font.getHeight() + offset, background);
+            this.box(x - offset, y - offset, x + this.font.getWidth(text) + offset - 1, y + this.font.getHeight() + offset, background);
         }
 
-        this.text(font, text, x, y, color, shadow);
+        this.text(text, x, y, color, shadow);
     }
 
     /* Pipeline */

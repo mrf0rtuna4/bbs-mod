@@ -1,7 +1,5 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
-import mchorse.bbs_mod.BBSModClient;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
@@ -46,7 +44,7 @@ public class UIText extends UIElement implements ITextColoring
 
     private int height()
     {
-        FontRenderer font = BBSModClient.getDefaultFont();
+        FontRenderer font = Batcher2D.getDefaultTextRenderer();
         int height = Math.max(this.lines, 1) * this.lineHeight - (this.lineHeight - font.getHeight());
 
         return height + this.paddingV * 2;
@@ -150,11 +148,13 @@ public class UIText extends UIElement implements ITextColoring
             }
         }
 
+        FontRenderer font = context.batcher.getFont();
+
         if (this.area.w > 0)
         {
             if (this.text == null)
             {
-                List<String> text = context.font.split(this.temp.get(), this.area.w - this.paddingH * 2);
+                List<String> text = font.wrap(this.temp.get(), this.area.w - this.paddingH * 2);
 
                 this.lines = text.size();
 
@@ -174,7 +174,7 @@ public class UIText extends UIElement implements ITextColoring
 
                 if (this.anchorX != 0)
                 {
-                    x = x + (int) (((this.area.w - this.paddingH * 2) - (context.font.getWidth(line))) * this.anchorX);
+                    x = x + (int) (((this.area.w - this.paddingH * 2) - (font.getWidth(line))) * this.anchorX);
                 }
 
                 context.batcher.text(line, x, this.area.y + y, color, this.shadow);

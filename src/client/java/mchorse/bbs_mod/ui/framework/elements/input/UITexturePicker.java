@@ -19,6 +19,7 @@ import mchorse.bbs_mod.ui.framework.elements.input.list.UIFilteredLinkList;
 import mchorse.bbs_mod.ui.framework.elements.input.multilink.UIMultiLinkEditor;
 import mchorse.bbs_mod.ui.framework.elements.input.text.UITextbox;
 import mchorse.bbs_mod.ui.framework.elements.utils.EventPropagation;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.UIUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -535,11 +536,6 @@ public class UITexturePicker extends UIElement
 
     protected boolean pickByTyping(UIContext context, char inputChar)
     {
-        if (!context.font.hasCharacter(inputChar))
-        {
-            return false;
-        }
-
         if (this.lastTyped.checkReset())
         {
             this.typed = "";
@@ -607,21 +603,23 @@ public class UITexturePicker extends UIElement
         /* Draw the overlays */
         if (this.right.isVisible())
         {
+            FontRenderer font = context.batcher.getFont();
+
             if (this.picker.getList().isEmpty())
             {
                 String label = UIKeys.TEXTURE_NO_DATA.get();
-                int w = context.font.getWidth(label);
+                int w = font.getWidth(label);
 
                 context.batcher.text(label, this.picker.area.mx(w), this.picker.area.my() - 8);
             }
 
             if (!this.lastTyped.check() && this.lastTyped.enabled)
             {
-                int w = context.font.getWidth(this.typed);
+                int w = font.getWidth(this.typed);
                 int x = this.text.area.x;
                 int y = this.text.area.ey();
 
-                context.batcher.box(x, y, x + w + 4, y + 4 + context.font.getHeight(), Colors.A50 | BBSSettings.primaryColor.get());
+                context.batcher.box(x, y, x + w + 4, y + 4 + font.getHeight(), Colors.A50 | BBSSettings.primaryColor.get());
                 context.batcher.textShadow(this.typed, x + 2, y + 2);
             }
 

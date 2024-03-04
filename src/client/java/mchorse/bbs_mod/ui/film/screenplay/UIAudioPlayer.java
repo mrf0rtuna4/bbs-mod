@@ -10,6 +10,7 @@ import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.IUITreeEventListener;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.colors.Colors;
@@ -145,8 +146,9 @@ public class UIAudioPlayer extends UIElement implements IUITreeEventListener
 
             int color = BBSSettings.primaryColor(Colors.A50);
             String label = String.format("%.1f/%.1f", this.player.getPlaybackPosition(), this.player.getBuffer().getDuration());
+            FontRenderer font = context.batcher.getFont();
 
-            context.batcher.textCard(context.font, label, this.area.ex() - 5 - context.font.getWidth(label), this.area.y + (this.area.h - context.font.getHeight()) / 2, Colors.WHITE, color);
+            context.batcher.textCard(label, this.area.ex() - 5 - font.getWidth(label), this.area.y + (this.area.h - font.getHeight()) / 2, Colors.WHITE, color);
         }
 
         if (this.player != null && this.wasPlaying != this.player.isPlaying())

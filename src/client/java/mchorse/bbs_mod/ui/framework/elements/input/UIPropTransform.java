@@ -6,6 +6,7 @@ import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.Keys;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.utils.Axis;
 import mchorse.bbs_mod.utils.Timer;
 import mchorse.bbs_mod.utils.colors.Colors;
@@ -249,10 +250,11 @@ public class UIPropTransform extends UITransform
         if (this.editing)
         {
             String label = UIKeys.TRANSFORMS_EDITING.get();
-            int x = this.area.mx(context.font.getWidth(label));
-            int y = this.area.my(context.font.getHeight());
+            FontRenderer font = context.batcher.getFont();
+            int x = this.area.mx(font.getWidth(label));
+            int y = this.area.my(font.getHeight());
 
-            context.batcher.textCard(context.font, label, x, y, Colors.WHITE, BBSSettings.primaryColor(Colors.A50));
+            context.batcher.textCard(label, x, y, Colors.WHITE, BBSSettings.primaryColor(Colors.A50));
         }
     }
 }

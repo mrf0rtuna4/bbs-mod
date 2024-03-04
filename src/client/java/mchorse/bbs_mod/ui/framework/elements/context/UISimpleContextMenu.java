@@ -39,7 +39,7 @@ public class UISimpleContextMenu extends UIContextMenu
 
         for (ContextAction action : this.actions.getList())
         {
-            w = Math.max(action.getWidth(context.font), w);
+            w = Math.max(action.getWidth(context.batcher.getFont()), w);
         }
 
         this.set(context.mouseX(), context.mouseY(), w, 0).h(this.actions.scroll.scrollSize).maxH(context.menu.height - 10).bounds(context.menu.overlay, 5);

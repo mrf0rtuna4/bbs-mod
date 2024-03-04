@@ -8,6 +8,7 @@ import mchorse.bbs_mod.settings.values.ValueFloat;
 import mchorse.bbs_mod.settings.values.ValueInt;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.input.text.UIBaseTextbox;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.Timer;
@@ -510,9 +511,10 @@ public class UITrackpad extends UIBaseTextbox
                 context.batcher.box(Math.min(fx, this.initialX), this.area.y + padding, Math.max(fx, this.initialX), this.area.ey() - padding, Colors.A100 | color);
             }
 
+            FontRenderer font = context.batcher.getFont();
             String label = this.textbox.getText();
-            int lx = this.area.mx(context.font.getWidth(label));
-            int ly = this.area.my() - context.font.getHeight() / 2;
+            int lx = this.area.mx(font.getWidth(label));
+            int ly = this.area.my() - font.getHeight() / 2;
 
             context.batcher.text(label, lx, ly, this.textbox.getColor());
 

@@ -5,6 +5,7 @@ import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.ui.film.UIClips;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.clips.Clip;
@@ -58,11 +59,12 @@ public class UIClipRenderer <T extends Clip> implements IUIClipRenderer<T>
             this.renderEnvelope(context, clip.envelope, clip.duration.get(), left + 1, y + 1, right - 1, y + 17);
         }
 
-        String label = context.font.limitToWidth(clip.title.get(), right - 5 - left);
+        FontRenderer font = context.batcher.getFont();
+        String label = font.limitToWidth(clip.title.get(), right - 5 - left);
 
         if (!label.isEmpty())
         {
-            context.batcher.textShadow(label, left + 5, y + (h - context.font.getHeight()) / 2);
+            context.batcher.textShadow(label, left + 5, y + (h - font.getHeight()) / 2);
         }
     }
 

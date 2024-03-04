@@ -375,11 +375,11 @@ public class UIPixelsEditor extends UICanvasEditor
         };
 
         int x = this.area.x + 10;
-        int y = this.area.ey() - context.font.getHeight() - 10 - (information.length - 1)* 14;
+        int y = this.area.ey() - context.batcher.getFont().getHeight() - 10 - (information.length - 1)* 14;
 
         for (String line : information)
         {
-            context.batcher.textCard(context.font, line, x, y);
+            context.batcher.textCard(line, x, y);
 
             y += 14;
         }

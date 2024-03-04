@@ -16,6 +16,7 @@ import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
 import mchorse.bbs_mod.ui.framework.elements.input.text.UITextEditor;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.elements.utils.UIRenderable;
 import mchorse.bbs_mod.ui.particles.sections.UIParticleSchemeAppearanceSection;
 import mchorse.bbs_mod.ui.particles.sections.UIParticleSchemeCollisionSection;
@@ -209,7 +210,7 @@ public class UIParticleSchemePanel extends UIDataDashboardPanel<ParticleScheme>
 
             int y = (this.textEditor.isVisible() ? this.textEditor.area.y : this.area.ey()) - 12;
 
-            context.batcher.textShadow(label, this.editor.area.ex() - 4 - context.font.getWidth(label), y);
+            context.batcher.textShadow(label, this.editor.area.ex() - 4 - context.batcher.getFont().getWidth(label), y);
         }
     }
 
@@ -220,9 +221,10 @@ public class UIParticleSchemePanel extends UIDataDashboardPanel<ParticleScheme>
 
         if (this.molangId != null)
         {
-            int w = context.font.getWidth(this.molangId);
+            FontRenderer font = context.batcher.getFont();
+            int w = font.getWidth(this.molangId);
 
-            context.batcher.textCard(context.font, this.molangId, this.textEditor.area.ex() - 6 - w, this.textEditor.area.ey() - 6 - context.font.getHeight());
+            context.batcher.textCard(this.molangId, this.textEditor.area.ex() - 6 - w, this.textEditor.area.ey() - 6 - font.getHeight());
         }
     }
 }

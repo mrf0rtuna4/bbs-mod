@@ -1,7 +1,6 @@
 package mchorse.bbs_mod.ui.forms;
 
 import mchorse.bbs_mod.BBSModClient;
-import mchorse.bbs_mod.forms.FormArchitect;
 import mchorse.bbs_mod.forms.categories.FormCategories;
 import mchorse.bbs_mod.forms.categories.FormCategory;
 import mchorse.bbs_mod.forms.forms.Form;
@@ -14,6 +13,7 @@ import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
 import mchorse.bbs_mod.ui.framework.elements.input.text.UITextbox;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.colors.Colors;
@@ -186,8 +186,9 @@ public class UIFormList extends UIElement
         {
             String displayName = selected.getDisplayName();
             String id = selected.getId();
+            FontRenderer font = context.batcher.getFont();
 
-            int w = Math.max(context.font.getWidth(displayName), context.font.getWidth(id));
+            int w = Math.max(font.getWidth(displayName), font.getWidth(id));
             int x = this.search.area.x;
             int y = this.search.area.y - 24;
 

@@ -1,6 +1,5 @@
 package mchorse.bbs_mod.ui.framework;
 
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.elements.IFocusedUIElement;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
@@ -23,7 +22,6 @@ import java.util.function.Consumer;
 
 public class UIContext implements IViewportStack
 {
-    public FontRenderer font;
     public UIRenderingContext render;
     public Batcher2D batcher;
 
@@ -84,7 +82,6 @@ public class UIContext implements IViewportStack
 
     public void setup(UIRenderingContext context)
     {
-        this.font = context.getFont();
         this.render = context;
         this.batcher = context.batcher;
     }

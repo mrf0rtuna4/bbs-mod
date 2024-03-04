@@ -1,12 +1,12 @@
 package mchorse.bbs_mod.ui.utils;
 
-import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
+import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
 import mchorse.bbs_mod.ui.framework.elements.utils.UILabel;
 import mchorse.bbs_mod.ui.utils.context.ContextAction;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -69,7 +69,7 @@ public class UI
 
     public static UILabel label(IKey label)
     {
-        return label(label, BBSModClient.getDefaultFont().getHeight());
+        return label(label, Batcher2D.getDefaultTextRenderer().getHeight());
     }
 
     public static UILabel label(IKey label, int height)

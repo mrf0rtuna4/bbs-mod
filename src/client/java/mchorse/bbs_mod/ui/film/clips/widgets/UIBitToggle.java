@@ -4,6 +4,7 @@ import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.utils.colors.Colors;
 
 import java.util.ArrayList;
@@ -155,10 +156,11 @@ public class UIBitToggle extends UIElement
 
         if (hovered >= 0)
         {
+            FontRenderer font = context.batcher.getFont();
             Bit bit = this.bits.get(hovered);
             String label = bit.label.get();
 
-            context.batcher.textCard(context.font, label, this.area.mx(context.font.getWidth(label)), this.area.my(context.font.getHeight()));
+            context.batcher.textCard(label, this.area.mx(font.getWidth(label)), this.area.my(font.getHeight()));
         }
     }
 

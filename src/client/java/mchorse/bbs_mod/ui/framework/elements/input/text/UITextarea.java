@@ -1,9 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text;
 
-import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.IFocusedUIElement;
@@ -11,6 +8,8 @@ import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.input.text.undo.TextEditUndo;
 import mchorse.bbs_mod.ui.framework.elements.input.text.utils.Cursor;
 import mchorse.bbs_mod.ui.framework.elements.input.text.utils.TextLine;
+import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.elements.utils.ITextColoring;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.ScrollArea;
@@ -107,7 +106,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
 
     protected FontRenderer getFont()
     {
-        return BBSModClient.getDefaultFont();
+        return Batcher2D.getDefaultTextRenderer();
     }
 
     public UITextarea<T> background()
@@ -1115,7 +1114,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
     @Override
     public boolean subTextInput(UIContext context)
     {
-        if (this.focused && this.getFont().hasCharacter(context.getInputCharacter()))
+        if (this.focused)
         {
             TextEditUndo undo = new TextEditUndo(this);
             String character = this.getFromChar(context.getInputCharacter());
@@ -1360,7 +1359,6 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
         boolean renderCursor = false;
         int cx = -1;
         int cy = -1;
-        int index = 0;
 
         FontRenderer font = this.getFont();
         Cursor min = this.getMin();
@@ -1372,11 +1370,6 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
         }
 
         context.batcher.flush();
-
-        /* TODO: Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
-        VAOBuilder builder = context.render.getVAO().setup(shader, VAO.INDICES).stack(context.render.stack);
-
-        builder.begin();
 
         for (int i = 0, ci = this.text.size(); i < ci; i++)
         {
@@ -1414,7 +1407,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
                         cy = newY;
                     }
 
-                    index = this.renderTextLine(font, builder, line, index, i, 0, newX, newY);
+                    this.renderTextLine(context, line, i, 0, newX, newY);
                 }
                 else
                 {
@@ -1432,7 +1425,7 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
                             cy = lineY;
                         }
 
-                        index = this.renderTextLine(font, builder, wrappedLine, index, i, j, newX, lineY);
+                        this.renderTextLine(context, wrappedLine, i, j, newX, lineY);
                         wrappedW += lineW;
                     }
                 }
@@ -1440,10 +1433,6 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
 
             y += textLine.getLines() * this.lineHeight;
         }
-
-        font.bindTexture(BBSModClient.getTextures());
-
-        builder.render(); */
 
         if (renderCursor)
         {
@@ -1471,9 +1460,9 @@ public class UITextarea <T extends TextLine> extends UIElement implements IFocus
         return w + this.padding * 2 + this.getShiftX();
     }
 
-    protected int renderTextLine(FontRenderer font, VAOBuilder builder, String line, int index, int i, int j, int nx, int ny)
+    protected void renderTextLine(UIContext context, String line, int i, int j, int nx, int ny)
     {
-        return index; // TODO: font.build(builder, line, nx, ny, index, this.textColor, this.textShadow);
+        context.batcher.text(line, nx, ny, Colors.WHITE, true);
     }
 
     protected void renderBackground(UIContext context)

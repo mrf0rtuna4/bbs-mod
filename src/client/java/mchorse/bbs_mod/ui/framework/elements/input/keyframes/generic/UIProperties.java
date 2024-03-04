@@ -9,6 +9,7 @@ import mchorse.bbs_mod.ui.film.UIClips;
 import mchorse.bbs_mod.ui.film.utils.undo.FilmEditorUndo;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.input.keyframes.UIBaseKeyframes;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.utils.CollectionUtils;
 import mchorse.bbs_mod.utils.colors.Colors;
@@ -558,9 +559,11 @@ public class UIProperties extends UIBaseKeyframes<GenericKeyframe>
                 index++;
             }
 
-            int lw = context.font.getWidth(property.title.get()) + 10;
+            FontRenderer font = context.batcher.getFont();
+            int lw = font.getWidth(property.title.get()) + 10;
+
             context.batcher.gradientHBox(this.area.ex() - lw - 10, y, this.area.ex(), y + h, property.color, Colors.A75 | property.color);
-            context.batcher.textShadow(property.title.get(), this.area.ex() - lw + 5, y + (h - context.font.getHeight()) / 2);
+            context.batcher.textShadow(property.title.get(), this.area.ex() - lw + 5, y + (h - font.getHeight()) / 2);
 
             y += h;
         }

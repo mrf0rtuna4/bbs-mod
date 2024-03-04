@@ -21,6 +21,6 @@ public class UIActionList extends UIList<ContextAction>
     {
         int h = this.scroll.scrollItemSize;
 
-        element.render(context, context.font, x, y, this.area.w, h, hover, selected);
+        element.render(context, context.batcher.getFont(), x, y, this.area.w, h, hover, selected);
     }
 }

@@ -3,6 +3,7 @@ package mchorse.bbs_mod.ui.framework.elements.input;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.input.color.UIColorPicker;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 
@@ -112,9 +113,10 @@ public class UIColor extends UIElement
 
         if (this.label)
         {
+            FontRenderer font = context.batcher.getFont();
             String label = this.picker.color.stringify(this.picker.editAlpha);
 
-            context.batcher.textCard(context.font, label, this.area.mx(context.font.getWidth(label)), this.area.my(context.font.getHeight() - 1), Colors.WHITE, Colors.A25, 1);
+            context.batcher.textCard(label, this.area.mx(font.getWidth(label)), this.area.my(font.getHeight() - 1), Colors.WHITE, Colors.A25, 1);
         }
 
         this.renderLockedArea(context);

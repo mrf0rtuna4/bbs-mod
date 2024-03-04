@@ -1,16 +1,17 @@
 package mchorse.bbs_mod.ui.utils.renderers;
 
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIBaseMenu;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeyCodes;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.Interpolation;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -202,7 +203,6 @@ public class InputRenderer
         int mx = offset + (int) (qx * (menu.width - offset * 2));
         int my = offset + (int) (qy * (menu.height - 20 - offset * 2));
 
-        FontRenderer font = menu.context.font;
         Iterator<PressedKey> it = this.pressedKeys.iterator();
 
         while (it.hasNext())
@@ -234,7 +234,7 @@ public class InputRenderer
 
     public void keyPressed(UIContext context, int key)
     {
-        if (key < 0 || context == null || context.font == null)
+        if (key < 0 || context == null)
         {
             return;
         }
@@ -250,7 +250,7 @@ public class InputRenderer
             {
                 if (pressed.key == key)
                 {
-                    offset = pressed.increment(context.font);
+                    offset = pressed.increment(Batcher2D.getDefaultTextRenderer());
                 }
                 else if (offset != -1000)
                 {
@@ -269,7 +269,7 @@ public class InputRenderer
             int x = last == null ? 0 : last.x + last.width + 18;
             PressedKey newKey = new PressedKey(key, x);
 
-            newKey.setupName(context.font);
+            newKey.setupName(MinecraftClient.getInstance().textRenderer);
 
             if (newKey.x + newKey.width + offset > context.menu.width - offset * 2)
             {
@@ -305,7 +305,7 @@ public class InputRenderer
             this.i = INDEX ++;
         }
 
-        public void setupName(FontRenderer font)
+        public void setupName(TextRenderer font)
         {
             this.name = KeyCodes.getName(this.key);
             this.width = font.getWidth(this.name) - 1;

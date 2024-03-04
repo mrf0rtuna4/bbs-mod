@@ -751,7 +751,7 @@ public abstract class UIList <T> extends UIElement
      */
     protected void renderElementPart(UIContext context, T element, int i, int x, int y, boolean hover, boolean selected)
     {
-        context.batcher.textShadow(context.font, this.elementToString(context, i, element), x + 4, y + (this.scroll.scrollItemSize - context.font.getHeight()) / 2, hover ? Colors.HIGHLIGHT : Colors.WHITE);
+        context.batcher.textShadow(this.elementToString(context, i, element), x + 4, y + (this.scroll.scrollItemSize - context.batcher.getFont().getHeight()) / 2, hover ? Colors.HIGHLIGHT : Colors.WHITE);
     }
 
     /**

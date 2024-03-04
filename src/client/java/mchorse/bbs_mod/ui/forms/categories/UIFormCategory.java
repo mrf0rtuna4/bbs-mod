@@ -128,7 +128,7 @@ public class UIFormCategory extends UIElement
 
             if (y < 0)
             {
-                if (x < this.area.x + 30 + context.font.getWidth(this.category.title.get()))
+                if (x < this.area.x + 30 + context.batcher.getFont().getWidth(this.category.title.get()))
                 {
                     this.category.hidden = !this.category.hidden;
 
@@ -174,7 +174,7 @@ public class UIFormCategory extends UIElement
     {
         super.render(context);
 
-        context.batcher.textCard(context.font, this.category.title.get(), this.area.x + 26, this.area.y + 6);
+        context.batcher.textCard(this.category.title.get(), this.area.x + 26, this.area.y + 6);
 
         if (this.category.hidden)
         {

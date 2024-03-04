@@ -4,6 +4,7 @@ import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.keys.Keybind;
 import mchorse.bbs_mod.utils.colors.Colors;
 
@@ -103,10 +104,11 @@ public class UIKeybinds extends UIScrollView
             int color = Colors.A100 | BBSSettings.primaryColor.get();
 
             String title = this.title.get();
+            FontRenderer font = context.batcher.getFont();
 
             if (!title.isEmpty())
             {
-                context.batcher.box(x - 10, y + i - 2, x + context.font.getWidth(title) + 2, y + i + context.font.getHeight() + 2, color);
+                context.batcher.box(x - 10, y + i - 2, x + font.getWidth(title) + 2, y + i + font.getHeight() + 2, color);
                 context.batcher.text(title, x, y + i);
                 i += 14;
             }
@@ -114,9 +116,9 @@ public class UIKeybinds extends UIScrollView
             for (Keybind keybind : this.keybinds)
             {
                 String combo = keybind.getKeyCombo();
-                int w = context.font.getWidth(combo);
+                int w = font.getWidth(combo);
 
-                context.batcher.box(x - 2, y + i - 2, x + w + 2, y + i + context.font.getHeight() + 2, color);
+                context.batcher.box(x - 2, y + i - 2, x + w + 2, y + i + font.getHeight() + 2, color);
                 context.batcher.text(combo, x, y + i);
                 context.batcher.textShadow(keybind.getLabel().get(), x + w + 5, y + i);
                 i += 14;

@@ -1,12 +1,12 @@
 package mchorse.bbs_mod.ui.framework;
 
 import mchorse.bbs_mod.BBSModClient;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
 import mchorse.bbs_mod.ui.framework.elements.utils.StencilMap;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.world.World;
 
@@ -38,9 +38,9 @@ public class UIRenderingContext
         return MinecraftClient.getInstance().world;
     }
 
-    public FontRenderer getFont()
+    public TextRenderer getFont()
     {
-        return BBSModClient.getDefaultFont();
+        return MinecraftClient.getInstance().textRenderer;
     }
 
     public VAOBuilder getVAO()

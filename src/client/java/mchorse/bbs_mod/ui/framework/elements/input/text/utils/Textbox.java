@@ -1,10 +1,10 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text.utils;
 
 import mchorse.bbs_mod.BBSSettings;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.StringGroupMatcher;
 import mchorse.bbs_mod.utils.Pair;
@@ -363,7 +363,7 @@ public class Textbox
 
         for (int i = start; i >= 0 && i < this.text.length(); i += direction)
         {
-            int sw = this.font.getWidth(this.text.charAt(i));
+            int sw = this.font.getWidth(String.valueOf(this.text.charAt(i)));
 
             if (w < max && w + sw >= max)
             {
@@ -512,7 +512,7 @@ public class Textbox
 
                 for (int i = 0, c = wrappedText.length(); i < c; i++)
                 {
-                    int string = this.font.getWidth(wrappedText.charAt(i));
+                    int string = this.font.getWidth(String.valueOf(wrappedText.charAt(i)));
 
                     if (x >= w && x < w + string)
                     {
@@ -636,22 +636,17 @@ public class Textbox
             return false;
         }
 
-        if (this.font.hasCharacter(character))
+        String text = String.valueOf(character);
+
+        if (this.validator != null && !this.validator.test(text))
         {
-            String text = String.valueOf(character);
-
-            if (this.validator != null && !this.validator.test(text))
-            {
-                return false;
-            }
-
-            this.insert(text);
-            this.acceptText();
-
-            return true;
+            return false;
         }
 
-        return false;
+        this.insert(text);
+        this.acceptText();
+
+        return true;
     }
 
     private void handleShift(boolean shift)
@@ -727,7 +722,7 @@ public class Textbox
             context.batcher.box(sx, y - 2, sx + sw, y + this.font.getHeight() + 2, 0x88000000 + BBSSettings.primaryColor.get());
         }
 
-        context.batcher.textShadow(this.font, text, x, y, color);
+        context.batcher.textShadow(text, x, y, color);
 
         if (this.focused)
         {

@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.ui.utils.renderers;
 
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.tooltips.styles.TooltipStyle;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.utils.colors.Color;
@@ -27,10 +28,11 @@ public class InterpolationRenderer
         int w = 140;
         int h = 130;
 
+        FontRenderer font = context.batcher.getFont();
         TooltipStyle style = TooltipStyle.get();
         String tooltip = ""; // TODO: interp.getTooltip().get();
-        List<String> lines = context.font.split(tooltip, w - 20);
-        int ah = lines.isEmpty() ? 0 : lines.size() * (context.font.getHeight() + 4);
+        List<String> lines = font.wrap(tooltip, w - 20);
+        int ah = lines.isEmpty() ? 0 : lines.size() * (font.getHeight() + 4);
 
         y = MathUtils.clamp(y, 0, context.menu.height - h - ah);
 
@@ -44,17 +46,17 @@ public class InterpolationRenderer
         style.renderBackground(context, Area.SHARED);
 
         Color fg = color.set(style.getForegroundColor(), false);
-        int font = style.getTextColor();
+        int fontColor = style.getTextColor();
 
         fg.a = 0.2F;
 
         String name = ""; // TODO: interp.getName().get();
 
-        context.batcher.textShadow(name, x + 10, y + 10, font);
+        context.batcher.textShadow(name, x + 10, y + 10, fontColor);
 
         for (int i = 0; i < lines.size(); i++)
         {
-            context.batcher.textShadow(lines.get(i), x + 10, y + h - 5 + i * (context.font.getHeight() + 4), font);
+            context.batcher.textShadow(lines.get(i), x + 10, y + h - 5 + i * (font.getHeight() + 4), fontColor);
         }
 
         /* Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA_2D);
@@ -98,8 +100,8 @@ public class InterpolationRenderer
 
         line.render(context.batcher, SolidColorLineRenderer.get(fg)); */
 
-        context.batcher.text("A", x + 14, (int)(y + h - 10 - padding / 2) + 4, font);
-        context.batcher.text("B", x + w - 19, (int)(y + 20 + padding / 2) - context.font.getHeight() - 4, font);
+        context.batcher.text("A", x + 14, (int)(y + h - 10 - padding / 2) + 4, fontColor);
+        context.batcher.text("B", x + w - 19, (int)(y + 20 + padding / 2) - font.getHeight() - 4, fontColor);
 
         float tick = context.getTickTransition() % (duration + 20);
         float factor = MathUtils.clamp(tick / (float) duration, 0, 1);

@@ -1,9 +1,5 @@
 package mchorse.bbs_mod.ui.framework.elements.input.text;
 
-import mchorse.bbs_mod.BBSModClient;
-import mchorse.bbs_mod.graphics.text.FontRenderer;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.input.text.highlighting.HighlightedTextLine;
 import mchorse.bbs_mod.ui.framework.elements.input.text.highlighting.ISyntaxHighlighter;
@@ -13,7 +9,9 @@ import mchorse.bbs_mod.ui.framework.elements.input.text.highlighting.TextLineNum
 import mchorse.bbs_mod.ui.framework.elements.input.text.highlighting.TextSegment;
 import mchorse.bbs_mod.ui.framework.elements.input.text.undo.TextEditUndo;
 import mchorse.bbs_mod.ui.framework.elements.input.text.utils.Cursor;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.utils.colors.Colors;
+import net.minecraft.client.font.TextRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +31,6 @@ public class UITextEditor extends UITextarea<HighlightedTextLine>
         super(callback);
 
         this.highlighter = new JSSyntaxHighlighter();
-    }
-
-    @Override
-    protected FontRenderer getFont()
-    {
-        return BBSModClient.getFonts().getRenderer(Link.assets("fonts/bbs_round_mono.json"));
     }
 
     public UITextEditor highlighter(ISyntaxHighlighter highlighter)
@@ -350,8 +342,10 @@ public class UITextEditor extends UITextarea<HighlightedTextLine>
     /* Replacing rendering */
 
     @Override
-    protected int renderTextLine(FontRenderer font, VAOBuilder builder, String line, int index, int i, int j, int nx, int ny)
+    protected void renderTextLine(UIContext context, String line, int i, int j, int nx, int ny)
     {
+        FontRenderer font = context.batcher.getFont();
+
         /* Cache line number to be later rendered in drawForeground() */
         if (this.lines && j == 0)
         {
@@ -394,13 +388,11 @@ public class UITextEditor extends UITextarea<HighlightedTextLine>
 
             for (TextSegment segment : segments)
             {
-                // TODO: index = font.build(builder, segment.text, nx, ny, index, segment.color, shadow);
+                context.batcher.text(segment.text, nx, ny, segment.color, shadow);
 
                 nx += segment.width;
             }
         }
-
-        return index;
     }
 
     @Override
@@ -433,7 +425,7 @@ public class UITextEditor extends UITextarea<HighlightedTextLine>
                     break;
                 }
 
-                context.batcher.text(font, number.line, number.x, number.y, this.highlighter.getStyle().lineNumbers);
+                context.batcher.text(number.line, number.x, number.y, this.highlighter.getStyle().lineNumbers);
                 number.render = false;
             }
 

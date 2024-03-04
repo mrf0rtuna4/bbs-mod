@@ -162,7 +162,7 @@ public class UIReplayList extends UIList<Replay>
     {
         Form form = element.form.get();
 
-        return form == null ? "-" : context.font.limitToWidth(form.getIdOrName(), this.area.w - 20);
+        return form == null ? "-" : context.batcher.getFont().limitToWidth(form.getIdOrName(), this.area.w - 20);
     }
 
     @Override

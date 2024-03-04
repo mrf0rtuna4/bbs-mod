@@ -21,6 +21,7 @@ import mchorse.bbs_mod.ui.film.replays.UIRecordOverlayPanel;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.StencilFormFramebuffer;
 import mchorse.bbs_mod.ui.utils.UIUtils;
@@ -716,6 +717,8 @@ public class UIFilmController extends UIElement
 
         if (this.controlled != null)
         {
+            FontRenderer font = context.batcher.getFont();
+
             /* Render helpful guides for sticks and triggers controls */
             if (mode > 0)
             {
@@ -738,7 +741,7 @@ public class UIFilmController extends UIElement
                     label = "Extra 2";
                 }
 
-                context.batcher.textCard(context.font, label, area.x + 5, area.ey() - 5 - context.font.getHeight(), Colors.WHITE, BBSSettings.primaryColor(Colors.A100));
+                context.batcher.textCard(label, area.x + 5, area.ey() - 5 - font.getHeight(), Colors.WHITE, BBSSettings.primaryColor(Colors.A100));
 
                 int ww = (int) (Math.min(area.w, area.h) * 0.75F);
                 int hh = ww;
@@ -764,11 +767,11 @@ public class UIFilmController extends UIElement
 
                 if (this.recordingCountdown <= 0)
                 {
-                    context.batcher.textCard(context.font, this.getTick() + " ticks", x + 3, y + 4, Colors.WHITE, Colors.A50);
+                    context.batcher.textCard(this.getTick() + " ticks", x + 3, y + 4, Colors.WHITE, Colors.A50);
                 }
                 else
                 {
-                    context.batcher.textCard(context.font, String.valueOf(this.recordingCountdown / 20F), x + 3, y + 4, Colors.WHITE, Colors.A50);
+                    context.batcher.textCard(String.valueOf(this.recordingCountdown / 20F), x + 3, y + 4, Colors.WHITE, Colors.A50);
                 }
             }
 

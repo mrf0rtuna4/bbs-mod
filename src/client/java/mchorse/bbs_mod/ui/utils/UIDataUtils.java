@@ -70,7 +70,7 @@ public class UIDataUtils
         int w = (int) (area.w / 1.1F);
         int color = Colors.mulRGB(0x444444, 1 - (float) factor);
 
-        context.batcher.wallText(context.font, label, area.mx() - w / 2, area.my() - 20, color, w, 12, 0.5F, 1);
+        context.batcher.wallText(label, area.mx() - w / 2, area.my() - 20, color, w, 12, 0.5F, 1);
 
         context.batcher.gradientVBox(area.x, area.my() + 20, area.ex(), area.my() + 40, 0, Colors.A100);
         context.batcher.box(area.x, area.my() + 40, area.ex(), area.my() + 90, Colors.A100);

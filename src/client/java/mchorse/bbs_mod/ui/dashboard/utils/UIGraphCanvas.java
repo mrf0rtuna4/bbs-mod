@@ -149,7 +149,7 @@ public class UIGraphCanvas extends UICanvas
             }
 
             int y3 = y1 < y2 ? y1 : y1 - 12;
-            int w = context.font.getWidth(coordinate);
+            int w = context.batcher.getFont().getWidth(coordinate);
 
             mouseX += 1;
 

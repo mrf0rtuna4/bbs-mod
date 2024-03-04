@@ -6,6 +6,7 @@ import mchorse.bbs_mod.graphics.line.SolidColorLineRenderer;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.film.utils.undo.FilmEditorUndo;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.Scale;
 import mchorse.bbs_mod.ui.utils.ScrollDirection;
@@ -842,9 +843,11 @@ public class UIKeyframes extends UIBaseKeyframes<Keyframe>
                 index++;
             }
 
-            int lw = context.font.getWidth(sheet.title.get()) + 10;
+            FontRenderer font = context.batcher.getFont();
+            int lw = font.getWidth(sheet.title.get()) + 10;
+
             context.batcher.gradientHBox(this.area.ex() - lw - 10, y, this.area.ex(), y + h, sheet.color, Colors.A75 | sheet.color);
-            context.batcher.textShadow(sheet.title.get(), this.area.ex() - lw + 5, y + (h - context.font.getHeight()) / 2);
+            context.batcher.textShadow(sheet.title.get(), this.area.ex() - lw + 5, y + (h - font.getHeight()) / 2);
 
             Area editArea = this.setupEditArea(y, h);
 
