@@ -23,6 +23,17 @@ public class UIScreen extends Screen
         this.menu.context.setup(this.context);
     }
 
+    public void update()
+    {
+        this.menu.update();
+    }
+
+    @Override
+    public boolean shouldPause()
+    {
+        return this.menu.canPause();
+    }
+
     @Override
     protected void init()
     {

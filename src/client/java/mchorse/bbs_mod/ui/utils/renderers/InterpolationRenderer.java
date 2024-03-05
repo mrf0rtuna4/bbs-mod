@@ -1,5 +1,8 @@
 package mchorse.bbs_mod.ui.utils.renderers;
 
+import mchorse.bbs_mod.graphics.line.Line;
+import mchorse.bbs_mod.graphics.line.LineBuilder;
+import mchorse.bbs_mod.graphics.line.SolidColorLineRenderer;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.tooltips.styles.TooltipStyle;
@@ -28,9 +31,10 @@ public class InterpolationRenderer
         int w = 140;
         int h = 130;
 
+        /* TODO: matrix */
         FontRenderer font = context.batcher.getFont();
         TooltipStyle style = TooltipStyle.get();
-        String tooltip = ""; // TODO: interp.getTooltip().get();
+        String tooltip = interp.toString(); // TODO: interp.getTooltip().get();
         List<String> lines = font.wrap(tooltip, w - 20);
         int ah = lines.isEmpty() ? 0 : lines.size() * (font.getHeight() + 4);
 
@@ -50,7 +54,7 @@ public class InterpolationRenderer
 
         fg.a = 0.2F;
 
-        String name = ""; // TODO: interp.getName().get();
+        String name = interp.toString(); // TODO: interp.getName().get();
 
         context.batcher.textShadow(name, x + 10, y + 10, fontColor);
 
@@ -59,29 +63,33 @@ public class InterpolationRenderer
             context.batcher.textShadow(lines.get(i), x + 10, y + h - 5 + i * (font.getHeight() + 4), fontColor);
         }
 
-        /* Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA_2D);
-        VAOBuilder builder = context.batcher.begin(GL11.GL_LINES, shader, null);
+        LineBuilder grid = new LineBuilder(0.25F);
 
-        CommonShaderAccess.setModelView(shader);
+        grid.add(x + 10, y + 20);
+        grid.add(x + 10, y + h - 10);
+        grid.add(x + w - 10, y + h - 10);
+        grid.add(x + w - 10, y + 20);
+        grid.add(x + 10, y + 20);
 
-        builder.xy(x + 10, y + 20).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + 10, y + h - 10).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w / 2, y + 20).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w / 2, y + h - 10).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + 20).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + h - 10).rgba(fg.r, fg.g, fg.b, fg.a);
+        grid.push();
+        grid.add(x + w / 2, y + 20);
+        grid.add(x + w / 2, y + h - 10);
 
-        builder.xy(x + 10, y + 20).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + 20).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + 10, y + 20 + (h - 30) / 2).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + 20 + (h - 30) / 2).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + 10, y + h - 10).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + h - 10).rgba(fg.r, fg.g, fg.b, fg.a);
+        grid.push();
+        grid.add(x + 10, y + h - 10 - padding / 2);
+        grid.add(x + w - 10, y + h - 10 - padding / 2);
 
-        builder.xy(x + 10, y + h - 10 - padding / 2).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + h - 10 - padding / 2).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + 10, y + 20 + padding / 2).rgba(fg.r, fg.g, fg.b, fg.a);
-        builder.xy(x + w - 10, y + 20 + padding / 2).rgba(fg.r, fg.g, fg.b, fg.a);
+        grid.push();
+        grid.add(x + 10, y + 20 + padding / 2);
+        grid.add(x + w - 10, y + 20 + padding / 2);
+
+        int h2 = (h + 10) / 2;
+
+        grid.push();
+        grid.add(x + 10, y + h2);
+        grid.add(x + w - 10, y + h2);
+
+        grid.render(context.batcher, SolidColorLineRenderer.get(fg));
 
         fg.a = 1F;
 
@@ -98,7 +106,7 @@ public class InterpolationRenderer
             line.add(x1, y1);
         }
 
-        line.render(context.batcher, SolidColorLineRenderer.get(fg)); */
+        line.render(context.batcher, SolidColorLineRenderer.get(fg));
 
         context.batcher.text("A", x + 14, (int)(y + h - 10 - padding / 2) + 4, fontColor);
         context.batcher.text("B", x + w - 19, (int)(y + 20 + padding / 2) - font.getHeight() - 4, fontColor);

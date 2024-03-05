@@ -1,8 +1,10 @@
 package mchorse.bbs_mod.graphics.line;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
@@ -82,6 +84,8 @@ public class LineBuilder <T>
         {
             BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
+            RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+            RenderSystem.enableBlend();
             builder.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR);
 
             for (LinePoint<T> point : points)

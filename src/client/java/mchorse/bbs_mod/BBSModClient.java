@@ -112,9 +112,14 @@ public class BBSModClient implements ClientModInitializer
 
         ClientTickEvents.END_CLIENT_TICK.register((client) ->
         {
+            if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
+            {
+                screen.update();
+            }
+
             while (keyPlay.wasPressed())
             {
-                
+
             }
 
             while (keyRecord.wasPressed())
