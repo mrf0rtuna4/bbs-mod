@@ -3,8 +3,6 @@ package mchorse.bbs_mod.ui.framework.elements.utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.texture.Texture;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.icons.Icon;
@@ -126,8 +124,6 @@ public class Batcher2D
 
     public void dropShadow(int left, int top, int right, int bottom, int offset, int opaque, int shadow)
     {
-        this.begin(VBOAttributes.VERTEX_RGBA_2D);
-
         left -= offset;
         top -= offset;
         right += offset;
@@ -362,8 +358,6 @@ public class Batcher2D
 
     public void texturedBox(Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
-        this.begin(VBOAttributes.VERTEX_UV_RGBA_2D, texture);
-
         RenderSystem.setShaderTexture(0, texture.id);
 
         this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
@@ -385,8 +379,6 @@ public class Batcher2D
         builder.vertex(matrix4f, x, y, 0F).texture(u1 / (float) textureW, v1 / (float) textureH).next();
 
         BufferRenderer.drawWithGlobalProgram(builder.end());
-
-        RenderSystem.depthFunc(GL11.GL_ALWAYS);
     }
 
     /* Textured box (with shader) */
@@ -403,8 +395,6 @@ public class Batcher2D
 
     public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
-        this.begin(shader, texture);
-
         this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
     }
 
@@ -517,38 +507,6 @@ public class Batcher2D
         }
 
         this.text(text, x, y, color, shadow);
-    }
-
-    /* Pipeline */
-
-    public VAOBuilder begin(VBOAttributes attributes)
-    {
-        return this.begin(GL11.GL_TRIANGLES, null, null);
-    }
-
-    public VAOBuilder begin(VBOAttributes attributes, Texture texture)
-    {
-        return this.begin(GL11.GL_TRIANGLES, null, texture);
-    }
-
-    public VAOBuilder begin(int mode, VBOAttributes attributes, Texture texture)
-    {
-        return this.begin(mode, (Object) null, texture);
-    }
-
-    public VAOBuilder begin(Object shader)
-    {
-        return this.begin(GL11.GL_TRIANGLES, shader, null);
-    }
-
-    public VAOBuilder begin(Object shader, Texture texture)
-    {
-        return this.begin(GL11.GL_TRIANGLES, shader, texture);
-    }
-
-    public VAOBuilder begin(int mode, Object shader, Texture texture)
-    {
-        return null;
     }
 
     public void flush()

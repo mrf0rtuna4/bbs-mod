@@ -1,7 +1,6 @@
 package mchorse.bbs_mod.graphics;
 
 import mchorse.bbs_mod.graphics.texture.Texture;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
@@ -23,12 +22,12 @@ public class Framebuffer
     public static void renderToQuad(/* TODO: RenderingContext context, Shader shader */)
     {
         /* Requires VBOAttributes.VERTEX_2D shader */
-        VAOBuilder builder = null; // TODO: context.getVAO().setup(shader);
+        /* VAOBuilder builder = null; // TODO: context.getVAO().setup(shader);
 
         builder.begin();
         builder.xy(-1, -1).xy(1, 1).xy(-1, 1);
         builder.xy(1, -1).xy(1, 1).xy(-1, -1);
-        builder.render();
+        builder.render(); */
     }
 
     public Framebuffer()

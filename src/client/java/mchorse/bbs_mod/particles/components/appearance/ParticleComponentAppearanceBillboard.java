@@ -3,7 +3,6 @@ package mchorse.bbs_mod.particles.components.appearance;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.ListType;
 import mchorse.bbs_mod.data.types.MapType;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.math.molang.MolangException;
 import mchorse.bbs_mod.math.molang.MolangParser;
 import mchorse.bbs_mod.math.molang.expressions.MolangExpression;
@@ -13,6 +12,7 @@ import mchorse.bbs_mod.particles.emitter.Particle;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
 import mchorse.bbs_mod.utils.joml.Vectors;
 import mchorse.bbs_mod.utils.math.Interpolations;
+import net.minecraft.client.render.BufferBuilder;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3d;
@@ -262,7 +262,7 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
     {}
 
     @Override
-    public void render(ParticleEmitter emitter, Particle particle, VAOBuilder builder, float transition)
+    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, float transition)
     {
         this.calculateUVs(particle, emitter, transition);
 
@@ -340,7 +340,7 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
         this.build(builder, particle);
     }
 
-    private void build(VAOBuilder builder, Particle particle)
+    private void build(BufferBuilder builder, Particle particle)
     {
         float u1 = this.u1 / (float) this.textureWidth;
         float u2 = this.u2 / (float) this.textureWidth;
@@ -360,17 +360,18 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
         this.writeVertex(builder, this.vertices[0], u2, v2, particle);
     }
 
-    private void writeVertex(VAOBuilder builder, Vector4f vertex, float u, float v, Particle particle)
+    private void writeVertex(BufferBuilder builder, Vector4f vertex, float u, float v, Particle particle)
     {
-        builder.xyz(vertex.x, vertex.y, vertex.z)
+        builder.vertex(vertex.x, vertex.y, vertex.z)
             .normal(0, 1F, 0)
-            .uv(u, v)
-            .xy(this.lx, this.ly)
-            .rgba(particle.r, particle.g, particle.b, particle.a);
+            .texture(u, v)
+            .light((int) (this.lx * 16), (int) (this.ly * 16)) // TODO: <-
+            .color(particle.r, particle.g, particle.b, particle.a)
+            .next();
     }
 
     @Override
-    public void renderUI(Particle particle, VAOBuilder builder, float transition)
+    public void renderUI(Particle particle, BufferBuilder builder, float transition)
     {
         this.calculateUVs(particle, null, transition);
 
@@ -392,7 +393,7 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
         this.buildUI(builder, particle);
     }
 
-    private void buildUI(VAOBuilder builder, Particle particle)
+    private void buildUI(BufferBuilder builder, Particle particle)
     {
         float u1 = this.u1 / (float) this.textureWidth;
         float u2 = this.u2 / (float) this.textureWidth;
@@ -412,11 +413,12 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
         this.writeVertexUI(builder, this.vertices[2], u2, v2, particle);
     }
 
-    private void writeVertexUI(VAOBuilder builder, Vector4f vertex, float u, float v, Particle particle)
+    private void writeVertexUI(BufferBuilder builder, Vector4f vertex, float u, float v, Particle particle)
     {
-        builder.xy(vertex.x, vertex.y)
-            .uv(u, v)
-            .rgba(particle.r, particle.g, particle.b, particle.a);
+        builder.vertex(vertex.x, vertex.y, 0F)
+            .texture(u, v)
+            .color(particle.r, particle.g, particle.b, particle.a)
+            .next();
     }
 
     public void calculateUVs(Particle particle, ParticleEmitter emitter, float transition)

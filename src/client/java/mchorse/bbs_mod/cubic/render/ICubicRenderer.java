@@ -2,9 +2,9 @@ package mchorse.bbs_mod.cubic.render;
 
 import mchorse.bbs_mod.cubic.data.model.Model;
 import mchorse.bbs_mod.cubic.data.model.ModelGroup;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import mchorse.bbs_mod.utils.pose.MatrixStack;
+import net.minecraft.client.render.BufferBuilder;
 import org.joml.Vector3f;
 
 public interface ICubicRenderer
@@ -56,5 +56,5 @@ public interface ICubicRenderer
         moveBackFromGroupPivot(stack, group);
     }
 
-    public boolean renderGroup(VAOBuilder builder, MatrixStack stack, ModelGroup group, Model model);
+    public boolean renderGroup(BufferBuilder builder, MatrixStack stack, ModelGroup group, Model model);
 }

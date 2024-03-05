@@ -2,7 +2,6 @@ package mchorse.bbs_mod.particles.components.appearance;
 
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.MapType;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.math.molang.MolangException;
 import mchorse.bbs_mod.math.molang.MolangParser;
 import mchorse.bbs_mod.particles.ParticleParser;
@@ -12,6 +11,7 @@ import mchorse.bbs_mod.particles.components.appearance.colors.Solid;
 import mchorse.bbs_mod.particles.components.appearance.colors.Tint;
 import mchorse.bbs_mod.particles.emitter.Particle;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
+import net.minecraft.client.render.BufferBuilder;
 
 public class ParticleComponentAppearanceTinting extends ParticleComponentBase implements IComponentParticleRender
 {
@@ -62,13 +62,13 @@ public class ParticleComponentAppearanceTinting extends ParticleComponentBase im
     {}
 
     @Override
-    public void render(ParticleEmitter emitter, Particle particle, VAOBuilder builder, float transition)
+    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, float transition)
     {
         this.renderUI(particle, builder, transition);
     }
 
     @Override
-    public void renderUI(Particle particle, VAOBuilder builder, float transition)
+    public void renderUI(Particle particle, BufferBuilder builder, float transition)
     {
         if (this.color != null)
         {

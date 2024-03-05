@@ -2,8 +2,8 @@ package mchorse.bbs_mod.cubic.render;
 
 import mchorse.bbs_mod.cubic.data.model.Model;
 import mchorse.bbs_mod.cubic.data.model.ModelGroup;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.utils.pose.MatrixStack;
+import net.minecraft.client.render.BufferBuilder;
 import org.joml.Matrix4f;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class CubicMatrixRenderer implements ICubicRenderer
     }
 
     @Override
-    public boolean renderGroup(VAOBuilder builder, MatrixStack stack, ModelGroup group, Model model)
+    public boolean renderGroup(BufferBuilder builder, MatrixStack stack, ModelGroup group, Model model)
     {
         this.matrices.get(group.index).set(stack.getModelMatrix());
 

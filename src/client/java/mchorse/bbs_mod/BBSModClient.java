@@ -7,7 +7,6 @@ import mchorse.bbs_mod.forms.categories.FormCategories;
 import mchorse.bbs_mod.graphics.FramebufferManager;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
-import mchorse.bbs_mod.ui.TestScreen;
 import mchorse.bbs_mod.ui.UITestMenu;
 import mchorse.bbs_mod.ui.framework.UIScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -115,7 +114,7 @@ public class BBSModClient implements ClientModInitializer
         {
             while (keyPlay.wasPressed())
             {
-                MinecraftClient.getInstance().setScreen(new TestScreen(Text.literal("Hello")));
+                
             }
 
             while (keyRecord.wasPressed())

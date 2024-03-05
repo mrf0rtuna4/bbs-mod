@@ -6,9 +6,9 @@ import mchorse.bbs_mod.cubic.data.model.ModelGroup;
 import mchorse.bbs_mod.cubic.data.model.ModelMesh;
 import mchorse.bbs_mod.cubic.data.model.ModelQuad;
 import mchorse.bbs_mod.cubic.data.model.ModelVertex;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import mchorse.bbs_mod.utils.pose.MatrixStack;
+import net.minecraft.client.render.BufferBuilder;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
@@ -81,7 +81,7 @@ public class CubicCubeRenderer implements ICubicRenderer
     }
 
     @Override
-    public boolean renderGroup(VAOBuilder builder, MatrixStack stack, ModelGroup group, Model model)
+    public boolean renderGroup(BufferBuilder builder, MatrixStack stack, ModelGroup group, Model model)
     {
         for (ModelCube cube : group.cubes)
         {
@@ -96,7 +96,7 @@ public class CubicCubeRenderer implements ICubicRenderer
         return false;
     }
 
-    private void renderCube(VAOBuilder builder, MatrixStack stack, ModelGroup group, ModelCube cube)
+    private void renderCube(BufferBuilder builder, MatrixStack stack, ModelGroup group, ModelCube cube)
     {
         stack.push();
         moveToPivot(stack, cube.pivot);
@@ -133,7 +133,7 @@ public class CubicCubeRenderer implements ICubicRenderer
         stack.pop();
     }
 
-    private void renderMesh(VAOBuilder builder, MatrixStack stack, Model model, ModelGroup group, ModelMesh mesh)
+    private void renderMesh(BufferBuilder builder, MatrixStack stack, Model model, ModelGroup group, ModelMesh mesh)
     {
         stack.push();
         moveToPivot(stack, mesh.origin);
@@ -179,14 +179,14 @@ public class CubicCubeRenderer implements ICubicRenderer
         stack.pop();
     }
 
-    protected void writeVertex(VAOBuilder builder, MatrixStack stack, ModelGroup group, ModelVertex vertex)
+    protected void writeVertex(BufferBuilder builder, MatrixStack stack, ModelGroup group, ModelVertex vertex)
     {
         this.vertex.set(vertex.vertex.x, vertex.vertex.y, vertex.vertex.z, 1);
         stack.getModelMatrix().transform(this.vertex);
 
-        builder.xyz(this.vertex.x, this.vertex.y, this.vertex.z)
+        builder.vertex(this.vertex.x, this.vertex.y, this.vertex.z)
             .normal(this.normal.x, this.normal.y, this.normal.z)
-            .uv(vertex.uv.x, vertex.uv.y)
-            .rgba(this.r, this.g, this.b, this.a);
+            .texture(vertex.uv.x, vertex.uv.y)
+            .color(this.r, this.g, this.b, this.a).next();
     }
 }

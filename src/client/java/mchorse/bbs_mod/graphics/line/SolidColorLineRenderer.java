@@ -1,7 +1,7 @@
 package mchorse.bbs_mod.graphics.line;
 
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.utils.colors.Color;
+import net.minecraft.client.render.BufferBuilder;
 
 public class SolidColorLineRenderer implements ILineRenderer
 {
@@ -34,8 +34,8 @@ public class SolidColorLineRenderer implements ILineRenderer
     }
 
     @Override
-    public void render(VAOBuilder builder, LinePoint point)
+    public void render(BufferBuilder builder, LinePoint point)
     {
-        builder.xy(point.x, point.y).rgba(this.color.r, this.color.g, this.color.b, this.color.a);
+        builder.vertex(point.x, point.y, 0F).color(this.color.r, this.color.g, this.color.b, this.color.a).next();
     }
 }

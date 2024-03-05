@@ -2,7 +2,6 @@ package mchorse.bbs_mod.particles.components.rate;
 
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.MapType;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
 import mchorse.bbs_mod.math.Constant;
 import mchorse.bbs_mod.math.molang.MolangException;
 import mchorse.bbs_mod.math.molang.MolangParser;
@@ -12,6 +11,7 @@ import mchorse.bbs_mod.particles.components.IComponentParticleRender;
 import mchorse.bbs_mod.particles.components.ParticleComponentBase;
 import mchorse.bbs_mod.particles.emitter.Particle;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
+import net.minecraft.client.render.BufferBuilder;
 
 public class ParticleComponentRateSteady extends ParticleComponentRate implements IComponentParticleRender
 {
@@ -51,11 +51,11 @@ public class ParticleComponentRateSteady extends ParticleComponentRate implement
     {}
 
     @Override
-    public void render(ParticleEmitter emitter, Particle particle, VAOBuilder builder, float transition)
+    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, float transition)
     {}
 
     @Override
-    public void renderUI(Particle particle, VAOBuilder builder, float transition)
+    public void renderUI(Particle particle, BufferBuilder builder, float transition)
     {}
 
     @Override

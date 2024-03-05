@@ -2,46 +2,46 @@ package mchorse.bbs_mod.graphics.texture;
 
 import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.Draw;
-import mchorse.bbs_mod.graphics.vao.VAO;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.resources.Pixels;
-import org.lwjgl.system.MemoryUtil;
+import net.minecraft.client.gl.VertexBuffer;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TextureExtruder
 {
-    private Map<Link, VAO> extruded = new HashMap<>();
+    private Map<Link, VertexBuffer> extruded = new HashMap<>();
 
     public void delete(Link key)
     {
-        VAO vao = this.extruded.remove(key);
+        VertexBuffer buffer = this.extruded.remove(key);
 
-        if (vao != null)
+        if (buffer != null)
         {
-            vao.delete();
+            buffer.close();
         }
     }
 
     public void deleteAll()
     {
-        for (VAO vao : this.extruded.values())
+        for (VertexBuffer buffer : this.extruded.values())
         {
-            if (vao != null)
+            if (buffer != null)
             {
-                vao.delete();
+                buffer.close();
             }
         }
 
         this.extruded.clear();
     }
 
-    public VAO get(Link key)
+    public VertexBuffer get(Link key)
     {
         if (this.extruded.containsKey(key))
         {
@@ -66,21 +66,21 @@ public class TextureExtruder
             return null;
         }
 
-        VAO vao = this.generate(pixels);
+        VertexBuffer buffer = this.generate(pixels);
 
         pixels.delete();
-        this.extruded.put(key, vao);
+        this.extruded.put(key, buffer);
 
-        return vao;
+        return buffer;
     }
 
-    private VAO generate(Pixels pixels)
+    private VertexBuffer generate(Pixels pixels)
     {
-        ByteBuffer buffer = MemoryUtil.memAlloc(this.countBytes(pixels, 6 * VBOAttributes.VERTEX_NORMAL_UV_RGBA.getBytes()));
-        VAO vao = new VAO().register(VBOAttributes.VERTEX_NORMAL_UV_RGBA);
-        VAOBuilder builder = null; // TODO: BBSMod.getRender().getVAO().setup(vao, null).buffer(buffer);
+        VertexBuffer vertexBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
 
-        builder.begin();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR_NORMAL);
 
         float p = 0.5F;
         float n = -0.5F;
@@ -121,13 +121,13 @@ public class TextureExtruder
             }
         }
 
-        builder.flush();
-        MemoryUtil.memFree(buffer);
+        vertexBuffer.bind();
+        vertexBuffer.upload(builder.end());
 
-        return vao;
+        return vertexBuffer;
     }
 
-    private void generateNeighbors(Pixels pixels, VAOBuilder builder, int i, int j, int x, int y, float d)
+    private void generateNeighbors(Pixels pixels, BufferBuilder builder, int i, int j, int x, int y, float d)
     {
         float w = pixels.width;
         float h = pixels.height;

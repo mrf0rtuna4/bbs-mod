@@ -3,8 +3,6 @@ package mchorse.bbs_mod.ui.particles.utils;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.graphics.line.LineBuilder;
 import mchorse.bbs_mod.graphics.line.SolidColorLineRenderer;
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.math.Constant;
 import mchorse.bbs_mod.math.molang.MolangParser;
 import mchorse.bbs_mod.math.molang.expressions.MolangExpression;
@@ -22,8 +20,12 @@ import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.Interpolations;
 import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import org.joml.Vector2d;
-import org.lwjgl.opengl.GL11;
 
 public class UICurve extends UIElement
 {
@@ -253,23 +255,26 @@ public class UICurve extends UIElement
 
     private void drawGraph(UIContext context)
     {
+        /* TODO: matrix */
         int c = this.curve.nodes.size();
 
-        VAOBuilder builder = context.batcher.begin(GL11.GL_LINES, VBOAttributes.VERTEX_RGBA_2D, null);
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        builder.begin(VertexFormat.DrawMode.LINES, VertexFormats.POSITION_COLOR);
 
         /* Top and bottom */
-        builder.xy(this.area.x, this.graph.y).rgba(0.5F, 0.5F, 0.5F, 0.5F);
-        builder.xy(this.area.ex(), this.graph.y).rgba(0.5F, 0.5F, 0.5F, 0.5F);
+        builder.vertex(this.area.x, this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(this.area.ex(), this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
-        builder.xy(this.area.x, this.graph.ey()).rgba(0.5F, 0.5F, 0.5F, 0.5F);
-        builder.xy(this.area.ex(), this.graph.ey()).rgba(0.5F, 0.5F, 0.5F, 0.5F);
+        builder.vertex(this.area.x, this.graph.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(this.area.ex(), this.graph.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
         /* Left and right */
-        builder.xy(this.graph.x, this.area.y).rgba(0.5F, 0.5F, 0.5F, 0.5F);
-        builder.xy(this.graph.x, this.area.ey()).rgba(0.5F, 0.5F, 0.5F, 0.5F);
+        builder.vertex(this.graph.x, this.area.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(this.graph.x, this.area.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
-        builder.xy(this.graph.ex(), this.area.y).rgba(0.5F, 0.5F, 0.5F, 0.5F);
-        builder.xy(this.graph.ex(), this.area.ey()).rgba(0.5F, 0.5F, 0.5F, 0.5F);
+        builder.vertex(this.graph.ex(), this.area.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(this.graph.ex(), this.area.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
         if (this.curve.type == ParticleCurveType.HERMITE && c >= 4)
         {
@@ -277,12 +282,14 @@ public class UICurve extends UIElement
             Vector2d last = this.getVector(c - 2, this.range.x, this.range.y);
 
             /* Hermite bounds */
-            builder.xy((float) first.x, this.graph.y).rgba(0.25F, 0.25F, 0.25F, 0.5F);
-            builder.xy((float) first.x, this.graph.ey()).rgba(0.25F, 0.25F, 0.25F, 0.5F);
+            builder.vertex((float) first.x, this.graph.y, 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
+            builder.vertex((float) first.x, this.graph.ey(), 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
 
-            builder.xy((float) last.x, this.graph.y).rgba(0.25F, 0.25F, 0.25F, 0.5F);
-            builder.xy((float) last.x, this.graph.ey()).rgba(0.25F, 0.25F, 0.25F, 0.5F);
+            builder.vertex((float) last.x, this.graph.y, 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
+            builder.vertex((float) last.x, this.graph.ey(), 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
         }
+
+        BufferRenderer.drawWithGlobalProgram(builder.end());
 
         Color color = Colors.COLOR;
         LineBuilder line = new LineBuilder(0.75F);

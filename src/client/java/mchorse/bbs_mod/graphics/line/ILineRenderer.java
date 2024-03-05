@@ -1,8 +1,8 @@
 package mchorse.bbs_mod.graphics.line;
 
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
+import net.minecraft.client.render.BufferBuilder;
 
 public interface ILineRenderer <T>
 {
-    public void render(VAOBuilder builder, LinePoint<T> point);
+    public void render(BufferBuilder builder, LinePoint<T> point);
 }

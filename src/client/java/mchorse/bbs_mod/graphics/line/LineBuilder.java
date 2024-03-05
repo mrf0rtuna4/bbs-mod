@@ -1,9 +1,11 @@
 package mchorse.bbs_mod.graphics.line;
 
-import mchorse.bbs_mod.graphics.vao.VAOBuilder;
-import mchorse.bbs_mod.graphics.vao.VBOAttributes;
 import mchorse.bbs_mod.ui.framework.elements.utils.Batcher2D;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,12 +80,16 @@ public class LineBuilder <T>
 
         for (List<LinePoint<T>> points : build)
         {
-            VAOBuilder builder = batcher2D.begin(GL11.GL_TRIANGLE_STRIP, VBOAttributes.VERTEX_RGBA_2D, null);
+            BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+            builder.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR);
 
             for (LinePoint<T> point : points)
             {
                 renderer.render(builder, point);
             }
+
+            BufferRenderer.drawWithGlobalProgram(builder.end());
         }
     }
 }
