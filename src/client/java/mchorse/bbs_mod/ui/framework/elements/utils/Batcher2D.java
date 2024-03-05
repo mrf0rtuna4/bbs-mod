@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.graphics.vao.VAOBuilder;
@@ -12,9 +13,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import org.joml.Matrix4f;
@@ -40,6 +40,11 @@ public class Batcher2D
     {
         this.context = context;
         this.font = getDefaultTextRenderer();
+    }
+
+    public DrawContext getContext()
+    {
+        return this.context;
     }
 
     public FontRenderer getFont()
@@ -102,7 +107,9 @@ public class Batcher2D
     public void box(float x, float y, float w, float h, int color1, int color2, int color3, int color4)
     {
         Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
-        VertexConsumer builder = this.context.getVertexConsumers().getBuffer(RenderLayer.getGui());
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        builder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
 
         /* c1 ---- c2
          * |        |
@@ -111,6 +118,10 @@ public class Batcher2D
         builder.vertex(matrix4f, x, y + h, 0).color(color3).next();
         builder.vertex(matrix4f, x + w, y + h, 0).color(color4).next();
         builder.vertex(matrix4f, x + w, y, 0).color(color2).next();
+
+        RenderSystem.enableBlend();
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     public void dropShadow(int left, int top, int right, int bottom, int offset, int opaque, int shadow)
@@ -123,7 +134,9 @@ public class Batcher2D
         bottom += offset;
 
         Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
-        VertexConsumer builder = this.context.getVertexConsumers().getBuffer(RenderLayer.getGui());
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        builder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
 
         /* Draw opaque part */
         builder.vertex(matrix4f, left + offset, top + offset, 0).color(opaque).next();
@@ -154,6 +167,10 @@ public class Batcher2D
         builder.vertex(matrix4f, right - offset, bottom - offset, 0).color(opaque).next();
         builder.vertex(matrix4f, right, bottom, 0).color(shadow).next();
         builder.vertex(matrix4f,right, top, 0).color(shadow).next();
+
+        RenderSystem.enableBlend();
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     /* Gradients */
@@ -195,6 +212,9 @@ public class Batcher2D
 
         Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        RenderSystem.enableBlend();
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
 
         /* Draw opaque base */
         builder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
@@ -344,6 +364,8 @@ public class Batcher2D
     {
         this.begin(VBOAttributes.VERTEX_UV_RGBA_2D, texture);
 
+        RenderSystem.setShaderTexture(0, texture.id);
+
         this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
     }
 
@@ -351,6 +373,8 @@ public class Batcher2D
     {
         Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
 
         builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE);
         builder.vertex(matrix4f, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).next();
@@ -361,6 +385,8 @@ public class Batcher2D
         builder.vertex(matrix4f, x, y, 0F).texture(u1 / (float) textureW, v1 / (float) textureH).next();
 
         BufferRenderer.drawWithGlobalProgram(builder.end());
+
+        RenderSystem.depthFunc(GL11.GL_ALWAYS);
     }
 
     /* Textured box (with shader) */
@@ -429,6 +455,9 @@ public class Batcher2D
     public void text(String label, float x, float y, int color, boolean shadow)
     {
         this.context.drawText(this.font.getRenderer(), label, (int) x, (int) y, color, shadow);
+        this.context.draw();
+
+        RenderSystem.depthFunc(GL11.GL_ALWAYS);
     }
 
     /* Text helpers */

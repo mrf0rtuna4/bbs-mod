@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui.framework;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.Keys;
 import mchorse.bbs_mod.ui.framework.elements.IViewport;
@@ -10,6 +11,7 @@ import mchorse.bbs_mod.ui.utils.renderers.InputRenderer;
 import mchorse.bbs_mod.utils.colors.Colors;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Base class for GUI screens using this framework
@@ -190,6 +192,8 @@ public abstract class UIBaseMenu
 
     public void renderMenu(UIRenderingContext context, int mouseX, int mouseY)
     {
+        RenderSystem.depthFunc(GL11.GL_ALWAYS);
+
         this.context.resetMatrix();
         this.context.setMouse(mouseX, mouseY);
 
@@ -210,6 +214,8 @@ public abstract class UIBaseMenu
         {
             inputRenderer.render(this, mouseX, mouseY);
         }
+
+        RenderSystem.depthFunc(GL11.GL_LEQUAL);
     }
 
     protected void preRenderMenu(UIRenderingContext context)
