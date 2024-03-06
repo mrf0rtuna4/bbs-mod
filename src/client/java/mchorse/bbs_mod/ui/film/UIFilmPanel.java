@@ -83,7 +83,6 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public UIIcon plause;
     public UIIcon record;
-    public UIIcon screenshot;
     public UIIcon openVideos;
     public UIIcon openCamera;
     public UIIcon openReplays;
@@ -142,13 +141,6 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         this.plause.tooltip(UIKeys.CAMERA_EDITOR_KEYS_EDITOR_PLAUSE, Direction.BOTTOM);
         this.record = new UIIcon(Icons.SPHERE, (b) -> this.recorder.startRecording(this.data.camera.calculateDuration(), this.getFramebuffer()));
         this.record.tooltip(UIKeys.CAMERA_TOOLTIPS_RECORD, Direction.LEFT);
-        this.screenshot = new UIIcon(Icons.CAMERA, (b) ->
-        {
-            /* TODO: ScreenshotRecorder recorder = this.dashboard.bridge.get(IBridgeVideoScreenshot.class).getScreenshotRecorder();
-
-            recorder.takeScreenshot(Window.isAltPressed() ? null : recorder.getScreenshotFile(), this.getFramebuffer().getMainTexture()); */
-        });
-        this.screenshot.tooltip(UIKeys.FILM_SCREENSHOT, Direction.LEFT);
         this.openVideos = new UIIcon(Icons.FILM, (b) -> this.recorder.openMovies());
         this.openVideos.tooltip(UIKeys.CAMERA_TOOLTIPS_OPEN_VIDEOS, Direction.LEFT);
         this.openCamera = new UIIcon(Icons.FRUSTUM, (b) -> this.showPanel(this.cameraClips));
@@ -167,7 +159,7 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         });
         this.draggable.hoverOnly().relative(this.main).x(1F, -3).y(0.5F, -40).wh(6, 80);
 
-        this.iconBar.add(this.plause, this.record, this.screenshot, this.openVideos, this.openCamera, this.openReplays, this.openScreenplay);
+        this.iconBar.add(this.plause, this.record, this.openVideos, this.openCamera, this.openReplays, this.openScreenplay);
 
         /* Adding everything */
         UIRenderable renderable = new UIRenderable(this::renderIcons);
@@ -472,7 +464,6 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
         this.plause.setEnabled(data != null);
         this.record.setEnabled(data != null);
-        this.screenshot.setEnabled(data != null);
         this.openCamera.setEnabled(data != null);
         this.openReplays.setEnabled(data != null);
         this.openScreenplay.setEnabled(data != null);
@@ -920,12 +911,12 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public Camera getWorldCamera()
     {
-        return null; // TODO: this.dashboard.bridge.get(IBridgeCamera.class).getCamera();
+        return this.getCamera();
     }
 
     public CameraController getCameraController()
     {
-        return null; // TODO: this.dashboard.bridge.get(IBridgeCamera.class).getCameraController();
+        return BBSModClient.getCameraController();
     }
 
     public int getCursor()

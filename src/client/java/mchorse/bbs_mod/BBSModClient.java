@@ -8,6 +8,7 @@ import mchorse.bbs_mod.forms.categories.FormCategories;
 import mchorse.bbs_mod.graphics.FramebufferManager;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
+import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.UITestMenu;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.framework.UIScreen;
@@ -102,6 +103,20 @@ public class BBSModClient implements ClientModInitializer
         KeybindSettings.registerClasses();
 
         BBSMod.setupConfig(Icons.KEY_CAP, "keybinds", new File(BBSMod.getSettingsFolder(), "keybinds.json"), KeybindSettings::register);
+        BBSData.load(BBSMod.getDataFolder());
+
+        BBSSettings.tooltipStyle.modes(
+            UIKeys.ENGINE_TOOLTIP_STYLE_LIGHT,
+            UIKeys.ENGINE_TOOLTIP_STYLE_DARK
+        );
+
+        BBSSettings.keystrokeMode.modes(
+            UIKeys.ENGINE_KEYSTROKES_POSITION_AUTO,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_LEFT,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_RIGHT,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_RIGHT,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
+        );
 
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(

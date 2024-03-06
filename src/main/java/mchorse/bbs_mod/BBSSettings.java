@@ -119,10 +119,7 @@ public class BBSSettings
         primaryColor = builder.getInt("primary_color", Colors.ACTIVE).color();
         enableTrackpadIncrements = builder.getBoolean("trackpad_increments", true);
         userIntefaceScale = builder.getInt("ui_scale", 2, 0, 4);
-        tooltipStyle = builder.getInt("tooltip_style", 1).modes(
-//            TODO: UIKeys.ENGINE_TOOLTIP_STYLE_LIGHT,
-//            UIKeys.ENGINE_TOOLTIP_STYLE_DARK
-        );
+        tooltipStyle = builder.getInt("tooltip_style", 1);
         fov = builder.getFloat("fov", 40, 0, 180);
         hsvColorPicker = builder.getBoolean("hsv_color_picker", true);
         forceQwerty = builder.getBoolean("force_qwerty", false);
@@ -135,13 +132,7 @@ public class BBSSettings
         enableKeystrokeRendering = builder.getBoolean("keystrokes", false);
         enableChalkboard = builder.getBoolean("chalkboard", false);
         keystrokeOffset = builder.getInt("keystrokes_offset", 10, 0, 20);
-        keystrokeMode = builder.getInt("keystrokes_position", 1).modes(
-//            TODO: UIKeys.ENGINE_KEYSTROKES_POSITION_AUTO,
-//            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_LEFT,
-//            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_RIGHT,
-//            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_RIGHT,
-//            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
-        );
+        keystrokeMode = builder.getInt("keystrokes_position", 1);
 
         backgroundImage = builder.category("background").getRL("image",  null);
         backgroundColor = builder.getInt("color",  Colors.A75).colorAlpha();

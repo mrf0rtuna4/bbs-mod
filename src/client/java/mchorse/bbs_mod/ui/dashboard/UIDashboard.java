@@ -21,7 +21,6 @@ import mchorse.bbs_mod.ui.framework.UIRenderingContext;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
 import mchorse.bbs_mod.ui.particles.UIParticleSchemePanel;
-import mchorse.bbs_mod.ui.utils.UIChalkboard;
 import mchorse.bbs_mod.ui.utils.UIUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.Direction;
@@ -40,8 +39,6 @@ public class UIDashboard extends UIBaseMenu
     public final UIOrbitCamera orbitUI = new UIOrbitCamera();
     public final OrbitCamera orbit = this.orbitUI.orbit;
     public final OrbitCameraController camera = new OrbitCameraController(this.orbit, 5);
-
-    private boolean displayAxes = true;
 
     private UISettingsOverlayPanel settingsPanel;
 
@@ -82,16 +79,7 @@ public class UIDashboard extends UIBaseMenu
         IKey category = UIKeys.DASHBOARD_CATEGORY;
 
         this.overlay.keys().register(Keys.TOGGLE_VISIBILITY, this.main::toggleVisible).category(category);
-        this.overlay.keys().register(Keys.WORLD_TOGGLE_AXES, () -> this.displayAxes = !this.displayAxes).category(category);
         this.overlay.keys().register(Keys.WORLD_CYCLE_PANELS, this::cyclePanels).category(category);
-
-        UIChalkboard chalkboard = new UIChalkboard();
-
-        chalkboard.relative(this.viewport).full();
-        chalkboard.setVisible(false);
-
-        this.getRoot().add(chalkboard);
-        this.getRoot().keys().register(Keys.CHALKBOARD_TOGGLE, chalkboard::toggleVisible);
     }
 
     private void cyclePanels()

@@ -75,13 +75,8 @@ public class Keys
     public static final KeyCombo KEYFRAMES_INTERP = new KeyCombo("interp", UIKeys.KEYFRAMES_KEYS_TOGGLE_INTERP, GLFW.GLFW_KEY_T, GLFW.GLFW_KEY_LEFT_SHIFT).categoryKey("keyframes");
     public static final KeyCombo KEYFRAMES_EASING = new KeyCombo("easing", UIKeys.KEYFRAMES_KEYS_TOGGLE_EASING, GLFW.GLFW_KEY_E, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("keyframes");
 
-    /* Chalkboard */
-    public static final KeyCombo CHALKBOARD_TOGGLE = new KeyCombo("toggle", UIKeys.CHALKBOARD_KEYS_TOGGLE, GLFW.GLFW_KEY_F8).categoryKey("chalkboard");
-    public static final KeyCombo CHALKBOARD_CLEAR = new KeyCombo("clear", UIKeys.CHALKBOARD_KEYS_CLEAR, GLFW.GLFW_KEY_DELETE).categoryKey("chalkboard");
-
     /* World menu */
     public static final KeyCombo WORLD_CYCLE_PANELS = new KeyCombo("cycle_panels", UIKeys.WORLD_KEYS_CYCLE_PANELS, GLFW.GLFW_KEY_TAB).categoryKey("world");
-    public static final KeyCombo WORLD_TOGGLE_AXES = new KeyCombo("toggle_axes", UIKeys.WORLD_KEYS_TOGGLE_AXES, GLFW.GLFW_KEY_T, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world");
 
     /* Transformations */
     public static final KeyCombo TRANSFORMATIONS_TRANSLATE = new KeyCombo("translate", UIKeys.TRANSFORMS_TRANSLATE, GLFW.GLFW_KEY_G).categoryKey("transformations");

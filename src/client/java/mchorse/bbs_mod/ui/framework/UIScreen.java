@@ -29,6 +29,22 @@ public class UIScreen extends Screen
     }
 
     @Override
+    public void removed()
+    {
+        super.removed();
+
+        this.menu.onClose(null);
+    }
+
+    @Override
+    public void onDisplayed()
+    {
+        super.onDisplayed();
+
+        this.menu.onOpen(null);
+    }
+
+    @Override
     public boolean shouldPause()
     {
         return this.menu.canPause();
