@@ -19,8 +19,6 @@ public class UIClipRenderers
 
         this.register(AudioClip.class, new UIAudioClipRenderer());
         this.register(VoicelineClip.class, new UIVoicelineClipRenderer());
-
-        // TODO: BBS.events.post(new RegisterUIClipRenderers(this));
     }
 
     public void register(Class key, IUIClipRenderer renderer)

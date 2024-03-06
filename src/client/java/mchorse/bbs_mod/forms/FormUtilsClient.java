@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.forms;
 
+import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import net.minecraft.entity.Entity;
@@ -14,7 +15,7 @@ public class FormUtilsClient
         throw new RuntimeException("TODO: ...");
     }
 
-    public static void render(Form form, Entity entity, Object context)
+    public static void render(Form form, IEntity entity, Object context)
     {
         throw new RuntimeException("TODO: ...");
     }

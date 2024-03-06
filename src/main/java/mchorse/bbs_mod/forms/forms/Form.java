@@ -4,6 +4,7 @@ import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.data.IMapSerializable;
 import mchorse.bbs_mod.data.types.MapType;
 import mchorse.bbs_mod.forms.FormArchitect;
+import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.forms.properties.AnchorProperty;
 import mchorse.bbs_mod.forms.properties.BooleanProperty;
 import mchorse.bbs_mod.forms.properties.FloatProperty;
@@ -12,7 +13,6 @@ import mchorse.bbs_mod.forms.properties.StringProperty;
 import mchorse.bbs_mod.forms.properties.TransformProperty;
 import mchorse.bbs_mod.utils.math.IInterpolation;
 import mchorse.bbs_mod.utils.pose.Transform;
-import net.minecraft.entity.Entity;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -125,7 +125,7 @@ public abstract class Form implements IMapSerializable
 
     /* Update */
 
-    public void update(Entity entity)
+    public void update(IEntity entity)
     {
         this.updateHitbox(entity);
 
@@ -137,7 +137,7 @@ public abstract class Form implements IMapSerializable
         }
     }
 
-    public void updateHitbox(Entity entity)
+    public void updateHitbox(IEntity entity)
     {
         if (this.hitbox.get() && this.parent == null)
         {

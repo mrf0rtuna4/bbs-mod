@@ -18,8 +18,6 @@ public class KeybindSettings
     public static void registerClasses()
     {
         classes.add(Keys.class);
-
-        // TODO: BBS.events.post(new RegisterKeybindsClassesEvent(classes));
     }
 
     public static void register(SettingsBuilder builder)

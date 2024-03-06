@@ -6,6 +6,7 @@ import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.l10n.keys.KeyCollection;
 import mchorse.bbs_mod.particles.ParticleCurveType;
 import mchorse.bbs_mod.utils.EnumUtils;
+import mchorse.bbs_mod.utils.keyframes.KeyframeEasing;
 import mchorse.bbs_mod.utils.keyframes.KeyframeInterpolation;
 import mchorse.bbs_mod.utils.math.Interpolation;
 
@@ -726,37 +727,7 @@ public class UIKeys
     public static final IKey WORLD_EDITOR_TOOLS_SPRAY_CHANCE = L10n.lang("bbs.ui.world_editor.tools.spray.chance");
     public static final IKey WORLD_ENTITY_EDITOR = L10n.lang("bbs.ui.world.entity_editor");
     public static final IKey WORLD_KEYS_CYCLE_PANELS = L10n.lang("bbs.ui.world.keys.cycle_panels");
-    public static final IKey WORLD_KEYS_SAVE = L10n.lang("bbs.ui.world.keys.save");
     public static final IKey WORLD_KEYS_TOGGLE_AXES = L10n.lang("bbs.ui.world.keys.toggle_axes");
-    public static final IKey WORLD_KEYS_TOGGLE_WALK = L10n.lang("bbs.ui.world.keys.toggle_walk");
-    public static final IKey WORLD_OBJECTS_CONTEXT_ADD = L10n.lang("bbs.ui.world_objects.context.add");
-    public static final IKey WORLD_OBJECTS_ID = L10n.lang("bbs.ui.world_objects.id", "ID", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_OBJECTS_ID_TOOLTIP = L10n.lang("bbs.ui.world_objects.id-tooltip", "The ID of this world object that can be referenced by scripts", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_OBJECTS_OBJECTS_PROP_HITBOX = L10n.lang("bbs.ui.world_objects.objects.prop.hitbox");
-    public static final IKey WORLD_OBJECTS_POSITION = L10n.lang("bbs.ui.world_objects.position");
-    public static final IKey WORLD_OBJECT_EDITOR = L10n.lang("bbs.ui.world.object_editor");
-    public static final IKey WORLD_SETTINGS = L10n.lang("bbs.ui.world.settings");
-    public static final IKey WORLD_SETTINGS_CONTEXT_SHADING_FROM_CAMERA = L10n.lang("bbs.ui.world.settings.context.shading_from_camera", "From camera", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_DAY_CYCLE_YAW = L10n.lang("bbs.ui.world.settings.day_cycle_yaw", "Day cycle and yaw", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_FOG = L10n.lang("bbs.ui.world.settings.fog");
-    public static final IKey WORLD_SETTINGS_LIGHTMAP0 = L10n.lang("bbs.ui.world.settings.lightmap0", "Lightmap (no lighting)", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_LIGHTMAP1 = L10n.lang("bbs.ui.world.settings.lightmap1", "Lightmap (with lighting)", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_MIDNIGHT = L10n.lang("bbs.ui.world.settings.midnight", "Midnight", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_NOON = L10n.lang("bbs.ui.world.settings.noon", "Noon", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_OPEN_PRESETS = L10n.lang("bbs.ui.world.settings.open_presets");
-    public static final IKey WORLD_SETTINGS_PICK_SKYBOX = L10n.lang("bbs.ui.world.settings.skybox");
-    public static final IKey WORLD_SETTINGS_PRESETS_EMPTY = L10n.lang("bbs.ui.world.settings.presets.empty");
-    public static final IKey WORLD_SETTINGS_PRESETS_SAVE_DESCRIPTION = L10n.lang("bbs.ui.world.settings.presets.save-description");
-    public static final IKey WORLD_SETTINGS_PRESETS_SAVE_TITLE = L10n.lang("bbs.ui.world.settings.presets.save-title");
-    public static final IKey WORLD_SETTINGS_PRESETS_TITLE = L10n.lang("bbs.ui.world.settings.presets.title");
-    public static final IKey WORLD_SETTINGS_SHADING = L10n.lang("bbs.ui.world.settings.shading_direction");
-    public static final IKey WORLD_SETTINGS_SKY = L10n.lang("bbs.ui.world.settings.sky");
-    public static final IKey WORLD_SETTINGS_SKYBOX_COLORS = L10n.lang("bbs.ui.world.settings.skybox_colors", "Skybox colors", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_SUNRISE = L10n.lang("bbs.ui.world.settings.sunrise", "Sunrise", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_SUNSET = L10n.lang("bbs.ui.world.settings.sunset", "Sunset", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_SETTINGS_TERRAIN = L10n.lang("bbs.ui.world.settings.terrain", "Terrain", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
-    public static final IKey WORLD_WORLDS = L10n.lang("bbs.ui.world.worlds");
-    public static final IKey WORLD_WORLD_EDITOR = L10n.lang("bbs.ui.world.world_editor");
 
     /* Key collections */
     public static final KeyCollection C_CLIP = new KeyCollection("bbs.ui.camera.clips.^")
@@ -765,8 +736,8 @@ public class UIKeys
         .load(EnumUtils.getKeys(ParticleCurveType.class, (c) -> c.id));
     public static final KeyCollection C_INTERPOLATION = new KeyCollection("interpolations.^")
         .load(EnumUtils.getKeys(Interpolation.class, (i) -> i.key))
-        .load(EnumUtils.getKeys(KeyframeInterpolation.class, (i) -> i.key));
+        .load(EnumUtils.getKeys(KeyframeInterpolation.class, (i) -> i.from(KeyframeEasing.IN).getKey()));
     public static final KeyCollection C_INTERPOLATION_TIPS = new KeyCollection("interpolations.^-tooltip")
         .load(EnumUtils.getKeys(Interpolation.class, (i) -> i.key))
-        .load(EnumUtils.getKeys(KeyframeInterpolation.class, (i) -> i.key));
+        .load(EnumUtils.getKeys(KeyframeInterpolation.class, (i) -> i.from(KeyframeEasing.IN).getKey()));
 }

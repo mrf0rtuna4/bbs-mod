@@ -24,7 +24,6 @@ public class BBSSettings
     public static ValueBoolean hsvColorPicker;
     public static ValueBoolean forceQwerty;
 
-    /* TODO: hide system cursor */
     public static ValueBoolean enableCursorRendering;
     public static ValueBoolean enableMouseButtonRendering;
     public static ValueBoolean enableKeystrokeRendering;

@@ -54,7 +54,6 @@ public class UISoundOverlayPanel extends UIStringOverlayPanel
         }
 
         Link location = Link.create(this.strings.list.getCurrentFirst());
-        /* TODO: audio location */
 
         BBSModClient.getSounds().play(location);
     }

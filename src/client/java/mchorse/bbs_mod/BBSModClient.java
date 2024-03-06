@@ -2,12 +2,14 @@ package mchorse.bbs_mod;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.audio.SoundManager;
+import mchorse.bbs_mod.camera.controller.CameraController;
 import mchorse.bbs_mod.client.renderer.ActorEntityRenderer;
 import mchorse.bbs_mod.forms.categories.FormCategories;
 import mchorse.bbs_mod.graphics.FramebufferManager;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.ui.UITestMenu;
+import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.framework.UIScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
@@ -53,6 +55,7 @@ public class BBSModClient implements ClientModInitializer
     private static KeyBinding keyPlay;
     private static KeyBinding keyRecord;
 
+    private static CameraController cameraController = new CameraController();
     public static boolean lockCamera = false;
 
     public static TextureManager getTextures()
@@ -78,6 +81,11 @@ public class BBSModClient implements ClientModInitializer
     public static FormCategories getFormCategories()
     {
         return formCategories;
+    }
+
+    public static CameraController getCameraController()
+    {
+        return cameraController;
     }
 
     @Override
@@ -119,7 +127,7 @@ public class BBSModClient implements ClientModInitializer
 
             while (keyPlay.wasPressed())
             {
-
+                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Dashboard"), new UIDashboard()));
             }
 
             while (keyRecord.wasPressed())

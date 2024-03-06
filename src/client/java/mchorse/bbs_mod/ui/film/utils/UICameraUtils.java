@@ -13,6 +13,7 @@ import mchorse.bbs_mod.l10n.keys.IKey;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.film.IUIClipsDelegate;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.utils.InterpolationUtils;
 import mchorse.bbs_mod.ui.utils.context.ContextAction;
 import mchorse.bbs_mod.ui.utils.context.ContextMenuManager;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -40,14 +41,14 @@ public class UICameraUtils
 
                 if (interpolation == current)
                 {
-                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, InterpolationUtils.getName(interpolation), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
                 }
                 else
                 {
-                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, InterpolationUtils.getName(interpolation), () -> consumer.accept(interpolation));
                 }
 
-                // TODO: interpolation.setupKeybind(action, KEYS_CATEGORY);
+                InterpolationUtils.setupKeybind(interpolation, action, KEYS_CATEGORY);
             }
         });
     }
@@ -56,23 +57,20 @@ public class UICameraUtils
     {
         context.replaceContextMenu((menu) ->
         {
-            int i = 0;
-
             for (InterpolationType interpolation : InterpolationType.values())
             {
                 ContextAction action;
 
-                // TODO: Fix names
                 if (interpolation == current)
                 {
-                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, InterpolationUtils.getName(interpolation), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
                 }
                 else
                 {
-                    action = menu.action(Icons.ADD, IKey.raw(interpolation.toString()), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, InterpolationUtils.getName(interpolation), () -> consumer.accept(interpolation));
                 }
 
-                // TODO: interpolation.setupKeybind(action, KEYS_CATEGORY);
+                InterpolationUtils.setupKeybind(interpolation, action, KEYS_CATEGORY);
             }
         });
     }

@@ -57,7 +57,6 @@ public class Keys
     /* Dashboard */
     public static final KeyCombo OPEN_DATA_MANAGER = new KeyCombo("data_manager", UIKeys.PANELS_KEYS_OPEN_DATA_MANAGER, GLFW.GLFW_KEY_N).categoryKey("dashboard");
     public static final KeyCombo TOGGLE_VISIBILITY = new KeyCombo("toggle", UIKeys.DASHBOARD_CONTEXT_TOGGLE_VISIBILITY, GLFW.GLFW_KEY_F1).categoryKey("dashboard");
-    public static final KeyCombo DASHBOARD_WORLD_EDITOR = new KeyCombo("world_editor", UIKeys.PANELS_KEYS_WORLD_EDITOR, GLFW.GLFW_KEY_B, GLFW.GLFW_KEY_LEFT_CONTROL, GLFW.GLFW_KEY_LEFT_SHIFT).categoryKey("dashboard");
 
     /* Forms */
     public static final KeyCombo FORMS_FOCUS = new KeyCombo("focus", UIKeys.FORMS_LIST_CONTEXT_FOCUS, GLFW.GLFW_KEY_F, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("forms");
@@ -81,31 +80,8 @@ public class Keys
     public static final KeyCombo CHALKBOARD_CLEAR = new KeyCombo("clear", UIKeys.CHALKBOARD_KEYS_CLEAR, GLFW.GLFW_KEY_DELETE).categoryKey("chalkboard");
 
     /* World menu */
-    public static final KeyCombo WORLD_MOVE_CENTER = new KeyCombo("move_center", UIKeys.WORLD_CONTEXT_MOVE_CENTER, GLFW.GLFW_KEY_F, GLFW.GLFW_KEY_LEFT_CONTROL, GLFW.GLFW_KEY_LEFT_SHIFT).categoryKey("world");
-    public static final KeyCombo WORLD_MOVE_TO_CURSOR = new KeyCombo("move_to_cursor", UIKeys.WORLD_CONTEXT_MOVE_TO_CURSOR, GLFW.GLFW_KEY_G, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world");
-    public static final KeyCombo WORLD_TOGGLE_WALK = new KeyCombo("toggle_walk", UIKeys.WORLD_KEYS_TOGGLE_WALK, GLFW.GLFW_KEY_B, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world");
     public static final KeyCombo WORLD_CYCLE_PANELS = new KeyCombo("cycle_panels", UIKeys.WORLD_KEYS_CYCLE_PANELS, GLFW.GLFW_KEY_TAB).categoryKey("world");
-    public static final KeyCombo WORLD_SAVE = new KeyCombo("save", UIKeys.WORLD_KEYS_SAVE, GLFW.GLFW_KEY_S, GLFW.GLFW_KEY_LEFT_CONTROL, GLFW.GLFW_KEY_LEFT_SHIFT).categoryKey("world");
     public static final KeyCombo WORLD_TOGGLE_AXES = new KeyCombo("toggle_axes", UIKeys.WORLD_KEYS_TOGGLE_AXES, GLFW.GLFW_KEY_T, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world");
-
-    /* World editor */
-    public static final KeyCombo WE_DESELECT = new KeyCombo("deselect", UIKeys.WORLD_EDITOR_CONTEXT_DESELECT, GLFW.GLFW_KEY_D, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world_editor");
-    public static final KeyCombo WE_MASK = new KeyCombo("mask", UIKeys.WORLD_EDITOR_CONTEXT_MASK, GLFW.GLFW_KEY_M).categoryKey("world_editor");
-    public static final KeyCombo WE_FILL_CUBE = new KeyCombo("fill_cube", UIKeys.WORLD_EDITOR_ACTIONS_FILL_CUBE, GLFW.GLFW_KEY_1, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world_editor");
-    public static final KeyCombo WE_FILL_SPHERE = new KeyCombo("fill_sphere", UIKeys.WORLD_EDITOR_ACTIONS_FILL_SPHERE, GLFW.GLFW_KEY_2, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world_editor");
-    public static final KeyCombo WE_FILL_CYLINDER = new KeyCombo("fill_cylinder", UIKeys.WORLD_EDITOR_ACTIONS_FILL_CYLINDER, GLFW.GLFW_KEY_3, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world_editor");
-    public static final KeyCombo WE_CLEAR = new KeyCombo("clear", UIKeys.WORLD_EDITOR_ACTIONS_CLEAR, GLFW.GLFW_KEY_DELETE).categoryKey("world_editor");
-    public static final KeyCombo WE_CUT = new KeyCombo("cut", UIKeys.WORLD_EDITOR_ACTIONS_CUT, GLFW.GLFW_KEY_X, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world_editor");
-    public static final KeyCombo WE_ROTATE = new KeyCombo("rotate", UIKeys.WORLD_EDITOR_ACTIONS_ROTATE, GLFW.GLFW_KEY_PERIOD).categoryKey("world_editor");
-    public static final KeyCombo WE_ROTATE_CC = new KeyCombo("rotate_cc", UIKeys.WORLD_EDITOR_ACTIONS_ROTATE_CC, GLFW.GLFW_KEY_COMMA).categoryKey("world_editor");
-    public static final KeyCombo WE_FLIP_H = new KeyCombo("flip_h", UIKeys.WORLD_EDITOR_ACTIONS_FLIP_H, GLFW.GLFW_KEY_V, GLFW.GLFW_KEY_LEFT_SHIFT).categoryKey("world_editor");
-    public static final KeyCombo WE_FLIP_V = new KeyCombo("flip_v", UIKeys.WORLD_EDITOR_ACTIONS_FLIP_V, GLFW.GLFW_KEY_V, GLFW.GLFW_KEY_LEFT_ALT).categoryKey("world_editor");
-    public static final KeyCombo WE_MOVE_TO_SELECTION = new KeyCombo("move_to_selection", UIKeys.WORLD_EDITOR_CONTEXT_MOVE_TO_SELECTION, GLFW.GLFW_KEY_F, GLFW.GLFW_KEY_LEFT_CONTROL, GLFW.GLFW_KEY_LEFT_SHIFT).categoryKey("world_editor");
-    public static final KeyCombo WE_MOVE_TO_CENTER = new KeyCombo("move_to_center", UIKeys.WORLD_EDITOR_CONTEXT_MOVE_TO_CENTER, GLFW.GLFW_KEY_F, GLFW.GLFW_KEY_LEFT_CONTROL).categoryKey("world_editor");
-    public static final KeyCombo WE_PICK = new KeyCombo("pick", UIKeys.WORLD_EDITOR_CONTEXT_PICK_BLOCK, GLFW.GLFW_KEY_R).categoryKey("world_editor");
-    public static final KeyCombo WE_BLOCKS = new KeyCombo("blocks", UIKeys.WORLD_EDITOR_CONTEXT_OPEN_BLOCKS, GLFW.GLFW_KEY_O).categoryKey("world_editor");
-    public static final KeyCombo WE_SELECT_FLOATING = new KeyCombo("select_floating", UIKeys.WORLD_EDITOR_CONTEXT_SELECTION_SELECT_FLOATING, GLFW.GLFW_KEY_U).categoryKey("world_editor");
-    public static final KeyCombo WE_RELOAD_CHUNKS = new KeyCombo("reload_chunks", UIKeys.WORLD_EDITOR_CONTEXT_UTILITY_RELOAD_CHUNKS, GLFW.GLFW_KEY_R, GLFW.GLFW_KEY_LEFT_ALT).categoryKey("world_editor");
 
     /* Transformations */
     public static final KeyCombo TRANSFORMATIONS_TRANSLATE = new KeyCombo("translate", UIKeys.TRANSFORMS_TRANSLATE, GLFW.GLFW_KEY_G).categoryKey("transformations");

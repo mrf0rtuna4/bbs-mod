@@ -8,7 +8,7 @@ import org.lwjgl.glfw.GLFW;
 
 public enum KeyframeInterpolation
 {
-    CONST("const")
+    CONST()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -16,7 +16,7 @@ public enum KeyframeInterpolation
             return KeyframeInterpolations.CONSTANT;
         }
     },
-    LINEAR("linear")
+    LINEAR()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -24,7 +24,7 @@ public enum KeyframeInterpolation
             return Interpolation.LINEAR;
         }
     },
-    QUAD("quad")
+    QUAD()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -35,7 +35,7 @@ public enum KeyframeInterpolation
             return Interpolation.QUAD_INOUT;
         }
     },
-    CUBIC("cubic")
+    CUBIC()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -46,7 +46,7 @@ public enum KeyframeInterpolation
             return Interpolation.CUBIC_INOUT;
         }
     },
-    HERMITE("hermite")
+    HERMITE()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -65,7 +65,7 @@ public enum KeyframeInterpolation
             return Interpolations.cubicHermite(v0, v1, v2, v3, x);
         }
     },
-    EXP("exp")
+    EXP()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -76,7 +76,7 @@ public enum KeyframeInterpolation
             return Interpolation.EXP_INOUT;
         }
     },
-    BEZIER("bezier")
+    BEZIER()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -110,7 +110,7 @@ public enum KeyframeInterpolation
             return Interpolations.bezier(0, y1, y2, 1, Interpolations.bezierX(x1, x2, x, e)) * h + a.getValue();
         }
     },
-    BACK("back")
+    BACK()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -121,7 +121,7 @@ public enum KeyframeInterpolation
             return Interpolation.BACK_INOUT;
         }
     },
-    ELASTIC("elastic")
+    ELASTIC()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -132,7 +132,7 @@ public enum KeyframeInterpolation
             return Interpolation.ELASTIC_INOUT;
         }
     },
-    BOUNCE("bounce")
+    BOUNCE()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -143,7 +143,7 @@ public enum KeyframeInterpolation
             return Interpolation.BOUNCE_INOUT;
         }
     },
-    SINE("sine")
+    SINE()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -154,7 +154,7 @@ public enum KeyframeInterpolation
             return Interpolation.SINE_INOUT;
         }
     },
-    QUART("quart")
+    QUART()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -165,7 +165,7 @@ public enum KeyframeInterpolation
             return Interpolation.QUART_INOUT;
         }
     },
-    QUINT("quint")
+    QUINT()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -176,7 +176,7 @@ public enum KeyframeInterpolation
             return Interpolation.QUINT_INOUT;
         }
     },
-    CIRCLE("circle")
+    CIRCLE()
     {
         @Override
         public IInterpolation from(KeyframeEasing easing)
@@ -187,13 +187,6 @@ public enum KeyframeInterpolation
             return Interpolation.CIRCLE_INOUT;
         }
     };
-
-    public final String key;
-
-    private KeyframeInterpolation(String key)
-    {
-        this.key = key;
-    }
 
     public IInterpolation from(KeyframeEasing easing)
     {

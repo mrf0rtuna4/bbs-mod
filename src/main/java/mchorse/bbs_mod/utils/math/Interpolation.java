@@ -674,34 +674,9 @@ public enum Interpolation implements IInterpolation
         this.keybind = keybind;
     }
 
-    /* TODO: public void setupKeybind(ContextAction action, IKey category)
+    @Override
+    public String getKey()
     {
-        if (this.key.endsWith("_in"))
-        {
-            action.key(category, this.keybind, GLFW.GLFW_KEY_LEFT_SHIFT);
-        }
-        else if (this.key.endsWith("_out"))
-        {
-            action.key(category, this.keybind, GLFW.GLFW_KEY_LEFT_CONTROL);
-        }
-        else
-        {
-            action.key(category, this.keybind);
-        }
+        return this.key;
     }
-
-    public int getKeybind()
-    {
-        return -1;
-    }
-
-    public IKey getName()
-    {
-        return UIKeys.C_INTERPOLATION.get(this.key);
-    }
-
-    public IKey getTooltip()
-    {
-        return UIKeys.C_INTERPOLATION_TIPS.get(this.key);
-    } */
 }

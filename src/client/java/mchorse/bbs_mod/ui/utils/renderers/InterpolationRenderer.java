@@ -1,12 +1,12 @@
 package mchorse.bbs_mod.ui.utils.renderers;
 
-import mchorse.bbs_mod.graphics.line.Line;
 import mchorse.bbs_mod.graphics.line.LineBuilder;
 import mchorse.bbs_mod.graphics.line.SolidColorLineRenderer;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.framework.tooltips.styles.TooltipStyle;
 import mchorse.bbs_mod.ui.utils.Area;
+import mchorse.bbs_mod.ui.utils.InterpolationUtils;
 import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.IInterpolation;
@@ -34,7 +34,7 @@ public class InterpolationRenderer
         /* TODO: matrix */
         FontRenderer font = context.batcher.getFont();
         TooltipStyle style = TooltipStyle.get();
-        String tooltip = interp.toString(); // TODO: interp.getTooltip().get();
+        String tooltip = InterpolationUtils.getTooltip(interp).get();
         List<String> lines = font.wrap(tooltip, w - 20);
         int ah = lines.isEmpty() ? 0 : lines.size() * (font.getHeight() + 4);
 
@@ -54,7 +54,7 @@ public class InterpolationRenderer
 
         fg.a = 0.2F;
 
-        String name = interp.toString(); // TODO: interp.getName().get();
+        String name = InterpolationUtils.getName(interp).get();
 
         context.batcher.textShadow(name, x + 10, y + 10, fontColor);
 

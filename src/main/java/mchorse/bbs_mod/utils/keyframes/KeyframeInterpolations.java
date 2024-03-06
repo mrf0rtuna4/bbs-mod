@@ -18,6 +18,12 @@ public class KeyframeInterpolations
         {
             return a;
         }
+
+        @Override
+        public String getKey()
+        {
+            return "constant";
+        }
     };
 
     public static final IInterpolation HERMITE = new IInterpolation()
@@ -33,6 +39,12 @@ public class KeyframeInterpolations
         {
             return Interpolations.cubicHermite(a, a, b, b, x);
         }
+
+        @Override
+        public String getKey()
+        {
+            return "hermite";
+        }
     };
 
     public static final IInterpolation BEZIER = new IInterpolation()
@@ -47,6 +59,12 @@ public class KeyframeInterpolations
         public double interpolate(double a, double b, double x)
         {
             return Interpolations.cubicHermite(a, a, b, b, x);
+        }
+
+        @Override
+        public String getKey()
+        {
+            return "bezier";
         }
     };
 }

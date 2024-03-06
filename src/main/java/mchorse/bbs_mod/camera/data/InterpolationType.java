@@ -27,7 +27,7 @@ public enum InterpolationType
     public Interpolation function;
     public KeyframeInterpolation interp;
     public KeyframeEasing easing = KeyframeEasing.IN;
-    private int keybind;
+    public int keybind;
 
     public static InterpolationType fromInterp(Interpolation interp)
     {
@@ -97,10 +97,7 @@ public enum InterpolationType
         }
     }
 
-    public IKey getName()
-    {
-        return UIKeys.C_INTERPOLATION.get(this.name);
-    } */
+   */
 
     @Override
     public String toString()

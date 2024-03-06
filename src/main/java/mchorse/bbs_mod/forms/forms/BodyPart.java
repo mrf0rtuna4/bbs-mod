@@ -1,13 +1,12 @@
 package mchorse.bbs_mod.forms.forms;
 
-import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.data.IMapSerializable;
 import mchorse.bbs_mod.data.types.MapType;
-import mchorse.bbs_mod.entity.ActorEntity;
 import mchorse.bbs_mod.forms.FormUtils;
+import mchorse.bbs_mod.forms.entities.IEntity;
+import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.utils.math.IInterpolation;
 import mchorse.bbs_mod.utils.pose.Transform;
-import net.minecraft.entity.Entity;
 
 import java.util.Objects;
 
@@ -25,7 +24,7 @@ public class BodyPart implements IMapSerializable
     public boolean enabled = true;
     public boolean useTarget;
 
-    private Entity entity = new ActorEntity(BBSMod.ACTOR_ENTITY, null);
+    private IEntity entity = new StubEntity();
 
     void setManager(BodyPartManager manager)
     {
@@ -62,7 +61,7 @@ public class BodyPart implements IMapSerializable
         return this.transform;
     }
 
-    public void update(Entity target)
+    public void update(IEntity target)
     {
         if (this.form != null)
         {

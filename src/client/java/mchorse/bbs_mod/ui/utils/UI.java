@@ -2,7 +2,7 @@ package mchorse.bbs_mod.ui.utils;
 
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.l10n.keys.IKey;
-import mchorse.bbs_mod.ui.UIKeys;
+import mchorse.bbs_mod.ui.film.utils.UICameraUtils;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
@@ -120,14 +120,14 @@ public class UI
 
                 if (interpolation == current)
                 {
-                    action = menu.action(Icons.ADD, UIKeys.C_INTERPOLATION.get(interpolation.key), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, InterpolationUtils.getName(interpolation), BBSSettings.primaryColor.get(), () -> consumer.accept(interpolation));
                 }
                 else
                 {
-                    action = menu.action(Icons.ADD, UIKeys.C_INTERPOLATION.get(interpolation.key), () -> consumer.accept(interpolation));
+                    action = menu.action(Icons.ADD, InterpolationUtils.getName(interpolation), () -> consumer.accept(interpolation));
                 }
 
-                // TODO: interpolation.setupKeybind(action, UICameraUtils.KEYS_CATEGORY);
+                InterpolationUtils.setupKeybind(interpolation, action, UICameraUtils.KEYS_CATEGORY);
             }
         });
     }

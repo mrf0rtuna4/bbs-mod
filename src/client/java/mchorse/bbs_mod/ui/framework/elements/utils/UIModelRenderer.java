@@ -1,15 +1,14 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
-import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.camera.Camera;
-import mchorse.bbs_mod.entity.ActorEntity;
+import mchorse.bbs_mod.forms.entities.IEntity;
+import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.utils.joml.Vectors;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
 import org.joml.Intersectiond;
 import org.joml.Matrix3d;
 import org.joml.Vector3d;
@@ -27,7 +26,7 @@ public abstract class UIModelRenderer extends UIElement
     private static Vector3d vec = new Vector3d();
     private static Matrix3d mat = new Matrix3d();
 
-    protected Entity entity;
+    protected IEntity entity;
 
     protected int timer;
     protected int dragging;
@@ -61,8 +60,7 @@ public abstract class UIModelRenderer extends UIElement
     {
         super();
 
-        this.entity = new ActorEntity(BBSMod.ACTOR_ENTITY, null);
-        this.entity.setOnGround(true);
+        this.entity = new StubEntity();
         this.reset();
     }
 
@@ -82,12 +80,12 @@ public abstract class UIModelRenderer extends UIElement
         this.distance = distance;
     }
 
-    public void setEntity(Entity entity)
+    public void setEntity(IEntity entity)
     {
         this.entity = entity;
     }
 
-    public Entity getEntity()
+    public IEntity getEntity()
     {
         return this.entity;
     }
@@ -205,7 +203,7 @@ public abstract class UIModelRenderer extends UIElement
     protected void update()
     {
         this.timer += 1;
-        this.entity.age = this.timer;
+        this.entity.setAge(this.timer);
     }
 
     /**

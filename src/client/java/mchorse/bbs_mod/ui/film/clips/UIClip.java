@@ -1,6 +1,22 @@
 package mchorse.bbs_mod.ui.film.clips;
 
 import mchorse.bbs_mod.BBSSettings;
+import mchorse.bbs_mod.camera.clips.misc.AudioClip;
+import mchorse.bbs_mod.camera.clips.misc.SubtitleClip;
+import mchorse.bbs_mod.camera.clips.misc.VoicelineClip;
+import mchorse.bbs_mod.camera.clips.modifiers.AngleClip;
+import mchorse.bbs_mod.camera.clips.modifiers.DragClip;
+import mchorse.bbs_mod.camera.clips.modifiers.LookClip;
+import mchorse.bbs_mod.camera.clips.modifiers.MathClip;
+import mchorse.bbs_mod.camera.clips.modifiers.OrbitClip;
+import mchorse.bbs_mod.camera.clips.modifiers.RemapperClip;
+import mchorse.bbs_mod.camera.clips.modifiers.ShakeClip;
+import mchorse.bbs_mod.camera.clips.modifiers.TranslateClip;
+import mchorse.bbs_mod.camera.clips.overwrite.CircularClip;
+import mchorse.bbs_mod.camera.clips.overwrite.DollyClip;
+import mchorse.bbs_mod.camera.clips.overwrite.IdleClip;
+import mchorse.bbs_mod.camera.clips.overwrite.KeyframeClip;
+import mchorse.bbs_mod.camera.clips.overwrite.PathClip;
 import mchorse.bbs_mod.camera.data.Position;
 import mchorse.bbs_mod.camera.utils.TimeUtils;
 import mchorse.bbs_mod.l10n.keys.IKey;
@@ -21,9 +37,14 @@ import mchorse.bbs_mod.utils.clips.Clip;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.undo.IUndo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class UIClip <T extends Clip> extends UIElement
 {
     public static final IKey CATEGORY = UIKeys.CAMERA_PANELS_KEYS_TITLE;
+
+    private static final Map<Class, IUIClipFactory> factories = new HashMap<>();
 
     public T clip;
     public IUIClipsDelegate editor;
@@ -37,6 +58,38 @@ public abstract class UIClip <T extends Clip> extends UIElement
     public UIEnvelope envelope;
 
     public UIScrollView panels;
+
+    static
+    {
+        register(IdleClip.class, UIIdleClip::new);
+        register(DollyClip.class, UIDollyClip::new);
+        register(CircularClip.class, UICircularClip::new);
+        register(PathClip.class, UIPathClip::new);
+        register(KeyframeClip.class, UIKeyframeClip::new);
+        register(TranslateClip.class, UITranslateClip::new);
+        register(AngleClip.class, UIAngleClip::new);
+        register(DragClip.class, UIDragClip::new);
+        register(ShakeClip.class, UIShakeClip::new);
+        register(MathClip.class, UIMathClip::new);
+        register(LookClip.class, UILookClip::new);
+        register(OrbitClip.class, UIOrbitClip::new);
+        register(RemapperClip.class, UIRemapperClip::new);
+        register(AudioClip.class, UIAudioClip::new);
+        register(SubtitleClip.class, UISubtitleClip::new);
+        register(VoicelineClip.class, UIVoicelineClip::new);
+    }
+
+    public static <T extends Clip> void register(Class<T> clazz, IUIClipFactory<T> factory)
+    {
+        factories.put(clazz, factory);
+    }
+
+    public static UIClip createPanel(Clip clip, IUIClipsDelegate delegate)
+    {
+        IUIClipFactory factory = factories.get(clip.getClass());
+
+        return factory == null ? null : factory.create(clip, delegate);
+    }
 
     public static UILabel label(IKey key)
     {
@@ -131,5 +184,10 @@ public abstract class UIClip <T extends Clip> extends UIElement
         context.batcher.box(this.area.ex() - 40, this.area.y, this.area.ex(), this.area.ey(), Colors.A25);
 
         super.render(context);
+    }
+
+    public static interface IUIClipFactory <T extends Clip>
+    {
+        public UIClip create(T clip, IUIClipsDelegate delegate);
     }
 }

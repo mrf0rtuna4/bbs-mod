@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui.dashboard;
 
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.camera.OrbitCamera;
 import mchorse.bbs_mod.camera.controller.OrbitCameraController;
@@ -139,7 +140,7 @@ public class UIDashboard extends UIBaseMenu
             this.setPanel(this.panels.panel);
         }
 
-        // TODO: this.bridge.get(IBridgeCamera.class).getCameraController().add(this.camera);
+        BBSModClient.getCameraController().add(this.camera);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class UIDashboard extends UIBaseMenu
         }
 
         this.orbit.reset();
-        // TODO: this.bridge.get(IBridgeCamera.class).getCameraController().remove(this.camera);
+        BBSModClient.getCameraController().remove(this.camera);
     }
 
     @Override
@@ -238,104 +239,5 @@ public class UIDashboard extends UIBaseMenu
         {
             this.panels.panel.renderInWorld();
         }
-
-        if (this.main.isVisible() && this.orbit.distance > 0.1F && this.displayAxes && this.panels.isFlightSupported())
-        {
-            // TODO: this.renderWorldAxes();
-        }
     }
-
-    /* TODO: public void renderWorldAxes(RenderingContext context)
-    {
-        Vector3f relative = context.getCamera().getRelative(this.orbit.position);
-
-        final float axisSize = 0.75F;
-        final float axisOffset = 0.045F;
-        final float outlineSize = axisSize + 0.015F;
-        final float outlineOffset = axisOffset + 0.015F;
-        final float labelOffset = axisSize - 0.075F;
-
-        context.stack.push();
-        context.stack.translate(relative);
-
-        Shader shader = context.getShaders().get(VBOAttributes.VERTEX_RGBA);
-
-        CommonShaderAccess.setModelView(shader, context.stack);
-
-        context.stack.pop();
-
-        VAOBuilder builder = context.getVAO().setup(shader);
-
-        GLStates.depthMask(false);
-
-        builder.begin();
-
-        Draw.fillBox(builder, 0, -outlineOffset, -outlineOffset, outlineSize, outlineOffset, outlineOffset, 0, 0, 0);
-        Draw.fillBox(builder, -outlineSize, -outlineOffset, -outlineOffset, 0, outlineOffset, outlineOffset, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, 0, -outlineOffset, outlineOffset, outlineSize, outlineOffset, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, -outlineSize, -outlineOffset, outlineOffset, 0, outlineOffset, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, -outlineOffset, 0, outlineOffset, outlineOffset, outlineSize, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, -outlineOffset, -outlineSize, outlineOffset, outlineOffset, 0, 0, 0, 0);
-
-        builder.render();
-
-        GLStates.depthMask(true);
-
-        builder.begin();
-
-        Draw.fillBox(builder, 0, -axisOffset, -axisOffset, axisSize, axisOffset, axisOffset, 1, 0, 0);
-        Draw.fillBox(builder, -axisSize, -axisOffset, -axisOffset, 0, axisOffset, axisOffset, 0.75F, 0, 0.25F);
-        Draw.fillBox(builder, -axisOffset, 0, -axisOffset, axisOffset, axisSize, axisOffset, 0, 1, 0);
-        Draw.fillBox(builder, -axisOffset, -axisSize, -axisOffset, axisOffset, 0, axisOffset, 0, 0.75F, 0.25F);
-        Draw.fillBox(builder, -axisOffset, -axisOffset, 0, axisOffset, axisOffset, axisSize, 0, 0, 1);
-        Draw.fillBox(builder, -axisOffset, -axisOffset, -axisSize, axisOffset, axisOffset, 0, 0.25F, 0, 0.75F);
-
-        builder.render();
-
-        if (this.orbit.distance < 8)
-        {
-            GLStates.depthTest(false);
-            GLStates.cullFaces(false);
-
-            this.renderWorldAxisLabel(context, "-X", -labelOffset, 0, 0, relative);
-            this.renderWorldAxisLabel(context, "+X", labelOffset, 0, 0, relative);
-            this.renderWorldAxisLabel(context, "+Y", 0, labelOffset, 0, relative);
-            this.renderWorldAxisLabel(context, "-Y", 0, -labelOffset, 0, relative);
-            this.renderWorldAxisLabel(context, "-Z", 0, 0, -labelOffset, relative);
-            this.renderWorldAxisLabel(context, "+Z", 0, 0, labelOffset, relative);
-
-            GLStates.depthTest(true);
-            GLStates.cullFaces(true);
-        }
-    } */
-
-    /* private void renderWorldAxisLabel(RenderingContext context, String label, float x, float y, float z, Vector3f relative)
-    {
-        final float scale = 0.125F / 16F;
-        MatrixStack stack = context.stack;
-        ColoredTextBuilder3D textBuilder = ITextBuilder.colored3D;
-
-        stack.push();
-        stack.translate(relative);
-        stack.translate(x, y, z);
-        stack.scale(scale, -scale, scale);
-        stack.rotateY(-this.orbit.rotation.y);
-        stack.rotateX(this.orbit.rotation.x);
-
-        Shader shader = context.getShaders().get(textBuilder.getAttributes());
-
-        CommonShaderAccess.setModelView(shader, stack);
-
-        stack.pop();
-
-        FontRenderer font = context.getFont();
-
-        font.bindTexture(context);
-
-        VAOBuilder builder = context.getVAO().setup(shader, VAO.INDICES);
-
-        builder.begin();
-        font.buildVAO(-font.getWidth(label) / 2, -font.getHeight() / 2, label, builder, textBuilder.setup(Colors.A100));
-        builder.render();
-    } */
 }

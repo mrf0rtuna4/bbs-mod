@@ -4,8 +4,8 @@ import mchorse.bbs_mod.data.IMapSerializable;
 import mchorse.bbs_mod.data.types.BaseType;
 import mchorse.bbs_mod.data.types.ListType;
 import mchorse.bbs_mod.data.types.MapType;
+import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.utils.math.IInterpolation;
-import net.minecraft.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +51,7 @@ public class BodyPartManager implements IMapSerializable
         }
     }
 
-    public void update(Entity target)
+    public void update(IEntity target)
     {
         for (BodyPart part : this.parts)
         {
