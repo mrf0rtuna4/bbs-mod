@@ -1,0 +1,148 @@
+package mchorse.bbs_mod.ui.utility;
+
+import mchorse.bbs_mod.BBSMod;
+import mchorse.bbs_mod.BBSModClient;
+import mchorse.bbs_mod.l10n.L10nUtils;
+import mchorse.bbs_mod.l10n.keys.IKey;
+import mchorse.bbs_mod.ui.UIKeys;
+import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
+import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
+import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
+import mchorse.bbs_mod.ui.framework.elements.overlay.UIMessageFolderOverlayPanel;
+import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
+import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlayPanel;
+import mchorse.bbs_mod.ui.utils.UI;
+import mchorse.bbs_mod.ui.utils.UIUtils;
+import mchorse.bbs_mod.ui.utils.icons.Icons;
+import mchorse.bbs_mod.utils.StringUtils;
+
+import java.io.File;
+
+public class UIUtilityOverlayPanel extends UIOverlayPanel
+{
+    public Runnable callback;
+
+    public UIScrollView view;
+
+    public UIUtilityOverlayPanel(IKey title, Runnable callback)
+    {
+        super(title);
+
+        this.callback = callback;
+
+        this.view = UI.scrollView(5, 10, 140);
+        this.view.relative(this.content).full();
+
+        UIButton openGameDirectory = new UIButton(UIKeys.UTILITY_OPEN_GAME_FOLDER, (b) -> this.openFolder(BBSMod.getGameFolder()));
+        UIButton openAudioDirectory = new UIButton(UIKeys.UTILITY_OPEN_AUDIO_FOLDER, (b) -> this.openFolder(BBSMod.getAssetsPath("audio")));
+        UIButton openModelsDirectory = new UIButton(UIKeys.UTILITY_OPEN_MODELS_FOLDER, (b) -> this.openFolder(BBSMod.getAssetsPath("models")));
+
+        UIIcon textures = new UIIcon(Icons.MATERIAL, (b) ->
+        {
+            this.print("Reloading textures!");
+            BBSModClient.getTextures().reload();
+            this.close();
+        });
+        textures.w(0).tooltip(UIKeys.UTILITY_RELOAD_TEXTURES);
+        UIIcon language = new UIIcon(Icons.GLOBE, (b) ->
+        {
+            this.print("Reloading languages!");
+            BBSModClient.getL10n().reload();
+            this.close();
+        });
+        language.w(0).tooltip(UIKeys.UTILITY_RELOAD_LANG);
+        UIIcon models = new UIIcon(Icons.POSE, (b) ->
+        {
+            this.print("Reloading models");
+            // TODO: BBSModClient.getModels().reload();
+            this.close();
+        });
+        models.w(0).tooltip(UIKeys.UTILITY_RELOAD_MODELS);
+        UIIcon sounds = new UIIcon(Icons.SOUND, (b) ->
+        {
+            this.print("Reloading sounds");
+            BBSModClient.getSounds().deleteSounds();
+            this.close();
+        });
+        sounds.w(0).tooltip(UIKeys.UTILITY_RELOAD_SOUNDS);
+        UIIcon terrain = new UIIcon(Icons.TREE, (b) ->
+        {
+            this.print("Forcing chunk loader");
+            // TODO: this.getContext().menu.bridge.get(IBridgeWorld.class).getWorld().chunks.buildChunks(BBS.getRender(), true);
+            this.close();
+        });
+        terrain.w(0).tooltip(UIKeys.UTILITY_RELOAD_TERRAIN);
+
+       UIButton analyze = new UIButton(UIKeys.UTILITY_ANALYZE_LANG, (b) -> this.analyzeLanguageStrings());
+       UIButton compile = new UIButton(UIKeys.UTILITY_COMPILE_LANG, (b) -> this.compileLanguageStrings());
+       UIButton langEditor = new UIButton(UIKeys.UTILITY_LANG_EDITOR, (b) -> this.openLangEditor());
+
+       this.view.add(UI.label(UIKeys.UTILITY_OPEN_FOLDER), UI.row(openGameDirectory, openModelsDirectory, openAudioDirectory).marginBottom(8));
+       this.view.add(UI.label(UIKeys.UTILITY_RELOAD_LABEL), UI.row(textures, language, models, sounds, terrain).marginBottom(8));
+       this.view.add(UI.label(UIKeys.UTILITY_LANG_LABEL), UI.row(analyze, compile), langEditor);
+       this.content.add(this.view);
+    }
+
+    private void openFolder(File gameFolder)
+    {
+        gameFolder.mkdirs();
+
+        UIUtils.openFolder(gameFolder);
+    }
+
+    private void openLangEditor()
+    {
+        UIContext context = this.getContext();
+
+        this.close();
+
+        UIOverlay.addOverlay(context, new UILanguageEditorOverlayPanel(), 0.6F, 0.9F);
+    }
+
+    private void analyzeLanguageStrings()
+    {
+        this.print(L10nUtils.analyzeStrings(BBSModClient.getL10n()));
+    }
+
+    private void compileLanguageStrings()
+    {
+        L10nUtils.compile(BBSMod.getExportFolder(), BBSModClient.getL10n().getStrings());
+
+        UIMessageFolderOverlayPanel panel = new UIMessageFolderOverlayPanel(UIKeys.GENERAL_SUCCESS, UIKeys.UTILITY_COMPILE_LANG_DESCRIPTION, BBSMod.getExportFolder());
+        UIOverlay.addOverlay(this.getContext(), panel);
+    }
+
+    private void print(String string)
+    {
+        int longest = 0;
+        String[] splits = string.split("\n");
+
+        for (String s : splits)
+        {
+            longest = Math.max(s.length(), longest);
+        }
+
+        String separator = StringUtils.repeat("-", longest);
+
+        System.out.println(separator);
+
+        for (String s : splits)
+        {
+            System.out.println(s);
+        }
+
+        System.out.println(separator);
+    }
+
+    @Override
+    public void onClose()
+    {
+        super.onClose();
+
+        if (this.callback != null)
+        {
+            this.callback.run();
+        }
+    }
+}

@@ -8,6 +8,7 @@ import mchorse.bbs_mod.forms.categories.FormCategories;
 import mchorse.bbs_mod.graphics.FramebufferManager;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
+import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.UITestMenu;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
@@ -43,6 +44,7 @@ import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
+import java.util.Collections;
 
 public class BBSModClient implements ClientModInitializer
 {
@@ -96,6 +98,8 @@ public class BBSModClient implements ClientModInitializer
         framebuffers = new FramebufferManager();
         sounds = new SoundManager(BBSMod.getProvider());
         l10n = new L10n();
+        l10n.register((lang) -> Collections.singletonList(Link.assets("strings/" + lang + ".json")));
+        l10n.reload();
 
         formCategories = new FormCategories();
         formCategories.setup();

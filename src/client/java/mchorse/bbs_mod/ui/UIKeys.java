@@ -527,7 +527,39 @@ public class UIKeys
     public static final IKey VOICE_LINE_SAVE_AUDIO_TITLE = L10n.lang("bbs.ui.voice_line.save_audio-title", "Compiled", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
     public static final IKey VOICE_LINE_SUBTITLES = L10n.lang("bbs.ui.voice_line.subtitles", "Generate subtitle clips", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
     public static final IKey WORLD_KEYS_CYCLE_PANELS = L10n.lang("bbs.ui.world.keys.cycle_panels");
-    public static final IKey WORLD_KEYS_TOGGLE_AXES = L10n.lang("bbs.ui.world.keys.toggle_axes");
+
+    /* Utility */
+    public static final IKey LANGUAGE_EDITOR_CONTEXT_COPY_KEY = L10n.lang("studio.ui.language.editor.context.copy_key");
+    public static final IKey LANGUAGE_EDITOR_CONTEXT_COPY_ORIGINAL = L10n.lang("studio.ui.language.editor.context.copy_original");
+    public static final IKey LANGUAGE_EDITOR_CONTEXT_MARK_COMPLETED = L10n.lang("studio.ui.language.editor.context.mark_completed");
+    public static final IKey LANGUAGE_EDITOR_CONTEXT_UNMARK_COMPLETED = L10n.lang("studio.ui.language.editor.context.unmark_completed");
+    public static final IKey LANGUAGE_EDITOR_COPY = L10n.lang("studio.ui.language.editor.copy");
+    public static final IKey LANGUAGE_EDITOR_FOLDER = L10n.lang("studio.ui.language.editor.folder");
+    public static final IKey LANGUAGE_EDITOR_MISSING = L10n.lang("studio.ui.language.editor.missing");
+    public static final IKey LANGUAGE_EDITOR_PASTE = L10n.lang("studio.ui.language.editor.paste");
+    public static final IKey LANGUAGE_EDITOR_PASTE_DESCRIPTION = L10n.lang("studio.ui.language.editor.paste-description");
+    public static final IKey LANGUAGE_EDITOR_REFERENCE = L10n.lang("studio.ui.language.editor.reference");
+    public static final IKey LANGUAGE_EDITOR_REFERENCE_TITLE = L10n.lang("studio.ui.language.editor.reference-title");
+    public static final IKey LANGUAGE_EDITOR_SAVE = L10n.lang("studio.ui.language.editor.save");
+    public static final IKey LANGUAGE_EDITOR_TITLE = L10n.lang("studio.ui.language.editor.title");
+    public static final IKey UTILITY_ANALYZE_LANG = L10n.lang("studio.ui.utility.analyze_lang");
+    public static final IKey UTILITY_COMPILE_LANG = L10n.lang("studio.ui.utility.compile_lang");
+    public static final IKey UTILITY_COMPILE_LANG_DESCRIPTION = L10n.lang("studio.ui.utility.compile_lang-description");
+    public static final IKey UTILITY_LANG_EDITOR = L10n.lang("studio.ui.utility.lang_editor");
+    public static final IKey UTILITY_LANG_LABEL = L10n.lang("studio.ui.utility.lang");
+    public static final IKey UTILITY_OPEN_AUDIO_FOLDER = L10n.lang("studio.ui.utility.open_audio_folder", "Audio", UTILITY_ANALYZE_LANG);
+    public static final IKey UTILITY_OPEN_FOLDER = L10n.lang("studio.ui.utility.open_folder", "Open folder...", UTILITY_ANALYZE_LANG);
+    public static final IKey UTILITY_OPEN_GAME_FOLDER = L10n.lang("studio.ui.utility.open_game_folder", "Game", UTILITY_ANALYZE_LANG);
+    public static final IKey UTILITY_OPEN_MODELS_FOLDER = L10n.lang("studio.ui.utility.open_models_folder", "Models", UTILITY_ANALYZE_LANG);
+    public static final IKey UTILITY_RELOAD_LABEL = L10n.lang("studio.ui.utility.reload");
+    public static final IKey UTILITY_RELOAD_LANG = L10n.lang("studio.ui.utility.reload_lang");
+    public static final IKey UTILITY_RELOAD_MODELS = L10n.lang("studio.ui.utility.reload_models");
+    public static final IKey UTILITY_RELOAD_SHADERS = L10n.lang("studio.ui.utility.reload_shaders");
+    public static final IKey UTILITY_RELOAD_SOUNDS = L10n.lang("studio.ui.utility.reload_sounds");
+    public static final IKey UTILITY_RELOAD_TERRAIN = L10n.lang("studio.ui.utility.reload_terrain");
+    public static final IKey UTILITY_RELOAD_TEXTURES = L10n.lang("studio.ui.utility.reload_textures");
+    public static final IKey UTILITY_RESIZE_WINDOW = L10n.lang("studio.ui.utility.resize");
+    public static final IKey UTILITY_TITLE = L10n.lang("studio.ui.utility.title");
 
     /* Key collections */
     public static final KeyCollection C_CLIP = new KeyCollection("bbs.ui.camera.clips.^")

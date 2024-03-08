@@ -21,11 +21,14 @@ import mchorse.bbs_mod.ui.framework.UIRenderingContext;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
 import mchorse.bbs_mod.ui.particles.UIParticleSchemePanel;
+import mchorse.bbs_mod.ui.utility.UIUtilityOverlayPanel;
 import mchorse.bbs_mod.ui.utils.UIUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
+import mchorse.bbs_mod.ui.utils.keys.KeyCombo;
 import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
 
@@ -80,6 +83,15 @@ public class UIDashboard extends UIBaseMenu
 
         this.overlay.keys().register(Keys.TOGGLE_VISIBILITY, this.main::toggleVisible).category(category);
         this.overlay.keys().register(Keys.WORLD_CYCLE_PANELS, this::cyclePanels).category(category);
+        this.overlay.keys().register(new KeyCombo(IKey.raw("Utility"), GLFW.GLFW_KEY_F6), () ->
+        {
+            if (UIOverlay.has(this.context))
+            {
+                return;
+            }
+
+            UIOverlay.addOverlay(this.context, new UIUtilityOverlayPanel(UIKeys.UTILITY_TITLE, null), 240, 160);
+        });
     }
 
     private void cyclePanels()
