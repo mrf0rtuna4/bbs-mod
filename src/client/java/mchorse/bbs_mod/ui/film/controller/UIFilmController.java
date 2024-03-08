@@ -32,6 +32,7 @@ import mchorse.bbs_mod.utils.Pair;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.joml.Matrices;
 import mchorse.bbs_mod.utils.keyframes.KeyframeChannel;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
@@ -110,9 +111,16 @@ public class UIFilmController extends UIElement
         this.noCulling();
     }
 
-    private void toggleMousePointer(boolean toggle)
+    private void toggleMousePointer(boolean disable)
     {
-        // TODO:
+        if (disable)
+        {
+            MinecraftClient.getInstance().mouse.lockCursor();
+        }
+        else
+        {
+            MinecraftClient.getInstance().mouse.unlockCursor();
+        }
     }
 
     private int getTick()

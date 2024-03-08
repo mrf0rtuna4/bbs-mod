@@ -1,5 +1,7 @@
 package mchorse.bbs_mod.utils.clips;
 
+import net.minecraft.world.World;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,25 +42,28 @@ public abstract class ClipContext <T extends Clip, E>
      */
     public int count;
 
+    public World world;
+
     public Map<String, Object> clipData = new HashMap<>();
 
-    public ClipContext setup(int ticks, float transition)
+    public ClipContext setup(World world, int ticks, float transition)
     {
-        return this.setup(ticks, ticks, transition);
+        return this.setup(world, ticks, ticks, transition);
     }
 
-    public ClipContext setup(int ticks, int relativeTick, float transition)
+    public ClipContext setup(World world, int ticks, int relativeTick, float transition)
     {
-        return this.setup(ticks, relativeTick, transition, 0);
+        return this.setup(world, ticks, relativeTick, transition, 0);
     }
 
-    public ClipContext setup(int ticks, int relativeTick, float transition, int currentLayer)
+    public ClipContext setup(World world, int ticks, int relativeTick, float transition, int currentLayer)
     {
         this.count = 0;
         this.ticks = ticks;
         this.relativeTick = relativeTick;
         this.transition = transition;
         this.currentLayer = currentLayer;
+        this.world = world;
 
         return this;
     }

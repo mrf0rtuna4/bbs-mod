@@ -38,7 +38,7 @@ public class LookClip extends EntityClip
     {
         if (this.checkForDead())
         {
-            // TODO: this.tryFindingEntity(context.bridge.get(IBridgeWorld.class).getWorld());
+            this.tryFindingEntity(context.world);
         }
 
         boolean atBlock = this.atBlock.get();

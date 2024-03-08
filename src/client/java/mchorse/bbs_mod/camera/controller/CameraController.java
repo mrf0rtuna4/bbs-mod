@@ -86,16 +86,9 @@ public class CameraController implements ICameraController
     @Override
     public void setup(Camera camera, float transition)
     {
-        float fov = this.camera.fov;
-
         if (this.current != null)
         {
             this.current.setup(camera, transition);
-        }
-
-        if (fov != this.camera.fov)
-        {
-            // TODO: this.resize(Window.width, Window.height);
         }
     }
 

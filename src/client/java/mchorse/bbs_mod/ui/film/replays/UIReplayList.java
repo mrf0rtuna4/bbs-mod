@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.ui.film.replays;
 
+import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.film.Film;
 import mchorse.bbs_mod.film.replays.Replay;
 import mchorse.bbs_mod.forms.FormUtilsClient;
@@ -12,8 +13,14 @@ import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.input.list.UIList;
 import mchorse.bbs_mod.ui.utils.UIDataUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
+import mchorse.bbs_mod.utils.RayTracing;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import org.joml.Vector3d;
 
 import java.util.List;
@@ -65,19 +72,19 @@ public class UIReplayList extends UIList<Replay>
 
     private void addReplay()
     {
-        /* TODO: World world = this.getContext().menu.bridge.get(IBridgeWorld.class).getWorld();
-        RayTraceResult result = new RayTraceResult();
+        World world = MinecraftClient.getInstance().world;
         Camera camera = this.panel.getCamera();
 
-        RayTracer.trace(result, world.chunks, camera.position, camera.getLookDirection(), 64F);
-        Vector3d position = new Vector3d(result.hit);
+        BlockHitResult blockHitResult = RayTracing.rayTrace(world, camera, 64F);
+        Vec3d p = blockHitResult.getPos();
+        Vector3d position = new Vector3d(p.x, p.y, p.z);
 
-        if (result.type != RayTraceType.BLOCK)
+        if (blockHitResult.getType() == HitResult.Type.MISS)
         {
             position.set(camera.getLookDirection()).mul(5F).add(camera.position);
         }
 
-        this.addReplay(position, camera.rotation.x, camera.rotation.y + MathUtils.PI); */
+        this.addReplay(position, camera.rotation.x, camera.rotation.y + MathUtils.PI);
     }
 
     public void addReplay(Vector3d position, float pitch, float yaw)

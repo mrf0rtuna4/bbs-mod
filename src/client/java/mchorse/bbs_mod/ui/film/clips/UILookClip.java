@@ -1,6 +1,8 @@
 package mchorse.bbs_mod.ui.film.clips;
 
+import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.camera.clips.modifiers.LookClip;
+import mchorse.bbs_mod.settings.values.base.BaseValue;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.film.IUIClipsDelegate;
 import mchorse.bbs_mod.ui.film.clips.modules.UIPointModule;
@@ -8,7 +10,14 @@ import mchorse.bbs_mod.ui.film.utils.UITextboxHelp;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIToggle;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
+import mchorse.bbs_mod.utils.RayTracing;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 public class UILookClip extends UIClip<LookClip>
 {
@@ -86,25 +95,24 @@ public class UILookClip extends UIClip<LookClip>
 
     private void rayTrace(boolean center)
     {
-        /* TODO: Camera camera = this.editor.getCamera();
+        Camera camera = this.editor.getCamera();
         World world = MinecraftClient.getInstance().world;
-        RayTraceResult result = new RayTraceResult();
 
-        RayTracer.traceEntity(result, world, camera.position, camera.getLookDirection(), 128);
+        HitResult result = RayTracing.rayTraceEntity(world, camera, 128);
 
-        if (center && result.type == RayTraceType.BLOCK)
+        if (center && result instanceof BlockHitResult bhr && bhr.getType() != HitResult.Type.MISS)
         {
-            Vector3i pos = result.block;
+            BlockPos pos = bhr.getBlockPos();
 
-            BaseValue.edit(this.clip.block, (block) -> block.get().set(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5));
+            BaseValue.edit(this.clip.block, (block) -> block.get().set(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
             this.fillData();
         }
-        else if (!center && !result.type.isMissed())
+        else if (!center && result instanceof EntityHitResult ehr && ehr.getType() != HitResult.Type.MISS)
         {
-            Vector3d vec = result.hit;
+            Vec3d vec = ehr.getPos();
 
             BaseValue.edit(this.clip.block, (block) -> block.get().set(vec.x, vec.y, vec.z));
             this.fillData();
-        } */
+        }
     }
 }

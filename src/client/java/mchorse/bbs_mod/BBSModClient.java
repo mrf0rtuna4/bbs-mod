@@ -10,11 +10,11 @@ import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
-import mchorse.bbs_mod.ui.UITestMenu;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.framework.UIScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
+import mchorse.bbs_mod.utils.RayTracing;
 import mchorse.bbs_mod.utils.colors.Colors;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -35,8 +35,10 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
@@ -151,7 +153,20 @@ public class BBSModClient implements ClientModInitializer
 
             while (keyRecord.wasPressed())
             {
-                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Hello"), new UITestMenu()));
+                MinecraftClient mc = MinecraftClient.getInstance();
+
+                HitResult result = RayTracing.rayTraceEntity(mc.player, mc.world, mc.cameraEntity.getEyePos(), mc.cameraEntity.getRotationVec(0F), 64);
+
+                if (result != null && result.getType() != HitResult.Type.MISS)
+                {
+                    Vec3d pos = result.getPos();
+
+                    mc.world.addParticle(ParticleTypes.EXPLOSION, pos.x, pos.y, pos.z, 0D, 0D, 0D);
+                }
+                else
+                {
+                    mc.player.sendMessage(Text.literal("I guess you have missed, huh?"));
+                }
             }
         });
 

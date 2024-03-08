@@ -6,6 +6,9 @@ import mchorse.bbs_mod.camera.data.Position;
 import mchorse.bbs_mod.camera.values.ValuePoint;
 import mchorse.bbs_mod.settings.values.ValueString;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.TypeFilter;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -21,6 +24,8 @@ import java.util.List;
  */
 public abstract class EntityClip extends CameraClip
 {
+    private static Box HUGE_BOX = new Box(-30_000_000D, -64D, -30_000_000D, 30_000_000D, 256D, 30_000_000D);
+
     /**
      * Position which may be used for calculation of relative
      * camera fixture animations
@@ -63,11 +68,20 @@ public abstract class EntityClip extends CameraClip
      */
     private void tryFindingEntityClient(World world, String selector)
     {
+        if (world == null)
+        {
+            this.entities = null;
+
+            return;
+        }
+
         selector = selector.trim();
 
         List<Entity> entities = new ArrayList<>();
+        final Identifier id = new Identifier(selector);
 
-        /* TODO: ... */
+        /* TODO: switch to entity selector */
+        world.collectEntitiesByType(TypeFilter.instanceOf(Entity.class), HUGE_BOX, (e) -> e.getType().getLootTableId().equals(id), entities);
 
         this.entities = entities.isEmpty() ? null : entities;
     }

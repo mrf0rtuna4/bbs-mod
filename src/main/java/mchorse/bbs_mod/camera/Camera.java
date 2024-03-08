@@ -1,9 +1,12 @@
 package mchorse.bbs_mod.camera;
 
+import mchorse.bbs_mod.utils.joml.Matrices;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import org.joml.Matrix4f;
+import org.joml.RayAabIntersection;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class Camera
 {
@@ -34,7 +37,7 @@ public class Camera
         this.far = far;
     }
 
-    /* public RayAabIntersection getMouseIntersection(int mx, int my)
+    public RayAabIntersection getMouseIntersection(int mx, int my)
     {
         Vector3f direction = this.getMouseDirection(mx, my);
 
@@ -44,23 +47,6 @@ public class Camera
     public Vector3f getLookDirection()
     {
         return Matrices.rotation(this.rotation.x, MathUtils.PI - this.rotation.y);
-    }
-
-    public Vector3f getMouseDirection()
-    {
-        MouseInput mouse = BBS.getEngine().mouse;
-
-        return this.getMouseDirection(mouse.x, mouse.y);
-    }
-
-    public Vector3f getMouseDirection(int mx, int my)
-    {
-        return this.getMouseDirection(mx, my, Window.width, Window.height);
-    }
-
-    public Vector3f getMouseDirection(int mx, int my, Area viewport)
-    {
-        return this.getMouseDirection(mx - viewport.x, my - viewport.y, viewport.w, viewport.h);
     }
 
     public Vector3f getMouseDirection(int mx, int my, int w, int h)
@@ -85,7 +71,7 @@ public class Camera
         matrix4f.transform(forward);
 
         return new Vector3f(forward.x, forward.y, forward.z);
-    } */
+    }
 
     public Vector3f getRelative(Vector3d vector)
     {

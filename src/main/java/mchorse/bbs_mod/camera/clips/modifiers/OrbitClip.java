@@ -56,7 +56,7 @@ public class OrbitClip extends EntityClip
     {
         if (this.checkForDead())
         {
-            // TODO: this.tryFindingEntity(context.bridge.get(IBridgeWorld.class).getWorld());
+            this.tryFindingEntity(context.world);
         }
 
         if (this.entities == null)

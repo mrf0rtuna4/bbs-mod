@@ -5,6 +5,7 @@ import mchorse.bbs_mod.camera.clips.CameraClipContext;
 import mchorse.bbs_mod.camera.data.Position;
 import mchorse.bbs_mod.utils.clips.Clip;
 import mchorse.bbs_mod.utils.clips.Clips;
+import net.minecraft.client.MinecraftClient;
 
 public abstract class CameraWorkCameraController implements ICameraController
 {
@@ -33,7 +34,7 @@ public abstract class CameraWorkCameraController implements ICameraController
         this.position.set(camera);
 
         this.context.clipData.clear();
-        this.context.setup(ticks, transition);
+        this.context.setup(MinecraftClient.getInstance().world, ticks, transition);
 
         for (Clip clip : this.context.clips.getClips(ticks))
         {

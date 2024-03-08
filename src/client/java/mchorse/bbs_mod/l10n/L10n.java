@@ -143,8 +143,6 @@ public class L10n
                 e.printStackTrace();
             }
         }
-
-        // TODO: BBS.events.post(new L10nReloadEvent(this));
     }
 
     public void load(Link origin, InputStream stream)
