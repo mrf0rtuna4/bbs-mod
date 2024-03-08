@@ -74,6 +74,11 @@ public class Settings extends BaseValue
         {
             if (file != null)
             {
+                if (!file.getParentFile().isDirectory())
+                {
+                    file.getParentFile().mkdirs();
+                }
+
                 IOUtils.writeText(file, this.toJson());
             }
 
