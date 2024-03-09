@@ -49,6 +49,11 @@ public class Camera
         return Matrices.rotation(this.rotation.x, MathUtils.PI - this.rotation.y);
     }
 
+    public Vector3f getMouseDirection(int mx, int my, int vx, int vy, int w, int h)
+    {
+        return this.getMouseDirection(mx - vx, my - vy, w, h);
+    }
+
     public Vector3f getMouseDirection(int mx, int my, int w, int h)
     {
         return this.getMouseDirection(mx / (float) w, 1 - my / (float) h);

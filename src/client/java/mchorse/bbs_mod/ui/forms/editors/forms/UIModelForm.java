@@ -30,12 +30,4 @@ public class UIModelForm extends UIForm<ModelForm>
 
         return this.getOrigin(transition, StringUtils.combinePaths(path, this.modelPanel.poseEditor.groups.getCurrentFirst()));
     }
-
-    @Override
-    public void finishEdit()
-    {
-        super.finishEdit();
-
-        // TODO: this.form.resetAnimator();
-    }
 }

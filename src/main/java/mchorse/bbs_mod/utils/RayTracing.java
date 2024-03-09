@@ -13,17 +13,24 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import org.joml.Vector3d;
 import org.joml.Vector3f;
 
 public class RayTracing
 {
+    public static Vec3d fromVector3d(Vector3d vector)
+    {
+        return new Vec3d(vector.x, vector.y, vector.z);
+    }
+
+    public static Vec3d fromVector3f(Vector3f vector)
+    {
+        return new Vec3d(vector.x, vector.y, vector.z);
+    }
+
     public static BlockHitResult rayTrace(World world, Camera camera, double d)
     {
-        Vector3f lookDirection = camera.getLookDirection();
-        Vec3d pos = new Vec3d(camera.position.x, camera.position.y, camera.position.z);
-        Vec3d look = new Vec3d(lookDirection.x, lookDirection.y, lookDirection.z);
-
-        return rayTrace(world, pos, look, d);
+        return rayTrace(world, fromVector3d(camera.position), fromVector3f(camera.getLookDirection()), d);
     }
 
     public static BlockHitResult rayTrace(World world, Vec3d pos, Vec3d direction, double d)

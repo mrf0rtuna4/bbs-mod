@@ -4,6 +4,7 @@ import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.audio.SoundPlayer;
 import mchorse.bbs_mod.audio.Waveform;
+import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.film.Film;
 import mchorse.bbs_mod.film.replays.Replay;
 import mchorse.bbs_mod.film.replays.ReplayKeyframes;
@@ -31,12 +32,19 @@ import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.context.ContextMenuManager;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.Pair;
+import mchorse.bbs_mod.utils.RayTracing;
 import mchorse.bbs_mod.utils.StringUtils;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.keyframes.KeyframeChannel;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframe;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeChannel;
 import mchorse.bbs_mod.utils.keyframes.generic.GenericKeyframeSegment;
+import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.world.World;
+import org.joml.Vector3d;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -361,25 +369,31 @@ public class UIReplaysEditor extends UIElement
         }
         else if (context.mouseButton == 1 && this.isVisible())
         {
-            /* TODO: RayTraceResult traceResult = new RayTraceResult();
-            World world = context.menu.bridge.get(IBridgeWorld.class).getWorld();
+            World world = MinecraftClient.getInstance().world;
             Camera camera = this.filmPanel.getCamera();
 
-            RayTracer.trace(traceResult, world.chunks, camera.position, camera.getMouseDirection(context.mouseX, context.mouseY, area), 64F);
+            BlockHitResult blockHitResult = RayTracing.rayTrace(
+                world,
+                RayTracing.fromVector3d(camera.position),
+                RayTracing.fromVector3f(camera.getMouseDirection(context.mouseX, context.mouseY, area.x, area.y, area.w, area.h)),
+                64F
+            );
 
-            if (traceResult.type == RayTraceType.BLOCK)
+            if (blockHitResult.getType() != HitResult.Type.MISS)
             {
+                Vector3d vec = new Vector3d(blockHitResult.getPos().x, blockHitResult.getPos().y, blockHitResult.getPos().z);
+
                 context.replaceContextMenu((menu) ->
                 {
                     float pitch = camera.rotation.x;
                     float yaw = camera.rotation.y + MathUtils.PI;
 
-                    menu.action(Icons.ADD, UIKeys.FILM_REPLAY_CONTEXT_ADD, () -> this.replays.addReplay(traceResult.hit, pitch, yaw));
-                    menu.action(Icons.POINTER, UIKeys.FILM_REPLAY_CONTEXT_MOVE_HERE, () -> this.moveReplay(traceResult.hit.x, traceResult.hit.y, traceResult.hit.z));
+                    menu.action(Icons.ADD, UIKeys.FILM_REPLAY_CONTEXT_ADD, () -> this.replays.addReplay(vec, pitch, yaw));
+                    menu.action(Icons.POINTER, UIKeys.FILM_REPLAY_CONTEXT_MOVE_HERE, () -> this.moveReplay(vec.x, vec.y, vec.z));
                 });
 
                 return true;
-            } */
+            }
         }
 
         return false;

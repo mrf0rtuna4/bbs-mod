@@ -1,17 +1,26 @@
 package mchorse.bbs_mod.ui.forms.editors;
 
-import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.data.types.MapType;
 import mchorse.bbs_mod.forms.FormUtils;
 import mchorse.bbs_mod.forms.FormUtilsClient;
+import mchorse.bbs_mod.forms.forms.BillboardForm;
 import mchorse.bbs_mod.forms.forms.BodyPart;
+import mchorse.bbs_mod.forms.forms.ExtrudedForm;
 import mchorse.bbs_mod.forms.forms.Form;
+import mchorse.bbs_mod.forms.forms.LabelForm;
+import mchorse.bbs_mod.forms.forms.ModelForm;
+import mchorse.bbs_mod.forms.forms.ParticleForm;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.forms.IUIFormList;
 import mchorse.bbs_mod.ui.forms.UIFormList;
 import mchorse.bbs_mod.ui.forms.UIFormPalette;
+import mchorse.bbs_mod.ui.forms.editors.forms.UIBillboardForm;
+import mchorse.bbs_mod.ui.forms.editors.forms.UIExtrudedForm;
 import mchorse.bbs_mod.ui.forms.editors.forms.UIForm;
+import mchorse.bbs_mod.ui.forms.editors.forms.UILabelForm;
+import mchorse.bbs_mod.ui.forms.editors.forms.UIModelForm;
+import mchorse.bbs_mod.ui.forms.editors.forms.UIParticleForm;
 import mchorse.bbs_mod.ui.forms.editors.utils.UIPickableFormRenderer;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
@@ -28,11 +37,16 @@ import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.Pair;
 import mchorse.bbs_mod.utils.colors.Colors;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class UIFormEditor extends UIElement implements IUIFormList
 {
+    private static Map<Class, Supplier<UIForm>> panels = new HashMap<>();
+
     private static final int TREE_WIDTH = 140;
     private static boolean TOGGLED = true;
 
@@ -58,6 +72,27 @@ public class UIFormEditor extends UIElement implements IUIFormList
     public Form form;
 
     private Consumer<Form> callback;
+
+    static
+    {
+        register(BillboardForm.class, UIBillboardForm::new);
+        register(ExtrudedForm.class, UIExtrudedForm::new);
+        register(LabelForm.class, UILabelForm::new);
+        register(ModelForm.class, UIModelForm::new);
+        register(ParticleForm.class, UIParticleForm::new);
+    }
+
+    public static void register(Class clazz, Supplier<UIForm> supplier)
+    {
+        panels.put(clazz, supplier);
+    }
+
+    public static UIForm createPanel(Form form)
+    {
+        Supplier<UIForm> supplier = panels.get(form.getClass());
+
+        return supplier == null ? null : supplier.get();
+    }
 
     public UIFormEditor(UIFormPalette palette)
     {
@@ -298,7 +333,7 @@ public class UIFormEditor extends UIElement implements IUIFormList
 
     public boolean switchEditor(Form form)
     {
-        UIForm editor = null; // TODO: BBSMod.getForms().getEditor(form);
+        UIForm editor = createPanel(form);
 
         if (editor == null)
         {
