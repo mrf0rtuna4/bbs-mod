@@ -14,4 +14,7 @@ public interface ICameraController
     {
         return 0;
     }
+
+    public default void update()
+    {}
 }

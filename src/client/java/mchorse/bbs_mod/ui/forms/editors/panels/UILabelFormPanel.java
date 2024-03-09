@@ -1,26 +1,18 @@
 package mchorse.bbs_mod.ui.forms.editors.panels;
 
 import mchorse.bbs_mod.forms.forms.LabelForm;
-import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.forms.editors.forms.UIForm;
-import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIToggle;
 import mchorse.bbs_mod.ui.framework.elements.input.UIColor;
 import mchorse.bbs_mod.ui.framework.elements.input.UITrackpad;
 import mchorse.bbs_mod.ui.framework.elements.input.text.UITextbox;
-import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
-import mchorse.bbs_mod.ui.framework.elements.overlay.UIStringOverlayPanel;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.utils.colors.Color;
-
-import java.util.Collections;
-import java.util.Set;
 
 public class UILabelFormPanel extends UIFormPanel<LabelForm>
 {
     public UITextbox text;
-    public UIButton font;
     public UIColor color;
     public UITrackpad max;
     public UITrackpad anchorX;
@@ -39,14 +31,6 @@ public class UILabelFormPanel extends UIFormPanel<LabelForm>
         super(editor);
 
         this.text = new UITextbox(10000, (t) -> this.form.text.set(t));
-        this.font = new UIButton(UIKeys.FORMS_EDITORS_LABEL_FONT, (b) ->
-        {
-            Set<Link> linkSet = Collections.emptySet(); /* TODO: BBS.getFonts().getFontSet(); */
-            UIStringOverlayPanel panel = UIStringOverlayPanel.links(UIKeys.FORMS_EDITORS_LABEL_FONT_TITLE, linkSet, (l) -> this.form.font.set(l));
-
-            panel.set(this.form.font.get());
-            UIOverlay.addOverlay(this.getContext(), panel);
-        });
         this.color = new UIColor((c) -> this.form.color.set(Color.rgba(c))).withAlpha();
         this.max = new UITrackpad((value) -> this.form.max.set(value.intValue()));
         this.max.limit(-1, Integer.MAX_VALUE, true).increment(10);
@@ -65,7 +49,7 @@ public class UILabelFormPanel extends UIFormPanel<LabelForm>
         this.background = new UIColor((value) -> this.form.background.set(Color.rgba(value))).withAlpha();
         this.offset = new UITrackpad((value) -> this.form.offset.set(value.floatValue()));
 
-        this.options.add(UI.label(UIKeys.FORMS_EDITORS_LABEL_LABEL), this.text, this.font, this.color, this.max);
+        this.options.add(UI.label(UIKeys.FORMS_EDITORS_LABEL_LABEL), this.text, this.color, this.max);
 
         this.options.add(UI.label(UIKeys.FORMS_EDITORS_LABEL_ANCHOR).marginTop(8), UI.row(this.anchorX, this.anchorY), this.anchorLines);
         this.options.add(UI.label(UIKeys.FORMS_EDITORS_LABEL_SHADOW_OFFSET).marginTop(8), this.shadowX, this.shadowY);

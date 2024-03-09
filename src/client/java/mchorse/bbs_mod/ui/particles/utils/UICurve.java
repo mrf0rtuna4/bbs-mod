@@ -25,6 +25,7 @@ import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
+import org.joml.Matrix4f;
 import org.joml.Vector2d;
 
 public class UICurve extends UIElement
@@ -255,7 +256,7 @@ public class UICurve extends UIElement
 
     private void drawGraph(UIContext context)
     {
-        /* TODO: matrix */
+        Matrix4f matrix = context.batcher.getContext().getMatrices().peek().getPositionMatrix();
         int c = this.curve.nodes.size();
 
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
@@ -263,18 +264,18 @@ public class UICurve extends UIElement
         builder.begin(VertexFormat.DrawMode.LINES, VertexFormats.POSITION_COLOR);
 
         /* Top and bottom */
-        builder.vertex(this.area.x, this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
-        builder.vertex(this.area.ex(), this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.area.x, this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.area.ex(), this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
-        builder.vertex(this.area.x, this.graph.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
-        builder.vertex(this.area.ex(), this.graph.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.area.x, this.graph.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.area.ex(), this.graph.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
         /* Left and right */
-        builder.vertex(this.graph.x, this.area.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
-        builder.vertex(this.graph.x, this.area.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.graph.x, this.area.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.graph.x, this.area.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
-        builder.vertex(this.graph.ex(), this.area.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
-        builder.vertex(this.graph.ex(), this.area.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.graph.ex(), this.area.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
+        builder.vertex(matrix, this.graph.ex(), this.area.ey(), 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
 
         if (this.curve.type == ParticleCurveType.HERMITE && c >= 4)
         {
@@ -282,11 +283,11 @@ public class UICurve extends UIElement
             Vector2d last = this.getVector(c - 2, this.range.x, this.range.y);
 
             /* Hermite bounds */
-            builder.vertex((float) first.x, this.graph.y, 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
-            builder.vertex((float) first.x, this.graph.ey(), 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
+            builder.vertex(matrix, (float) first.x, this.graph.y, 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
+            builder.vertex(matrix, (float) first.x, this.graph.ey(), 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
 
-            builder.vertex((float) last.x, this.graph.y, 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
-            builder.vertex((float) last.x, this.graph.ey(), 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
+            builder.vertex(matrix, (float) last.x, this.graph.y, 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
+            builder.vertex(matrix, (float) last.x, this.graph.ey(), 0F).color(0.25F, 0.25F, 0.25F, 0.5F).next();
         }
 
         BufferRenderer.drawWithGlobalProgram(builder.end());

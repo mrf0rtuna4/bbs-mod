@@ -2,6 +2,7 @@ package mchorse.bbs_mod.graphics.line;
 
 import mchorse.bbs_mod.utils.colors.Color;
 import net.minecraft.client.render.BufferBuilder;
+import org.joml.Matrix4f;
 
 public class SolidColorLineRenderer implements ILineRenderer
 {
@@ -34,8 +35,8 @@ public class SolidColorLineRenderer implements ILineRenderer
     }
 
     @Override
-    public void render(BufferBuilder builder, LinePoint point)
+    public void render(BufferBuilder builder, Matrix4f matrix, LinePoint point)
     {
-        builder.vertex(point.x, point.y, 0F).color(this.color.r, this.color.g, this.color.b, this.color.a).next();
+        builder.vertex(matrix, point.x, point.y, 0F).color(this.color.r, this.color.g, this.color.b, this.color.a).next();
     }
 }

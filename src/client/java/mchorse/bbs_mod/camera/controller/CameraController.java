@@ -75,12 +75,13 @@ public class CameraController implements ICameraController
         this.updateCurrent();
     }
 
-    public void tick()
+    @Override
+    public void update()
     {
-        /* TODO: if (this.current instanceof ITickable)
+        if (this.current != null)
         {
-            ((ITickable) this.current).update();
-        } */
+            this.current.update();
+        }
     }
 
     @Override

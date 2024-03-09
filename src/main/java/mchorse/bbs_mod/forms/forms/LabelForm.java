@@ -4,14 +4,12 @@ import mchorse.bbs_mod.forms.properties.BooleanProperty;
 import mchorse.bbs_mod.forms.properties.ColorProperty;
 import mchorse.bbs_mod.forms.properties.FloatProperty;
 import mchorse.bbs_mod.forms.properties.IntegerProperty;
-import mchorse.bbs_mod.forms.properties.LinkProperty;
 import mchorse.bbs_mod.forms.properties.StringProperty;
 import mchorse.bbs_mod.utils.colors.Color;
 
 public class LabelForm extends Form
 {
     public final StringProperty text = new StringProperty(this, "text", "Hello, World!");
-    public final LinkProperty font = new LinkProperty(this, "font", null);
     public final ColorProperty color = new ColorProperty(this, "color", Color.white());
 
     public final IntegerProperty max = new IntegerProperty(this, "max", -1);
@@ -32,10 +30,7 @@ public class LabelForm extends Form
     {
         super();
 
-        this.font.cantAnimate();
-
         this.register(this.text);
-        this.register(this.font);
         this.register(this.color);
         this.register(this.max);
         this.register(this.anchorX);

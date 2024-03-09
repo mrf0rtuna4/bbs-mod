@@ -41,6 +41,7 @@ public class RunnerCameraController extends CameraWorkCameraController
         }
     }
 
+    @Override
     public void update()
     {
         if (this.context.playing && this.manual == null)

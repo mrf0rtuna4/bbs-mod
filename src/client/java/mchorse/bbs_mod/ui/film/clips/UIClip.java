@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.ui.film.clips;
 
 import mchorse.bbs_mod.BBSSettings;
+import mchorse.bbs_mod.camera.clips.misc.AudioClientClip;
 import mchorse.bbs_mod.camera.clips.misc.AudioClip;
 import mchorse.bbs_mod.camera.clips.misc.SubtitleClip;
 import mchorse.bbs_mod.camera.clips.misc.VoicelineClip;
@@ -74,7 +75,7 @@ public abstract class UIClip <T extends Clip> extends UIElement
         register(LookClip.class, UILookClip::new);
         register(OrbitClip.class, UIOrbitClip::new);
         register(RemapperClip.class, UIRemapperClip::new);
-        register(AudioClip.class, UIAudioClip::new);
+        register(AudioClientClip.class, UIAudioClip::new);
         register(SubtitleClip.class, UISubtitleClip::new);
         register(VoicelineClip.class, UIVoicelineClip::new);
     }

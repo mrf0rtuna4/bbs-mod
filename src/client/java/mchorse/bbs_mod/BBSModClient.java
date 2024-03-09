@@ -2,6 +2,9 @@ package mchorse.bbs_mod;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.audio.SoundManager;
+import mchorse.bbs_mod.camera.Camera;
+import mchorse.bbs_mod.camera.clips.ClipFactoryData;
+import mchorse.bbs_mod.camera.clips.misc.AudioClientClip;
 import mchorse.bbs_mod.camera.controller.CameraController;
 import mchorse.bbs_mod.client.renderer.ActorEntityRenderer;
 import mchorse.bbs_mod.forms.categories.FormCategories;
@@ -124,6 +127,10 @@ public class BBSModClient implements ClientModInitializer
             UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
         );
 
+        /* Replace audio clip with client version that plays audio */
+        BBSMod.getFactoryCameraClips()
+            .register(Link.bbs("audio"), AudioClientClip.class, new ClipFactoryData(Icons.SOUND, 0xffc825));
+
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key." + BBSMod.MOD_ID + ".play",
@@ -139,12 +146,19 @@ public class BBSModClient implements ClientModInitializer
             "category." + BBSMod.MOD_ID + ".test"
         ));
 
+        WorldRenderEvents.START.register((client) ->
+        {
+            cameraController.setup(new Camera(), client.tickDelta());
+        });
+
         ClientTickEvents.END_CLIENT_TICK.register((client) ->
         {
             if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
             {
                 screen.update();
             }
+
+            cameraController.update();
 
             while (keyPlay.wasPressed())
             {

@@ -8,6 +8,7 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
+import org.joml.Matrix4f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,7 @@ public class LineBuilder <T>
 
     public void render(Batcher2D batcher2D, ILineRenderer<T> renderer)
     {
+        Matrix4f matrix = batcher2D.getContext().getMatrices().peek().getPositionMatrix();
         List<List<LinePoint<T>>> build = this.build();
 
         for (List<LinePoint<T>> points : build)
@@ -90,7 +92,7 @@ public class LineBuilder <T>
 
             for (LinePoint<T> point : points)
             {
-                renderer.render(builder, point);
+                renderer.render(builder, matrix, point);
             }
 
             BufferRenderer.drawWithGlobalProgram(builder.end());

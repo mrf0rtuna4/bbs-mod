@@ -1,6 +1,6 @@
 package mchorse.bbs_mod.ui.film.clips.renderer;
 
-import mchorse.bbs_mod.camera.clips.misc.AudioClip;
+import mchorse.bbs_mod.camera.clips.misc.AudioClientClip;
 import mchorse.bbs_mod.camera.clips.misc.VoicelineClip;
 import mchorse.bbs_mod.utils.clips.Clip;
 
@@ -17,7 +17,7 @@ public class UIClipRenderers
     {
         this.defaultRenderer = new UIClipRenderer();
 
-        this.register(AudioClip.class, new UIAudioClipRenderer());
+        this.register(AudioClientClip.class, new UIAudioClipRenderer());
         this.register(VoicelineClip.class, new UIVoicelineClipRenderer());
     }
 
