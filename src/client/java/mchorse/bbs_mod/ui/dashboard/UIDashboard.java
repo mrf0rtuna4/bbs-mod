@@ -160,6 +160,8 @@ public class UIDashboard extends UIBaseMenu
     @Override
     protected void closeMenu()
     {
+        super.closeMenu();
+
         if (!this.main.isVisible())
         {
             this.main.setVisible(true);
@@ -238,6 +240,17 @@ public class UIDashboard extends UIBaseMenu
         if (this.panels.panel != null)
         {
             this.panels.panel.renderInWorld();
+        }
+    }
+
+    @Override
+    public void lastRender()
+    {
+        super.lastRender();
+
+        if (this.panels.panel != null)
+        {
+            this.panels.panel.lastRender();
         }
     }
 }

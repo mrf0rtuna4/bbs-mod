@@ -28,6 +28,11 @@ public class UIScreen extends Screen
         this.menu.update();
     }
 
+    public void lastRender()
+    {
+        this.menu.lastRender();
+    }
+
     @Override
     public void removed()
     {

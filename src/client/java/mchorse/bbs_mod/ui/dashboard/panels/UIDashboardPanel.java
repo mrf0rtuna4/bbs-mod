@@ -45,6 +45,9 @@ public class UIDashboardPanel extends UIElement
     public void reloadWorld()
     {}
 
+    public void lastRender()
+    {}
+
     public void update()
     {}
 

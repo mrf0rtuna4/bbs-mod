@@ -341,11 +341,6 @@ public class Batcher2D
         this.texturedBox(texture, color, x, y, w, h, 0, 0, w, h, (int) w, (int) h);
     }
 
-    public void fullTexturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h)
-    {
-        this.texturedBox(shader, texture, color, x, y, w, h, 0, 0, w, h, (int) w, (int) h);
-    }
-
     public void texturedBox(Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2)
     {
         this.texturedBox(texture, color, x, y, w, h, u1, v1, u2, v2, texture.width, texture.height);
@@ -360,42 +355,40 @@ public class Batcher2D
     {
         RenderSystem.setShaderTexture(0, texture.id);
 
-        this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
-    }
-
-    private void fillTexturedBox(float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
-    {
-        Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+        Matrix4f matrix = this.context.getMatrices().peek().getPositionMatrix();
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
 
-        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE);
-        builder.vertex(matrix4f, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).next();
-        builder.vertex(matrix4f, x + w, y + h, 0F).texture(u2 / (float) textureW, v2 / (float) textureH).next();
-        builder.vertex(matrix4f, x + w, y, 0F).texture(u2 / (float) textureW, v1 / (float) textureH).next();
-        builder.vertex(matrix4f, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).next();
-        builder.vertex(matrix4f, x + w, y, 0F).texture(u2 / (float) textureW, v1 / (float) textureH).next();
-        builder.vertex(matrix4f, x, y, 0F).texture(u1 / (float) textureW, v1 / (float) textureH).next();
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR);
+        this.fillTexturedBox(builder, matrix, color, x, y, w, h, u1, v1, u2, v2, textureW, textureH);
 
         BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
-    /* Textured box (with shader) */
-
-    public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2)
+    public void texturedBox(int texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
-        this.texturedBox(shader, texture, color, x, y, w, h, u1, v1, u2, v2, texture.width, texture.height);
+        RenderSystem.setShaderTexture(0, texture);
+
+        Matrix4f matrix = this.context.getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR);
+        this.fillTexturedBox(builder, matrix, color, x, y, w, h, u1, v1, u2, v2, textureW, textureH);
+
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
-    public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u, float v)
+    private void fillTexturedBox(BufferBuilder builder, Matrix4f matrix, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
     {
-        this.texturedBox(shader, texture, color, x, y, w, h, u, v, u + w, v + h, texture.width, texture.height);
-    }
-
-    public void texturedBox(Object shader, Texture texture, int color, float x, float y, float w, float h, float u1, float v1, float u2, float v2, int textureW, int textureH)
-    {
-        this.fillTexturedBox(x, y, w, h, u1, v1, u2, v2, textureW, textureH);
+        builder.vertex(matrix, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).color(color).next();
+        builder.vertex(matrix, x + w, y + h, 0F).texture(u2 / (float) textureW, v2 / (float) textureH).color(color).next();
+        builder.vertex(matrix, x + w, y, 0F).texture(u2 / (float) textureW, v1 / (float) textureH).color(color).next();
+        builder.vertex(matrix, x, y + h, 0F).texture(u1 / (float) textureW, v2 / (float) textureH).color(color).next();
+        builder.vertex(matrix, x + w, y, 0F).texture(u2 / (float) textureW, v1 / (float) textureH).color(color).next();
+        builder.vertex(matrix, x, y, 0F).texture(u1 / (float) textureW, v1 / (float) textureH).color(color).next();
     }
 
     /* Repeatable textured box */
@@ -407,6 +400,14 @@ public class Batcher2D
         float fillerX = w - (countX - 1) * tileW;
         float fillerY = h - (countY - 1) * tileH;
 
+        Matrix4f matrix = this.context.getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+        RenderSystem.setShaderTexture(0, texture.id);
+
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR);
+
         for (int i = 0, c = countX * countY; i < c; i ++)
         {
             float ix = i % countX;
@@ -416,8 +417,10 @@ public class Batcher2D
             float xw = ix == countX - 1 ? fillerX : tileW;
             float yh = iy == countY - 1 ? fillerY : tileH;
 
-            this.texturedBox(texture, color, xx, yy, xw, yh, u, v, u + xw, v + yh, tw, th);
+            this.fillTexturedBox(builder, matrix, color, xx, yy, xw, yh, u, v, u + xw, v + yh, tw, th);
         }
+
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 
     /* Text with default font */

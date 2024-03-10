@@ -14,10 +14,9 @@ import mchorse.bbs_mod.film.Film;
 import mchorse.bbs_mod.film.VoiceLines;
 import mchorse.bbs_mod.film.replays.Replay;
 import mchorse.bbs_mod.forms.FormUtils;
-import mchorse.bbs_mod.graphics.Framebuffer;
 import mchorse.bbs_mod.graphics.texture.Texture;
+import mchorse.bbs_mod.graphics.texture.TextureFormat;
 import mchorse.bbs_mod.l10n.keys.IKey;
-import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.settings.values.ValueGroup;
 import mchorse.bbs_mod.settings.values.base.BaseValue;
 import mchorse.bbs_mod.ui.ContentType;
@@ -53,10 +52,10 @@ import mchorse.bbs_mod.utils.math.MathUtils;
 import mchorse.bbs_mod.utils.undo.CompoundUndo;
 import mchorse.bbs_mod.utils.undo.IUndo;
 import mchorse.bbs_mod.utils.undo.UndoManager;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.Framebuffer;
 import org.joml.Vector2i;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL30;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,6 +106,8 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
     private FilmEditorUndo.KeyframeSelection cachedPropertiesSelection;
     private Map<BaseValue, BaseType> cachedUndo = new HashMap<>();
 
+    private Texture texture;
+
     public static VoiceLines getVoiceLines()
     {
         return voiceLines;
@@ -140,7 +141,7 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         /* Setup elements */
         this.plause = new UIIcon(Icons.PLAY, (b) -> this.togglePlayback());
         this.plause.tooltip(UIKeys.CAMERA_EDITOR_KEYS_EDITOR_PLAUSE, Direction.BOTTOM);
-        this.record = new UIIcon(Icons.SPHERE, (b) -> this.recorder.startRecording(this.data.camera.calculateDuration(), this.getFramebuffer()));
+        this.record = new UIIcon(Icons.SPHERE, (b) -> this.recorder.startRecording(this.data.camera.calculateDuration(), null));
         this.record.tooltip(UIKeys.CAMERA_TOOLTIPS_RECORD, Direction.LEFT);
         this.openVideos = new UIIcon(Icons.FILM, (b) -> this.recorder.openMovies());
         this.openVideos.tooltip(UIKeys.CAMERA_TOOLTIPS_OPEN_VIDEOS, Direction.LEFT);
@@ -214,18 +215,7 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public Framebuffer getFramebuffer()
     {
-        return BBSModClient.getFramebuffers().getFramebuffer(Link.bbs("camera"), (framebuffer) ->
-        {
-            Texture texture = new Texture();
-            int width = BBSSettings.videoWidth.get();
-            int height = BBSSettings.videoHeight.get();
-
-            texture.setFilter(GL11.GL_LINEAR);
-            texture.setWrap(GL13.GL_CLAMP_TO_EDGE);
-            texture.setSize(width, height);
-
-            framebuffer.deleteTextures().attach(texture, GL30.GL_COLOR_ATTACHMENT0);
-        });
+        return MinecraftClient.getInstance().getFramebuffer();
     }
 
     public Area getViewportArea()
@@ -240,8 +230,8 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public Area getFramebufferArea(Area viewport)
     {
-        int width = BBSSettings.videoWidth.get();
-        int height = BBSSettings.videoHeight.get();
+        int width = this.texture.width; // BBSSettings.videoWidth.get();
+        int height = this.texture.height; // BBSSettings.videoHeight.get();
 
         Camera camera = new Camera();
 
@@ -813,35 +803,14 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
         context.batcher.flush();
 
+        Texture framebuffer = this.texture;
         Area viewport = this.getViewportArea();
-
-        /* Setup framebuffer */
-        Framebuffer framebuffer = this.getFramebuffer();
-        Texture texture = framebuffer.getMainTexture();
-        int width = BBSSettings.videoWidth.get();
-        int height = BBSSettings.videoHeight.get();
-
-        this.camera.copy(this.getWorldCamera());
-        this.camera.updatePerspectiveProjection(width, height);
-
-        /* Resize framebuffer if desired width and height changed */
-        if (texture.width != width || texture.height != height)
-        {
-            framebuffer.resize(width, height);
-        }
-
         Area area = this.getFramebufferArea(viewport);
 
         /* Render the scene to framebuffer */
-        /* TODO: GLStates.setupDepthFunction3D();
-        this.dashboard.bridge.get(IBridgeRender.class).renderSceneTo(this.camera, framebuffer, 0, true, 0, (fb) ->
-        {
-            UISubtitleRenderer.renderSubtitles(context, fb, SubtitleClip.getSubtitles(this.runner.getContext()));
-        });
-        GLStates.setupDepthFunction2D(); */
 
         viewport.render(context.batcher, Colors.A90);
-        context.batcher.texturedBox(texture, Colors.WHITE, area.x, area.y, area.w, area.h, 0, height, width, 0, width, height);
+        context.batcher.texturedBox(framebuffer.id, Colors.WHITE, area.x, area.y, area.w, area.h, 0, framebuffer.height, framebuffer.width, 0, framebuffer.width, framebuffer.height);
 
         /* Render rule of thirds */
         if (BBSSettings.editorRuleOfThirds.get())
@@ -896,6 +865,26 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         super.renderInWorld();
 
         this.controller.renderFrame();
+    }
+
+    @Override
+    public void lastRender()
+    {
+        super.lastRender();
+
+        if (texture == null)
+        {
+            texture = new Texture();
+            texture.setFormat(TextureFormat.RGB_U8);
+            texture.setFilter(GL11.GL_NEAREST);
+        }
+
+        Framebuffer framebuffer = MinecraftClient.getInstance().getFramebuffer();
+
+        texture.bind();
+        texture.setSize(framebuffer.textureWidth, framebuffer.textureHeight);
+        GL11.glCopyTexSubImage2D(GL11.GL_TEXTURE_2D, 0, 0, 0, 0, 0, framebuffer.textureWidth, framebuffer.textureHeight);
+        texture.unbind();
     }
 
     /* IUICameraWorkDelegate implementation */

@@ -24,5 +24,7 @@ public abstract class CameraMixin
             this.setPos(0D, -59D, -5D);
             this.setRotation(0F, 0F);
         }
+
+        BBSModClient.getCameraController().setup(new mchorse.bbs_mod.camera.Camera(), tickDelta);
     }
 }

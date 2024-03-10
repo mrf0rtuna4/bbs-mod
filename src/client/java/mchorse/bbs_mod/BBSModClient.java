@@ -2,7 +2,6 @@ package mchorse.bbs_mod;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.audio.SoundManager;
-import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.camera.clips.ClipFactoryData;
 import mchorse.bbs_mod.camera.clips.misc.AudioClientClip;
 import mchorse.bbs_mod.camera.controller.CameraController;
@@ -146,9 +145,12 @@ public class BBSModClient implements ClientModInitializer
             "category." + BBSMod.MOD_ID + ".test"
         ));
 
-        WorldRenderEvents.START.register((client) ->
+        WorldRenderEvents.LAST.register((client) ->
         {
-            cameraController.setup(new Camera(), client.tickDelta());
+            if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
+            {
+                screen.lastRender();
+            }
         });
 
         ClientTickEvents.END_CLIENT_TICK.register((client) ->
