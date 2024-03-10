@@ -93,11 +93,6 @@ public class CameraController implements ICameraController
         }
     }
 
-    public void resize(int width, int height)
-    {
-        this.camera.updatePerspectiveProjection(width, height);
-    }
-
     public boolean has(ICameraController controller)
     {
         return this.controllers.contains(controller);

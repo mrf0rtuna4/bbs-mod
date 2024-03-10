@@ -1,16 +1,25 @@
 package mchorse.bbs_mod.ui.framework.elements.utils;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.systems.VertexSorter;
 import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
-import mchorse.bbs_mod.utils.joml.Vectors;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Intersectiond;
 import org.joml.Matrix3d;
+import org.joml.Matrix4f;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
@@ -45,16 +54,6 @@ public abstract class UIModelRenderer extends UIElement
     private float lastY;
 
     private long tick;
-
-    public static boolean isRendering()
-    {
-        return rendering;
-    }
-
-    public static void disableRenderingFlag()
-    {
-        rendering = false;
-    }
 
     public UIModelRenderer()
     {
@@ -162,20 +161,11 @@ public abstract class UIModelRenderer extends UIElement
     {
         this.updateLogic(context);
 
-        /* TODO: Camera camera = context.render.getCamera();
-
-        context.render.setCamera(this.camera);
-        rendering = true;
-
         context.batcher.clip(this.area, context);
         this.renderModel(context);
         context.batcher.unclip(context);
 
-        rendering = false;
-
-        context.render.setCamera(camera);
-
-        super.render(context); */
+        super.render(context);
     }
 
     private void updateLogic(UIContext context)
@@ -211,18 +201,30 @@ public abstract class UIModelRenderer extends UIElement
      */
     private void renderModel(UIContext context)
     {
-        /* TODO: GLStates.setupDepthFunction3D();
+        MinecraftClient mc = MinecraftClient.getInstance();
+
+        RenderSystem.depthFunc(GL11.GL_LEQUAL);
 
         this.setupPosition(context);
         this.setupViewport(context);
 
         /* Drawing begins */
-        /* context.render.getUBO().update(this.camera.projection, this.camera.view);
+        Matrix4f oldProjection = new Matrix4f(RenderSystem.getProjectionMatrix());
+        Matrix4f oldMV = new Matrix4f(RenderSystem.getModelViewMatrix());
 
-        MatrixStack stack = context.render.stack;
+        RenderSystem.setProjectionMatrix(this.camera.projection, VertexSorter.BY_Z);
+
+        MatrixStack renderStack = RenderSystem.getModelViewStack();
+        MatrixStack stack = context.render.batcher.getContext().getMatrices();
+
+        renderStack.push();
+        renderStack.loadIdentity();
+        RenderSystem.applyModelViewMatrix();
+        renderStack.pop();
 
         stack.push();
-        stack.translateRelative(this.camera, 0, 0, 0);
+        stack.multiplyPositionMatrix(this.camera.view);
+        stack.translate(-this.camera.position.x, -this.camera.position.y, -this.camera.position.z);
 
         if (this.grid)
         {
@@ -234,11 +236,16 @@ public abstract class UIModelRenderer extends UIElement
         stack.pop();
 
         /* Return back to orthographic projection */
-        /* GLStates.resetViewport();
+        RenderSystem.viewport(0, 0, mc.getWindow().getWidth(), mc.getWindow().getHeight());
+        RenderSystem.setProjectionMatrix(oldProjection, VertexSorter.BY_Z);
 
-        context.render.getUBO().update(context.render.projection, Matrices.EMPTY_4F);
+        renderStack.push();
+        renderStack.loadIdentity();
+        renderStack.multiplyPositionMatrix(oldMV);
+        RenderSystem.applyModelViewMatrix();
+        renderStack.pop();
 
-        GLStates.setupDepthFunction2D(); */
+        RenderSystem.depthFunc(GL11.GL_ALWAYS);
     }
 
     protected void setupPosition(UIContext context)
@@ -286,7 +293,7 @@ public abstract class UIModelRenderer extends UIElement
     {
         Vector3d vector = new Vector3d();
         Vector3d origin = new Vector3d(this.cachedCamera.position).sub(this.cachedPos);
-        Vector3d destination = Vectors.EMPTY_3D; // TODO: new Vector3d(this.cachedCamera.getMouseDirection(context.mouseX, context.mouseY, this.area)).mul(this.distance * 2).add(origin);
+        Vector3d destination = new Vector3d(this.cachedCamera.getMouseDirection(context.mouseX, context.mouseY, this.area.x, this.area.y, this.area.w, this.area.h)).mul(this.distance * 2).add(origin);
         Intersectiond.intersectLineSegmentPlane(origin.x, origin.y, origin.z, destination.x, destination.y, destination.z, this.plane.x, this.plane.y, this.plane.z, 0, vector);
 
         return vector;
@@ -314,11 +321,9 @@ public abstract class UIModelRenderer extends UIElement
         int vw = (int) (this.area.w * rx);
         int vh = (int) (this.area.h * ry);
 
-        GL11.glViewport(vx, vy, vw, vh);
+        RenderSystem.viewport(vx, vy, vw, vh);
         this.camera.updatePerspectiveProjection(vw, vh);
         this.camera.updateView();
-
-        // TODO: context.render.stack.reset();
     }
 
     /**
@@ -332,23 +337,23 @@ public abstract class UIModelRenderer extends UIElement
      */
     protected void renderGrid(UIContext context)
     {
-        /* TODO: Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA);
-        VAOBuilder builder = context.render.getVAO().setup(shader);
+        Matrix4f matrix4f = context.batcher.getContext().getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        CommonShaderAccess.setModelView(shader, context.render.stack);
-        builder.begin();
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        builder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
 
         for (int x = 0; x <= 10; x ++)
         {
             if (x == 0)
             {
-                builder.xyz(x - 5, 0, -5).rgba(0F, 0F, 1F, 1F);
-                builder.xyz(x - 5, 0, 5).rgba(0F, 0F, 1F, 1F);
+                builder.vertex(matrix4f, x - 5, 0, -5).color(0F, 0F, 1F, 1F).next();
+                builder.vertex(matrix4f, x - 5, 0, 5).color(0F, 0F, 1F, 1F).next();
             }
             else
             {
-                builder.xyz(x - 5, 0, -5).rgba(0.25F, 0.25F, 0.25F, 1F);
-                builder.xyz(x - 5, 0, 5).rgba(0.25F, 0.25F, 0.25F, 1F);
+                builder.vertex(matrix4f, x - 5, 0, -5).color(0.25F, 0.25F, 0.25F, 1F).next();
+                builder.vertex(matrix4f, x - 5, 0, 5).color(0.25F, 0.25F, 0.25F, 1F).next();
             }
         }
 
@@ -356,16 +361,16 @@ public abstract class UIModelRenderer extends UIElement
         {
             if (x == 0)
             {
-                builder.xyz(-5, 0, x - 5).rgba(1F, 0F, 0F, 1F);
-                builder.xyz(5, 0, x - 5).rgba(1F, 0F, 0F, 1F);
+                builder.vertex(matrix4f, -5, 0, x - 5).color(1F, 0F, 0F, 1F).next();
+                builder.vertex(matrix4f, 5, 0, x - 5).color(1F, 0F, 0F, 1F).next();
             }
             else
             {
-                builder.xyz(-5, 0, x - 5).rgba(0.25F, 0.25F, 0.25F, 1F);
-                builder.xyz(5, 0, x - 5).rgba(0.25F, 0.25F, 0.25F, 1F);
+                builder.vertex(matrix4f, -5, 0, x - 5).color(0.25F, 0.25F, 0.25F, 1F).next();
+                builder.vertex(matrix4f, 5, 0, x - 5).color(0.25F, 0.25F, 0.25F, 1F).next();
             }
         }
 
-        builder.render(GL11.GL_LINES); */
+        BufferRenderer.drawWithGlobalProgram(builder.end());
     }
 }

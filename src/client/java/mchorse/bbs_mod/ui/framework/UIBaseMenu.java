@@ -46,8 +46,6 @@ public abstract class UIBaseMenu
         this.context.keybinds.relative(this.viewport).wh(0.5F, 1F);
     }
 
-    public abstract Link getMenuId();
-
     public UIRootElement getRoot()
     {
         return this.root;

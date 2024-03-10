@@ -112,12 +112,6 @@ public class UIDashboard extends UIBaseMenu
     }
 
     @Override
-    public Link getMenuId()
-    {
-        return Link.bbs("dashboard");
-    }
-
-    @Override
     public boolean canPause()
     {
         return this.panels.panel != null && this.panels.panel.canPause();

@@ -12,6 +12,7 @@ import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
+import mchorse.bbs_mod.ui.UITestMenu;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.framework.UIScreen;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -183,6 +184,8 @@ public class BBSModClient implements ClientModInitializer
                 {
                     mc.player.sendMessage(Text.literal("I guess you have missed, huh?"));
                 }
+
+                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Model renderer"), new UITestMenu()));
             }
         });
 

@@ -796,6 +796,10 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
      */
     private void renderOverlays(UIContext context)
     {
+        int color = BBSSettings.primaryColor.get();
+
+        this.area.render(context.batcher, Colors.mulRGB(color | Colors.A100, 0.1F));
+
         if (this.data == null)
         {
             return;
@@ -807,31 +811,29 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         Area viewport = this.getViewportArea();
         Area area = this.getFramebufferArea(viewport);
 
-        /* Render the scene to framebuffer */
-
         viewport.render(context.batcher, Colors.A90);
         context.batcher.texturedBox(framebuffer.id, Colors.WHITE, area.x, area.y, area.w, area.h, 0, framebuffer.height, framebuffer.width, 0, framebuffer.width, framebuffer.height);
 
         /* Render rule of thirds */
         if (BBSSettings.editorRuleOfThirds.get())
         {
-            int color = BBSSettings.editorGuidesColor.get();
+            int guidesColor = BBSSettings.editorGuidesColor.get();
 
-            context.batcher.box(area.x + area.w / 3 - 1, area.y, area.x + area.w / 3, area.y + area.h, color);
-            context.batcher.box(area.x + area.w - area.w / 3, area.y, area.x + area.w - area.w / 3 + 1, area.y + area.h, color);
+            context.batcher.box(area.x + area.w / 3 - 1, area.y, area.x + area.w / 3, area.y + area.h, guidesColor);
+            context.batcher.box(area.x + area.w - area.w / 3, area.y, area.x + area.w - area.w / 3 + 1, area.y + area.h, guidesColor);
 
-            context.batcher.box(area.x, area.y + area.h / 3 - 1, area.x + area.w, area.y + area.h / 3, color);
-            context.batcher.box(area.x, area.y + area.h - area.h / 3, area.x + area.w, area.y + area.h - area.h / 3 + 1, color);
+            context.batcher.box(area.x, area.y + area.h / 3 - 1, area.x + area.w, area.y + area.h / 3, guidesColor);
+            context.batcher.box(area.x, area.y + area.h - area.h / 3, area.x + area.w, area.y + area.h - area.h / 3 + 1, guidesColor);
         }
 
         if (BBSSettings.editorCenterLines.get())
         {
-            int color = BBSSettings.editorGuidesColor.get();
+            int guidesColor = BBSSettings.editorGuidesColor.get();
             int x = area.mx();
             int y = area.my();
 
-            context.batcher.box(area.x, y, area.ex(), y + 1, color);
-            context.batcher.box(x, area.y, x + 1, area.ey(), color);
+            context.batcher.box(area.x, y, area.ex(), y + 1, guidesColor);
+            context.batcher.box(x, area.y, x + 1, area.ey(), guidesColor);
         }
 
         if (BBSSettings.editorCrosshair.get())

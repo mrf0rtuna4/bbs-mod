@@ -261,7 +261,7 @@ public class UICurve extends UIElement
 
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        builder.begin(VertexFormat.DrawMode.LINES, VertexFormats.POSITION_COLOR);
+        builder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
 
         /* Top and bottom */
         builder.vertex(matrix, this.area.x, this.graph.y, 0F).color(0.5F, 0.5F, 0.5F, 0.5F).next();
