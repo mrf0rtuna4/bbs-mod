@@ -31,6 +31,11 @@ public class CameraController implements ICameraController
         return MathUtils.toDeg(this.camera.rotation.x);
     }
 
+    public float getRoll()
+    {
+        return MathUtils.toDeg(this.camera.rotation.z);
+    }
+
     public double getFOV()
     {
         return MathUtils.toDeg(this.camera.fov);

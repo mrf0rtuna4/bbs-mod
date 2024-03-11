@@ -1,7 +1,7 @@
 - [ ] Shaders for multi-link preview and subtitle renderer
 - [ ] Form renderers
 - [x] Camera editor
-  - [ ] Apply roll
+  - [x] Apply roll
   - [x] Apply FOV
 - [ ] Film controller
 - [ ] Video recording

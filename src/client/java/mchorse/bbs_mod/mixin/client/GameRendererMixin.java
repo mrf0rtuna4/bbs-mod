@@ -3,6 +3,8 @@ package mchorse.bbs_mod.mixin.client;
 import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.camera.controller.CameraController;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.RotationAxis;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,7 +27,7 @@ public class GameRendererMixin
     }
 
     /**
-     * This injection replaces the FOV when camera controller takes over
+     * This injection replaces the camera FOV when camera controller takes over
      */
     @Inject(method = "getFov", at = @At("RETURN"), cancellable = true)
     public void onGetFov(CallbackInfoReturnable<Double> info)
@@ -35,6 +37,22 @@ public class GameRendererMixin
         if (controller.getCurrent() != null)
         {
             info.setReturnValue(controller.getFOV());
+        }
+    }
+
+    /**
+     * This injection replaces the camera roll when camera controller takes over
+     */
+    @Inject(method = "tiltViewWhenHurt", at = @At("HEAD"), cancellable = true)
+    public void onTiltViewWhenHurt(MatrixStack matrices, float tickDelta, CallbackInfo info)
+    {
+        CameraController controller = BBSModClient.getCameraController();
+
+        if (controller.getCurrent() != null)
+        {
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(controller.getRoll()));
+
+            info.cancel();
         }
     }
 }
