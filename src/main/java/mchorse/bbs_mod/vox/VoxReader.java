@@ -88,7 +88,6 @@ public class VoxReader extends BinaryReader
                 {
                     stream.read(this.buf);
 
-                    /* TODO: figure out why I have to flip X axis */
                     int x = vox.w - 1 - (this.buf[0] & 0xff);
                     int y = this.buf[2] & 0xff;
                     int z = this.buf[1] & 0xff;

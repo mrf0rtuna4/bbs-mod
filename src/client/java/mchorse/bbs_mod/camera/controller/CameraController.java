@@ -1,6 +1,9 @@
 package mchorse.bbs_mod.camera.controller;
 
 import mchorse.bbs_mod.camera.Camera;
+import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3d;
 
 import java.util.ArrayList;
@@ -13,7 +16,20 @@ public class CameraController implements ICameraController
     private ICameraController current;
     private List<ICameraController> controllers = new ArrayList<>();
 
-    private Vector3d prevPosition = new Vector3d();
+    public Vector3d getPosition()
+    {
+        return this.camera.position;
+    }
+
+    public float getYaw()
+    {
+        return MathUtils.toDeg(this.camera.rotation.y - MathUtils.PI);
+    }
+
+    public float getPitch()
+    {
+        return MathUtils.toDeg(this.camera.rotation.x);
+    }
 
     public void updateCurrent()
     {
@@ -109,5 +125,18 @@ public class CameraController implements ICameraController
         }
 
         return false;
+    }
+
+    public void copy(Entity cameraEntity)
+    {
+        if (cameraEntity == null)
+        {
+            return;
+        }
+
+        Vec3d eyePos = cameraEntity.getEyePos();
+
+        this.camera.position.set(eyePos.x, eyePos.y, eyePos.z);
+        this.camera.rotation.set(MathUtils.toRad(cameraEntity.getPitch()), MathUtils.toRad(cameraEntity.getHeadYaw()), 0);
     }
 }

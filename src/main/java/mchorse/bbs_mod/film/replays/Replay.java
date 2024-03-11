@@ -22,9 +22,9 @@ public class Replay extends ValueGroup
     {
         super(id);
 
-        //this.add(this.form);
+        this.add(this.form);
         this.add(this.keyframes);
-        // this.add(this.properties);
+        this.add(this.properties);
     }
 
     public void applyFrame(int tick, LivingEntity actor)
@@ -37,10 +37,8 @@ public class Replay extends ValueGroup
         this.keyframes.apply(tick, actor, groups);
     }
 
-    public void applyProperties(int tick, LivingEntity entity, boolean playing)
+    public void applyProperties(int tick, Form form, boolean playing)
     {
-        Form form = null; // TODO: entity.get(FormComponent.class).form;
-
         if (form == null)
         {
             return;

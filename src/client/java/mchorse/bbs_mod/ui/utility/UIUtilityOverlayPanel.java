@@ -9,6 +9,7 @@ import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIScrollView;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
+import mchorse.bbs_mod.ui.framework.elements.input.UITrackpad;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIMessageFolderOverlayPanel;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlayPanel;
@@ -16,6 +17,8 @@ import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.UIUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.StringUtils;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.util.Window;
 
 import java.io.File;
 
@@ -24,11 +27,16 @@ public class UIUtilityOverlayPanel extends UIOverlayPanel
     public Runnable callback;
 
     public UIScrollView view;
+    public UITrackpad width;
+    public UITrackpad height;
+
+    private Window window;
 
     public UIUtilityOverlayPanel(IKey title, Runnable callback)
     {
         super(title);
 
+        this.window = MinecraftClient.getInstance().getWindow();
         this.callback = callback;
 
         this.view = UI.scrollView(5, 10, 140);
@@ -74,14 +82,27 @@ public class UIUtilityOverlayPanel extends UIOverlayPanel
         });
         terrain.w(0).tooltip(UIKeys.UTILITY_RELOAD_TERRAIN);
 
-       UIButton analyze = new UIButton(UIKeys.UTILITY_ANALYZE_LANG, (b) -> this.analyzeLanguageStrings());
-       UIButton compile = new UIButton(UIKeys.UTILITY_COMPILE_LANG, (b) -> this.compileLanguageStrings());
-       UIButton langEditor = new UIButton(UIKeys.UTILITY_LANG_EDITOR, (b) -> this.openLangEditor());
+        this.width = new UITrackpad((v) ->
+        {
+            this.window.setWindowedSize((int) this.width.getValue(), (int) this.height.getValue());
+        });
+        this.height = new UITrackpad((v) ->
+        {
+            this.window.setWindowedSize((int) this.width.getValue(), (int) this.height.getValue());
+        });
 
-       this.view.add(UI.label(UIKeys.UTILITY_OPEN_FOLDER), UI.row(openGameDirectory, openModelsDirectory, openAudioDirectory).marginBottom(8));
-       this.view.add(UI.label(UIKeys.UTILITY_RELOAD_LABEL), UI.row(textures, language, models, sounds, terrain).marginBottom(8));
-       this.view.add(UI.label(UIKeys.UTILITY_LANG_LABEL), UI.row(analyze, compile), langEditor);
-       this.content.add(this.view);
+        this.width.delayedInput().limit(2, 4096, true).values(2, 1, 10).setValue(this.window.getWidth());
+        this.height.delayedInput().limit(2, 4096, true).values(2, 1, 10).setValue(this.window.getHeight());
+
+        UIButton analyze = new UIButton(UIKeys.UTILITY_ANALYZE_LANG, (b) -> this.analyzeLanguageStrings());
+        UIButton compile = new UIButton(UIKeys.UTILITY_COMPILE_LANG, (b) -> this.compileLanguageStrings());
+        UIButton langEditor = new UIButton(UIKeys.UTILITY_LANG_EDITOR, (b) -> this.openLangEditor());
+
+        this.view.add(UI.label(UIKeys.UTILITY_OPEN_FOLDER), UI.row(openGameDirectory, openModelsDirectory, openAudioDirectory).marginBottom(8));
+        this.view.add(UI.label(UIKeys.UTILITY_RELOAD_LABEL), UI.row(textures, language, models, sounds, terrain).marginBottom(8));
+        this.view.add(UI.column(UI.label(UIKeys.UTILITY_RESIZE_WINDOW), UI.row(this.width, this.height)).marginBottom(8));
+        this.view.add(UI.label(UIKeys.UTILITY_LANG_LABEL), UI.row(analyze, compile), langEditor);
+        this.content.add(this.view);
     }
 
     private void openFolder(File gameFolder)
@@ -133,6 +154,15 @@ public class UIUtilityOverlayPanel extends UIOverlayPanel
         }
 
         System.out.println(separator);
+    }
+
+    @Override
+    public void resize()
+    {
+        super.resize();
+
+        this.width.setValue(this.window.getWidth());
+        this.height.setValue(this.window.getHeight());
     }
 
     @Override

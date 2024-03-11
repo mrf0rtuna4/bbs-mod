@@ -798,13 +798,14 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
     {
         int color = BBSSettings.primaryColor.get();
 
-        this.area.render(context.batcher, Colors.mulRGB(color | Colors.A100, 0.1F));
+        this.area.render(context.batcher, Colors.mulRGB(color | Colors.A100, 0.2F));
 
         if (this.data == null)
         {
             return;
         }
 
+        this.camera.copy(this.getWorldCamera());
         context.batcher.flush();
 
         Texture framebuffer = this.texture;
@@ -903,7 +904,7 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
 
     public Camera getWorldCamera()
     {
-        return this.getCamera();
+        return BBSModClient.getCameraController().camera;
     }
 
     public CameraController getCameraController()

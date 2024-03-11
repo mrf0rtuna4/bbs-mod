@@ -1,0 +1,17 @@
+- [ ] Shaders for multi-link preview and subtitle renderer
+- [ ] Form renderers
+- [x] Camera editor
+  - [ ] Apply roll
+  - [ ] Apply FOV
+- [ ] Film controller
+- [ ] Video recording
+- [ ] Entity selectors in EntityClip
+- [ ] Attach field to entities
+  - [ ] Form
+  - [ ] Prev prev rotation
+  - [ ] Animation data (sticks, trigger, extra)
+- [ ] Framebuffer picking
+- [ ] Particles
+  - [ ] Collision
+  - [ ] Lighting
+  - [ ] Rendering

@@ -28,6 +28,7 @@ import mchorse.bbs_mod.ui.utils.keys.KeyCombo;
 import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class UIDashboard extends UIBaseMenu
 
             if (e.lastPanel instanceof UIFilmPanel)
             {
-                // TODO: this.orbit.setup(this.bridge.get(IBridgeCamera.class).getCamera());
+                BBSModClient.getCameraController().copy(MinecraftClient.getInstance().getCameraEntity());
             }
         });
         this.panels.relative(this.viewport).full();

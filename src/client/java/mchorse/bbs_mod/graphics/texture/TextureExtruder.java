@@ -10,12 +10,14 @@ import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.math.MatrixStack;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TextureExtruder
 {
+    private MatrixStack stack = new MatrixStack();
     private Map<Link, VertexBuffer> extruded = new HashMap<>();
 
     public void delete(Link key)
@@ -90,7 +92,7 @@ public class TextureExtruder
         float v2 = 1F;
         float d = 0.5F / 16F;
 
-        Draw.fillTexturedNormalQuad(builder,
+        Draw.fillTexturedNormalQuad(builder, this.stack,
             p, n, d,
             n, n, d,
             n, p, d,
@@ -100,7 +102,7 @@ public class TextureExtruder
             0F, 0F, 1F
         );
 
-        Draw.fillTexturedNormalQuad(builder,
+        Draw.fillTexturedNormalQuad(builder, this.stack,
             n, n, -d,
             p, n, -d,
             p, p, -d,
@@ -136,7 +138,7 @@ public class TextureExtruder
 
         if (!this.hasPixel(pixels, x - 1, y) || i == 0)
         {
-            Draw.fillTexturedNormalQuad(builder,
+            Draw.fillTexturedNormalQuad(builder, this.stack,
                 i / w - 0.5F, -(j + 1) / h + 0.5F, -d,
                 i / w - 0.5F, -j / h + 0.5F, -d,
                 i / w - 0.5F, -j / h + 0.5F, d,
@@ -149,7 +151,7 @@ public class TextureExtruder
 
         if (!this.hasPixel(pixels, x + 1, y) || i == 15)
         {
-            Draw.fillTexturedNormalQuad(builder,
+            Draw.fillTexturedNormalQuad(builder, this.stack,
                 (i + 1) / w - 0.5F, -(j + 1) / h + 0.5F, d,
                 (i + 1) / w - 0.5F, -j / h + 0.5F, d,
                 (i + 1) / w - 0.5F, -j / h + 0.5F, -d,
@@ -162,7 +164,7 @@ public class TextureExtruder
 
         if (!this.hasPixel(pixels, x, y - 1) || j == 0)
         {
-            Draw.fillTexturedNormalQuad(builder,
+            Draw.fillTexturedNormalQuad(builder, this.stack,
                 (i + 1) / w - 0.5F, -j / h + 0.5F, d,
                 i / w - 0.5F, -j / h + 0.5F, d,
                 i / w - 0.5F, -j / h + 0.5F, -d,
@@ -175,7 +177,7 @@ public class TextureExtruder
 
         if (!this.hasPixel(pixels, x, y + 1) || j == 15)
         {
-            Draw.fillTexturedNormalQuad(builder,
+            Draw.fillTexturedNormalQuad(builder, this.stack,
                 (i + 1) / w - 0.5F, -(j + 1) / h + 0.5F, -d,
                 i / w - 0.5F, -(j + 1) / h + 0.5F, -d,
                 i / w - 0.5F, -(j + 1) / h + 0.5F, d,

@@ -677,7 +677,7 @@ public class UIFilmController extends UIElement
                         replay.keyframes.record(ticks, entity, this.recordingGroups);
                     }
 
-                    replay.applyProperties(ticks, entity, runner.isRunning());
+                    // TODO: replay.applyProperties(ticks, entity, runner.isRunning());
                 }
             }
         }

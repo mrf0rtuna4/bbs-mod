@@ -13,7 +13,7 @@ public class GameRendererMixin
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
     public void onBob(CallbackInfo ci)
     {
-        if (BBSModClient.lockCamera)
+        if (BBSModClient.getCameraController().getCurrent() != null)
         {
             ci.cancel();
         }

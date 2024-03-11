@@ -798,8 +798,7 @@ public class UIElement implements IUIElement
         return this;
     }
 
-    /* Post resizers convenience methods
-     * TODO: remove child resizers when switching to another post method */
+    /* Post resizers convenience methods */
 
     public RowResizer row()
     {

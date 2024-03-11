@@ -21,8 +21,7 @@ import net.minecraft.world.World;
 
 public class UILookClip extends UIClip<LookClip>
 {
-    /* TODO: Aperture */
-    public static final String SELECTOR_HELP = "";
+    public static final String SELECTOR_HELP = "https://minecraft.wiki/w/Target_selectors";
 
     public UITextboxHelp selector;
     public UIToggle relative;

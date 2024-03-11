@@ -194,8 +194,6 @@ public class Interpolations
      */
     public static double lerpYaw(double a, double b, double position)
     {
-        /* TODO: wrap degrees: a and b */
-
         return lerp(a, normalizeYaw(a, b), position);
     }
 

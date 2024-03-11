@@ -1,13 +1,21 @@
 package mchorse.bbs_mod.ui.forms.editors.utils;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.forms.Form;
+import mchorse.bbs_mod.graphics.Draw;
 import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.forms.editors.UIFormEditor;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.StencilFormFramebuffer;
 import mchorse.bbs_mod.utils.Pair;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 
@@ -69,11 +77,11 @@ public class UIPickableFormRenderer extends UIFormRenderer
             return;
         }
 
-        FormUtilsClient.render(this.form, this.entity,  context.render);
+        FormUtilsClient.render(this.form, this.entity, context.render);
 
         if (this.form.hitbox.get())
         {
-            // TODO: this.renderFormHitbox(context.render);
+            this.renderFormHitbox(context);
         }
 
         this.renderAxes(context);
@@ -104,54 +112,52 @@ public class UIPickableFormRenderer extends UIFormRenderer
         final float outlineSize = axisSize + 0.005F;
         final float outlineOffset = axisOffset + 0.005F;
 
-        /* TODO: Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA);
+        MatrixStack stack = context.render.batcher.getContext().getMatrices();
 
-        context.render.stack.push();
+        stack.push();
 
         if (matrix != null)
         {
-            context.render.stack.multiply(matrix);
+            stack.multiplyPositionMatrix(matrix);
         }
 
-        CommonShaderAccess.setModelView(shader, context.render.stack);
-
-        context.render.stack.pop();
-
         /* Draw axes */
-        /* VAOBuilder builder = context.render.getVAO().setup(shader);
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        GLStates.depthTest(false);
+        RenderSystem.disableDepthTest();
 
-        builder.begin();
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR);
 
-        Draw.fillBox(builder, 0, -outlineOffset, -outlineOffset, outlineSize, outlineOffset, outlineOffset, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, 0, -outlineOffset, outlineOffset, outlineSize, outlineOffset, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, -outlineOffset, 0, outlineOffset, outlineOffset, outlineSize, 0, 0, 0);
-        Draw.fillBox(builder, -outlineOffset, -outlineOffset, -outlineOffset, outlineOffset, outlineOffset, outlineOffset, 0, 0, 0);
+        Draw.fillBox(builder, stack, 0, -outlineOffset, -outlineOffset, outlineSize, outlineOffset, outlineOffset, 0, 0, 0);
+        Draw.fillBox(builder, stack, -outlineOffset, 0, -outlineOffset, outlineOffset, outlineSize, outlineOffset, 0, 0, 0);
+        Draw.fillBox(builder, stack, -outlineOffset, -outlineOffset, 0, outlineOffset, outlineOffset, outlineSize, 0, 0, 0);
+        Draw.fillBox(builder, stack, -outlineOffset, -outlineOffset, -outlineOffset, outlineOffset, outlineOffset, outlineOffset, 0, 0, 0);
 
-        Draw.fillBox(builder, 0, -axisOffset, -axisOffset, axisSize, axisOffset, axisOffset, 1, 0, 0);
-        Draw.fillBox(builder, -axisOffset, 0, -axisOffset, axisOffset, axisSize, axisOffset, 0, 1, 0);
-        Draw.fillBox(builder, -axisOffset, -axisOffset, 0, axisOffset, axisOffset, axisSize, 0, 0, 1);
-        Draw.fillBox(builder, -axisOffset, -axisOffset, -axisOffset, axisOffset, axisOffset, axisOffset, 1, 1, 1);
+        Draw.fillBox(builder, stack, 0, -axisOffset, -axisOffset, axisSize, axisOffset, axisOffset, 1, 0, 0);
+        Draw.fillBox(builder, stack, -axisOffset, 0, -axisOffset, axisOffset, axisSize, axisOffset, 0, 1, 0);
+        Draw.fillBox(builder, stack, -axisOffset, -axisOffset, 0, axisOffset, axisOffset, axisSize, 0, 0, 1);
+        Draw.fillBox(builder, stack, -axisOffset, -axisOffset, -axisOffset, axisOffset, axisOffset, axisOffset, 1, 1, 1);
 
-        builder.render();
+        BufferRenderer.drawWithGlobalProgram(builder.end());
 
-        GLStates.depthTest(true); */
+        RenderSystem.enableBlend();
+
+        stack.pop();
     }
 
-    /* TODO: private void renderFormHitbox(RenderingContext context)
+    private void renderFormHitbox(UIContext context)
     {
         float hitboxW = this.form.hitboxWidth.get();
         float hitboxH = this.form.hitboxHeight.get();
         float eyeHeight = hitboxH * this.form.hitboxEyeHeight.get();
 
         /* Draw look vector */
-        /* final float thickness = 0.01F;
-        Draw.renderBox(context, -thickness, -thickness + eyeHeight, -thickness, thickness, thickness, 2F, 1F, 0F, 0F);
+        final float thickness = 0.01F;
+        Draw.renderBox(context.batcher.getContext().getMatrices(), -thickness, -thickness + eyeHeight, -thickness, thickness, thickness, 2F, 1F, 0F, 0F);
 
         /* Draw hitbox */
-        /* Draw.renderBox(context, -hitboxW / 2, 0, -hitboxW / 2, hitboxW, hitboxH, hitboxW);
-    } */
+        Draw.renderBox(context.batcher.getContext().getMatrices(), -hitboxW / 2, 0, -hitboxW / 2, hitboxW, hitboxH, hitboxW);
+    }
 
     @Override
     protected void update()
@@ -180,7 +186,7 @@ public class UIPickableFormRenderer extends UIFormRenderer
         int w = texture.width;
         int h = texture.height;
 
-        /* Shader shader = context.render.getPickingShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
+        /* TODO: Shader shader = context.render.getPickingShaders().get(VBOAttributes.VERTEX_UV_RGBA_2D);
 
         CommonShaderAccess.setTarget(shader, index);
         context.batcher.texturedBox(shader, texture, Colors.WHITE, this.area.x, this.area.y, this.area.w, this.area.h, 0, h, w, 0, w, h);

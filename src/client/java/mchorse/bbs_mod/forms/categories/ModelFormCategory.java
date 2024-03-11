@@ -5,6 +5,7 @@ import mchorse.bbs_mod.forms.forms.ModelForm;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.forms.UIFormList;
 import mchorse.bbs_mod.ui.forms.categories.UIFormCategory;
+import mchorse.bbs_mod.ui.utils.UIUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 
 import java.io.File;
@@ -57,7 +58,7 @@ public class ModelFormCategory extends FormCategory
             {
                 ModelForm form = (ModelForm) category.selected;
 
-                // TODO: UIUtils.openFolder(BBSMod.getAssetsPath("models/" + form.getModelKey() + "/"));
+                UIUtils.openFolder(BBSMod.getAssetsPath("models/" + form.model.get() + "/"));
             });
         });
 
