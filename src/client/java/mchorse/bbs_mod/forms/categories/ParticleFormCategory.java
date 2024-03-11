@@ -22,7 +22,7 @@ public class ParticleFormCategory extends FormCategory
         {
             ParticleForm form = new ParticleForm();
 
-            // TODO: form.setEffect(key);
+            form.effect.set(key);
             this.forms.add(form);
         }
     }

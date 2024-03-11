@@ -2,7 +2,7 @@
 - [ ] Form renderers
 - [x] Camera editor
   - [ ] Apply roll
-  - [ ] Apply FOV
+  - [x] Apply FOV
 - [ ] Film controller
 - [ ] Video recording
 - [ ] Entity selectors in EntityClip

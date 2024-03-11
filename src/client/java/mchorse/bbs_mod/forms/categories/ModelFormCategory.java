@@ -41,7 +41,7 @@ public class ModelFormCategory extends FormCategory
             {
                 ModelForm form = new ModelForm();
 
-                // TODO: form.setModel(file.getName());
+                form.model.set(file.getName());
                 this.forms.add(form);
             }
         }
