@@ -19,7 +19,9 @@ import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.ui.utils.keys.KeybindSettings;
 import mchorse.bbs_mod.utils.RayTracing;
 import mchorse.bbs_mod.utils.colors.Colors;
+import mchorse.bbs_mod.utils.watchdog.WatchDog;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -53,7 +55,9 @@ import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class BBSModClient implements ClientModInitializer
 {
@@ -63,6 +67,7 @@ public class BBSModClient implements ClientModInitializer
     private static L10n l10n;
 
     private static FormCategories formCategories;
+    private static WatchDog watchDog;
 
     private static KeyBinding keyPlay;
     private static KeyBinding keyRecord;
@@ -99,9 +104,15 @@ public class BBSModClient implements ClientModInitializer
         return cameraController;
     }
 
+    private static List<Runnable> scheduledRunnables = new ArrayList<>();
     private static int _lastFramebufferSizeW;
     private static int _lastFramebufferSizeH;
     private static Vector2f pos2d = new Vector2f();
+
+    public static void schedule(Runnable runnable)
+    {
+        scheduledRunnables.add(runnable);
+    }
 
     @Override
     public void onInitializeClient()
@@ -115,6 +126,10 @@ public class BBSModClient implements ClientModInitializer
 
         formCategories = new FormCategories();
         formCategories.setup();
+        watchDog = new WatchDog(BBSMod.getAssetsFolder(), (runnable) -> schedule(runnable));
+        watchDog.register(textures);
+        watchDog.register(sounds);
+        watchDog.start();
 
         KeybindSettings.registerClasses();
 
@@ -122,35 +137,35 @@ public class BBSModClient implements ClientModInitializer
         BBSData.load(BBSMod.getDataFolder());
 
         BBSSettings.tooltipStyle.modes(
-                UIKeys.ENGINE_TOOLTIP_STYLE_LIGHT,
-                UIKeys.ENGINE_TOOLTIP_STYLE_DARK
+            UIKeys.ENGINE_TOOLTIP_STYLE_LIGHT,
+            UIKeys.ENGINE_TOOLTIP_STYLE_DARK
         );
 
         BBSSettings.keystrokeMode.modes(
-                UIKeys.ENGINE_KEYSTROKES_POSITION_AUTO,
-                UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_LEFT,
-                UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_RIGHT,
-                UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_RIGHT,
-                UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
+            UIKeys.ENGINE_KEYSTROKES_POSITION_AUTO,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_LEFT,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_RIGHT,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_RIGHT,
+            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
         );
 
         /* Replace audio clip with client version that plays audio */
         BBSMod.getFactoryCameraClips()
-                .register(Link.bbs("audio"), AudioClientClip.class, new ClipFactoryData(Icons.SOUND, 0xffc825));
+            .register(Link.bbs("audio"), AudioClientClip.class, new ClipFactoryData(Icons.SOUND, 0xffc825));
 
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key." + BBSMod.MOD_ID + ".play",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_G,
-                "category." + BBSMod.MOD_ID + ".test"
+            "key." + BBSMod.MOD_ID + ".play",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_G,
+            "category." + BBSMod.MOD_ID + ".test"
         ));
 
         keyRecord = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key." + BBSMod.MOD_ID + ".record",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_R,
-                "category." + BBSMod.MOD_ID + ".test"
+            "key." + BBSMod.MOD_ID + ".record",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_R,
+            "category." + BBSMod.MOD_ID + ".test"
         ));
 
         WorldRenderEvents.START.register((client) ->
@@ -208,6 +223,18 @@ public class BBSModClient implements ClientModInitializer
 
                 MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Model renderer"), new UITestMenu()));
             }
+
+            for (Runnable runnable : scheduledRunnables)
+            {
+                runnable.run();
+            }
+
+            scheduledRunnables.clear();
+        });
+
+        ClientLifecycleEvents.CLIENT_STOPPING.register((e) ->
+        {
+            watchDog.stop();
         });
 
         registerHUDRender();

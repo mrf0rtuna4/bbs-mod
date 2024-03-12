@@ -103,7 +103,7 @@ public class MultiLinkThread implements Runnable
 
                     Pixels pixels = TextureProcessor.process(location);
 
-                    BBSMod.schedule(() ->
+                    BBSModClient.schedule(() ->
                     {
                         texture.bind();
                         texture.uploadTexture(pixels);

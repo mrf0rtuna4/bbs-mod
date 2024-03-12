@@ -1,7 +1,5 @@
 package mchorse.bbs_mod.utils.watchdog;
 
-import mchorse.bbs_mod.BBSMod;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -20,10 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public class WatchDog implements Runnable
 {
     private Path folder;
+    private Consumer<Runnable> spawner;
     private List<IWatchDogListener> listeners = new ArrayList<>();
 
     private WatchService service;
@@ -31,9 +31,10 @@ public class WatchDog implements Runnable
     private Thread thread;
     private boolean stopThread;
 
-    public WatchDog(File folder)
+    public WatchDog(File folder, Consumer<Runnable> spawner)
     {
         this.folder = folder.toPath();
+        this.spawner = spawner;
     }
 
     public void register(IWatchDogListener listener)
@@ -171,7 +172,7 @@ public class WatchDog implements Runnable
 
             final WatchDogEvent finalType = type;
 
-            BBSMod.schedule(() ->
+            this.spawner.accept(() ->
             {
                 for (IWatchDogListener listener : this.listeners)
                 {

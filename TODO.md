@@ -16,4 +16,4 @@
   - [ ] Collision
   - [ ] Lighting
   - [x] Rendering
-- [ ] Setup watch dog
+- [x] Setup watch dog

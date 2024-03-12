@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.ui.film.screenplay;
 
 import mchorse.bbs_mod.BBSMod;
+import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
 import mchorse.bbs_mod.audio.ColorCode;
 import mchorse.bbs_mod.audio.SoundPlayer;
@@ -125,7 +126,7 @@ public class UIScreenplayEditor extends UIElement
         ElevenLabsAPI.generateStandard(context, UIFilmPanel.getVoiceLines().getFolder(), clips, (result) ->
         {
             /* Post runnable is necessary because callback is calling from non-main thread */
-            BBSMod.schedule(() ->
+            BBSModClient.schedule(() ->
             {
                 if (result.clip != null && result.status == ElevenLabsResult.Status.GENERATED)
                 {

@@ -371,7 +371,7 @@ public class UIPixelsEditor extends UICanvasEditor
 
         String[] information = {
             this.pixels.width + "x" + this.pixels.height + " (" + pixel.x + ", " + pixel.y + ")",
-            "\u00A75R\u00A7aG\u00A7cB\u00A7rA (" + r + ", " + g + ", " + b + ", " + a + ")",
+            "\u00A7cR\u00A7aG\u00A79B\u00A7rA (" + r + ", " + g + ", " + b + ", " + a + ")",
         };
 
         int x = this.area.x + 10;

@@ -55,8 +55,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class BBSMod implements ModInitializer
@@ -78,8 +76,6 @@ public class BBSMod implements ModInitializer
 
     private static MapFactory<Clip, ClipFactoryData> factoryCameraClips;
     private static MapFactory<Clip, ClipFactoryData> factoryScreenplayClips;
-
-    private static List<Runnable> scheduledRunnables = new ArrayList<>();
 
     public static final Identifier PLAY_PACKET_ID = new Identifier(MOD_ID, "play");
     public static final Identifier RECORD_PACKET_ID = new Identifier(MOD_ID, "record");
@@ -174,11 +170,6 @@ public class BBSMod implements ModInitializer
     public static MapFactory<Clip, ClipFactoryData> getFactoryScreenplayClips()
     {
         return factoryScreenplayClips;
-    }
-
-    public static void schedule(Runnable runnable)
-    {
-        scheduledRunnables.add(runnable);
     }
 
     @Override
