@@ -1,6 +1,8 @@
 package mchorse.bbs_mod.graphics.texture;
 
+import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.TextureUtil;
 import mchorse.bbs_mod.utils.resources.Pixels;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
@@ -45,7 +47,7 @@ public class Texture
 
     public Texture()
     {
-        this.id = GL11.glGenTextures();
+        this.id = TextureUtil.generateTextureId();
         this.target = GL11.GL_TEXTURE_2D;
 
         this.bind();
@@ -193,6 +195,10 @@ public class Texture
 
     public void uploadTexture(int target, int level, int w, int h, ByteBuffer buffer)
     {
+        GL11.glPixelStorei(GL11.GL_UNPACK_ROW_LENGTH, w);
+        GL11.glPixelStorei(GL11.GL_UNPACK_SKIP_PIXELS, 0);
+        GL11.glPixelStorei(GL11.GL_UNPACK_SKIP_ROWS, 0);
+
         GL11.glTexImage2D(target, level, this.format.internal, w, h, 0, this.format.format, this.format.type, buffer);
 
         if (level == 0)
