@@ -26,6 +26,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
@@ -46,6 +47,9 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3d;
+import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -64,7 +68,6 @@ public class BBSModClient implements ClientModInitializer
     private static KeyBinding keyRecord;
 
     private static CameraController cameraController = new CameraController();
-    public static boolean lockCamera = false;
 
     public static TextureManager getTextures()
     {
@@ -96,6 +99,10 @@ public class BBSModClient implements ClientModInitializer
         return cameraController;
     }
 
+    private static int _lastFramebufferSizeW;
+    private static int _lastFramebufferSizeH;
+    private static Vector2f pos2d = new Vector2f();
+
     @Override
     public void onInitializeClient()
     {
@@ -115,36 +122,46 @@ public class BBSModClient implements ClientModInitializer
         BBSData.load(BBSMod.getDataFolder());
 
         BBSSettings.tooltipStyle.modes(
-            UIKeys.ENGINE_TOOLTIP_STYLE_LIGHT,
-            UIKeys.ENGINE_TOOLTIP_STYLE_DARK
+                UIKeys.ENGINE_TOOLTIP_STYLE_LIGHT,
+                UIKeys.ENGINE_TOOLTIP_STYLE_DARK
         );
 
         BBSSettings.keystrokeMode.modes(
-            UIKeys.ENGINE_KEYSTROKES_POSITION_AUTO,
-            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_LEFT,
-            UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_RIGHT,
-            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_RIGHT,
-            UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
+                UIKeys.ENGINE_KEYSTROKES_POSITION_AUTO,
+                UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_LEFT,
+                UIKeys.ENGINE_KEYSTROKES_POSITION_BOTTOM_RIGHT,
+                UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_RIGHT,
+                UIKeys.ENGINE_KEYSTROKES_POSITION_TOP_LEFT
         );
 
         /* Replace audio clip with client version that plays audio */
         BBSMod.getFactoryCameraClips()
-            .register(Link.bbs("audio"), AudioClientClip.class, new ClipFactoryData(Icons.SOUND, 0xffc825));
+                .register(Link.bbs("audio"), AudioClientClip.class, new ClipFactoryData(Icons.SOUND, 0xffc825));
 
         /* Keybind shenanigans */
         keyPlay = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key." + BBSMod.MOD_ID + ".play",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_G,
-            "category." + BBSMod.MOD_ID + ".test"
+                "key." + BBSMod.MOD_ID + ".play",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_G,
+                "category." + BBSMod.MOD_ID + ".test"
         ));
 
         keyRecord = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key." + BBSMod.MOD_ID + ".record",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_R,
-            "category." + BBSMod.MOD_ID + ".test"
+                "key." + BBSMod.MOD_ID + ".record",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_R,
+                "category." + BBSMod.MOD_ID + ".test"
         ));
+
+        WorldRenderEvents.START.register((client) ->
+        {
+            Framebuffer framebuffer = MinecraftClient.getInstance().getFramebuffer();
+
+            _lastFramebufferSizeW = framebuffer.textureWidth;
+            _lastFramebufferSizeH = framebuffer.textureHeight;
+
+            // framebuffer.resize(50, 50, false);
+        });
 
         WorldRenderEvents.LAST.register((client) ->
         {
@@ -152,6 +169,10 @@ public class BBSModClient implements ClientModInitializer
             {
                 screen.lastRender();
             }
+
+            Framebuffer framebuffer = MinecraftClient.getInstance().getFramebuffer();
+
+            // framebuffer.resize(_lastFramebufferSizeW, _lastFramebufferSizeH, false);
         });
 
         ClientTickEvents.END_CLIENT_TICK.register((client) ->
@@ -200,6 +221,9 @@ public class BBSModClient implements ClientModInitializer
     {
         HudRenderCallback.EVENT.register((drawContext, tickDelta) ->
         {
+            int x = (int) (pos2d.x * drawContext.getScaledWindowWidth() / 2 + drawContext.getScaledWindowWidth() / 2);
+            int y = (int) (-pos2d.y * drawContext.getScaledWindowHeight() / 2 + drawContext.getScaledWindowHeight() / 2);
+
             // Get the transformation matrix from the matrix stack, alongside the tessellator instance and a new buffer builder.
             Matrix4f transformationMatrix = drawContext.getMatrices().peek().getPositionMatrix();
             Tessellator tessellator = Tessellator.getInstance();
@@ -209,10 +233,10 @@ public class BBSModClient implements ClientModInitializer
             buffer.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR_TEXTURE);
 
             // Write our vertices, Z doesn't really matter since it's on the HUD.
-            buffer.vertex(transformationMatrix, 20, 20, 5).color(0xffffffff).texture(1F, 0F).next();
-            buffer.vertex(transformationMatrix, 5, 40, 5).color(0xffffffff).texture(0F, 0F).next();
-            buffer.vertex(transformationMatrix, 35, 40, 5).color(0xffffffff).texture(1F, 1F).next();
-            buffer.vertex(transformationMatrix, 20, 60, 5).color(0xffffffff).texture(0F, 1F).next();
+            buffer.vertex(transformationMatrix, x, y - 20, 5).color(0xffffffff).texture(1F, 0F).next();
+            buffer.vertex(transformationMatrix, x - 20, y, 5).color(0xffffffff).texture(0F, 0F).next();
+            buffer.vertex(transformationMatrix, x + 20, y, 5).color(0xffffffff).texture(1F, 1F).next();
+            buffer.vertex(transformationMatrix, x, y + 20, 5).color(0xffffffff).texture(0F, 1F).next();
 
             // We'll get to this bit in the next section.
             RenderSystem.setShader(GameRenderer::getPositionColorTexProgram);
@@ -221,18 +245,22 @@ public class BBSModClient implements ClientModInitializer
 
             // Draw the buffer onto the screen.
             tessellator.draw();
+
+            drawContext.fill(x - 10, y - 10, x + 10, y + 10, 5, Colors.RED | Colors.A100);
         });
     }
 
     private void registerWorldRenderer()
     {
+        Vector3d pospos = new Vector3d(0, -58, 0);
+
         WorldRenderEvents.BEFORE_ENTITIES.register((listener) ->
         {
             MatrixStack stack = listener.matrixStack();
             Vec3d pos = listener.camera().getPos();
 
             stack.push();
-            stack.translate(0 - pos.x, (-58) - pos.y, 0 - pos.z);
+            stack.translate(pospos.x - pos.x, pospos.y - pos.y, pospos.z - pos.z);
             stack.scale(0.5f, 0.5f, 0.5f);
             stack.multiply(listener.camera().getRotation());
             stack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f));
@@ -245,11 +273,23 @@ public class BBSModClient implements ClientModInitializer
             vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 1.0f, 1, 1, 0);
             vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 0.0f, 1, 0, 0);
             stack.pop();
+
+            Matrix4f proj = RenderSystem.getProjectionMatrix();
+            Matrix4f view = stack.peek().getPositionMatrix();
+            Vector4f vec = new Vector4f((float) (pospos.x - pos.x), (float) (pospos.y - pos.y), (float) (pospos.z - pos.z), 1F);
+
+            view.transform(vec);
+            proj.transform(vec);
+
+            vec.x /= vec.w;
+            vec.y /= vec.w;
+
+            pos2d.set(vec.x, vec.y);
         });
     }
 
     private static void vertex(VertexConsumer buffer, Matrix4f matrix, Matrix3f normalMatrix, int light, float x, int y, int u, int v)
     {
-        buffer.vertex(matrix, x - 0.5f, (float)y - 0.5f, 0.0f).color(Colors.WHITE).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, 0.0f, 1.0f, 0.0f).next();
+        buffer.vertex(matrix, x - 0.5f, (float) y - 0.5f, 0.0f).color(Colors.WHITE).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(light).normal(normalMatrix, 0.0f, 1.0f, 0.0f).next();
     }
 }

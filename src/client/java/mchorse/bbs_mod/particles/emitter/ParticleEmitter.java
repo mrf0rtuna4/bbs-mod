@@ -1,16 +1,30 @@
 package mchorse.bbs_mod.particles.emitter;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import mchorse.bbs_mod.BBSModClient;
+import mchorse.bbs_mod.camera.Camera;
+import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.math.IExpression;
 import mchorse.bbs_mod.math.Variable;
 import mchorse.bbs_mod.particles.ParticleScheme;
 import mchorse.bbs_mod.particles.components.IComponentEmitterInitialize;
 import mchorse.bbs_mod.particles.components.IComponentEmitterUpdate;
 import mchorse.bbs_mod.particles.components.IComponentParticleInitialize;
+import mchorse.bbs_mod.particles.components.IComponentParticleRender;
 import mchorse.bbs_mod.particles.components.IComponentParticleUpdate;
 import mchorse.bbs_mod.resources.Link;
+import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
 
@@ -344,14 +358,13 @@ public class ParticleEmitter
     /**
      * Render the particle on screen
      */
-    /* TODO: public void renderUI(UIRenderingContext context)
+    public void renderUI(MatrixStack stack, float transition)
     {
         if (this.scheme == null)
         {
             return;
         }
 
-        float transition = context.getTransition();
         List<IComponentParticleRender> list = this.scheme.getComponents(IComponentParticleRender.class);
 
         if (!list.isEmpty())
@@ -368,28 +381,32 @@ public class ParticleEmitter
             this.setEmitterVariables(transition);
             this.setParticleVariables(this.uiParticle, transition);
 
-            VAOBuilder builder = context.batcher.begin(VBOAttributes.VERTEX_UV_RGBA_2D, context.getTextures().getTexture(this.scheme.texture));
+            Matrix4f matrix = stack.peek().getPositionMatrix();
+            BufferBuilder builder = Tessellator.getInstance().getBuffer();
+
+            builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR);
 
             for (IComponentParticleRender render : list)
             {
-                render.renderUI(this.uiParticle, builder, transition);
+                render.renderUI(this.uiParticle, builder, matrix, transition);
             }
 
-            builder.render();
+            RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+            RenderSystem.disableCull();
+            BufferRenderer.drawWithGlobalProgram(builder.end());
+            RenderSystem.enableCull();
         }
-    } */
+    }
 
     /**
      * Render all the particles in this particle emitter
      */
-    /* TODO: public void render(RenderingContext context, Shader shader)
+    public void render(MatrixStack stack, float transition)
     {
         if (this.scheme == null)
         {
             return;
         }
-
-        float transition = context.getTransition();
 
         List<IComponentParticleRender> renders = this.scheme.particleRender;
 
@@ -400,10 +417,11 @@ public class ParticleEmitter
 
         if (!this.particles.isEmpty())
         {
-            VAOBuilder builder = context.getVAO().setup(shader);
+            Matrix4f matrix = stack.peek().getPositionMatrix();
+            BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
             this.bindTexture();
-            builder.begin();
+            builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT);
 
             for (Particle particle : this.particles)
             {
@@ -412,13 +430,14 @@ public class ParticleEmitter
 
                 for (IComponentParticleRender component : renders)
                 {
-                    component.render(this, particle, builder, transition);
+                    component.render(this, particle, builder, matrix, transition);
                 }
             }
 
-            GLStates.cullFaces(false);
-            builder.render();
-            GLStates.cullFaces(true);
+            RenderSystem.setShader(GameRenderer::getPositionColorTexLightmapProgram);
+            RenderSystem.disableCull();
+            BufferRenderer.drawWithGlobalProgram(builder.end());
+            RenderSystem.enableCull();
         }
 
         for (IComponentParticleRender component : renders)
@@ -429,7 +448,9 @@ public class ParticleEmitter
 
     private void bindTexture()
     {
-        BBS.getTextures().bind(this.texture == null ? this.scheme.texture : this.texture);
+        Texture texture = BBSModClient.getTextures().getTexture(this.texture == null ? this.scheme.texture : this.texture);
+
+        RenderSystem.setShaderTexture(0, texture.id);
     }
 
     public void setupCameraProperties(Camera camera)
@@ -439,5 +460,5 @@ public class ParticleEmitter
         this.cX = camera.position.x;
         this.cY = camera.position.y;
         this.cZ = camera.position.z;
-    } */
+    }
 }

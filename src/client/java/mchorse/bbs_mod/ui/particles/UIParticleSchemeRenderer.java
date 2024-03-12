@@ -1,9 +1,19 @@
 package mchorse.bbs_mod.ui.particles;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import mchorse.bbs_mod.graphics.Draw;
 import mchorse.bbs_mod.particles.ParticleScheme;
+import mchorse.bbs_mod.particles.components.expiration.ParticleComponentKillPlane;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.utils.UIModelRenderer;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class UIParticleSchemeRenderer extends UIModelRenderer
@@ -45,47 +55,45 @@ public class UIParticleSchemeRenderer extends UIModelRenderer
             return;
         }
 
-        /* TODO: this.emitter.setupCameraProperties(this.camera);
+        this.emitter.setupCameraProperties(this.camera);
         this.emitter.rotation.identity();
 
-        Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_NORMAL_UV_LIGHT_RGBA);
-
-        CommonShaderAccess.setModelView(shader);
-        this.emitter.render(context.render, shader);
+        this.emitter.render(context.batcher.getContext().getMatrices(), context.getTransition());
 
         ParticleComponentKillPlane plane = this.emitter.scheme.get(ParticleComponentKillPlane.class);
 
         if (plane.a != 0 || plane.b != 0 || plane.c != 0)
         {
-            this.renderPlane(context.render, plane.a, plane.b, plane.c, plane.d);
-        } */
+            this.renderPlane(context, plane.a, plane.b, plane.c, plane.d);
+        }
     }
 
-    /* TODO: private void renderPlane(RenderingContext context, float a, float b, float c, float d)
+    private void renderPlane(UIContext context, float a, float b, float c, float d)
     {
-        Shader basic = context.getShaders().get(VBOAttributes.VERTEX_RGBA);
-        VAOBuilder buffer = context.getVAO().setup(basic);
+        Matrix4f matrix = context.batcher.getContext().getMatrices().peek().getPositionMatrix();
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
         final float alpha = 0.5F;
 
-        buffer.begin();
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR);
 
         this.calculate(0, 0, a, b, c, d);
-        buffer.xyz(this.vector.x, this.vector.y, this.vector.z).rgba(0, 1, 0, alpha);
+        builder.vertex(matrix, this.vector.x, this.vector.y, this.vector.z).color(0, 1, 0, alpha).next();
         this.calculate(0, 1, a, b, c, d);
-        buffer.xyz(this.vector.x, this.vector.y, this.vector.z).rgba(0, 1, 0, alpha);
+        builder.vertex(matrix, this.vector.x, this.vector.y, this.vector.z).color(0, 1, 0, alpha).next();
         this.calculate(1, 0, a, b, c, d);
-        buffer.xyz(this.vector.x, this.vector.y, this.vector.z).rgba(0, 1, 0, alpha);
+        builder.vertex(matrix, this.vector.x, this.vector.y, this.vector.z).color(0, 1, 0, alpha).next();
 
         this.calculate(1, 0, a, b, c, d);
-        buffer.xyz(this.vector.x, this.vector.y, this.vector.z).rgba(0, 1, 0, alpha);
+        builder.vertex(matrix, this.vector.x, this.vector.y, this.vector.z).color(0, 1, 0, alpha).next();
         this.calculate(0, 1, a, b, c, d);
-        buffer.xyz(this.vector.x, this.vector.y, this.vector.z).rgba(0, 1, 0, alpha);
+        builder.vertex(matrix, this.vector.x, this.vector.y, this.vector.z).color(0, 1, 0, alpha).next();
         this.calculate(1, 1, a, b, c, d);
-        buffer.xyz(this.vector.x, this.vector.y, this.vector.z).rgba(0, 1, 0, alpha);
+        builder.vertex(matrix, this.vector.x, this.vector.y, this.vector.z).color(0, 1, 0, alpha).next();
 
-        GLStates.cullFaces(false);
-        buffer.render();
-        GLStates.cullFaces(true);
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        RenderSystem.disableCull();
+        BufferRenderer.drawWithGlobalProgram(builder.end());
+        RenderSystem.enableCull();
     }
 
     private void calculate(float i, float j, float a, float b, float c, float d)
@@ -117,11 +125,12 @@ public class UIParticleSchemeRenderer extends UIModelRenderer
     {
         super.renderGrid(context);
 
-        Shader shader = context.render.getShaders().get(VBOAttributes.VERTEX_RGBA);
-        VAOBuilder builder = context.render.getVAO().setup(shader);
+        BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        builder.begin();
-        Draw.axis(builder, 1F, 0.01F);
-        builder.render();
-    } */
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR);
+        Draw.axis(builder, context.batcher.getContext().getMatrices(), 1F, 0.01F);
+
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        BufferRenderer.drawWithGlobalProgram(builder.end());
+    }
 }

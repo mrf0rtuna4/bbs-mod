@@ -118,6 +118,7 @@ public class UIScreen extends Screen
     {
         super.render(context, mouseX, mouseY, delta);
 
+        this.menu.context.setTransition(this.client.getTickDelta());
         this.menu.renderMenu(this.context, mouseX, mouseY);
     }
 }

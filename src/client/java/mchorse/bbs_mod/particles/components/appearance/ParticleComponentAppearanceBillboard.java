@@ -10,11 +10,11 @@ import mchorse.bbs_mod.particles.components.IComponentParticleRender;
 import mchorse.bbs_mod.particles.components.ParticleComponentBase;
 import mchorse.bbs_mod.particles.emitter.Particle;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
-import mchorse.bbs_mod.utils.joml.Vectors;
 import mchorse.bbs_mod.utils.math.Interpolations;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.LightType;
 import org.joml.Matrix4f;
-import org.joml.Vector2f;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -49,8 +49,8 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
     private float u2;
     private float v2;
 
-    private float lx;
-    private float ly;
+    private int lx;
+    private int ly;
 
     private Matrix4f transform = new Matrix4f();
     private Matrix4f rotation = new Matrix4f();
@@ -262,7 +262,7 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
     {}
 
     @Override
-    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, float transition)
+    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, Matrix4f matrix, float transition)
     {
         this.calculateUVs(particle, emitter, transition);
 
@@ -337,10 +337,10 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
         this.transform.mul(this.rotation);
         this.transform.setTranslation(new Vector3f((float) px, (float) py, (float) pz));
 
-        this.build(builder, particle);
+        this.build(builder, matrix, particle);
     }
 
-    private void build(BufferBuilder builder, Particle particle)
+    private void build(BufferBuilder builder, Matrix4f matrix, Particle particle)
     {
         float u1 = this.u1 / (float) this.textureWidth;
         float u2 = this.u2 / (float) this.textureWidth;
@@ -352,26 +352,25 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
             this.transform.transform(vertex);
         }
 
-        this.writeVertex(builder, this.vertices[0], u2, v2, particle);
-        this.writeVertex(builder, this.vertices[1], u1, v2, particle);
-        this.writeVertex(builder, this.vertices[2], u1, v1, particle);
-        this.writeVertex(builder, this.vertices[2], u1, v1, particle);
-        this.writeVertex(builder, this.vertices[3], u2, v1, particle);
-        this.writeVertex(builder, this.vertices[0], u2, v2, particle);
+        this.writeVertex(builder, matrix, this.vertices[0], u2, v2, particle);
+        this.writeVertex(builder, matrix, this.vertices[1], u1, v2, particle);
+        this.writeVertex(builder, matrix, this.vertices[2], u1, v1, particle);
+        this.writeVertex(builder, matrix, this.vertices[2], u1, v1, particle);
+        this.writeVertex(builder, matrix, this.vertices[3], u2, v1, particle);
+        this.writeVertex(builder, matrix, this.vertices[0], u2, v2, particle);
     }
 
-    private void writeVertex(BufferBuilder builder, Vector4f vertex, float u, float v, Particle particle)
+    private void writeVertex(BufferBuilder builder, Matrix4f matrix, Vector4f vertex, float u, float v, Particle particle)
     {
-        builder.vertex(vertex.x, vertex.y, vertex.z)
-            .normal(0, 1F, 0)
-            .texture(u, v)
-            .light((int) (this.lx * 16), (int) (this.ly * 16)) // TODO: <-
+        builder.vertex(matrix, vertex.x, vertex.y, vertex.z)
             .color(particle.r, particle.g, particle.b, particle.a)
+            .texture(u, v)
+            .light(this.lx, this.ly)
             .next();
     }
 
     @Override
-    public void renderUI(Particle particle, BufferBuilder builder, float transition)
+    public void renderUI(Particle particle, BufferBuilder builder, Matrix4f matrix, float transition)
     {
         this.calculateUVs(particle, null, transition);
 
@@ -390,10 +389,10 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
         this.rotation.rotateZ(angle / 180 * (float) Math.PI);
         this.transform.mul(this.rotation);
 
-        this.buildUI(builder, particle);
+        this.buildUI(builder, matrix, particle);
     }
 
-    private void buildUI(BufferBuilder builder, Particle particle)
+    private void buildUI(BufferBuilder builder, Matrix4f matrix, Particle particle)
     {
         float u1 = this.u1 / (float) this.textureWidth;
         float u2 = this.u2 / (float) this.textureWidth;
@@ -405,17 +404,17 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
             this.transform.transform(vertex);
         }
 
-        this.writeVertexUI(builder, this.vertices[2], u2, v2, particle);
-        this.writeVertexUI(builder, this.vertices[1], u2, v1, particle);
-        this.writeVertexUI(builder, this.vertices[0], u1, v1, particle);
-        this.writeVertexUI(builder, this.vertices[0], u1, v1, particle);
-        this.writeVertexUI(builder, this.vertices[3], u1, v2, particle);
-        this.writeVertexUI(builder, this.vertices[2], u2, v2, particle);
+        this.writeVertexUI(builder, matrix, this.vertices[2], u2, v2, particle);
+        this.writeVertexUI(builder, matrix, this.vertices[1], u2, v1, particle);
+        this.writeVertexUI(builder, matrix, this.vertices[0], u1, v1, particle);
+        this.writeVertexUI(builder, matrix, this.vertices[0], u1, v1, particle);
+        this.writeVertexUI(builder, matrix, this.vertices[3], u1, v2, particle);
+        this.writeVertexUI(builder, matrix, this.vertices[2], u2, v2, particle);
     }
 
-    private void writeVertexUI(BufferBuilder builder, Vector4f vertex, float u, float v, Particle particle)
+    private void writeVertexUI(BufferBuilder builder, Matrix4f matrix, Vector4f vertex, float u, float v, Particle particle)
     {
-        builder.vertex(vertex.x, vertex.y, 0F)
+        builder.vertex(matrix, vertex.x, vertex.y, 0F)
             .texture(u, v)
             .color(particle.r, particle.g, particle.b, particle.a)
             .next();
@@ -465,16 +464,16 @@ public class ParticleComponentAppearanceBillboard extends ParticleComponentBase 
 
         if (emitter == null || emitter.lit || emitter.world == null)
         {
-            this.lx = 1F;
-            this.ly = 0F;
+            this.lx = 0;
+            this.ly = 0;
         }
         else
         {
             Vector3d pos = particle.getGlobalPosition(emitter);
-            Vector2f lighting = Vectors.EMPTY_2F; // TODO: emitter.world.getLighting(pos.x, pos.y, pos.z);
+            BlockPos blockPos = new BlockPos((int) pos.x, (int) pos.y, (int) pos.z);
 
-            this.lx = lighting.x;
-            this.ly = lighting.y;
+            this.lx = emitter.world.getLightLevel(LightType.SKY, blockPos);
+            this.ly = emitter.world.getLightLevel(LightType.BLOCK, blockPos);
         }
     }
 

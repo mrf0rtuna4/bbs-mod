@@ -12,6 +12,7 @@ import mchorse.bbs_mod.particles.components.ParticleComponentBase;
 import mchorse.bbs_mod.particles.emitter.Particle;
 import mchorse.bbs_mod.particles.emitter.ParticleEmitter;
 import net.minecraft.client.render.BufferBuilder;
+import org.joml.Matrix4f;
 
 public class ParticleComponentRateSteady extends ParticleComponentRate implements IComponentParticleRender
 {
@@ -51,11 +52,11 @@ public class ParticleComponentRateSteady extends ParticleComponentRate implement
     {}
 
     @Override
-    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, float transition)
+    public void render(ParticleEmitter emitter, Particle particle, BufferBuilder builder, Matrix4f matrix, float transition)
     {}
 
     @Override
-    public void renderUI(Particle particle, BufferBuilder builder, float transition)
+    public void renderUI(Particle particle, BufferBuilder builder, Matrix4f matrix, float transition)
     {}
 
     @Override

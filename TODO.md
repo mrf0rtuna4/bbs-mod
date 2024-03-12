@@ -5,6 +5,7 @@
   - [x] Apply FOV
 - [ ] Film controller
 - [ ] Video recording
+  - [ ] Framebuffer resize
 - [ ] Entity selectors in EntityClip
 - [ ] Attach field to entities
   - [ ] Form
@@ -14,4 +15,5 @@
 - [ ] Particles
   - [ ] Collision
   - [ ] Lighting
-  - [ ] Rendering
+  - [x] Rendering
+- [ ] Setup watch dog
