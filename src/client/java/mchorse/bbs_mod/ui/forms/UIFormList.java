@@ -69,7 +69,7 @@ public class UIFormList extends UIElement
         this.categories.clear();
         this.forms.removeAll();
 
-        for (FormCategory category : forms.getUserCategories())
+        for (FormCategory category : forms.getCategories())
         {
             UIFormCategory uiCategory = category.createUI(this);
 

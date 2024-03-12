@@ -12,12 +12,12 @@ public class FormUtilsClient
 {
     public static void renderUI(Form form, UIContext context, int x1, int y1, int x2, int y2)
     {
-        throw new RuntimeException("TODO: ...");
+        // throw new RuntimeException("TODO: ...");
     }
 
     public static void render(Form form, IEntity entity, Object context)
     {
-        throw new RuntimeException("TODO: ...");
+        // throw new RuntimeException("TODO: ...");
     }
 
     public static List<String> getBones(Form form)

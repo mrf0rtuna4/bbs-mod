@@ -104,10 +104,11 @@ public class BBSModClient implements ClientModInitializer
         return cameraController;
     }
 
+    private UIDashboard dashboard;
+
     private static List<Runnable> scheduledRunnables = new ArrayList<>();
     private static int _lastFramebufferSizeW;
     private static int _lastFramebufferSizeH;
-    private static Vector2f pos2d = new Vector2f();
 
     public static void schedule(Runnable runnable)
     {
@@ -190,6 +191,8 @@ public class BBSModClient implements ClientModInitializer
             // framebuffer.resize(_lastFramebufferSizeW, _lastFramebufferSizeH, false);
         });
 
+
+
         ClientTickEvents.END_CLIENT_TICK.register((client) ->
         {
             if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
@@ -201,7 +204,12 @@ public class BBSModClient implements ClientModInitializer
 
             while (keyPlay.wasPressed())
             {
-                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Dashboard"), new UIDashboard()));
+                if (dashboard == null)
+                {
+                    dashboard = new UIDashboard();
+                }
+
+                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Dashboard"), dashboard));
             }
 
             while (keyRecord.wasPressed())
@@ -237,82 +245,8 @@ public class BBSModClient implements ClientModInitializer
             watchDog.stop();
         });
 
-        registerHUDRender();
-        registerWorldRenderer();
-
         /* Entity renderers */
         EntityRendererRegistry.register(BBSMod.ACTOR_ENTITY, ActorEntityRenderer::new);
-    }
-
-    private void registerHUDRender()
-    {
-        HudRenderCallback.EVENT.register((drawContext, tickDelta) ->
-        {
-            int x = (int) (pos2d.x * drawContext.getScaledWindowWidth() / 2 + drawContext.getScaledWindowWidth() / 2);
-            int y = (int) (-pos2d.y * drawContext.getScaledWindowHeight() / 2 + drawContext.getScaledWindowHeight() / 2);
-
-            // Get the transformation matrix from the matrix stack, alongside the tessellator instance and a new buffer builder.
-            Matrix4f transformationMatrix = drawContext.getMatrices().peek().getPositionMatrix();
-            Tessellator tessellator = Tessellator.getInstance();
-            BufferBuilder buffer = tessellator.getBuffer();
-
-            // Initialize the buffer using the specified format and draw mode.
-            buffer.begin(VertexFormat.DrawMode.TRIANGLE_STRIP, VertexFormats.POSITION_COLOR_TEXTURE);
-
-            // Write our vertices, Z doesn't really matter since it's on the HUD.
-            buffer.vertex(transformationMatrix, x, y - 20, 5).color(0xffffffff).texture(1F, 0F).next();
-            buffer.vertex(transformationMatrix, x - 20, y, 5).color(0xffffffff).texture(0F, 0F).next();
-            buffer.vertex(transformationMatrix, x + 20, y, 5).color(0xffffffff).texture(1F, 1F).next();
-            buffer.vertex(transformationMatrix, x, y + 20, 5).color(0xffffffff).texture(0F, 1F).next();
-
-            // We'll get to this bit in the next section.
-            RenderSystem.setShader(GameRenderer::getPositionColorTexProgram);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, new Identifier("bbs:icon.png"));
-
-            // Draw the buffer onto the screen.
-            tessellator.draw();
-
-            drawContext.fill(x - 10, y - 10, x + 10, y + 10, 5, Colors.RED | Colors.A100);
-        });
-    }
-
-    private void registerWorldRenderer()
-    {
-        Vector3d pospos = new Vector3d(0, -58, 0);
-
-        WorldRenderEvents.BEFORE_ENTITIES.register((listener) ->
-        {
-            MatrixStack stack = listener.matrixStack();
-            Vec3d pos = listener.camera().getPos();
-
-            stack.push();
-            stack.translate(pospos.x - pos.x, pospos.y - pos.y, pospos.z - pos.z);
-            stack.scale(0.5f, 0.5f, 0.5f);
-            stack.multiply(listener.camera().getRotation());
-            stack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0f));
-            MatrixStack.Entry entry = stack.peek();
-            Matrix4f mv = entry.getPositionMatrix();
-            Matrix3f normal = entry.getNormalMatrix();
-            VertexConsumer vertexConsumer = listener.consumers().getBuffer(RenderLayer.getEntityCutout(new Identifier("bbs:icon.png")));
-            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 0.0f, 0, 0, 1);
-            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 1.0f, 0, 1, 1);
-            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 1.0f, 1, 1, 0);
-            vertex(vertexConsumer, mv, normal, LightmapTextureManager.pack(15, 15), 0.0f, 1, 0, 0);
-            stack.pop();
-
-            Matrix4f proj = RenderSystem.getProjectionMatrix();
-            Matrix4f view = stack.peek().getPositionMatrix();
-            Vector4f vec = new Vector4f((float) (pospos.x - pos.x), (float) (pospos.y - pos.y), (float) (pospos.z - pos.z), 1F);
-
-            view.transform(vec);
-            proj.transform(vec);
-
-            vec.x /= vec.w;
-            vec.y /= vec.w;
-
-            pos2d.set(vec.x, vec.y);
-        });
     }
 
     private static void vertex(VertexConsumer buffer, Matrix4f matrix, Matrix3f normalMatrix, int light, float x, int y, int u, int v)
