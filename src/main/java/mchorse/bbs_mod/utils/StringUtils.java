@@ -163,6 +163,36 @@ public class StringUtils
         return lastSlash >= 0 ? path.substring(0, lastSlash) : "";
     }
 
+    public static String processColoredText(String text)
+    {
+        if (!text.contains("["))
+        {
+            return text;
+        }
+        else
+        {
+            StringBuilder builder = new StringBuilder();
+            int i = 0;
+
+            for(int c = text.length(); i < c; i++)
+            {
+                char character = text.charAt(i);
+
+                if (character == '\\' && i < c - 1 && text.charAt(i + 1) == '[')
+                {
+                    builder.append('[');
+                    i += 1;
+                }
+                else
+                {
+                    builder.append(character == '[' ? "\u00A7" : character);
+                }
+            }
+
+            return builder.toString();
+        }
+    }
+
     /* Stringify vectors */
 
     public static String vector4fToString(Vector4f vector)

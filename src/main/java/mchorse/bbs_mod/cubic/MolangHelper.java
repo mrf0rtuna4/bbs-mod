@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.cubic;
 
+import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.math.molang.MolangParser;
 import mchorse.bbs_mod.math.molang.expressions.MolangExpression;
 import mchorse.bbs_mod.utils.Axis;
@@ -34,7 +35,7 @@ public class MolangHelper
         parser.register("extra2.y");
     }
 
-    public static void setMolangVariables(MolangParser parser, LivingEntity target, float frame, float transition)
+    public static void setMolangVariables(MolangParser parser, IEntity target, float frame, float transition)
     {
         double dx = 0;
         double dz = 0;
@@ -46,14 +47,14 @@ public class MolangHelper
 
         if (target != null)
         {
-            float yawHead = Interpolations.lerp(target.prevHeadYaw, target.getHeadYaw(), transition);
-            float bodyYaw = Interpolations.lerp(target.prevBodyYaw, target.getBodyYaw(), transition);
+            float yawHead = Interpolations.lerp(target.getPrevHeadYaw(), target.getHeadYaw(), transition);
+            float bodyYaw = Interpolations.lerp(target.getPrevBodyYaw(), target.getBodyYaw(), transition);
 
             dx = target.getVelocity().x;
             dz = target.getVelocity().z;
             // TODO: yawSpeed = Interpolations.lerp(basic.prevRotation.z - basic.prevPrevRotationZ, basic.rotation.z - basic.prevRotation.z, transition);
             headYaw = Math.toDegrees(yawHead - bodyYaw);
-            headPitch = Math.toDegrees(Interpolations.lerp(target.prevPitch, target.getPitch(), transition));
+            headPitch = Math.toDegrees(Interpolations.lerp(target.getPrevPitch(), target.getPitch(), transition));
             velocity = Math.sqrt(dx * dx + target.getVelocity().y * target.getVelocity().y + dz * dz);
 
             /* There is still a tiny bit of vertical velocity (gravity) when an
@@ -63,7 +64,7 @@ public class MolangHelper
                 velocity = 0;
             }
 
-            age = target.age + transition;
+            age = target.getAge() + transition;
 
             if (false)
             {

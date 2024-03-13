@@ -76,13 +76,13 @@ public class Draw
         Matrix4f matrix4f = stack.peek().getPositionMatrix();
 
         /* 1 - BL, 2 - BR, 3 - TR, 4 - TL */
-        builder.vertex(matrix4f, x2, y2, z2).normal(nx, ny, nz).texture(u1, v2).color(r, g, b, a).next();
-        builder.vertex(matrix4f, x1, y1, z1).normal(nx, ny, nz).texture(u2, v2).color(r, g, b, a).next();
-        builder.vertex(matrix4f, x4, y4, z4).normal(nx, ny, nz).texture(u2, v1).color(r, g, b, a).next();
+        builder.vertex(matrix4f, x2, y2, z2).texture(u1, v2).color(r, g, b, a).normal(nx, ny, nz).next();
+        builder.vertex(matrix4f, x1, y1, z1).texture(u2, v2).color(r, g, b, a).normal(nx, ny, nz).next();
+        builder.vertex(matrix4f, x4, y4, z4).texture(u2, v1).color(r, g, b, a).normal(nx, ny, nz).next();
 
-        builder.vertex(matrix4f, x2, y2, z2).normal(nx, ny, nz).texture(u1, v2).color(r, g, b, a).next();
-        builder.vertex(matrix4f, x4, y4, z4).normal(nx, ny, nz).texture(u2, v1).color(r, g, b, a).next();
-        builder.vertex(matrix4f, x3, y3, z3).normal(nx, ny, nz).texture(u1, v1).color(r, g, b, a).next();
+        builder.vertex(matrix4f, x2, y2, z2).texture(u1, v2).color(r, g, b, a).normal(nx, ny, nz).next();
+        builder.vertex(matrix4f, x4, y4, z4).texture(u2, v1).color(r, g, b, a).normal(nx, ny, nz).next();
+        builder.vertex(matrix4f, x3, y3, z3).texture(u1, v1).color(r, g, b, a).normal(nx, ny, nz).next();
     }
 
     /**

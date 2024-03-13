@@ -453,6 +453,15 @@ public class ParticleEmitter
         RenderSystem.setShaderTexture(0, texture.id);
     }
 
+    public void setupCameraProperties(net.minecraft.client.render.Camera camera)
+    {
+        this.cYaw = 180 - MathUtils.toDeg(camera.getYaw());
+        this.cPitch = MathUtils.toDeg(camera.getPitch());
+        this.cX = camera.getPos().x;
+        this.cY = camera.getPos().y;
+        this.cZ = camera.getPos().z;
+    }
+
     public void setupCameraProperties(Camera camera)
     {
         this.cYaw = 180 - MathUtils.toDeg(camera.rotation.y);

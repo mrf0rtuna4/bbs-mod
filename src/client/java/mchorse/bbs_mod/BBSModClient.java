@@ -1,15 +1,16 @@
 package mchorse.bbs_mod;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.audio.SoundManager;
 import mchorse.bbs_mod.camera.clips.ClipFactoryData;
 import mchorse.bbs_mod.camera.clips.misc.AudioClientClip;
 import mchorse.bbs_mod.camera.controller.CameraController;
 import mchorse.bbs_mod.client.renderer.ActorEntityRenderer;
+import mchorse.bbs_mod.cubic.model.ModelManager;
 import mchorse.bbs_mod.forms.categories.FormCategories;
 import mchorse.bbs_mod.graphics.FramebufferManager;
 import mchorse.bbs_mod.graphics.texture.TextureManager;
 import mchorse.bbs_mod.l10n.L10n;
+import mchorse.bbs_mod.resources.AssetProvider;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.UITestMenu;
@@ -25,33 +26,19 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import org.joml.Vector2f;
-import org.joml.Vector3d;
-import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
@@ -66,6 +53,7 @@ public class BBSModClient implements ClientModInitializer
     private static SoundManager sounds;
     private static L10n l10n;
 
+    private static ModelManager models;
     private static FormCategories formCategories;
     private static WatchDog watchDog;
 
@@ -94,6 +82,11 @@ public class BBSModClient implements ClientModInitializer
         return l10n;
     }
 
+    public static ModelManager getModels()
+    {
+        return models;
+    }
+
     public static FormCategories getFormCategories()
     {
         return formCategories;
@@ -118,13 +111,16 @@ public class BBSModClient implements ClientModInitializer
     @Override
     public void onInitializeClient()
     {
-        textures = new TextureManager(BBSMod.getProvider());
+        AssetProvider provider = BBSMod.getProvider();
+
+        textures = new TextureManager(provider);
         framebuffers = new FramebufferManager();
-        sounds = new SoundManager(BBSMod.getProvider());
+        sounds = new SoundManager(provider);
         l10n = new L10n();
         l10n.register((lang) -> Collections.singletonList(Link.assets("strings/" + lang + ".json")));
         l10n.reload();
 
+        models = new ModelManager(provider);
         formCategories = new FormCategories();
         formCategories.setup();
         watchDog = new WatchDog(BBSMod.getAssetsFolder(), (runnable) -> schedule(runnable));

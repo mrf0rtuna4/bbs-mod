@@ -1,5 +1,8 @@
 - [ ] Shaders for multi-link preview and subtitle renderer
-- [ ] Form renderers
+- [x] Form renderers
+  - [x] Model rendering
+  - [ ] Body part rendering
+  - [ ] Extruded form rendering
 - [x] Camera editor
   - [x] Apply roll
   - [x] Apply FOV
@@ -17,3 +20,13 @@
   - [ ] Lighting
   - [x] Rendering
 - [x] Setup watch dog
+- [ ] Model blocks
+- [ ] More forms
+  - [ ] Block form
+  - [ ] Item form
+  - [ ] Structure form
+
+Core features:
+
+- [ ] Action system
+- [ ] Emoticons + S&B

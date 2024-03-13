@@ -3,6 +3,7 @@ package mchorse.bbs_mod.ui.forms.editors.utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.forms.Form;
+import mchorse.bbs_mod.forms.renderers.FormRenderingContext;
 import mchorse.bbs_mod.graphics.Draw;
 import mchorse.bbs_mod.graphics.texture.Texture;
 import mchorse.bbs_mod.resources.Link;
@@ -77,7 +78,9 @@ public class UIPickableFormRenderer extends UIFormRenderer
             return;
         }
 
-        FormUtilsClient.render(this.form, this.entity, context.render);
+        FormRenderingContext formContext = new FormRenderingContext(this.entity, context.batcher.getContext().getMatrices(), context.getTransition());
+
+        FormUtilsClient.render(this.form, formContext);
 
         if (this.form.hitbox.get())
         {
@@ -91,7 +94,7 @@ public class UIPickableFormRenderer extends UIFormRenderer
             GL11.glDisable(GL11.GL_SCISSOR_TEST);
 
             this.stencil.apply(context);
-            FormUtilsClient.render(this.form, this.entity, context.render);
+            FormUtilsClient.render(this.form, formContext);
 
             this.stencil.pickGUI(context, this.area);
             this.stencil.unbind(context);

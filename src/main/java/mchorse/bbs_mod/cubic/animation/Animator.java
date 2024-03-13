@@ -4,6 +4,7 @@ import mchorse.bbs_mod.cubic.CubicModel;
 import mchorse.bbs_mod.cubic.data.animation.Animation;
 import mchorse.bbs_mod.cubic.data.animation.Animations;
 import mchorse.bbs_mod.cubic.data.model.Model;
+import mchorse.bbs_mod.forms.entities.IEntity;
 import net.minecraft.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class Animator
      * Update animator. This method is responsible for updating action 
      * pipeline and also change current actions based on entity's state.
      */
-    public void update(LivingEntity target)
+    public void update(IEntity target)
     {
         /* Fix issue with forms sudden running action */
         if (this.prevX == Float.MAX_VALUE)
@@ -167,7 +168,7 @@ public class Animator
      * code (i.e. the ones that is responsible for switching between 
      * actions).
      */
-    protected void controlActions(LivingEntity target)
+    protected void controlActions(IEntity target)
     {
         double dx = target.getX() - this.prevX;
         double dz = target.getZ() - this.prevZ;
@@ -209,7 +210,7 @@ public class Animator
             {
                 this.setActiveAction(!moves ? this.crouchingIdle : this.crouching);
             }
-            else if (!target.isOnGround() && target.getVelocity().y < 0 && target.fallDistance > 1.25)
+            else if (!target.isOnGround() && target.getVelocity().y < 0 && target.getFallDistance() > 1.25)
             {
                 this.setActiveAction(this.falling);
             }
@@ -234,7 +235,7 @@ public class Animator
             this.wasOnGround = false;
         }
 
-        if (target.handSwingTicks >= 5)
+        if (target.isPunching())
         {
             this.addAction(this.swipe);
         }
@@ -244,11 +245,6 @@ public class Animator
         this.prevMY = target.getVelocity().y;
 
         this.wasOnGround = target.isOnGround();
-    }
-
-    private boolean isGamepadPressed(int gamepad, int button)
-    {
-        return ((gamepad >> button) & 0b1) == 1;
     }
 
     /**
@@ -309,7 +305,7 @@ public class Animator
     /**
      * Apply currently running action pipeline onto given armature
      */
-    public void applyActions(LivingEntity target, Model armature, float transition)
+    public void applyActions(IEntity target, Model armature, float transition)
     {
         if (this.lastActive != null && this.active.isFading())
         {

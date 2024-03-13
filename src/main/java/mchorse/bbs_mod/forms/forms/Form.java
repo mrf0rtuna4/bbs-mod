@@ -11,6 +11,7 @@ import mchorse.bbs_mod.forms.properties.FloatProperty;
 import mchorse.bbs_mod.forms.properties.IFormProperty;
 import mchorse.bbs_mod.forms.properties.StringProperty;
 import mchorse.bbs_mod.forms.properties.TransformProperty;
+import mchorse.bbs_mod.forms.ITickable;
 import mchorse.bbs_mod.utils.math.IInterpolation;
 import mchorse.bbs_mod.utils.pose.Transform;
 
@@ -57,6 +58,16 @@ public abstract class Form implements IMapSerializable
         this.register(this.hitboxHeight);
         this.register(this.hitboxSneakMultiplier);
         this.register(this.hitboxEyeHeight);
+    }
+
+    public Object getRenderer()
+    {
+        return this.renderer;
+    }
+
+    public void setRenderer(Object renderer)
+    {
+        this.renderer = renderer;
     }
 
     protected void register(IFormProperty property)
@@ -134,6 +145,11 @@ public abstract class Form implements IMapSerializable
         for (IFormProperty property : this.properties.values())
         {
             property.update();
+        }
+
+        if (this.renderer instanceof ITickable)
+        {
+            ((ITickable) this.renderer).tick(entity);
         }
     }
 

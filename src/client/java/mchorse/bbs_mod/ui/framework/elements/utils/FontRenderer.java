@@ -10,6 +10,23 @@ public class FontRenderer
 {
     private TextRenderer renderer;
 
+    public static List<String> wrap(TextRenderer renderer, String string, int width)
+    {
+        return renderer.wrapLines(Text.literal(string), width).stream().map((ot) ->
+        {
+            StringBuilder builder = new StringBuilder();
+
+            ot.accept((a, b, c) ->
+            {
+                builder.appendCodePoint(c);
+
+                return true;
+            });
+
+            return builder.toString();
+        }).collect(Collectors.toList());
+    }
+
     public void setRenderer(TextRenderer renderer)
     {
         this.renderer = renderer;
@@ -32,19 +49,7 @@ public class FontRenderer
 
     public List<String> wrap(String string, int width)
     {
-        return this.renderer.wrapLines(Text.literal(string), width).stream().map((ot) ->
-        {
-            StringBuilder builder = new StringBuilder();
-
-            ot.accept((a, b, c) ->
-            {
-                builder.appendCodePoint(c);
-
-                return true;
-            });
-
-            return builder.toString();
-        }).collect(Collectors.toList());
+        return wrap(this.renderer, string, width);
     }
 
     public String limitToWidth(String str, int width)

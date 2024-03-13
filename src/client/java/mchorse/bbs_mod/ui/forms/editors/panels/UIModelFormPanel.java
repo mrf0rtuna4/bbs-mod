@@ -1,12 +1,15 @@
 package mchorse.bbs_mod.ui.forms.editors.panels;
 
+import mchorse.bbs_mod.cubic.CubicModel;
 import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.forms.ModelForm;
+import mchorse.bbs_mod.forms.renderers.ModelFormRenderer;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.forms.editors.forms.UIForm;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIButton;
 import mchorse.bbs_mod.ui.framework.elements.input.UIColor;
+import mchorse.bbs_mod.ui.framework.elements.input.UITexturePicker;
 import mchorse.bbs_mod.ui.utils.pose.UIPoseEditor;
 import mchorse.bbs_mod.utils.colors.Color;
 
@@ -26,14 +29,14 @@ public class UIModelFormPanel extends UIFormPanel<ModelForm>
         this.pick = new UIButton(UIKeys.FORMS_EDITOR_MODEL_PICK_TEXTURE, (b) ->
         {
             Link link = this.form.texture.get();
-            /* TODO: CubicModel model = this.form.getModel();
+            CubicModel model = ModelFormRenderer.getModel(this.form);
 
             if (model != null && link == null)
             {
                 link = model.texture;
             }
 
-            UITexturePicker.open(this, link, (l) -> this.form.texture.set(l)); */
+            UITexturePicker.open(this, link, (l) -> this.form.texture.set(l));
         });
 
         this.options.add(this.pick, this.color, this.poseEditor.marginTop(8));
@@ -49,7 +52,7 @@ public class UIModelFormPanel extends UIFormPanel<ModelForm>
     {
         super.startEdit(form);
 
-        // TODO: this.poseEditor.setPose(form.pose.get(), this.form.getModel().poseGroup);
+        this.poseEditor.setPose(form.pose.get(), ModelFormRenderer.getModel(this.form).poseGroup);
         this.poseEditor.fillGroups(FormUtilsClient.getBones(this.form));
         this.color.setColor(form.color.get().getARGBColor());
     }

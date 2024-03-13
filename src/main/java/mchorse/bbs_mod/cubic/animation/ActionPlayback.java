@@ -4,6 +4,7 @@ import mchorse.bbs_mod.cubic.CubicModelAnimator;
 import mchorse.bbs_mod.cubic.MolangHelper;
 import mchorse.bbs_mod.cubic.data.animation.Animation;
 import mchorse.bbs_mod.cubic.data.model.Model;
+import mchorse.bbs_mod.forms.entities.IEntity;
 import net.minecraft.entity.LivingEntity;
 
 public class ActionPlayback
@@ -187,7 +188,7 @@ public class ActionPlayback
         return ticks;
     }
 
-    public void apply(LivingEntity target, Model armature, float transition, float blend, boolean skipInitial)
+    public void apply(IEntity target, Model armature, float transition, float blend, boolean skipInitial)
     {
         float tick = this.getTick(transition);
 

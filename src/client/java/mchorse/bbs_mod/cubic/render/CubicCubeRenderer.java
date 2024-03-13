@@ -185,8 +185,9 @@ public class CubicCubeRenderer implements ICubicRenderer
         stack.getModelMatrix().transform(this.vertex);
 
         builder.vertex(this.vertex.x, this.vertex.y, this.vertex.z)
-            .normal(this.normal.x, this.normal.y, this.normal.z)
             .texture(vertex.uv.x, vertex.uv.y)
-            .color(this.r, this.g, this.b, this.a).next();
+            .color(this.r, this.g, this.b, this.a)
+            .normal(this.normal.x, this.normal.y, this.normal.z)
+            .next();
     }
 }
