@@ -25,6 +25,7 @@
   - [ ] Block form
   - [ ] Item form
   - [ ] Structure form
+- [ ] File drag and dropping
 
 Core features:
 

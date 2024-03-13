@@ -3,8 +3,9 @@ package mchorse.bbs_mod.cubic.render;
 import mchorse.bbs_mod.cubic.data.model.Model;
 import mchorse.bbs_mod.cubic.data.model.ModelGroup;
 import mchorse.bbs_mod.utils.math.MathUtils;
-import mchorse.bbs_mod.utils.pose.MatrixStack;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.RotationAxis;
 import org.joml.Vector3f;
 
 public interface ICubicRenderer
@@ -26,13 +27,13 @@ public interface ICubicRenderer
 
     public static void rotateGroup(MatrixStack stack, ModelGroup group)
     {
-        if (group.current.rotate.z != 0F) stack.rotateZ(MathUtils.toRad(group.current.rotate.z));
-        if (group.current.rotate.y != 0F) stack.rotateY(MathUtils.toRad(group.current.rotate.y));
-        if (group.current.rotate.x != 0F) stack.rotateX(MathUtils.toRad(group.current.rotate.x));
+        if (group.current.rotate.z != 0F) stack.multiply(RotationAxis.POSITIVE_Z.rotation(MathUtils.toRad(group.current.rotate.z)));
+        if (group.current.rotate.y != 0F) stack.multiply(RotationAxis.POSITIVE_Y.rotation(MathUtils.toRad(group.current.rotate.y)));
+        if (group.current.rotate.x != 0F) stack.multiply(RotationAxis.POSITIVE_X.rotation(MathUtils.toRad(group.current.rotate.x)));
 
-        if (group.current.rotate2.z != 0F) stack.rotateZ(MathUtils.toRad(group.current.rotate2.z));
-        if (group.current.rotate2.y != 0F) stack.rotateY(MathUtils.toRad(group.current.rotate2.y));
-        if (group.current.rotate2.x != 0F) stack.rotateX(MathUtils.toRad(group.current.rotate2.x));
+        if (group.current.rotate2.z != 0F) stack.multiply(RotationAxis.POSITIVE_Z.rotation(MathUtils.toRad(group.current.rotate2.z)));
+        if (group.current.rotate2.y != 0F) stack.multiply(RotationAxis.POSITIVE_Y.rotation(MathUtils.toRad(group.current.rotate2.y)));
+        if (group.current.rotate2.x != 0F) stack.multiply(RotationAxis.POSITIVE_X.rotation(MathUtils.toRad(group.current.rotate2.x)));
     }
 
     public static void scaleGroup(MatrixStack stack, ModelGroup group)

@@ -7,8 +7,8 @@ import mchorse.bbs_mod.cubic.data.model.ModelMesh;
 import mchorse.bbs_mod.cubic.data.model.ModelQuad;
 import mchorse.bbs_mod.cubic.data.model.ModelVertex;
 import mchorse.bbs_mod.utils.math.MathUtils;
-import mchorse.bbs_mod.utils.pose.MatrixStack;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
@@ -17,6 +17,9 @@ import org.joml.Vector4f;
 
 public class CubicCubeRenderer implements ICubicRenderer
 {
+    private static Matrix4f modelM = new Matrix4f();
+    private static Matrix3f normalM = new Matrix3f();
+
     protected float r = 1;
     protected float g = 1;
     protected float b = 1;
@@ -43,28 +46,28 @@ public class CubicCubeRenderer implements ICubicRenderer
         Matrix4f matrix4f = new Matrix4f();
         Matrix3f matrix3f = new Matrix3f();
 
-        stack.tempModelMatrix.identity();
+        modelM.identity();
         matrix4f.identity().rotateZ(MathUtils.toRad(rotation.z));
-        stack.tempModelMatrix.mul(matrix4f);
+        modelM.mul(matrix4f);
 
         matrix4f.identity().rotateY(MathUtils.toRad(rotation.y));
-        stack.tempModelMatrix.mul(matrix4f);
+        modelM.mul(matrix4f);
 
         matrix4f.identity().rotateX(MathUtils.toRad(rotation.x));
-        stack.tempModelMatrix.mul(matrix4f);
+        modelM.mul(matrix4f);
 
-        stack.tempNormalMatrix.identity();
+        normalM.identity();
         matrix3f.identity().rotateZ(MathUtils.toRad(rotation.z));
-        stack.tempNormalMatrix.mul(matrix3f);
+        normalM.mul(matrix3f);
 
         matrix3f.identity().rotateY(MathUtils.toRad(rotation.y));
-        stack.tempNormalMatrix.mul(matrix3f);
+        normalM.mul(matrix3f);
 
         matrix3f.identity().rotateX(MathUtils.toRad(rotation.x));
-        stack.tempNormalMatrix.mul(matrix3f);
+        normalM.mul(matrix3f);
 
-        stack.getModelMatrix().mul(stack.tempModelMatrix);
-        stack.getNormalMatrix().mul(stack.tempNormalMatrix);
+        stack.peek().getPositionMatrix().mul(modelM);
+        stack.peek().getNormalMatrix().mul(normalM);
     }
 
     public static void moveBackFromPivot(MatrixStack stack, Vector3f pivot)
@@ -106,7 +109,7 @@ public class CubicCubeRenderer implements ICubicRenderer
         for (ModelQuad quad : cube.quads)
         {
             this.normal.set(quad.normal.x, quad.normal.y, quad.normal.z);
-            stack.getNormalMatrix().transform(this.normal);
+            stack.peek().getNormalMatrix().transform(this.normal);
 
             /* For 0 sized cubes on either axis, to avoid getting dark shading on models
              * which didn't correctly setup the UV faces.
@@ -163,7 +166,7 @@ public class CubicCubeRenderer implements ICubicRenderer
             normal.normalize();
 
             this.normal.set(normal.x, normal.y, normal.z);
-            stack.getNormalMatrix().transform(this.normal);
+            stack.peek().getNormalMatrix().transform(this.normal);
 
             /* Write vertices */
             this.modelVertex.set(p1, uv1, model);
@@ -182,7 +185,7 @@ public class CubicCubeRenderer implements ICubicRenderer
     protected void writeVertex(BufferBuilder builder, MatrixStack stack, ModelGroup group, ModelVertex vertex)
     {
         this.vertex.set(vertex.vertex.x, vertex.vertex.y, vertex.vertex.z, 1);
-        stack.getModelMatrix().transform(this.vertex);
+        stack.peek().getPositionMatrix().transform(this.vertex);
 
         builder.vertex(this.vertex.x, this.vertex.y, this.vertex.z)
             .texture(vertex.uv.x, vertex.uv.y)

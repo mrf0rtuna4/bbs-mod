@@ -53,18 +53,6 @@ public class Transform implements IMapSerializable
         return matrix;
     }
 
-    public void apply(MatrixStack stack)
-    {
-        stack.translate(this.translate);
-        stack.rotateZ(this.rotate.z);
-        stack.rotateY(this.rotate.y);
-        stack.rotateX(this.rotate.x);
-        stack.rotateZ(this.rotate2.z);
-        stack.rotateY(this.rotate2.y);
-        stack.rotateX(this.rotate2.x);
-        stack.scale(this.scale.x, this.scale.y, this.scale.z);
-    }
-
     @Override
     public boolean equals(Object obj)
     {

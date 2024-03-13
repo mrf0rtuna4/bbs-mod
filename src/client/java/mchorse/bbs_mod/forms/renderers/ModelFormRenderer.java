@@ -158,10 +158,12 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
 
         builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR_NORMAL);
 
-        mchorse.bbs_mod.utils.pose.MatrixStack newStack = new mchorse.bbs_mod.utils.pose.MatrixStack();
+        MatrixStack newStack = new MatrixStack();
 
-        newStack.push(stack.peek().getPositionMatrix());
+        newStack.push();
+        newStack.multiplyPositionMatrix(stack.peek().getPositionMatrix());
         CubicRenderer.processRenderModel(new CubicCubeRenderer(), builder, newStack, model);
+        newStack.pop();
 
         BufferRenderer.drawWithGlobalProgram(builder.end());
     }
@@ -216,7 +218,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
 
     private void captureMatrices(CubicModel model)
     {
-        mchorse.bbs_mod.utils.pose.MatrixStack stack = new mchorse.bbs_mod.utils.pose.MatrixStack();
+        MatrixStack stack = new MatrixStack();
         CubicMatrixRenderer renderer = new CubicMatrixRenderer(model.model);
 
         CubicRenderer.processRenderModel(renderer, null, stack, model.model);
