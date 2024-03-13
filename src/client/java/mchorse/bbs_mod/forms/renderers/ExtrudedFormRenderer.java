@@ -49,10 +49,11 @@ public class ExtrudedFormRenderer extends FormRenderer<ExtrudedForm>
 
         if (vertexBuffer != null)
         {
-            // TODO: test this thing!!!
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
 
+            vertexBuffer.bind();
             vertexBuffer.draw(context.stack.peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionTexColorProgram());
+            VertexBuffer.unbind();
         }
     }
 }
