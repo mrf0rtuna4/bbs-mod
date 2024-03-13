@@ -13,7 +13,6 @@ import mchorse.bbs_mod.cubic.render.CubicRenderer;
 import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.ITickable;
 import mchorse.bbs_mod.forms.entities.IEntity;
-import mchorse.bbs_mod.forms.entities.MCEntity;
 import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.forms.forms.BodyPart;
 import mchorse.bbs_mod.forms.forms.Form;
@@ -31,7 +30,6 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
@@ -266,7 +264,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
     }
 
     @Override
-    public void collectMatrices(Entity entity, MatrixStack stack, Map<String, Matrix4f> matrices, String prefix, float transition)
+    public void collectMatrices(IEntity entity, MatrixStack stack, Map<String, Matrix4f> matrices, String prefix, float transition)
     {
         stack.push();
         stack.multiplyPositionMatrix(this.form.transform.get(transition).createMatrix());
@@ -280,7 +278,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         {
             CubicModelAnimator.resetPose(model.model);
 
-            this.animator.applyActions(new MCEntity(entity), model.model, transition);
+            this.animator.applyActions(entity, model.model, transition);
             model.model.apply(this.getPose(transition));
 
             stack.multiply(RotationAxis.POSITIVE_Y.rotation(MathUtils.PI));

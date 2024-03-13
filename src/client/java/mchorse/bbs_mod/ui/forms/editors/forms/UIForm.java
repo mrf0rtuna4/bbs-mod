@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.ui.forms.editors.forms;
 
 import mchorse.bbs_mod.forms.FormUtils;
+import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.ui.UIKeys;
 import mchorse.bbs_mod.ui.forms.editors.UIFormEditor;
@@ -12,7 +13,7 @@ import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.joml.Matrices;
-import mchorse.bbs_mod.utils.pose.MatrixStack;
+import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix4f;
 
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public abstract class UIForm <T extends Form> extends UIPanelBase<UIFormPanel<T>
         MatrixStack stack = new MatrixStack();
         Map<String, Matrix4f> map = new HashMap<>();
 
-        // TODO: root.getRenderer().collectMatrices(this.editor.renderer.getEntity(), stack, map, "", transition);
+        FormUtilsClient.getRenderer(root).collectMatrices(this.editor.renderer.getEntity(), stack, map, "", transition);
 
         Matrix4f matrix = map.get(path);
 

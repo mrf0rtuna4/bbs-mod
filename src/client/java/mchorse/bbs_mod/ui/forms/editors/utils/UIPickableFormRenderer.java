@@ -13,6 +13,7 @@ import mchorse.bbs_mod.ui.utils.StencilFormFramebuffer;
 import mchorse.bbs_mod.utils.Pair;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
@@ -89,7 +90,7 @@ public class UIPickableFormRenderer extends UIFormRenderer
 
         this.renderAxes(context);
 
-        if (this.area.isInside(context))
+        /* TODO: if (this.area.isInside(context))
         {
             GL11.glDisable(GL11.GL_SCISSOR_TEST);
 
@@ -104,7 +105,7 @@ public class UIPickableFormRenderer extends UIFormRenderer
         else
         {
             this.stencil.clearPicking();
-        }
+        } */
     }
 
     private void renderAxes(UIContext context)
@@ -127,8 +128,6 @@ public class UIPickableFormRenderer extends UIFormRenderer
         /* Draw axes */
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        RenderSystem.disableDepthTest();
-
         builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR);
 
         Draw.fillBox(builder, stack, 0, -outlineOffset, -outlineOffset, outlineSize, outlineOffset, outlineOffset, 0, 0, 0);
@@ -141,9 +140,12 @@ public class UIPickableFormRenderer extends UIFormRenderer
         Draw.fillBox(builder, stack, -axisOffset, -axisOffset, 0, axisOffset, axisOffset, axisSize, 0, 0, 1);
         Draw.fillBox(builder, stack, -axisOffset, -axisOffset, -axisOffset, axisOffset, axisOffset, axisOffset, 1, 1, 1);
 
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        RenderSystem.disableDepthTest();
+
         BufferRenderer.drawWithGlobalProgram(builder.end());
 
-        RenderSystem.enableBlend();
+        RenderSystem.enableDepthTest();
 
         stack.pop();
     }

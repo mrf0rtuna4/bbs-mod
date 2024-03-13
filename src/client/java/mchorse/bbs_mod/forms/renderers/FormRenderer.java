@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.forms.renderers;
 
 import mchorse.bbs_mod.forms.FormUtilsClient;
+import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.forms.forms.BodyPart;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.ui.framework.UIContext;
@@ -87,7 +88,7 @@ public abstract class FormRenderer <T extends Form>
         }
     }
 
-    public void collectMatrices(Entity entity, MatrixStack stack, Map<String, Matrix4f> matrices, String prefix, float transition)
+    public void collectMatrices(IEntity entity, MatrixStack stack, Map<String, Matrix4f> matrices, String prefix, float transition)
     {
         stack.push();
         stack.multiplyPositionMatrix(this.form.transform.get(transition).createMatrix());
