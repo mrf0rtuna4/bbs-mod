@@ -120,6 +120,8 @@ public class Batcher2D
         RenderSystem.enableBlend();
         RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         BufferRenderer.drawWithGlobalProgram(builder.end());
+
+        this.context.draw();
     }
 
     public void dropShadow(int left, int top, int right, int bottom, int offset, int opaque, int shadow)
@@ -207,6 +209,7 @@ public class Batcher2D
         }
 
         Matrix4f matrix4f = this.context.getMatrices().peek().getPositionMatrix();
+
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
         RenderSystem.enableBlend();

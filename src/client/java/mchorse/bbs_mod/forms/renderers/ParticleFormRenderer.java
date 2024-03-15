@@ -84,21 +84,14 @@ public class ParticleFormRenderer extends FormRenderer<ParticleForm> implements 
 
         if (emitter != null)
         {
-            Camera camera = MinecraftClient.getInstance().gameRenderer.getCamera();
-
-            if (camera == null)
-            {
-                return;
-            }
-
             Matrix4f matrix = context.stack.peek().getPositionMatrix();
             Vector3d vector = new Vector3d().set(matrix.getTranslation(Vectors.TEMP_3F));
 
             this.updateTexture(context.getTransition());
-            vector.add(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+            vector.add(context.camera.position.x, context.camera.position.y, context.camera.position.z);
             emitter.lastGlobal.set(vector);
             emitter.rotation.set(matrix);
-            emitter.setupCameraProperties(camera);
+            emitter.setupCameraProperties(context.camera);
             emitter.render(context.stack, context.getTransition());
         }
     }

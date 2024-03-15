@@ -129,6 +129,8 @@ public class Supporters
         this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "...");
         this.add("ItsLunaz");
         this.add("渣暴风StorM", "https://space.bilibili.com/186424629");
+        this.add("爱发电用户_WJku^^^");
+        this.add("娱儿游", "https://space.bilibili.com/42973624");
     }
 
     private void add(String name)

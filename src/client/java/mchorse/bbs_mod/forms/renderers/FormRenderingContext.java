@@ -1,19 +1,50 @@
 package mchorse.bbs_mod.forms.renderers;
 
+import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.forms.entities.IEntity;
+import mchorse.bbs_mod.utils.math.MathUtils;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class FormRenderingContext
 {
+    private static final FormRenderingContext context = new FormRenderingContext();
+
     public IEntity entity;
     public MatrixStack stack;
+    public int light;
     public float transition;
+    public final Camera camera = new Camera();
 
-    public FormRenderingContext(IEntity entity, MatrixStack stack, float transition)
+    private FormRenderingContext()
+    {}
+
+    public static FormRenderingContext set(IEntity entity, MatrixStack stack, int light, float transition)
     {
-        this.entity = entity;
-        this.stack = stack;
-        this.transition = transition;
+        context.entity = entity;
+        context.stack = stack;
+        context.light = light;
+        context.transition = transition;
+
+        return context;
+    }
+
+    public FormRenderingContext camera(Camera camera)
+    {
+        this.camera.copy(camera);
+        this.camera.updateView();
+
+        return this;
+    }
+
+    public FormRenderingContext camera(net.minecraft.client.render.Camera camera)
+    {
+        this.camera.position.set(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+        this.camera.rotation.set(camera.getPitch(), camera.getYaw(), 0F);
+        this.camera.fov = MathUtils.toRad(MinecraftClient.getInstance().options.getFov().getValue());
+        this.camera.updateView();
+
+        return this;
     }
 
     public float getTransition()

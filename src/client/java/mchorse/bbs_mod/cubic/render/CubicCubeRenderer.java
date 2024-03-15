@@ -8,6 +8,7 @@ import mchorse.bbs_mod.cubic.data.model.ModelQuad;
 import mchorse.bbs_mod.cubic.data.model.ModelVertex;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -24,12 +25,18 @@ public class CubicCubeRenderer implements ICubicRenderer
     protected float g = 1;
     protected float b = 1;
     protected float a = 1;
+    protected int light;
 
     /* Temporary variables to avoid allocating and GC vectors */
     protected Vector3f normal = new Vector3f();
     protected Vector4f vertex = new Vector4f();
 
     private ModelVertex modelVertex = new ModelVertex();
+
+    public CubicCubeRenderer(int light)
+    {
+        this.light = light;
+    }
 
     public static void moveToPivot(MatrixStack stack, Vector3f pivot)
     {
@@ -187,9 +194,12 @@ public class CubicCubeRenderer implements ICubicRenderer
         this.vertex.set(vertex.vertex.x, vertex.vertex.y, vertex.vertex.z, 1);
         stack.peek().getPositionMatrix().transform(this.vertex);
 
+        // POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL
         builder.vertex(this.vertex.x, this.vertex.y, this.vertex.z)
-            .texture(vertex.uv.x, vertex.uv.y)
             .color(this.r, this.g, this.b, this.a)
+            .texture(vertex.uv.x, vertex.uv.y)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(this.light)
             .normal(this.normal.x, this.normal.y, this.normal.z)
             .next();
     }

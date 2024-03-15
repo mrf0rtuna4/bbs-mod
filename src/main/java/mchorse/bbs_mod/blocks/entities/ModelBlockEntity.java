@@ -3,8 +3,9 @@ package mchorse.bbs_mod.blocks.entities;
 import mchorse.bbs_mod.BBSMod;
 import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.forms.entities.StubEntity;
+import mchorse.bbs_mod.forms.forms.BillboardForm;
 import mchorse.bbs_mod.forms.forms.Form;
-import mchorse.bbs_mod.forms.forms.ModelForm;
+import mchorse.bbs_mod.resources.Link;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
@@ -19,9 +20,9 @@ public class ModelBlockEntity extends BlockEntity
     {
         super(BBSMod.MODEL_BLOCK_ENTITY, pos, state);
 
-        ModelForm model = new ModelForm();
+        BillboardForm model = new BillboardForm();
 
-        model.model.set("butterfly");
+        model.texture.set(Link.create("assets:textures/bee.png"));
 
         this.form = model;
     }

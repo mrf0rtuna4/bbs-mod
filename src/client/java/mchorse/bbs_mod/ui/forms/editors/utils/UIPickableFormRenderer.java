@@ -14,12 +14,12 @@ import mchorse.bbs_mod.utils.Pair;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Matrix4f;
-import org.lwjgl.opengl.GL11;
 
 public class UIPickableFormRenderer extends UIFormRenderer
 {
@@ -79,7 +79,9 @@ public class UIPickableFormRenderer extends UIFormRenderer
             return;
         }
 
-        FormRenderingContext formContext = new FormRenderingContext(this.entity, context.batcher.getContext().getMatrices(), context.getTransition());
+        FormRenderingContext formContext = FormRenderingContext
+            .set(this.entity, context.batcher.getContext().getMatrices(), LightmapTextureManager.pack(15, 15), context.getTransition())
+            .camera(this.camera);
 
         FormUtilsClient.render(this.form, formContext);
 

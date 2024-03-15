@@ -23,9 +23,11 @@ import mchorse.bbs_mod.utils.StringUtils;
 import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import mchorse.bbs_mod.utils.pose.Pose;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
@@ -136,15 +138,15 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
             RenderSystem.setShaderColor(color.r, color.g, color.b, color.a);
             RenderSystem.depthFunc(GL11.GL_LEQUAL);
-            RenderSystem.setShader(GameRenderer::getPositionTexColorNormalProgram);
+            RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentCullProgram);
 
-            this.renderModel(stack, model.model);
+            this.renderModel(stack, model.model, LightmapTextureManager.pack(15, 15));
 
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
             /* Render body parts */
             this.captureMatrices(model);
-            this.renderBodyParts(new FormRenderingContext(this.entity, stack, context.getTransition()));
+            this.renderBodyParts(FormRenderingContext.set(this.entity, stack, 0, context.getTransition()));
 
             RenderSystem.depthFunc(GL11.GL_ALWAYS);
 
@@ -152,20 +154,24 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         }
     }
 
-    private void renderModel(MatrixStack stack, Model model)
+    private void renderModel(MatrixStack stack, Model model, int light)
     {
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
-        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR_NORMAL);
+        MinecraftClient.getInstance().gameRenderer.getLightmapTextureManager().enable();
+
+        builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL);
 
         MatrixStack newStack = new MatrixStack();
 
         newStack.push();
         newStack.multiplyPositionMatrix(stack.peek().getPositionMatrix());
-        CubicRenderer.processRenderModel(new CubicCubeRenderer(), builder, newStack, model);
+        CubicRenderer.processRenderModel(new CubicCubeRenderer(light), builder, newStack, model);
         newStack.pop();
 
         BufferRenderer.drawWithGlobalProgram(builder.end());
+
+        MinecraftClient.getInstance().gameRenderer.getLightmapTextureManager().disable();
     }
 
     @Override
@@ -190,9 +196,9 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
 
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
             RenderSystem.setShaderColor(color.r, color.g, color.b, color.a);
-            RenderSystem.setShader(GameRenderer::getPositionTexColorNormalProgram);
+            RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentCullProgram);
 
-            this.renderModel(context.stack, model.model);
+            this.renderModel(context.stack, model.model, context.light);
 
             RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 

@@ -5,6 +5,7 @@ import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.forms.renderers.FormRenderingContext;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.utils.UIModelRenderer;
+import net.minecraft.client.render.LightmapTextureManager;
 
 public class UIFormRenderer extends UIModelRenderer
 {
@@ -18,6 +19,10 @@ public class UIFormRenderer extends UIModelRenderer
             return;
         }
 
-        FormUtilsClient.render(this.form, new FormRenderingContext(this.entity, context.batcher.getContext().getMatrices(), context.getTransition()));
+        FormRenderingContext formContext = FormRenderingContext
+            .set(this.entity, context.batcher.getContext().getMatrices(), LightmapTextureManager.pack(15, 15), context.getTransition())
+            .camera(this.camera);
+
+        FormUtilsClient.render(this.form, formContext);
     }
 }

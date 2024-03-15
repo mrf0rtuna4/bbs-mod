@@ -1,5 +1,6 @@
 package mchorse.bbs_mod.client.renderer;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mchorse.bbs_mod.blocks.entities.ModelBlockEntity;
 import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.entities.StubEntity;
@@ -35,12 +36,16 @@ public class ModelBlockEntityRenderer implements BlockEntityRenderer<ModelBlockE
         // Rotate the item
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((entity.getWorld().getTime() + tickDelta) * 4));
 
-        int lightAbove = WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().up());
+        int lightAbove = WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos());
         MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.GROUND, lightAbove, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, entity.getWorld(), 0);
 
         if (entity.getForm() != null)
         {
-            FormUtilsClient.render(entity.getForm(), new FormRenderingContext(new StubEntity(), matrices, tickDelta));
+            RenderSystem.enableDepthTest();
+            FormUtilsClient.render(entity.getForm(), FormRenderingContext
+                .set(new StubEntity(), matrices, lightAbove, tickDelta)
+                .camera(MinecraftClient.getInstance().gameRenderer.getCamera()));
+            RenderSystem.disableDepthTest();
         }
 
         matrices.pop();
