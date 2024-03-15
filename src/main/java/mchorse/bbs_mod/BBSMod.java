@@ -1,5 +1,7 @@
 package mchorse.bbs_mod;
 
+import mchorse.bbs_mod.blocks.ModelBlock;
+import mchorse.bbs_mod.blocks.entities.ModelBlockEntity;
 import mchorse.bbs_mod.camera.clips.ClipFactoryData;
 import mchorse.bbs_mod.camera.clips.converters.DollyToKeyframeConverter;
 import mchorse.bbs_mod.camera.clips.converters.DollyToPathConverter;
@@ -44,12 +46,18 @@ import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.clips.Clip;
 import mchorse.bbs_mod.utils.factory.MapFactory;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -85,6 +93,22 @@ public class BBSMod implements ModInitializer
         new Identifier(MOD_ID, "actor"),
         FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ActorEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.8F)).build()
     );
+
+    public static final Block MODEL_BLOCK = new ModelBlock(FabricBlockSettings.create()
+        .noBlockBreakParticles()
+        .dropsNothing()
+        .noCollision()
+        .nonOpaque()
+        .notSolid()
+        .strength(0F)
+    );
+
+    public static final BlockEntityType<ModelBlockEntity> MODEL_BLOCK_ENTITY = Registry.register(
+        Registries.BLOCK_ENTITY_TYPE,
+        new Identifier(MOD_ID, "model_block_entity"),
+        FabricBlockEntityTypeBuilder.create(ModelBlockEntity::new, MODEL_BLOCK).build()
+    );
+
 
     /**
      * Main folder, where all the other folders are located.
@@ -232,6 +256,10 @@ public class BBSMod implements ModInitializer
 
         /* Entities */
         FabricDefaultAttributeRegistry.register(ACTOR_ENTITY, ActorEntity.createActorAttributes());
+
+        /* Blocks */
+        Registry.register(Registries.BLOCK, new Identifier(MOD_ID, "model"), MODEL_BLOCK);
+        Registry.register(Registries.ITEM, new Identifier(MOD_ID, "model"), new BlockItem(MODEL_BLOCK, new Item.Settings()));
     }
 
     public static Settings setupConfig(Icon icon, String id, File destination, Consumer<SettingsBuilder> registerer)

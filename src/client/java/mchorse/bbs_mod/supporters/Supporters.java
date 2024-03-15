@@ -52,7 +52,7 @@ public class Supporters
         this.add("暗影苦力怕", "https://space.bilibili.com/472637101", "...");
         this.add("Zhesheng_1818", "https://www.youtube.com/channel/UC47jJ8OEHIdbq-H1xhwUzXA");
         this.add("star_tan");
-        this.add("阿狐糊涂");
+        this.add("阿狐糊涂", "https://space.bilibili.com/3494374845450678");
         this.add("开智同学");
         this.add("绯色の白初");
         this.add("GHL");
@@ -105,7 +105,7 @@ public class Supporters
         this.add("Tanis Gon");
         this.add("临夜", "https://space.bilibili.com/1544935486");
         this.add("Sundown Story");
-        this.add("Michael Creeper_", "...", "...");
+        this.add("Michael Creeper_", "https://twitter.com/MichaelCreeper", "...");
         this.add("Hrymka", "...", "...");
         this.add("Rasty", "https://www.youtube.com/@RastyStudio");
         this.add("Clesten", "https://www.youtube.com/@clesten9475");
@@ -128,6 +128,7 @@ public class Supporters
         this.add("Frosty1239869");
         this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "...");
         this.add("ItsLunaz");
+        this.add("渣暴风StorM", "https://space.bilibili.com/186424629");
     }
 
     private void add(String name)
