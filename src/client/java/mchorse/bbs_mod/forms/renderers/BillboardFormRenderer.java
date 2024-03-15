@@ -136,6 +136,7 @@ public class BillboardFormRenderer extends FormRenderer<BillboardForm>
     {
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
         Color color = this.form.color.get(context.getTransition());
+        Matrix4f matrix = context.stack.peek().getPositionMatrix();
 
         /* TODO: if (this.form.billboard.get(context.getTransition()))
         {
@@ -159,12 +160,12 @@ public class BillboardFormRenderer extends FormRenderer<BillboardForm>
         RenderSystem.setShader(GameRenderer::getPositionTexColorNormalProgram);
 
         builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_TEXTURE_COLOR_NORMAL);
-        builder.vertex(quad.p1.x, quad.p1.y, 0F).texture(uvQuad.p1.x, uvQuad.p1.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
-        builder.vertex(quad.p2.x, quad.p2.y, 0F).texture(uvQuad.p2.x, uvQuad.p2.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
-        builder.vertex(quad.p3.x, quad.p3.y, 0F).texture(uvQuad.p3.x, uvQuad.p3.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
-        builder.vertex(quad.p2.x, quad.p2.y, 0F).texture(uvQuad.p2.x, uvQuad.p2.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
-        builder.vertex(quad.p4.x, quad.p4.y, 0F).texture(uvQuad.p4.x, uvQuad.p4.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
-        builder.vertex(quad.p3.x, quad.p3.y, 0F).texture(uvQuad.p3.x, uvQuad.p3.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
+        builder.vertex(matrix, quad.p1.x, quad.p1.y, 0F).texture(uvQuad.p1.x, uvQuad.p1.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
+        builder.vertex(matrix, quad.p2.x, quad.p2.y, 0F).texture(uvQuad.p2.x, uvQuad.p2.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
+        builder.vertex(matrix, quad.p3.x, quad.p3.y, 0F).texture(uvQuad.p3.x, uvQuad.p3.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
+        builder.vertex(matrix, quad.p2.x, quad.p2.y, 0F).texture(uvQuad.p2.x, uvQuad.p2.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
+        builder.vertex(matrix, quad.p4.x, quad.p4.y, 0F).texture(uvQuad.p4.x, uvQuad.p4.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
+        builder.vertex(matrix, quad.p3.x, quad.p3.y, 0F).texture(uvQuad.p3.x, uvQuad.p3.y).color(color.r, color.g, color.b, color.a).normal(0F, 0F, 1F).next();
 
         RenderSystem.disableCull();
         BufferRenderer.drawWithGlobalProgram(builder.end());

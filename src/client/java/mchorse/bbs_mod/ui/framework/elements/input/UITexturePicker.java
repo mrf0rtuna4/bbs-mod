@@ -20,6 +20,7 @@ import mchorse.bbs_mod.ui.framework.elements.input.multilink.UIMultiLinkEditor;
 import mchorse.bbs_mod.ui.framework.elements.input.text.UITextbox;
 import mchorse.bbs_mod.ui.framework.elements.utils.EventPropagation;
 import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
+import mchorse.bbs_mod.ui.utils.IFileDropListener;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.UIUtils;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
@@ -44,7 +45,7 @@ import java.util.function.Consumer;
  * This bad boy allows picking a texture from the file browser, and also 
  * it allows creating multi-skins. See {@link MultiLink} for more information.
  */
-public class UITexturePicker extends UIElement
+public class UITexturePicker extends UIElement implements IFileDropListener
 {
     public UIElement right;
     public UITextbox text;
@@ -210,6 +211,7 @@ public class UITexturePicker extends UIElement
         }
     }
 
+    @Override
     public void acceptFilePaths(String[] paths)
     {
         File target = BBSMod.getProvider().getFile(this.picker.path);

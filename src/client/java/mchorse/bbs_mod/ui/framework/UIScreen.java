@@ -1,12 +1,16 @@
 package mchorse.bbs_mod.ui.framework;
 
+import mchorse.bbs_mod.ui.utils.IFileDropListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
-public class UIScreen extends Screen
+import java.nio.file.Path;
+import java.util.List;
+
+public class UIScreen extends Screen implements IFileDropListener
 {
     private UIBaseMenu menu;
     private UIRenderingContext context;
@@ -31,6 +35,24 @@ public class UIScreen extends Screen
     public void lastRender()
     {
         this.menu.lastRender();
+    }
+
+    @Override
+    public void filesDragged(List<Path> paths)
+    {
+        super.filesDragged(paths);
+
+        String[] filePaths = new String[paths.size()];
+        int i = 0;
+
+        for (Path path : paths)
+        {
+            filePaths[i] = path.toAbsolutePath().toString();
+
+            i += 1;
+        }
+
+        this.acceptFilePaths(filePaths);
     }
 
     @Override
@@ -120,5 +142,17 @@ public class UIScreen extends Screen
 
         this.menu.context.setTransition(this.client.getTickDelta());
         this.menu.renderMenu(this.context, mouseX, mouseY);
+    }
+
+    @Override
+    public void acceptFilePaths(String[] paths)
+    {
+        if (this.menu != null)
+        {
+            for (IFileDropListener listener : this.menu.getRoot().getChildren(IFileDropListener.class))
+            {
+                listener.acceptFilePaths(paths);
+            }
+        }
     }
 }

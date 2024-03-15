@@ -2,7 +2,7 @@
 - [x] Form renderers
   - [x] Model rendering
   - [ ] Body part rendering
-  - [ ] Extruded form rendering
+  - [x] Extruded form rendering
 - [x] Camera editor
   - [x] Apply roll
   - [x] Apply FOV
@@ -25,7 +25,7 @@
   - [ ] Block form
   - [ ] Item form
   - [ ] Structure form
-- [ ] File drag and dropping
+- [x] File drag and dropping
 
 Core features:
 

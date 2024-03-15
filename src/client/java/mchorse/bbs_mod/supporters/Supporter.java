@@ -8,21 +8,6 @@ public class Supporter
     public final String link;
     public final Link banner;
 
-    public Supporter(String name)
-    {
-        this(name, "...");
-    }
-
-    public Supporter(String name, String link)
-    {
-        this(name, link, "...");
-    }
-
-    public Supporter(String name, String link, String banner)
-    {
-        this(name, link, Link.create(banner));
-    }
-
     public Supporter(String name, String link, Link banner)
     {
         this.name = name;
