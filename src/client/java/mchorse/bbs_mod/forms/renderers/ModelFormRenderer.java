@@ -136,13 +136,10 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             stack.multiplyPositionMatrix(this.uiMatrix);
 
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
-            RenderSystem.setShaderColor(color.r, color.g, color.b, color.a);
             RenderSystem.depthFunc(GL11.GL_LEQUAL);
             RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentCullProgram);
 
-            this.renderModel(stack, model.model, LightmapTextureManager.pack(15, 15));
-
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+            this.renderModel(stack, model.model, LightmapTextureManager.pack(15, 15), color);
 
             /* Render body parts */
             this.captureMatrices(model);
@@ -154,7 +151,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         }
     }
 
-    private void renderModel(MatrixStack stack, Model model, int light)
+    private void renderModel(MatrixStack stack, Model model, int light, Color color)
     {
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
@@ -163,10 +160,13 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         builder.begin(VertexFormat.DrawMode.TRIANGLES, VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL);
 
         MatrixStack newStack = new MatrixStack();
+        CubicCubeRenderer renderProcessor = new CubicCubeRenderer(light);
+
+        renderProcessor.setColor(color.r, color.g, color.b, color.a);
 
         newStack.push();
         newStack.multiplyPositionMatrix(stack.peek().getPositionMatrix());
-        CubicRenderer.processRenderModel(new CubicCubeRenderer(light), builder, newStack, model);
+        CubicRenderer.processRenderModel(renderProcessor, builder, newStack, model);
         newStack.pop();
 
         BufferRenderer.drawWithGlobalProgram(builder.end());
@@ -195,12 +195,9 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             context.stack.multiply(RotationAxis.POSITIVE_Y.rotation(MathUtils.PI));
 
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
-            RenderSystem.setShaderColor(color.r, color.g, color.b, color.a);
             RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentCullProgram);
 
-            this.renderModel(context.stack, model.model, context.light);
-
-            RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
+            this.renderModel(context.stack, model.model, context.light, color);
 
             this.captureMatrices(model);
         }

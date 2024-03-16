@@ -1,14 +1,191 @@
 package mchorse.bbs_mod.data;
 
+import mchorse.bbs_mod.data.storage.DataStorage;
+import mchorse.bbs_mod.data.types.BaseType;
+import mchorse.bbs_mod.data.types.ByteType;
+import mchorse.bbs_mod.data.types.DoubleType;
+import mchorse.bbs_mod.data.types.FloatType;
+import mchorse.bbs_mod.data.types.IntType;
 import mchorse.bbs_mod.data.types.ListType;
+import mchorse.bbs_mod.data.types.LongType;
+import mchorse.bbs_mod.data.types.MapType;
+import mchorse.bbs_mod.data.types.ShortType;
+import mchorse.bbs_mod.data.types.StringType;
+import net.minecraft.nbt.NbtByte;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtDouble;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtFloat;
+import net.minecraft.nbt.NbtInt;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtLong;
+import net.minecraft.nbt.NbtShort;
+import net.minecraft.nbt.NbtString;
+import net.minecraft.network.PacketByteBuf;
 import org.joml.Matrix3f;
 import org.joml.Vector2i;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 public class DataStorageUtils
 {
+    /* PacketByteBuf */
+
+    public static void writeToPacket(PacketByteBuf packet, BaseType type)
+    {
+        try
+        {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            DataStorage.writeToStream(stream, type);
+
+            packet.writeByteArray(stream.toByteArray());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static BaseType readFromPacket(PacketByteBuf packet)
+    {
+        try
+        {
+            ByteArrayInputStream stream = new ByteArrayInputStream(packet.readByteArray());
+
+            return DataStorage.readFromStream(stream);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /* NBT */
+
+    public static NbtElement toNbt(BaseType type)
+    {
+        if (type instanceof ByteType byteType)
+        {
+            return NbtByte.of(byteType.value);
+        }
+        else if (type instanceof DoubleType doubleType)
+        {
+            return NbtDouble.of(doubleType.value);
+        }
+        else if (type instanceof FloatType floatType)
+        {
+            return NbtFloat.of(floatType.value);
+        }
+        else if (type instanceof IntType intType)
+        {
+            return NbtInt.of(intType.value);
+        }
+        else if (type instanceof LongType longType)
+        {
+            return NbtLong.of(longType.value);
+        }
+        else if (type instanceof ShortType shortType)
+        {
+            return NbtShort.of(shortType.value);
+        }
+        else if (type instanceof StringType stringType)
+        {
+            return NbtString.of(stringType.value);
+        }
+        else if (type instanceof ListType listType)
+        {
+            NbtList list = new NbtList();
+
+            for (BaseType baseType : listType)
+            {
+                list.add(toNbt(baseType));
+            }
+
+            return list;
+        }
+        else if (type instanceof MapType mapType)
+        {
+            NbtCompound compound = new NbtCompound();
+
+            for (String key : mapType.keys())
+            {
+                compound.put(key, toNbt(mapType.get(key)));
+            }
+
+            return compound;
+        }
+
+        // TODO: ArrayType
+
+        return null;
+    }
+
+    public static BaseType fromNbt(NbtElement element)
+    {
+        if (element instanceof NbtByte nbtByte)
+        {
+            return new ByteType(nbtByte.byteValue());
+        }
+        else if (element instanceof NbtDouble nbtDouble)
+        {
+            return new DoubleType(nbtDouble.doubleValue());
+        }
+        else if (element instanceof NbtFloat nbtFloat)
+        {
+            return new FloatType(nbtFloat.floatValue());
+        }
+        else if (element instanceof NbtInt nbtInt)
+        {
+            return new IntType(nbtInt.intValue());
+        }
+        else if (element instanceof NbtLong nbtLong)
+        {
+            return new LongType(nbtLong.longValue());
+        }
+        else if (element instanceof NbtShort nbtShort)
+        {
+            return new ShortType(nbtShort.shortValue());
+        }
+        else if (element instanceof NbtString nbtString)
+        {
+            return new StringType(nbtString.asString());
+        }
+        else if (element instanceof NbtList nbtList)
+        {
+            ListType list = new ListType();
+
+            for (NbtElement nbtElement : nbtList)
+            {
+                list.add(fromNbt(nbtElement));
+            }
+
+            return list;
+        }
+        else if (element instanceof NbtCompound nbtCompound)
+        {
+            MapType map = new MapType();
+
+            for (String key : nbtCompound.getKeys())
+            {
+                map.put(key, fromNbt(nbtCompound.get(key)));
+            }
+
+            return map;
+        }
+
+        // TODO: ArrayType
+
+        return null;
+    }
+
     /* Vector2i */
 
     public static ListType vector2iToData(Vector2i vector)

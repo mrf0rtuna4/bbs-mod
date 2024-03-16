@@ -14,6 +14,7 @@ public class Supporters
     {
         this.add("毫无人性的大麦纸", "https://space.bilibili.com/591074", "...");
         this.add("Afica");
+        this.add("白某人是个萌新");
         this.add("76823999");
         this.add("Silly_Sheep_");
         this.add("Rainbow Stars");
@@ -36,8 +37,10 @@ public class Supporters
         this.add("Nobody");
         this.add("星星会说话");
         this.add("一只蟠桃peach");
+        this.add("小猪之最");
         this.add("tianqo");
         this.add("暴碧Bobi");
+        this.add("Nullname");
         this.add("l1ngisout", "https://space.bilibili.com/23839756", "...");
         this.add("爆风BooM", "https://space.bilibili.com/308180216");
         this.add("Seven_Chad", "https://twitter.com/seven_chad", "...");
@@ -113,6 +116,7 @@ public class Supporters
         this.add("骚老师的MC动画");
         this.add("Jackey_lin", "...");
         this.add("snifferpond");
+        this.add("Repeater");
         this.add("爱发电用户_e9eaf^^^");
         this.add("爱发电用户_10b4f^^^");
         this.add("爱发电用户_cfaea^^^", "...");
@@ -131,6 +135,13 @@ public class Supporters
         this.add("渣暴风StorM", "https://space.bilibili.com/186424629");
         this.add("爱发电用户_WJku^^^");
         this.add("娱儿游", "https://space.bilibili.com/42973624");
+        this.add("乐笑虾");
+        this.add("瑭玟", "...", "...");
+        this.add("江枫珧");
+        this.add("安仙_9487");
+        this.add("碎梦入行", "https://space.bilibili.com/34789774");
+        this.add("Bourner");
+        this.add("益之冰棍", "https://space.bilibili.com/70170627");
     }
 
     private void add(String name)
