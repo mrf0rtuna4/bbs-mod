@@ -528,6 +528,8 @@ public class UIKeys
     public static final IKey VOICE_LINE_SUBTITLES = L10n.lang("bbs.ui.voice_line.subtitles", "Generate subtitle clips", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
     public static final IKey WORLD_KEYS_CYCLE_PANELS = L10n.lang("bbs.ui.world.keys.cycle_panels");
 
+    public static final IKey MODEL_BLOCKS_TITLE = L10n.lang("bbs.ui.model_blocks.title", "Model blocks", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
+
     /* Utility */
     public static final IKey LANGUAGE_EDITOR_CONTEXT_COPY_KEY = L10n.lang("studio.ui.language.editor.context.copy_key");
     public static final IKey LANGUAGE_EDITOR_CONTEXT_COPY_ORIGINAL = L10n.lang("studio.ui.language.editor.context.copy_original");

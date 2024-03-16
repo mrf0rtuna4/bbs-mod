@@ -1,8 +1,12 @@
 - [ ] Shaders for multi-link preview and subtitle renderer
 - [x] Form renderers
   - [x] Model rendering
+    - [ ] Fix normals
   - [ ] Body part rendering
   - [x] Extruded form rendering
+    - [ ] Fix lack of diffuse lighting
+  - [ ] Fix label form rendering
+  - [ ] Fix particle form rendering
 - [x] Camera editor
   - [x] Apply roll
   - [x] Apply FOV
@@ -20,7 +24,10 @@
   - [ ] Lighting
   - [x] Rendering
 - [x] Setup watch dog
-- [ ] Model blocks
+- [x] Model blocks
+  - [ ] Add F3 indicators
+  - [ ] Add outline in 3d
+  - [ ] Add click picking
 - [ ] More forms
   - [ ] Block form
   - [ ] Item form

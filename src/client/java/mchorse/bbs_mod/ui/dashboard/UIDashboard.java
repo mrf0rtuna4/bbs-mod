@@ -2,6 +2,7 @@ package mchorse.bbs_mod.ui.dashboard;
 
 import mchorse.bbs_mod.BBSModClient;
 import mchorse.bbs_mod.BBSSettings;
+import mchorse.bbs_mod.camera.Camera;
 import mchorse.bbs_mod.camera.OrbitCamera;
 import mchorse.bbs_mod.camera.controller.OrbitCameraController;
 import mchorse.bbs_mod.graphics.window.Window;
@@ -20,6 +21,7 @@ import mchorse.bbs_mod.ui.framework.UIBaseMenu;
 import mchorse.bbs_mod.ui.framework.UIRenderingContext;
 import mchorse.bbs_mod.ui.framework.elements.buttons.UIIcon;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
+import mchorse.bbs_mod.ui.model_blocks.UIModelBlockPanel;
 import mchorse.bbs_mod.ui.particles.UIParticleSchemePanel;
 import mchorse.bbs_mod.ui.utility.UIUtilityOverlayPanel;
 import mchorse.bbs_mod.ui.utils.UIUtils;
@@ -29,6 +31,8 @@ import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
@@ -58,10 +62,15 @@ public class UIDashboard extends UIBaseMenu
         {
             this.orbitUI.setControl(this.panels.isFlightSupported());
 
-            if (e.lastPanel instanceof UIFilmPanel)
-            {
-                BBSModClient.getCameraController().copy(MinecraftClient.getInstance().getCameraEntity());
-            }
+            Entity cameraEntity = MinecraftClient.getInstance().getCameraEntity();
+            Vec3d eyePos = cameraEntity.getEyePos();
+            Camera camera = new Camera();
+
+            camera.position.set(eyePos.getX(), eyePos.getY(), eyePos.getZ());
+            camera.rotation.set(MathUtils.toRad(cameraEntity.getPitch()), MathUtils.toRad(cameraEntity.getHeadYaw() - 180), 0);
+            camera.fov = MathUtils.toRad(MinecraftClient.getInstance().options.getFov().getValue().floatValue());
+
+            this.orbit.setup(camera);
         });
         this.panels.relative(this.viewport).full();
         this.registerPanels();
@@ -166,6 +175,7 @@ public class UIDashboard extends UIBaseMenu
     protected void registerPanels()
     {
         this.panels.registerPanel(new UIFilmPanel(this), UIKeys.FILM_TITLE, Icons.FILM);
+        this.panels.registerPanel(new UIModelBlockPanel(this), UIKeys.MODEL_BLOCKS_TITLE, Icons.BLOCK);
         this.panels.registerPanel(new UIParticleSchemePanel(this), UIKeys.PANELS_PARTICLES, Icons.PARTICLE).marginLeft(10);
         this.panels.registerPanel(new UITextureManagerPanel(this), UIKeys.TEXTURES_TOOLTIP, Icons.MATERIAL);
         this.panels.registerPanel(new UIGraphPanel(this), UIKeys.GRAPH_TOOLTIP, Icons.GRAPH);

@@ -106,6 +106,7 @@ public class UI
         UIScrollView scrollView = new UIScrollView();
 
         scrollView.column(margin).vertical().stretch().scroll().width(width).padding(padding);
+        scrollView.add(elements);
 
         return scrollView;
     }

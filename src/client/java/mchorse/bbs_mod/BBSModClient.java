@@ -58,6 +58,12 @@ public class BBSModClient implements ClientModInitializer
     private static KeyBinding keyPlay;
     private static KeyBinding keyRecord;
 
+    private static UIDashboard dashboard;
+
+    private static List<Runnable> scheduledRunnables = new ArrayList<>();
+    private static int _lastFramebufferSizeW;
+    private static int _lastFramebufferSizeH;
+
     private static CameraController cameraController = new CameraController();
 
     public static TextureManager getTextures()
@@ -95,11 +101,15 @@ public class BBSModClient implements ClientModInitializer
         return cameraController;
     }
 
-    private UIDashboard dashboard;
+    public static UIDashboard getDashboard()
+    {
+        if (dashboard == null)
+        {
+            dashboard = new UIDashboard();
+        }
 
-    private static List<Runnable> scheduledRunnables = new ArrayList<>();
-    private static int _lastFramebufferSizeW;
-    private static int _lastFramebufferSizeH;
+        return dashboard;
+    }
 
     public static void schedule(Runnable runnable)
     {
@@ -185,8 +195,6 @@ public class BBSModClient implements ClientModInitializer
             // framebuffer.resize(_lastFramebufferSizeW, _lastFramebufferSizeH, false);
         });
 
-
-
         ClientTickEvents.END_CLIENT_TICK.register((client) ->
         {
             if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
@@ -198,12 +206,7 @@ public class BBSModClient implements ClientModInitializer
 
             while (keyPlay.wasPressed())
             {
-                if (dashboard == null)
-                {
-                    dashboard = new UIDashboard();
-                }
-
-                MinecraftClient.getInstance().setScreen(new UIScreen(Text.literal("Dashboard"), dashboard));
+                MinecraftClient.getInstance().setScreen(new UIScreen(Text.empty(), getDashboard()));
             }
 
             while (keyRecord.wasPressed())

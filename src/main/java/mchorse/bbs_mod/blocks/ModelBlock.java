@@ -59,9 +59,12 @@ public class ModelBlock extends Block implements BlockEntityProvider
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
-        if (hand == Hand.MAIN_HAND && player instanceof ServerPlayerEntity serverPlayer)
+        if (hand == Hand.MAIN_HAND)
         {
-            ServerNetwork.sendClickedModelBlock(serverPlayer, pos);
+            if (player instanceof ServerPlayerEntity serverPlayer)
+            {
+                ServerNetwork.sendClickedModelBlock(serverPlayer, pos);
+            }
 
             return ActionResult.SUCCESS;
         }

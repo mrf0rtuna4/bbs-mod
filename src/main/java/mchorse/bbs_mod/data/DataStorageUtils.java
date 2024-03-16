@@ -186,6 +186,23 @@ public class DataStorageUtils
         return null;
     }
 
+    public static void writeToNbtCompound(NbtCompound compound, String key, BaseType data)
+    {
+        compound.put(key, DataStorageUtils.toNbt(data));
+    }
+
+    public static BaseType readFromNbtCompound(NbtCompound compound, String key)
+    {
+        BaseType baseType = DataStorageUtils.fromNbt(compound.get(key));
+
+        if (baseType != null)
+        {
+            return baseType;
+        }
+
+        return null;
+    }
+
     /* Vector2i */
 
     public static ListType vector2iToData(Vector2i vector)

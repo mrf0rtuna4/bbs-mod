@@ -375,7 +375,6 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
         this.cameraClips.embedView(null);
         this.setFlight(false);
         cameraController.remove(this.runner);
-        cameraController.remove(this.controller.orbit);
 
         this.disableContext();
     }

@@ -1,15 +1,18 @@
 package mchorse.bbs_mod.network;
 
 import mchorse.bbs_mod.BBSMod;
+import mchorse.bbs_mod.blocks.entities.ModelBlockEntity;
 import mchorse.bbs_mod.data.DataStorageUtils;
 import mchorse.bbs_mod.data.types.MapType;
 import mchorse.bbs_mod.forms.forms.Form;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class ServerNetwork
 {
@@ -22,12 +25,28 @@ public class ServerNetwork
         ServerPlayNetworking.registerGlobalReceiver(SERVER_MODEL_BLOCK_FORM_PACKET, (server, player, handler, buf, responder) ->
         {
             BlockPos pos = buf.readBlockPos();
-            Form form = BBSMod.getForms().fromData((MapType) DataStorageUtils.readFromPacket(buf));
+            MapType data = (MapType) DataStorageUtils.readFromPacket(buf);
 
-            server.execute(() ->
+            try
             {
-                System.out.println("Hey, look!" + form + " " + pos);
-            });
+                Form form = BBSMod.getForms().fromData(data);
+                MapType transform = (MapType) DataStorageUtils.readFromPacket(buf);
+
+                server.execute(() ->
+                {
+                    World world = player.getWorld();
+                    BlockEntity be = world.getBlockEntity(pos);
+
+                    if (be instanceof ModelBlockEntity modelBlock)
+                    {
+                        modelBlock.updateForm(form, transform, world);
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         });
     }
 

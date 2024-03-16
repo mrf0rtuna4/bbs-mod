@@ -1,13 +1,18 @@
 package mchorse.bbs_mod.network;
 
+import mchorse.bbs_mod.BBSModClient;
+import mchorse.bbs_mod.blocks.entities.ModelBlockEntity;
 import mchorse.bbs_mod.data.DataStorageUtils;
 import mchorse.bbs_mod.data.types.MapType;
 import mchorse.bbs_mod.forms.FormUtils;
-import mchorse.bbs_mod.forms.forms.Form;
-import mchorse.bbs_mod.forms.forms.ModelForm;
+import mchorse.bbs_mod.ui.dashboard.UIDashboard;
+import mchorse.bbs_mod.ui.framework.UIScreen;
+import mchorse.bbs_mod.ui.model_blocks.UIModelBlockPanel;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 public class ClientNetwork
@@ -20,25 +25,36 @@ public class ClientNetwork
 
             client.execute(() ->
             {
-                // Open dashboard with editing the model block
-                System.out.println("What's up! " + pos);
+                BlockEntity entity = client.world.getBlockEntity(pos);
 
-                ModelForm form = new ModelForm();
+                if (!(entity instanceof ModelBlockEntity))
+                {
+                    return;
+                }
 
-                form.model.set("butterfly");
+                UIDashboard dashboard = BBSModClient.getDashboard();
 
-                sendModelBlockForm(pos, form);
+                if (!(client.currentScreen instanceof UIScreen) || ((UIScreen) client.currentScreen).getMenu() != dashboard)
+                {
+                    client.setScreen(new UIScreen(Text.empty(), dashboard));
+                }
+
+                UIModelBlockPanel panel = dashboard.getPanels().getPanel(UIModelBlockPanel.class);
+
+                dashboard.setPanel(panel);
+                panel.fill((ModelBlockEntity) entity, true);
             });
         });
     }
 
-    public static void sendModelBlockForm(BlockPos pos, Form form)
+    public static void sendModelBlockForm(BlockPos pos, ModelBlockEntity modelBlock)
     {
         PacketByteBuf buf = PacketByteBufs.create();
-        MapType mapType = FormUtils.toData(form);
+        MapType mapType = FormUtils.toData(modelBlock.getForm());
 
         buf.writeBlockPos(pos);
         DataStorageUtils.writeToPacket(buf, mapType == null ? new MapType() : mapType);
+        DataStorageUtils.writeToPacket(buf, modelBlock.getTransform().toData());
 
         ClientPlayNetworking.send(ServerNetwork.SERVER_MODEL_BLOCK_FORM_PACKET, buf);
     }

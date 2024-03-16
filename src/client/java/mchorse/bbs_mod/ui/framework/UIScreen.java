@@ -27,6 +27,11 @@ public class UIScreen extends Screen implements IFileDropListener
         this.menu.context.setup(this.context);
     }
 
+    public UIBaseMenu getMenu()
+    {
+        return this.menu;
+    }
+
     public void update()
     {
         this.menu.update();
@@ -61,6 +66,8 @@ public class UIScreen extends Screen implements IFileDropListener
         super.removed();
 
         this.menu.onClose(null);
+
+        MinecraftClient.getInstance().options.hudHidden = false;
     }
 
     @Override
@@ -69,6 +76,8 @@ public class UIScreen extends Screen implements IFileDropListener
         super.onDisplayed();
 
         this.menu.onOpen(null);
+
+        MinecraftClient.getInstance().options.hudHidden = true;
     }
 
     @Override
