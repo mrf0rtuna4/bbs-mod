@@ -142,6 +142,9 @@ public class Supporters
         this.add("碎梦入行", "https://space.bilibili.com/34789774");
         this.add("Bourner");
         this.add("益之冰棍", "https://space.bilibili.com/70170627");
+        this.add("hao_yeah");
+        this.add("Giftia", "https://space.bilibili.com/59624348", "...");
+        this.add("Yu_Feng");
     }
 
     private void add(String name)

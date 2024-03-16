@@ -30,6 +30,7 @@ import mchorse.bbs_mod.ui.utils.keys.KeyCombo;
 import mchorse.bbs_mod.utils.Direction;
 import mchorse.bbs_mod.utils.colors.Colors;
 import mchorse.bbs_mod.utils.math.MathUtils;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
@@ -238,24 +239,24 @@ public class UIDashboard extends UIBaseMenu
         }
     }
 
-    public void renderInWorld()
+    public void renderInWorld(WorldRenderContext context)
     {
-        super.renderInWorld();
+        super.renderInWorld(context);
 
         if (this.panels.panel != null)
         {
-            this.panels.panel.renderInWorld();
+            this.panels.panel.renderInWorld(context);
         }
     }
 
     @Override
-    public void lastRender()
+    public void lastRender(WorldRenderContext context)
     {
-        super.lastRender();
+        super.lastRender(context);
 
         if (this.panels.panel != null)
         {
-            this.panels.panel.lastRender();
+            this.panels.panel.lastRender(context);
         }
     }
 }

@@ -1,7 +1,6 @@
 package mchorse.bbs_mod.ui.framework;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.Keys;
 import mchorse.bbs_mod.ui.framework.elements.IViewport;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
@@ -9,6 +8,7 @@ import mchorse.bbs_mod.ui.framework.elements.utils.IViewportStack;
 import mchorse.bbs_mod.ui.utils.Area;
 import mchorse.bbs_mod.ui.utils.renderers.InputRenderer;
 import mchorse.bbs_mod.utils.colors.Colors;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
@@ -219,10 +219,10 @@ public abstract class UIBaseMenu
     protected void preRenderMenu(UIRenderingContext context)
     {}
 
-    public void renderInWorld()
+    public void renderInWorld(WorldRenderContext context)
     {}
 
-    public void lastRender()
+    public void lastRender(WorldRenderContext context)
     {}
 
     public static class UIRootElement extends UIElement implements IViewport

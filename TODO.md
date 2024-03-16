@@ -25,9 +25,10 @@
   - [x] Rendering
 - [x] Setup watch dog
 - [x] Model blocks
-  - [ ] Add F3 indicators
-  - [ ] Add outline in 3d
-  - [ ] Add click picking
+  - [x] Add F3 indicators
+  - [x] Add outline in 3d
+  - [x] Add click picking
+  - [ ] Move to cursor (with ray tracing)
 - [ ] More forms
   - [ ] Block form
   - [ ] Item form

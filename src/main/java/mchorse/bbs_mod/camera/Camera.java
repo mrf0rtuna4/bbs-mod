@@ -21,6 +21,20 @@ public class Camera
 
     private Vector3f relative = new Vector3f();
 
+    public static Vector3f getMouseDirectionNormalized(Matrix4f projection, Matrix4f view, float mx, float my)
+    {
+        Matrix4f matrix4f = new Matrix4f(projection);
+
+        matrix4f.mul(view);
+        matrix4f.invert();
+
+        Vector4f forward = new Vector4f(mx, my, 0, 1);
+
+        matrix4f.transform(forward);
+
+        return new Vector3f(forward.x, forward.y, forward.z);
+    }
+
     public Camera()
     {
         this.setFov(70);
@@ -66,16 +80,7 @@ public class Camera
 
     public Vector3f getMouseDirectionNormalized(float mx, float my)
     {
-        Matrix4f matrix4f = new Matrix4f(this.projection);
-
-        matrix4f.mul(this.view);
-        matrix4f.invert();
-
-        Vector4f forward = new Vector4f(mx, my, 0, 1);
-
-        matrix4f.transform(forward);
-
-        return new Vector3f(forward.x, forward.y, forward.z);
+        return getMouseDirectionNormalized(this.projection, this.view, mx, my);
     }
 
     public Vector3f getRelative(Vector3d vector)

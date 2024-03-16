@@ -1,6 +1,7 @@
 package mchorse.bbs_mod.ui.framework;
 
 import mchorse.bbs_mod.ui.utils.IFileDropListener;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -37,9 +38,14 @@ public class UIScreen extends Screen implements IFileDropListener
         this.menu.update();
     }
 
-    public void lastRender()
+    public void renderInWorld(WorldRenderContext context)
     {
-        this.menu.lastRender();
+        this.menu.renderInWorld(context);
+    }
+
+    public void lastRender(WorldRenderContext context)
+    {
+        this.menu.lastRender(context);
     }
 
     @Override

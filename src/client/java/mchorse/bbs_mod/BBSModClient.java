@@ -183,11 +183,19 @@ public class BBSModClient implements ClientModInitializer
             // framebuffer.resize(50, 50, false);
         });
 
-        WorldRenderEvents.LAST.register((client) ->
+        WorldRenderEvents.AFTER_ENTITIES.register((context) ->
         {
             if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
             {
-                screen.lastRender();
+                screen.renderInWorld(context);
+            }
+        });
+
+        WorldRenderEvents.LAST.register((context) ->
+        {
+            if (MinecraftClient.getInstance().currentScreen instanceof UIScreen screen)
+            {
+                screen.lastRender(context);
             }
 
             Framebuffer framebuffer = MinecraftClient.getInstance().getFramebuffer();

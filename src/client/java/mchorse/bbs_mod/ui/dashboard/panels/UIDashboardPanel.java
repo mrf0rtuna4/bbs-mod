@@ -2,6 +2,7 @@ package mchorse.bbs_mod.ui.dashboard.panels;
 
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 
 public class UIDashboardPanel extends UIElement
 {
@@ -42,15 +43,12 @@ public class UIDashboardPanel extends UIElement
     public void close()
     {}
 
-    public void reloadWorld()
-    {}
-
-    public void lastRender()
+    public void lastRender(WorldRenderContext context)
     {}
 
     public void update()
     {}
 
-    public void renderInWorld()
+    public void renderInWorld(WorldRenderContext context)
     {}
 }

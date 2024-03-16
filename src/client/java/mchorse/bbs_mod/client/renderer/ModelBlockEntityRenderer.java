@@ -5,6 +5,7 @@ import mchorse.bbs_mod.blocks.entities.ModelBlockEntity;
 import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.forms.renderers.FormRenderingContext;
+import mchorse.bbs_mod.graphics.Draw;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
@@ -33,6 +34,11 @@ public class ModelBlockEntityRenderer implements BlockEntityRenderer<ModelBlockE
                 .set(new StubEntity(), matrices, lightAbove, tickDelta)
                 .camera(MinecraftClient.getInstance().gameRenderer.getCamera()));
             RenderSystem.disableDepthTest();
+        }
+
+        if (MinecraftClient.getInstance().getDebugHud().shouldShowDebugHud())
+        {
+            Draw.renderBox(matrices, -0.5D, 0, -0.5D, 1, 1, 1, 0, 0.5F, 1F, 0.5F);
         }
 
         matrices.pop();

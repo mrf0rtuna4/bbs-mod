@@ -52,6 +52,7 @@ import mchorse.bbs_mod.utils.math.MathUtils;
 import mchorse.bbs_mod.utils.undo.CompoundUndo;
 import mchorse.bbs_mod.utils.undo.IUndo;
 import mchorse.bbs_mod.utils.undo.UndoManager;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import org.joml.Vector2i;
@@ -862,17 +863,17 @@ public class UIFilmPanel extends UIDataDashboardPanel<Film> implements IFlightSu
     }
 
     @Override
-    public void renderInWorld()
+    public void renderInWorld(WorldRenderContext context)
     {
-        super.renderInWorld();
+        super.renderInWorld(context);
 
         this.controller.renderFrame();
     }
 
     @Override
-    public void lastRender()
+    public void lastRender(WorldRenderContext context)
     {
-        super.lastRender();
+        super.lastRender(context);
 
         if (texture == null)
         {
