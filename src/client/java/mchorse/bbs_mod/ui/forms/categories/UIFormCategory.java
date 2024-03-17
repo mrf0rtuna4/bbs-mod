@@ -18,6 +18,7 @@ import mchorse.bbs_mod.ui.framework.elements.overlay.UIOverlay;
 import mchorse.bbs_mod.ui.framework.elements.overlay.UIPromptOverlayPanel;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.colors.Colors;
+import net.minecraft.client.render.DiffuseLighting;
 
 import java.util.ArrayList;
 import java.util.List;

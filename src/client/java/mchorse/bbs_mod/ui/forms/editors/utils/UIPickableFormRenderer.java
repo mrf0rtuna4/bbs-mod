@@ -10,6 +10,7 @@ import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.forms.editors.UIFormEditor;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.utils.StencilFormFramebuffer;
+import mchorse.bbs_mod.utils.MatrixStackUtils;
 import mchorse.bbs_mod.utils.Pair;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
@@ -124,7 +125,7 @@ public class UIPickableFormRenderer extends UIFormRenderer
 
         if (matrix != null)
         {
-            stack.multiplyPositionMatrix(matrix);
+            MatrixStackUtils.multiply(stack, matrix);
         }
 
         /* Draw axes */

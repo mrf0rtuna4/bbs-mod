@@ -1,7 +1,7 @@
 - [ ] Shaders for multi-link preview and subtitle renderer
 - [x] Form renderers
   - [x] Model rendering
-    - [ ] Fix normals
+    - [x] Fix normals
   - [ ] Body part rendering
   - [x] Extruded form rendering
     - [ ] Fix lack of diffuse lighting
@@ -28,7 +28,7 @@
   - [x] Add F3 indicators
   - [x] Add outline in 3d
   - [x] Add click picking
-  - [ ] Move to cursor (with ray tracing)
+  - [x] Move to cursor (with ray tracing)
 - [ ] More forms
   - [ ] Block form
   - [ ] Item form

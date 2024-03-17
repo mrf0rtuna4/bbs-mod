@@ -8,15 +8,18 @@ import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.graphics.window.Window;
 import mchorse.bbs_mod.ui.framework.UIContext;
 import mchorse.bbs_mod.ui.framework.elements.UIElement;
+import mchorse.bbs_mod.utils.MatrixStackUtils;
 import mchorse.bbs_mod.utils.math.MathUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
+import org.apache.commons.lang3.builder.Diff;
 import org.joml.Intersectiond;
 import org.joml.Matrix3d;
 import org.joml.Matrix4f;
@@ -223,8 +226,10 @@ public abstract class UIModelRenderer extends UIElement
         renderStack.pop();
 
         stack.push();
-        stack.multiplyPositionMatrix(this.camera.view);
+        MatrixStackUtils.multiply(stack, this.camera.view);
         stack.translate(-this.camera.position.x, -this.camera.position.y, -this.camera.position.z);
+
+        RenderSystem.setupLevelDiffuseLighting(new Vector3f(0, 0.85F, -1).normalize(), new Vector3f(0, 0.85F, 1).normalize(), this.camera.view);
 
         if (this.grid)
         {
@@ -232,6 +237,8 @@ public abstract class UIModelRenderer extends UIElement
         }
 
         this.renderUserModel(context);
+
+        DiffuseLighting.disableGuiDepthLighting();
 
         stack.pop();
 
@@ -241,7 +248,7 @@ public abstract class UIModelRenderer extends UIElement
 
         renderStack.push();
         renderStack.loadIdentity();
-        renderStack.multiplyPositionMatrix(oldMV);
+        MatrixStackUtils.multiply(stack, oldMV);
         RenderSystem.applyModelViewMatrix();
         renderStack.pop();
 

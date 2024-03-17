@@ -63,7 +63,7 @@ public class UIUtilityOverlayPanel extends UIOverlayPanel
         UIIcon models = new UIIcon(Icons.POSE, (b) ->
         {
             this.print("Reloading models");
-            // TODO: BBSModClient.getModels().reload();
+            BBSModClient.getModels().reload();
             this.close();
         });
         models.w(0).tooltip(UIKeys.UTILITY_RELOAD_MODELS);

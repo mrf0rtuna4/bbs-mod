@@ -19,6 +19,7 @@ import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.forms.forms.ModelForm;
 import mchorse.bbs_mod.resources.Link;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.utils.MatrixStackUtils;
 import mchorse.bbs_mod.utils.StringUtils;
 import mchorse.bbs_mod.utils.colors.Color;
 import mchorse.bbs_mod.utils.math.MathUtils;
@@ -111,7 +112,6 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             MatrixStack stack = context.batcher.getContext().getMatrices();
 
             stack.push();
-            stack.peek().getNormalMatrix().scale(1, -1, 1);
 
             float scale = (y2 - y1) / 2.5F;
             int x = x1 + (x2 - x1) / 2;
@@ -121,7 +121,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             this.uiMatrix.translate(x, y, 40);
             this.uiMatrix.scale(scale, -scale, scale);
             this.uiMatrix.rotateX(MathUtils.PI / 8);
-            this.uiMatrix.rotateY(MathUtils.toRad(context.getTickTransition()));
+            this.uiMatrix.rotateY(MathUtils.toRad(context.mouseX - (x1 + x2) / 2) + MathUtils.PI);
             this.uiMatrix.mul(this.form.transform.get(context.getTransition()).createMatrix());
 
             Link link = this.form.texture.get(context.getTransition());
@@ -133,13 +133,13 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             this.animator.applyActions(null, model.model, context.getTransition());
             model.model.apply(this.getPose(context.getTransition()));
 
-            stack.multiplyPositionMatrix(this.uiMatrix);
+            MatrixStackUtils.multiply(stack, this.uiMatrix);
 
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
             RenderSystem.depthFunc(GL11.GL_LEQUAL);
             RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentCullProgram);
 
-            this.renderModel(stack, model.model, LightmapTextureManager.pack(15, 15), color);
+            this.renderModel(stack, model.model, LightmapTextureManager.pack(15, 15), color, true);
 
             /* Render body parts */
             this.captureMatrices(model);
@@ -151,7 +151,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         }
     }
 
-    private void renderModel(MatrixStack stack, Model model, int light, Color color)
+    private void renderModel(MatrixStack stack, Model model, int light, Color color, boolean ui)
     {
         BufferBuilder builder = Tessellator.getInstance().getBuffer();
 
@@ -165,7 +165,14 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         renderProcessor.setColor(color.r, color.g, color.b, color.a);
 
         newStack.push();
-        newStack.multiplyPositionMatrix(stack.peek().getPositionMatrix());
+
+        if (ui)
+        {
+            newStack.peek().getNormalMatrix().scale(1F, -1F, 1F);
+        }
+
+        MatrixStackUtils.multiply(newStack, stack.peek().getPositionMatrix());
+
         CubicRenderer.processRenderModel(renderProcessor, builder, newStack, model);
         newStack.pop();
 
@@ -197,7 +204,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
             RenderSystem.setShaderTexture(0, BBSModClient.getTextures().getTexture(texture).id);
             RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentCullProgram);
 
-            this.renderModel(context.stack, model.model, context.light, color);
+            this.renderModel(context.stack, model.model, context.light, color, false);
 
             this.captureMatrices(model);
         }
@@ -253,7 +260,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
 
             if (matrix != null)
             {
-                context.stack.multiplyPositionMatrix(matrix);
+                MatrixStackUtils.multiply(context.stack, matrix);
             }
             else
             {
@@ -272,7 +279,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
     public void collectMatrices(IEntity entity, MatrixStack stack, Map<String, Matrix4f> matrices, String prefix, float transition)
     {
         stack.push();
-        stack.multiplyPositionMatrix(this.form.transform.get(transition).createMatrix());
+        MatrixStackUtils.multiply(stack, this.form.transform.get(transition).createMatrix());
 
         matrices.put(prefix, new Matrix4f(stack.peek().getPositionMatrix()));
 
@@ -293,7 +300,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
         for (Map.Entry<String, Matrix4f> entry : this.bones.entrySet())
         {
             stack.push();
-            stack.multiplyPositionMatrix(entry.getValue());
+            MatrixStackUtils.multiply(stack, entry.getValue());
             matrices.put(StringUtils.combinePaths(prefix, entry.getKey()), new Matrix4f(stack.peek().getPositionMatrix()));
             stack.pop();
         }
@@ -313,7 +320,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
 
                 if (matrix != null)
                 {
-                    stack.multiplyPositionMatrix(matrix);
+                    MatrixStackUtils.multiply(stack, matrix);
                 }
                 else
                 {
@@ -321,7 +328,7 @@ public class ModelFormRenderer extends FormRenderer<ModelForm> implements ITicka
                 }
 
                 stack.push();
-                stack.multiplyPositionMatrix(part.getTransform().createMatrix());
+                MatrixStackUtils.multiply(stack, part.getTransform().createMatrix());
 
                 FormRenderer formRenderer = FormUtilsClient.getRenderer(form);
 

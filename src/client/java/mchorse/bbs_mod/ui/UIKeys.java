@@ -529,6 +529,7 @@ public class UIKeys
     public static final IKey WORLD_KEYS_CYCLE_PANELS = L10n.lang("bbs.ui.world.keys.cycle_panels");
 
     public static final IKey MODEL_BLOCKS_TITLE = L10n.lang("bbs.ui.model_blocks.title", "Model blocks", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
+    public static final IKey MODEL_BLOCKS_KEYS_MOVE_TO = L10n.lang("bbs.ui.model_blocks.keys.move_to", "Move to", BLOCK_VARIANT_CONTEXT_INSERT_EMPTY);
 
     /* Utility */
     public static final IKey LANGUAGE_EDITOR_CONTEXT_COPY_KEY = L10n.lang("studio.ui.language.editor.context.copy_key");
@@ -556,7 +557,6 @@ public class UIKeys
     public static final IKey UTILITY_RELOAD_LABEL = L10n.lang("studio.ui.utility.reload");
     public static final IKey UTILITY_RELOAD_LANG = L10n.lang("studio.ui.utility.reload_lang");
     public static final IKey UTILITY_RELOAD_MODELS = L10n.lang("studio.ui.utility.reload_models");
-    public static final IKey UTILITY_RELOAD_SHADERS = L10n.lang("studio.ui.utility.reload_shaders");
     public static final IKey UTILITY_RELOAD_SOUNDS = L10n.lang("studio.ui.utility.reload_sounds");
     public static final IKey UTILITY_RELOAD_TERRAIN = L10n.lang("studio.ui.utility.reload_terrain");
     public static final IKey UTILITY_RELOAD_TEXTURES = L10n.lang("studio.ui.utility.reload_textures");

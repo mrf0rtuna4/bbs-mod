@@ -6,6 +6,8 @@ import mchorse.bbs_mod.forms.FormUtilsClient;
 import mchorse.bbs_mod.forms.entities.StubEntity;
 import mchorse.bbs_mod.forms.renderers.FormRenderingContext;
 import mchorse.bbs_mod.graphics.Draw;
+import mchorse.bbs_mod.utils.MatrixStackUtils;
+import mchorse.bbs_mod.utils.pose.Transform;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
@@ -21,11 +23,13 @@ public class ModelBlockEntityRenderer implements BlockEntityRenderer<ModelBlockE
     @Override
     public void render(ModelBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay)
     {
+        Transform transform = entity.getTransform();
+
         matrices.push();
         matrices.translate(0.5F, 0F, 0.5F);
-        matrices.multiplyPositionMatrix(entity.getTransform().createMatrix());
+        MatrixStackUtils.multiply(matrices, transform.createMatrix());
 
-        int lightAbove = WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos());
+        int lightAbove = WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().add((int) transform.translate.x, (int) transform.translate.y, (int) transform.translate.z));
 
         if (entity.getForm() != null)
         {

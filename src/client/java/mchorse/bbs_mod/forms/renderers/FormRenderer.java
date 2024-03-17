@@ -5,9 +5,9 @@ import mchorse.bbs_mod.forms.entities.IEntity;
 import mchorse.bbs_mod.forms.forms.BodyPart;
 import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.ui.framework.UIContext;
+import mchorse.bbs_mod.utils.MatrixStackUtils;
 import mchorse.bbs_mod.utils.StringUtils;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import org.joml.Matrix4f;
 
 import java.util.Collections;
@@ -40,7 +40,7 @@ public abstract class FormRenderer <T extends Form>
         boolean isPicking = false; // TODO: context instanceof UIRenderingContext && ((UIRenderingContext) context).getStencil().picking;
 
         context.stack.push();
-        context.stack.multiplyPositionMatrix(this.form.transform.get(context.getTransition()).createMatrix());
+        MatrixStackUtils.multiply(context.stack, this.form.transform.get(context.getTransition()).createMatrix());
 
         if (isPicking)
         {
@@ -91,7 +91,7 @@ public abstract class FormRenderer <T extends Form>
     public void collectMatrices(IEntity entity, MatrixStack stack, Map<String, Matrix4f> matrices, String prefix, float transition)
     {
         stack.push();
-        stack.multiplyPositionMatrix(this.form.transform.get(transition).createMatrix());
+        MatrixStackUtils.multiply(stack, this.form.transform.get(transition).createMatrix());
 
         matrices.put(prefix, new Matrix4f(stack.peek().getPositionMatrix()));
 
@@ -104,7 +104,7 @@ public abstract class FormRenderer <T extends Form>
             if (form != null)
             {
                 stack.push();
-                stack.multiplyPositionMatrix(part.getTransform().createMatrix());
+                MatrixStackUtils.multiply(stack, part.getTransform().createMatrix());
 
                 FormUtilsClient.getRenderer(form).collectMatrices(entity, stack, matrices, StringUtils.combinePaths(prefix, String.valueOf(i)), transition);
 

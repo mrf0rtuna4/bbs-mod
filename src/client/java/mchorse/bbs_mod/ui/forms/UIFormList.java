@@ -17,6 +17,7 @@ import mchorse.bbs_mod.ui.framework.elements.utils.FontRenderer;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.ui.utils.icons.Icons;
 import mchorse.bbs_mod.utils.colors.Colors;
+import net.minecraft.client.render.DiffuseLighting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,7 +178,11 @@ public class UIFormList extends UIElement
     @Override
     public void render(UIContext context)
     {
+        DiffuseLighting.enableGuiDepthLighting();
+
         super.render(context);
+
+        DiffuseLighting.disableGuiDepthLighting();
 
         /* Render form's display name and ID */
         Form selected = this.getSelected();

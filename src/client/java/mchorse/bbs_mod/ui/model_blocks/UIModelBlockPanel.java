@@ -6,6 +6,7 @@ import mchorse.bbs_mod.blocks.entities.ModelBlockEntity;
 import mchorse.bbs_mod.graphics.Draw;
 import mchorse.bbs_mod.mixin.client.WorldRendererMixin;
 import mchorse.bbs_mod.network.ClientNetwork;
+import mchorse.bbs_mod.ui.Keys;
 import mchorse.bbs_mod.ui.dashboard.UIDashboard;
 import mchorse.bbs_mod.ui.dashboard.panels.IFlightSupported;
 import mchorse.bbs_mod.ui.dashboard.panels.UIDashboardPanel;
@@ -17,11 +18,14 @@ import mchorse.bbs_mod.ui.framework.elements.input.UIPropTransform;
 import mchorse.bbs_mod.ui.framework.elements.input.list.UIStringList;
 import mchorse.bbs_mod.ui.utils.UI;
 import mchorse.bbs_mod.utils.AABB;
+import mchorse.bbs_mod.utils.RayTracing;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.chunk.ChunkBuilder;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3d;
@@ -35,6 +39,7 @@ public class UIModelBlockPanel extends UIDashboardPanel implements IFlightSuppor
 
     private ModelBlockEntity modelBlock;
     private ModelBlockEntity hovered;
+    private Vector3f mouseDirection = new Vector3f();
 
     public UIModelBlockPanel(UIDashboard dashboard)
     {
@@ -62,6 +67,22 @@ public class UIModelBlockPanel extends UIDashboardPanel implements IFlightSuppor
         scrollView.relative(this).w(200).h(1F);
 
         this.fill(null, false);
+
+        this.keys().register(Keys.MODEL_BLOCKS_MOVE_TO, () ->
+        {
+            MinecraftClient mc = MinecraftClient.getInstance();
+            Camera camera = mc.gameRenderer.getCamera();
+            BlockHitResult blockHitResult = RayTracing.rayTrace(mc.world, camera.getPos(), RayTracing.fromVector3f(this.mouseDirection), 64F);
+
+            if (blockHitResult.getType() != HitResult.Type.MISS)
+            {
+                Vec3d hit = blockHitResult.getPos();
+                BlockPos pos = this.modelBlock.getPos();
+
+                this.modelBlock.getTransform().translate.set(hit.x - pos.getX() - 0.5F, hit.y - pos.getY(), hit.z - pos.getZ() - 0.5F);
+                this.fillData();
+            }
+        }).active(() -> this.modelBlock != null);
 
         this.add(scrollView);
     }
@@ -118,14 +139,19 @@ public class UIModelBlockPanel extends UIDashboardPanel implements IFlightSuppor
 
         if (modelBlock != null)
         {
-            this.pickEdit.setForm(modelBlock.getForm());
-            this.transform.setTransform(modelBlock.getTransform());
+            this.fillData();
         }
 
         if (select)
         {
             this.modelBlocks.setCurrentScroll(modelBlock);
         }
+    }
+
+    private void fillData()
+    {
+        this.pickEdit.setForm(modelBlock.getForm());
+        this.transform.setTransform(modelBlock.getTransform());
     }
 
     private void save()
@@ -166,9 +192,12 @@ public class UIModelBlockPanel extends UIDashboardPanel implements IFlightSuppor
         x = (x - w2) / w2;
         y = (-y + h2) / h2;
 
-        Vector3f vector = mchorse.bbs_mod.camera.Camera.getMouseDirectionNormalized(RenderSystem.getProjectionMatrix(), context.matrixStack().peek().getPositionMatrix(), (float) x, (float) y);
-
-        this.hovered = this.getClosestObject(new Vector3d(pos.x, pos.y, pos.z), vector);
+        this.mouseDirection.set(mchorse.bbs_mod.camera.Camera.getMouseDirectionNormalized(
+            RenderSystem.getProjectionMatrix(),
+            context.matrixStack().peek().getPositionMatrix(),
+            (float) x, (float) y)
+        );
+        this.hovered = this.getClosestObject(new Vector3d(pos.x, pos.y, pos.z), this.mouseDirection);
 
         RenderSystem.enableDepthTest();
 
