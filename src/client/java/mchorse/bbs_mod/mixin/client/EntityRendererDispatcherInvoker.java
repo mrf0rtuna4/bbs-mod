@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface EntityRendererDispatcherInvoker
 {
     @Invoker("renderShadow")
-    public static void renderShadow(MatrixStack matrices, VertexConsumerProvider vertexConsumers, Entity entity, float opacity, float tickDelta, WorldView world, float radius)
+    public static void bbs$renderShadow(MatrixStack matrices, VertexConsumerProvider vertexConsumers, Entity entity, float opacity, float tickDelta, WorldView world, float radius)
     {}
 }
