@@ -1,4 +1,4 @@
-package mchorse.bbs_mod.supporters;
+package mchorse.bbs_mod.ui.supporters;
 
 import mchorse.bbs_mod.resources.Link;
 
