@@ -164,8 +164,8 @@ public class Supporters
         this.add("ROLL", "https://space.bilibili.com/4868856");
         this.add("ORDM 平凡的草民", "...", "...");
         this.add("纪夫Junly", "https://space.bilibili.com/19512037");
-        this.add("Pimpochka Games", "...", "...");
-        this.add("酷勒个白", "https://space.bilibili.com/41135516", "...");
+        this.add("Pimpochka Games", "https://pimpochka.games/", "...");
+        this.add("酷勒个白", "https://space.bilibili.com/41135516", "textures/banners/kuleigebai.png");
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
     }
 
