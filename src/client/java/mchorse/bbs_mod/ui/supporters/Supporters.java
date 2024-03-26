@@ -27,7 +27,7 @@ public class Supporters
         this.add("OoooorangeClover", "https://space.bilibili.com/3546579457805118/");
         this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "...");
         this.add("M1nNa");
-        this.add("ANDOG", "https://space.bilibili.com/25400883", "...");
+        this.add("ANDOG", "https://space.bilibili.com/25400883", "textures/banners/andog.png");
         this.add("Adfbulin");
         this.add("Relyonovo");
         this.add("老吴鸦", "...", "...");
@@ -164,7 +164,7 @@ public class Supporters
         this.add("ROLL", "https://space.bilibili.com/4868856");
         this.add("ORDM 平凡的草民", "...", "...");
         this.add("纪夫Junly", "https://space.bilibili.com/19512037");
-        this.add("Pimpochka Games", "https://pimpochka.games/", "...");
+        this.add("Pimpochka Games", "https://pimpochka.games/", "textures/banners/pimpochka_games.png");
         this.add("酷勒个白", "https://space.bilibili.com/41135516", "textures/banners/kuleigebai.png");
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
     }
