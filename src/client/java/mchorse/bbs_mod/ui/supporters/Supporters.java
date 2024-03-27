@@ -18,6 +18,7 @@ public class Supporters
         this.add("76823999");
         this.add("Silly_Sheep_");
         this.add("Rainbow Stars");
+        this.add("是老吴鸦", "https://space.bilibili.com/374757395");
         this.add("XiaoTu_MC", "https://v.douyin.com/iNwM4XEr/", "...");
         this.add("1749907");
         this.add("一身白装小兵这个");
@@ -126,7 +127,7 @@ public class Supporters
         this.add("brisk_citrus凉柑");
         this.add("FenrirKK");
         this.add("Frosty1239869");
-        this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "...");
+        this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "textures/banners/notsafe.png");
         this.add("ItsLunaz");
         this.add("渣暴风StorM", "https://space.bilibili.com/186424629");
         this.add("娱儿游", "https://space.bilibili.com/42973624");
@@ -166,6 +167,8 @@ public class Supporters
         this.add("纪夫Junly", "https://space.bilibili.com/19512037");
         this.add("Pimpochka Games", "https://pimpochka.games/", "textures/banners/pimpochka_games.png");
         this.add("酷勒个白", "https://space.bilibili.com/41135516", "textures/banners/kuleigebai.png");
+        this.add("一千兆赫", "https://space.bilibili.com/1199808099");
+        this.add("穷思鸡", "https://space.bilibili.com/9661047", "...");
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
     }
 
