@@ -109,7 +109,7 @@ public class Supporters
         this.add("临夜", "https://space.bilibili.com/1544935486");
         this.add("Sundown Story");
         this.add("Michael Creeper_", "https://twitter.com/MichaelCreeper", "...");
-        this.add("Hrymka", "...", "...");
+        this.add("Hrymka", "...", "textures/banners/hrymka.png");
         this.add("Rasty", "https://www.youtube.com/@RastyStudio");
         this.add("Clesten", "https://www.youtube.com/@clesten9475");
         this.add("Wenbai", "https://space.bilibili.com/697902619", "...");
