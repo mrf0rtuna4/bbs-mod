@@ -3,6 +3,7 @@ package mchorse.bbs_mod.ui.supporters;
 import mchorse.bbs_mod.resources.Link;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,198 +13,212 @@ public class Supporters
 
     public void setup()
     {
-        this.add("毫无人性的大麦纸", "https://space.bilibili.com/591074", "...");
-        this.add("Afica");
-        this.add("白某人是个萌新");
-        this.add("76823999");
-        this.add("Silly_Sheep_");
-        this.add("Rainbow Stars");
-        this.add("是老吴鸦", "https://space.bilibili.com/374757395");
-        this.add("XiaoTu_MC", "https://v.douyin.com/iNwM4XEr/", "...");
-        this.add("1749907");
-        this.add("一身白装小兵这个");
-        this.add("Fight凡子");
-        this.add("GODZILLA256", "https://space.bilibili.com/17798027", "...");
-        this.add("LiteCat");
-        this.add("OoooorangeClover", "https://space.bilibili.com/3546579457805118/");
-        this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "...");
-        this.add("M1nNa");
-        this.add("ANDOG", "https://space.bilibili.com/25400883", "textures/banners/andog.png");
-        this.add("Adfbulin");
-        this.add("Relyonovo");
-        this.add("老吴鸦", "...", "...");
-        this.add("一团糯米NuoMi");
-        this.add("第三位者");
-        this.add("望空希星", "https://space.bilibili.com/494577886", "...");
-        this.add("Nobody");
-        this.add("星星会说话");
-        this.add("一只蟠桃peach");
-        this.add("小猪之最");
-        this.add("tianqo");
-        this.add("暴碧Bobi");
-        this.add("Nullname");
-        this.add("l1ngisout", "https://space.bilibili.com/23839756", "...");
-        this.add("爆风BooM", "https://space.bilibili.com/308180216");
-        this.add("Seven_Chad", "https://twitter.com/seven_chad", "...");
-        this.add("Deal");
-        this.add("萱萱-3z", "https://space.bilibili.com/601994215", "...");
-        this.add("泥土NT_black", "...");
-        this.add("零雾〇五Fogg05");
-        this.add("篝火工作室");
-        this.add("0tt0258");
-        this.add("凤天", "https://space.bilibili.com/22348510");
-        this.add("暗影苦力怕", "https://space.bilibili.com/472637101", "...");
-        this.add("Zhesheng_1818", "https://www.youtube.com/channel/UC47jJ8OEHIdbq-H1xhwUzXA");
-        this.add("star_tan");
-        this.add("阿狐糊涂", "https://space.bilibili.com/3494374845450678");
-        this.add("开智同学");
-        this.add("绯色の白初");
-        this.add("GHL");
-        this.add("iamli541");
-        this.add("YuanMouRen");
-        this.add("PearballNeko");
-        this.add("九纳森九斯达", "https://space.bilibili.com/17696710");
-        this.add("超威乌龙喵", "https://space.bilibili.com/14359286");
-        this.add("LeaFire焰叶", "...");
-        this.add("chclmii1");
-        this.add("星辰不是瓜");
-        this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...");
-        this.add("Kirkus");
-        this.add("Tanner Walterman");
-        this.add("Rheed The Legend", "https://www.youtube.com/@rheedcraft");
-        this.add("fastvincent1");
-        this.add("CraZzZy Boy", "...");
-        this.add("Mor14");
-        this.add("B13 Pictures");
-        this.add("Satorik");
-        this.add("SkedgyEdgy", "https://www.youtube.com/skedgyedgy", "...");
-        this.add("Mr BurNik", "https://www.youtube.com/channel/UCnmttzfQHsBw0GefMToNwpA");
-        this.add("Joziah3", "https://www.youtube.com/channel/UC8cnHS3Ub_EEzuaESD8E-ow");
-        this.add("CreeperGoldMC");
-        this.add("Roma on youtube");
-        this.add("Markus");
-        this.add("JesseMauve", "https://www.youtube.com/@JesseMauve/videos");
-        this.add("DrGugl");
-        this.add("theFallEquinox");
-        this.add("Pixe_GUM");
-        this.add("RunnyHero");
-        this.add("Kludge");
-        this.add("seb024YT");
-        this.add("良辰 薛");
-        this.add("PracticeTyping");
-        this.add("GEVids", "https://www.youtube.com/c/GEVids", "...");
-        this.add("IPhonelover XD");
-        this.add("technodwarf", "https://www.youtube.com/@technodwarf");
-        this.add("Klalorathy", "...");
-        this.add("Pexiaus");
-        this.add("The Anime Protagonist", "https://www.youtube.com/@DuhAnimeProtagonist/featured");
-        this.add("wangyupu");
-        this.add("Wone_J", "https://space.bilibili.com/13505331");
-        this.add("资 云");
-        this.add("dustink", "https://space.bilibili.com/514637376");
-        this.add("Usaky舞麒", "https://space.bilibili.com/673732587", "...");
-        this.add("流风", "...", "...");
-        this.add("南风不知我意");
-        this.add("WATERMELON");
-        this.add("Tanis Gon");
-        this.add("临夜", "https://space.bilibili.com/1544935486");
-        this.add("Sundown Story");
-        this.add("Michael Creeper_", "https://twitter.com/MichaelCreeper", "...");
-        this.add("Hrymka", "...", "textures/banners/hrymka.png");
-        this.add("Rasty", "https://www.youtube.com/@RastyStudio");
-        this.add("Clesten", "https://www.youtube.com/@clesten9475");
-        this.add("Wenbai", "https://space.bilibili.com/697902619", "...");
-        this.add("骚老师的MC动画");
-        this.add("Jackey_lin", "...");
-        this.add("snifferpond");
-        this.add("Repeater");
-        this.add("HeimNad");
-        this.add("Minecraft地形师茶馆", "https://space.bilibili.com/3461578447915295");
-        this.add("Jmol", "https://space.bilibili.com/108360657");
-        this.add("小博ace");
-        this.add("Michql");
-        this.add("ESAT");
-        this.add("愉悦的hehe11", "...", "...");
-        this.add("brisk_citrus凉柑");
-        this.add("FenrirKK");
-        this.add("Frosty1239869");
-        this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "textures/banners/notsafe.png");
-        this.add("ItsLunaz");
-        this.add("渣暴风StorM", "https://space.bilibili.com/186424629");
-        this.add("娱儿游", "https://space.bilibili.com/42973624");
-        this.add("乐笑虾");
-        this.add("瑭玟", "...", "...");
-        this.add("江枫珧");
-        this.add("安仙_9487");
-        this.add("碎梦入行", "https://space.bilibili.com/34789774");
-        this.add("Bourner");
-        this.add("益之冰棍", "https://space.bilibili.com/70170627");
-        this.add("hao_yeah");
-        this.add("Giftia", "https://space.bilibili.com/59624348", "...");
-        this.add("Yu_Feng");
-        this.add("洛筠sama", "https://space.bilibili.com/2035820829");
-        this.add("小猪之最Thepig", "https://space.bilibili.com/381671770");
-        this.add("lkctrl");
-        this.add("飒爽师叔", "https://space.bilibili.com/22219285");
-        this.add("yeek");
-        this.add("mc47382");
-        this.add("浪濤", "https://space.bilibili.com/289923315", "...");
-        this.add("附魔粒子", "https://space.bilibili.com/455637223");
-        this.add("涅泪", "https://space.bilibili.com/326657199", "...");
-        this.add("冰林L", "https://space.bilibili.com/497979931");
-        this.add("问学巨酱", "https://space.bilibili.com/635615190");
-        this.add("慕华lingzi");
-        this.add("靈音Nemloi");
-        this.add("风尘WD");
-        this.add("QingDame");
-        this.add("InmoNum");
-        this.add("akirashio");
-        this.add("Starc Clans");
-        this.add("yancie", "https://space.bilibili.com/3186399/", "...");
-        this.add("凉茶是帅哥");
-        this.add("Ender_Moring UOP");
-        this.add("ROLL", "https://space.bilibili.com/4868856");
-        this.add("ORDM 平凡的草民", "...", "...");
-        this.add("纪夫Junly", "https://space.bilibili.com/19512037");
-        this.add("Pimpochka Games", "https://pimpochka.games/", "textures/banners/pimpochka_games.png");
-        this.add("酷勒个白", "https://space.bilibili.com/41135516", "textures/banners/kuleigebai.png");
-        this.add("一千兆赫", "https://space.bilibili.com/1199808099");
-        this.add("穷思鸡", "https://space.bilibili.com/9661047", "...");
+        /* Afdian */
+        this.add("76823999").withDate(2, 29);
+        this.add("Silly_Sheep_").withDate(2, 29);
+        this.add("毫无人性的大麦纸", "https://space.bilibili.com/591074", "...").withDate(2, 29);
+        this.add("Afica").withDate(2, 29);
+        this.add("XiaoTu_MC", "https://v.douyin.com/iNwM4XEr/", "...").withDate(3, 1);
+        this.add("一身白装小兵这个").withDate(3, 1);
+        this.add("Rainbow Stars").withDate(3, 1);
+        this.add("开智同学").withDate(3, 2);
+        this.add("Fight凡子").withDate(3, 2);
+        this.add("零雾〇五Fogg05").withDate(3, 2);
+        this.add("GODZILLA256", "https://space.bilibili.com/17798027", "...").withDate(3, 2);
+        this.add("LiteCat").withDate(3, 2);
+        this.add("一只蟠桃peach").withDate(3, 2);
+        this.add("tianqo").withDate(3, 3);
+        this.add("Tanis Gon").withDate(3, 3);
+        this.add("ERroooooR", "https://space.bilibili.com/3546579457805118/").withDate(3, 3);
+        this.add("澪L1ng", "https://space.bilibili.com/23839756", "...").withDate(3, 3);
+        this.add("爆风BooM", "https://space.bilibili.com/308180216").withDate(3, 3);
+        this.add("Seven_Chad", "https://twitter.com/seven_chad", "...").withDate(3, 3);
+        this.add("九纳森九斯达", "https://space.bilibili.com/17696710").withDate(3, 3);
+        this.add("Deal").withDate(3, 3);
+        this.add("凤天", "https://space.bilibili.com/22348510").withDate(3, 3);
+        this.add("萱萱-3z", "https://space.bilibili.com/601994215", "...").withDate(3, 3);
+        this.add("白某人是个萌新").withDate(3, 3);
+        this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "...").withDate(3, 3);
+        this.add("Adfbulin").withDate(3, 3);
+        this.add("方草块Minna").withDate(3, 3);
+        this.add("Zhesheng_1818", "https://www.youtube.com/@MetalStorm_Studio").withDate(3, 3);
+        this.add("暗影苦力怕 iter", "https://space.bilibili.com/472637101", "...").withDate(3, 3);
+        this.add("ANDOG", "https://space.bilibili.com/25400883", "textures/banners/andog.png").withDate(3, 3);
+        this.add("0tt0258").withDate(3, 3);
+        this.add("NT_black", "https://space.bilibili.com/22190116").withDate(3, 3);
+        this.add("iamli541").withDate(3, 3);
+        this.add("望空希星", "https://space.bilibili.com/494577886", "...").withDate(3, 3);
+        this.add("Relyonovo").withDate(3, 3);
+        this.add("是老吴鸦").withDate(3, 3);
+        this.add("一团糯米NuoMi").withDate(3, 3);
+        this.add("第三位者").withDate(3, 3);
+        this.add("星星会说话").withDate(3, 3);
+        this.add("Foreboding萧").withDate(3, 3);
+        this.add("篝火工作室").withDate(3, 3);
+        this.add("star_tan").withDate(3, 3);
+        this.add("绯色の白初").withDate(3, 3);
+        this.add("GHL").withDate(3, 3);
+        this.add("YuanMouRen").withDate(3, 3);
+        this.add("冰糖梨丸").withDate(3, 3);
+        this.add("LeaFire焰叶", "...").withDate(3, 3);
+        this.add("超威乌龙喵", "https://space.bilibili.com/14359286").withDate(3, 3);
+        this.add("稚名chclmii1", "https://space.bilibili.com/14359286").withDate(3, 3);
+        this.add("星辰不是瓜").withDate(3, 4);
+        this.add("暴碧Bobi").withDate(3, 4);
+        this.add("WATERMELON").withDate(3, 4);
+        this.add("无铭_Null").withDate(3, 4);
+        this.add("silent", "https://space.bilibili.com/514637376").withDate(3, 4);
+        this.add("Usaky舞麒", "https://space.bilibili.com/673732587", "...").withDate(3, 4);
+        this.add("流风LFloy", "...", "...").withDate(3, 4);
+        this.add("南风不知我意").withDate(3, 4);
+        this.add("临夜Livie", "https://space.bilibili.com/1544935486").withDate(3, 5);
+        this.add("小猪之最", "https://space.bilibili.com/381671770", "...").withDate(3, 6);
+        this.add("宁儿", "...", "...").withDate(3, 7);
+        this.add("Wenbai", "https://space.bilibili.com/697902619", "...").withDate(3, 8);
+        this.add("骚老师的MC动画").withDate(3, 9);
+        this.add("Jackey_lin", "...").withDate(3, 9);
+        this.add("HeimNad").withDate(3, 11);
+        this.add("Minecraft地形师茶馆", "https://space.bilibili.com/3461578447915295").withDate(3, 12);
+        this.add("Jmol", "https://space.bilibili.com/108360657").withDate(3, 13);
+        this.add("Repeater", "...").withDate(3, 13);
+        this.add("小博ace").withDate(3, 13);
+        this.add("EliSATfe_").withDate(3, 13);
+        this.add("愉悦的hehe11", "https://space.bilibili.com/3334737", "...").withDate(3, 14);
+        this.add("FenrirKK").withDate(3, 14);
+        this.add("乐笑虾").withDate(3, 14);
+        this.add("brisk_citrus凉柑").withDate(3, 14);
+        this.add("娱儿游", "https://space.bilibili.com/42973624").withDate(3, 15);
+        this.add("阿狐糊涂", "https://space.bilibili.com/3494374845450678").withDate(3, 15);
+        this.add("渣暴风StorM", "https://space.bilibili.com/186424629").withDate(3, 15);
+        this.add("瑭玟", "...", "...").withDate(3, 15);
+        this.add("hao_yeah").withDate(3, 16);
+        this.add("江枫珧").withDate(3, 16);
+        this.add("安仙_9487").withDate(3, 16);
+        this.add("碎梦入行", "https://space.bilibili.com/34789774").withDate(3, 16);
+        this.add("益之冰棍", "https://space.bilibili.com/70170627").withDate(3, 16);
+        this.add("Giftia", "https://space.bilibili.com/59624348", "...").withDate(3, 16);
+        this.add("Yu_Feng").withDate(3, 16);
+        this.add("洛筠sama", "https://space.bilibili.com/2035820829").withDate(3, 18);
+        this.add("lkctrl").withDate(3, 18);
+        this.add("飒爽师叔", "https://space.bilibili.com/22219285").withDate(3, 19);
+        this.add("yeek").withDate(3, 20);
+        this.add("mc47382").withDate(3, 20);
+        this.add("浪濤", "https://space.bilibili.com/289923315", "...").withDate(3, 20);
+        this.add("附魔粒子", "https://space.bilibili.com/45637223", "...").withDate(3, 22);
+        this.add("涅泪", "https://space.bilibili.com/326657199", "...").withDate(3, 22);
+        this.add("冰林L", "https://space.bilibili.com/497979931").withDate(3, 23);
+        this.add("问学巨酱", "https://space.bilibili.com/635615190").withDate(3, 23);
+        this.add("慕华lingzi").withDate(3, 23);
+        this.add("靈音Nemloi").withDate(3, 23);
+        this.add("风尘WD").withDate(3, 23);
+        this.add("QingDame").withDate(3, 23);
+        this.add("月影Yancie", "https://space.bilibili.com/3186399", "...").withDate(3, 24);
+        this.add("凉茶是帅哥").withDate(3, 24);
+        this.add("Ender_Moring UOP").withDate(3, 25);
+        this.add("lighting").withDate(3, 25);
+        this.add("扣肉", "https://space.bilibili.com/4868856").withDate(3, 25);
+        this.add("ORDM 平凡的草民", "https://space.bilibili.com/87734289", "...").withDate(3, 25);
+        this.add("纪夫Junly", "https://space.bilibili.com/19512037").withDate(3, 25);
+        this.add("酷勒个白", "https://space.bilibili.com/41135516", "textures/banners/kuleigebai.png").withDate(3, 26);
+        this.add("李开咕").withDate(3, 26);
+        this.add("一千兆赫", "https://space.bilibili.com/1199808099").withDate(3, 26);
+        this.add("穷思鸡", "https://space.bilibili.com/9661047", "...").withDate(3, 27);
+        this.add("轩的游戏日志", "https://space.bilibili.com/175442023").withDate(3, 30);
+
+        /* Patreon */
+        this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
+        this.add("Kirkus").withDate(2, 23);
+        this.add("Tanner Walterman").withDate(2, 23);
+        this.add("Rheed The Legend", "https://www.youtube.com/@rheedcraft").withDate(2, 23);
+        this.add("CraZzZy Boy", "...").withDate(2, 23);
+        this.add("fastvincent1").withDate(2, 23);
+        this.add("Mor14").withDate(2, 23);
+        this.add("B13 Pictures").withDate(2, 23);
+        this.add("Satorik").withDate(2, 23);
+        this.add("SkedgyEdgy", "https://www.youtube.com/skedgyedgy", "...").withDate(2, 23);
+        this.add("Mr BurNik", "https://www.youtube.com/channel/UCnmttzfQHsBw0GefMToNwpA").withDate(2, 23);
+        this.add("Joziah3", "https://www.youtube.com/channel/UC8cnHS3Ub_EEzuaESD8E-ow").withDate(2, 24);
+        this.add("CreeperGoldMC").withDate(2, 24);
+        this.add("Roma on YouTube").withDate(2, 24);
+        this.add("Markus").withDate(2, 24);
+        this.add("JesseMauve", "https://www.youtube.com/@JesseMauve/videos").withDate(2, 24);
+        this.add("DrGugl").withDate(2, 24);
+        this.add("theFallEquinox").withDate(2, 24);
+        this.add("Pixe_GUM").withDate(2, 25);
+        this.add("RunnyHero").withDate(2, 25);
+        this.add("Chunk7", "...", "...").withDate(2, 25);
+        this.add("Kludge").withDate(2, 25);
+        this.add("seb024YT").withDate(2, 27);
+        this.add("良辰 薛").withDate(2, 27);
+        this.add("PracticeTyping").withDate(2, 27);
+        this.add("GEVids", "https://www.youtube.com/c/GEVids", "...").withDate(2, 27);
+        this.add("IPhonelover XD").withDate(2, 28);
+        this.add("Klalorathy", "...").withDate(2, 29);
+        this.add("technodwarf", "https://www.youtube.com/@technodwarf").withDate(2, 29);
+        this.add("Pexiaus").withDate(3, 1);
+        this.add("The Anime Protagonist", "https://www.youtube.com/@DuhAnimeProtagonist/featured").withDate(3, 1);
+        this.add("wangyupu").withDate(3, 2);
+        this.add("Wone_J", "https://space.bilibili.com/13505331").withDate(3, 2);
+        this.add("资 云").withDate(3, 4);
+        this.add("Michael Creeper_", "https://twitter.com/MichaelCreeper", "...").withDate(3, 5);
+        this.add("Sundown Story").withDate(3, 5);
+        this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "textures/banners/notsafe.png").withDate(3, 8);
+        this.add("sniffierpond").withDate(3, 10);
+        this.add("Michql").withDate(3, 12);
+        this.add("Frosty1239869").withDate(3, 13);
+        this.add("ItsLunaz").withDate(3, 14);
+        this.add("Bourner").withDate(3, 16);
+        this.add("N. Popovich").withDate(3, 18);
+        this.add("InmoNum").withDate(3, 23);
+        this.add("akirashio").withDate(3, 24);
+        this.add("StarcClans").withDate(3, 24);
+        this.add("Pimpochka Games", "https://pimpochka.games/", "textures/banners/pimpochka_games.png").withDate(3, 25);
+        this.add("Nioum").withDate(3, 27);
+        this.add("D. Janvier").withDate(3, 27);
+
+        /* Custom */
+        this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
+        this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
+        this.add("Clesten", "https://www.youtube.com/@clesten9475").withDate(3, 6);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
     }
 
-    private void add(String name)
+    private Supporter add(String name)
     {
-        this.add(name, "");
+        return this.add(name, "");
     }
 
-    private void add(String name, String link)
+    private Supporter add(String name, String link)
     {
-        this.add(name, link, (Link) null);
+        return this.add(name, link, (Link) null);
     }
 
-    private void add(String name, String link, String banner)
+    private Supporter add(String name, String link, String banner)
     {
-        this.add(name, link, Link.create(banner));
+        return this.add(name, link, Link.create(banner));
     }
 
-    private void add(String name, String link, Link banner)
+    private Supporter add(String name, String link, Link banner)
     {
-        this.supporters.add(new Supporter(name, link, banner));
+        Supporter supporter = new Supporter(name, link, banner);
+
+        this.supporters.add(supporter);
+
+        return supporter;
     }
 
     public List<Supporter> getBBSEarlyAccessSupporters()
     {
-        return this.supporters.stream().filter(Supporter::hasOnlyName).collect(Collectors.toList());
+        return this.supporters.stream().filter(Supporter::hasOnlyName).sorted(Comparator.comparing((a) -> a.date)).collect(Collectors.toList());
     }
 
     public List<Supporter> getSuperSupporters()
     {
-        return this.supporters.stream().filter(Supporter::hasNoBanner).collect(Collectors.toList());
+        return this.supporters.stream().filter(Supporter::hasNoBanner).sorted(Comparator.comparing((a) -> a.date)).collect(Collectors.toList());
     }
 
     public List<Supporter> getCCSupporters()
     {
-        return this.supporters.stream().filter(Supporter::hasBanner).collect(Collectors.toList());
+        return this.supporters.stream().filter(Supporter::hasBanner).sorted(Comparator.comparing((a) -> a.date)).collect(Collectors.toList());
     }
 }
