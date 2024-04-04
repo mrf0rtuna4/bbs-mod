@@ -24,19 +24,19 @@ public class Supporters
         this.add("开智同学").withDate(3, 2);
         this.add("Fight凡子").withDate(3, 2);
         this.add("零雾〇五Fogg05").withDate(3, 2);
-        this.add("GODZILLA256", "https://space.bilibili.com/17798027", "...").withDate(3, 2);
+        this.add("GODZILLA256", "https://space.bilibili.com/17798027", "textures/banners/GODZILLA256.png").withDate(3, 2);
         this.add("LiteCat").withDate(3, 2);
         this.add("一只蟠桃peach").withDate(3, 2);
         this.add("tianqo").withDate(3, 3);
         this.add("Tanis Gon").withDate(3, 3);
         this.add("ERroooooR", "https://space.bilibili.com/3546579457805118/").withDate(3, 3);
-        this.add("澪L1ng", "https://space.bilibili.com/23839756", "...").withDate(3, 3);
+        this.add("澪L1ng", "https://space.bilibili.com/23839756", "textures/banners/L1ng.png").withDate(3, 3);
         this.add("爆风BooM", "https://space.bilibili.com/308180216").withDate(3, 3);
         this.add("Seven_Chad", "https://twitter.com/seven_chad", "...").withDate(3, 3);
         this.add("九纳森九斯达", "https://space.bilibili.com/17696710").withDate(3, 3);
         this.add("Deal").withDate(3, 3);
         this.add("凤天", "https://space.bilibili.com/22348510").withDate(3, 3);
-        this.add("萱萱-3z", "https://space.bilibili.com/601994215", "...").withDate(3, 3);
+        this.add("萱萱-3z", "https://space.bilibili.com/601994215", "textures/banners/Xuanxuan.png").withDate(3, 3);
         this.add("白某人是个萌新").withDate(3, 3);
         this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "...").withDate(3, 3);
         this.add("Adfbulin").withDate(3, 3);
@@ -172,9 +172,12 @@ public class Supporters
         this.add("InmoNum").withDate(3, 23);
         this.add("akirashio").withDate(3, 24);
         this.add("StarcClans").withDate(3, 24);
+        this.add("Jakinho", "https://www.youtube.com/@Jakinho", "...").withDate(3, 24);
         this.add("Pimpochka Games", "https://pimpochka.games/", "textures/banners/pimpochka_games.png").withDate(3, 25);
         this.add("Nioum").withDate(3, 27);
         this.add("D. Janvier").withDate(3, 27);
+        this.add("Malley").withDate(4, 1);
+        this.add("FunkyFight", "https://www.youtube.com/@FunkyFight", "textures/banners/funkyfight.png").withDate(4, 2);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
