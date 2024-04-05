@@ -124,6 +124,8 @@ public class Supporters
         this.add("一千兆赫", "https://space.bilibili.com/1199808099").withDate(3, 26);
         this.add("穷思鸡", "https://space.bilibili.com/9661047", "...").withDate(3, 27);
         this.add("轩的游戏日志", "https://space.bilibili.com/175442023").withDate(3, 30);
+        this.add("Saki_Rong").withDate(4, 2);
+        this.add("Q").withDate(4, 5);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -178,6 +180,9 @@ public class Supporters
         this.add("D. Janvier").withDate(3, 27);
         this.add("Malley").withDate(4, 1);
         this.add("FunkyFight", "https://www.youtube.com/@FunkyFight", "textures/banners/funkyfight.png").withDate(4, 2);
+        this.add("FaithStudios").withDate(4, 2);
+        this.add("I. Dmitriyev").withDate(4, 4);
+        this.add("Schneider", "https://www.youtube.com/@SchneiderGamesOFC").withDate(4, 5);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
