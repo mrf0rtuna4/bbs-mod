@@ -74,7 +74,7 @@ public class Supporters
         this.add("临夜Livie", "https://space.bilibili.com/1544935486").withDate(3, 5);
         this.add("小猪之最", "https://space.bilibili.com/381671770", "...").withDate(3, 6);
         this.add("宁儿", "...", "...").withDate(3, 7);
-        this.add("Wenbai", "https://space.bilibili.com/697902619", "...").withDate(3, 8);
+        this.add("Wenbai", "https://space.bilibili.com/697902619", "textures/banners/wenbai.png").withDate(3, 8);
         this.add("骚老师的MC动画").withDate(3, 9);
         this.add("Jackey_lin", "...").withDate(3, 9);
         this.add("HeimNad").withDate(3, 11);
@@ -126,6 +126,8 @@ public class Supporters
         this.add("轩的游戏日志", "https://space.bilibili.com/175442023").withDate(3, 30);
         this.add("Saki_Rong").withDate(4, 2);
         this.add("Q").withDate(4, 5);
+        this.add("ms影月").withDate(4, 6);
+        this.add("夏月琳櫻").withDate(4, 6);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
