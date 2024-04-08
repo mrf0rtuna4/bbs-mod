@@ -190,6 +190,7 @@ public class Supporters
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
         this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
         this.add("Clesten", "https://www.youtube.com/@clesten9475").withDate(3, 6);
+        this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "...").withDate(4, 8);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
     }
 
