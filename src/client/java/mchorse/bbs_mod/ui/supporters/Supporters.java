@@ -128,6 +128,10 @@ public class Supporters
         this.add("Q").withDate(4, 5);
         this.add("ms影月").withDate(4, 6);
         this.add("夏月琳櫻").withDate(4, 6);
+        this.add("四维灵动").withDate(4, 6);
+        this.add("Msy默笙", "https://space.bilibili.com/284586643").withDate(4, 7);
+        this.add("逢山栖影", "https://space.bilibili.com/453945116").withDate(4, 10);
+        this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -192,6 +196,8 @@ public class Supporters
         this.add("Clesten", "https://www.youtube.com/@clesten9475").withDate(3, 6);
         this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "...").withDate(4, 8);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
+
+        // TODO: Add donators who didn't provide name or under BBS early access tier
     }
 
     private Supporter add(String name)
