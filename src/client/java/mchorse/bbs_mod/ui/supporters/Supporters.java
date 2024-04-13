@@ -132,6 +132,8 @@ public class Supporters
         this.add("Msy默笙", "https://space.bilibili.com/284586643").withDate(4, 7);
         this.add("逢山栖影", "https://space.bilibili.com/453945116").withDate(4, 10);
         this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
+        this.add("诺麟煌").withDate(4, 12);
+        this.add("陈佬C.频", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -189,6 +191,8 @@ public class Supporters
         this.add("FaithStudios").withDate(4, 2);
         this.add("I. Dmitriyev").withDate(4, 4);
         this.add("Schneider", "https://www.youtube.com/@SchneiderGamesOFC").withDate(4, 5);
+        this.add("FaithStudios").withDate(4, 5);
+        this.add("Nightie").withDate(4, 10);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
