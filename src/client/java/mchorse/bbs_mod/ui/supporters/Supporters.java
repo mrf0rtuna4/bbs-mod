@@ -193,6 +193,13 @@ public class Supporters
         this.add("Schneider", "https://www.youtube.com/@SchneiderGamesOFC").withDate(4, 5);
         this.add("FaithStudios").withDate(4, 5);
         this.add("Nightie").withDate(4, 10);
+        this.add("P. C. Thái", "...").withDate(4, 11);
+        this.add("Ylizioo").withDate(4, 12);
+        this.add("NEMO").withDate(4, 12);
+        this.add("Exotic Domo Sniper", "...").withDate(4, 12);
+        this.add("Sir Sean").withDate(4, 12);
+        this.add("Man").withDate(4, 13);
+        this.add("이TV 달").withDate(4, 13);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
