@@ -133,7 +133,7 @@ public class Supporters
         this.add("逢山栖影", "https://space.bilibili.com/453945116").withDate(4, 10);
         this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
         this.add("诺麟煌").withDate(4, 12);
-        this.add("陈佬C.频", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
+        this.add("陈佬C", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -165,6 +165,10 @@ public class Supporters
         this.add("IPhonelover XD").withDate(2, 28);
         this.add("Klalorathy", "...").withDate(2, 29);
         this.add("technodwarf", "https://www.youtube.com/@technodwarf").withDate(2, 29);
+        this.add("LINKYAM9").withDate(3, 1);
+        this.add("Hermeticlock", "https://www.youtube.com/channel/UCbeyfcexbuO7NalTJn9akTw").withDate(3, 1);
+        this.add("ぶろう").withDate(3, 1);
+        this.add("Naos", "...").withDate(3, 1);
         this.add("Pexiaus").withDate(3, 1);
         this.add("The Anime Protagonist", "https://www.youtube.com/@DuhAnimeProtagonist/featured").withDate(3, 1);
         this.add("wangyupu").withDate(3, 2);
@@ -200,6 +204,7 @@ public class Supporters
         this.add("Sir Sean").withDate(4, 12);
         this.add("Man").withDate(4, 13);
         this.add("이TV 달").withDate(4, 13);
+        this.add("Terry Bleuh", "https://www.youtube.com/@TerryBleuh/featured").withDate(4, 15);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
@@ -208,7 +213,17 @@ public class Supporters
         this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "...").withDate(4, 8);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
 
-        // TODO: Add donators who didn't provide name or under BBS early access tier
+        int afdian = 5;
+        int patreon = 0;
+        int total = afdian + patreon;
+
+        this.add("And " + total + " others...", "...");
+
+        afdian = 16;
+        patreon = 2;
+        total = afdian + patreon;
+
+        this.add("And " + total + " others...");
     }
 
     private Supporter add(String name)
