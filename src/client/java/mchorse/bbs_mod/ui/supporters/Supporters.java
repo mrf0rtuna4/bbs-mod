@@ -134,6 +134,7 @@ public class Supporters
         this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
         this.add("诺麟煌").withDate(4, 12);
         this.add("陈佬C", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
+        this.add("叶落空留白").withDate(4, 18);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
