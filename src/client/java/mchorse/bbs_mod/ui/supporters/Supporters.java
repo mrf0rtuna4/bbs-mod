@@ -135,6 +135,8 @@ public class Supporters
         this.add("诺麟煌").withDate(4, 12);
         this.add("陈佬C", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
         this.add("叶落空留白").withDate(4, 18);
+        this.add("银蝶餐饮工作室").withDate(4, 19);
+        this.add("明光凯").withDate(4, 20);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -208,6 +210,9 @@ public class Supporters
         this.add("Terry Bleuh", "https://www.youtube.com/@TerryBleuh/featured").withDate(4, 15);
         this.add("2TK_craft").withDate(4, 17);
         this.add("poplistic").withDate(4, 17);
+        this.add("mrPixBro").withDate(4, 18);
+        this.add("R. Gallardo", "...").withDate(4, 20);
+        this.add("Lucky Pickle62", "...").withDate(4, 20);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
