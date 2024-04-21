@@ -183,7 +183,7 @@ public class Supporters
         this.add("Sundown Story").withDate(3, 5);
         this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "textures/banners/notsafe.png").withDate(3, 8);
         this.add("sniffierpond").withDate(3, 10);
-        this.add("Michql").withDate(3, 12);
+        this.add("Geno").withDate(3, 12);
         this.add("Frosty1239869").withDate(3, 13);
         this.add("ItsLunaz").withDate(3, 14);
         this.add("Bourner").withDate(3, 16);
@@ -215,6 +215,11 @@ public class Supporters
         this.add("mrPixBro").withDate(4, 18);
         this.add("R. Gallardo", "...").withDate(4, 20);
         this.add("Lucky Pickle62", "...").withDate(4, 20);
+        this.add("Positive Vibes Only").withDate(4, 21);
+        this.add("Little.Froggy").withDate(4, 21);
+        this.add("Mister Yo").withDate(4, 21);
+        this.add("jDeV7").withDate(4, 21);
+        this.add("BBPC").withDate(4, 21);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
