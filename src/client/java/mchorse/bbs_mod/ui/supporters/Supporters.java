@@ -151,7 +151,7 @@ public class Supporters
         this.add("B13 Pictures").withDate(2, 23);
         this.add("Satorik").withDate(2, 23);
         this.add("SkedgyEdgy", "https://www.youtube.com/skedgyedgy", "...").withDate(2, 23);
-        this.add("Mr BurNik", "https://www.youtube.com/channel/UCnmttzfQHsBw0GefMToNwpA").withDate(2, 23);
+        this.add("MrBurNik", "https://www.youtube.com/channel/UCnmttzfQHsBw0GefMToNwpA").withDate(2, 23);
         this.add("Joziah3", "https://www.youtube.com/channel/UC8cnHS3Ub_EEzuaESD8E-ow").withDate(2, 24);
         this.add("CreeperGoldMC").withDate(2, 24);
         this.add("Roma on YouTube").withDate(2, 24);
@@ -214,12 +214,17 @@ public class Supporters
         this.add("poplistic").withDate(4, 17);
         this.add("mrPixBro").withDate(4, 18);
         this.add("R. Gallardo", "...").withDate(4, 20);
-        this.add("Lucky Pickle62", "...").withDate(4, 20);
+        this.add("LuckyPickle", "https://www.youtube.com/@luckypicklex").withDate(4, 20);
         this.add("Positive Vibes Only").withDate(4, 21);
         this.add("Little.Froggy").withDate(4, 21);
-        this.add("Mister Yo").withDate(4, 21);
+        this.add("AND_010").withDate(4, 21);
         this.add("jDeV7").withDate(4, 21);
         this.add("BBPC").withDate(4, 21);
+        this.add("NEXT ENTERTAINMENT STUDIOS").withDate(4, 21);
+        this.add("ZoGa", "...", "...").withDate(4, 22);
+        this.add("Jivalon").withDate(4, 22);
+        this.add("Croc").withDate(4, 22);
+        this.add("P1asmaDev", "...").withDate(4, 23);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
