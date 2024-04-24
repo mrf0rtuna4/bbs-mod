@@ -185,7 +185,7 @@ public class Supporters
         this.add("sniffierpond").withDate(3, 10);
         this.add("Geno").withDate(3, 12);
         this.add("Frosty1239869").withDate(3, 13);
-        this.add("ItsLunaz").withDate(3, 14);
+        this.add("LunazStudios", "https://twitter.com/LunazStudios").withDate(3, 14);
         this.add("Bourner").withDate(3, 16);
         this.add("N. Popovich").withDate(3, 18);
         this.add("InmoNum").withDate(3, 23);
