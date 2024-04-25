@@ -225,6 +225,7 @@ public class Supporters
         this.add("Jivalon").withDate(4, 22);
         this.add("Croc").withDate(4, 22);
         this.add("P1asmaDev", "...").withDate(4, 23);
+        this.add("SergiDPlay", "...").withDate(4, 23);
         this.add("sollymcwolly").withDate(4, 23);
 
         /* Custom */
