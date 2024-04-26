@@ -134,7 +134,7 @@ public class Supporters
         this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
         this.add("诺麟煌").withDate(4, 12);
         this.add("陈佬C", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
-        this.add("omo仙贝", "...", "...").withDate(4, 16);
+        this.add("omo仙贝", "https://space.bilibili.com/1959304255", "...").withDate(4, 16);
         this.add("叶落空留白").withDate(4, 18);
         this.add("银蝶餐饮工作室").withDate(4, 19);
         this.add("-叶落空留白-").withDate(4, 19);
@@ -207,7 +207,7 @@ public class Supporters
         this.add("Jekipung").withDate(4, 12);
         this.add("Exotic Domo Sniper", "...").withDate(4, 12);
         this.add("Sir Sean").withDate(4, 12);
-        this.add("Man").withDate(4, 13);
+        this.add("JohnJoyBillion").withDate(4, 13);
         this.add("이TV 달").withDate(4, 13);
         this.add("Terry Bleuh", "https://www.youtube.com/@TerryBleuh/featured").withDate(4, 15);
         this.add("2TK_craft").withDate(4, 17);
@@ -227,6 +227,8 @@ public class Supporters
         this.add("P1asmaDev", "...").withDate(4, 23);
         this.add("SergiDPlay", "https://www.youtube.com/channel/UCt9X0GcCz7s1kjV33VEqEcA").withDate(4, 23);
         this.add("sollymcwolly").withDate(4, 23);
+        this.add("Kaguno").withDate(4, 25);
+        this.add("Si-ko").withDate(4, 25);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
