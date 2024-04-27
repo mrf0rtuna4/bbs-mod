@@ -170,7 +170,7 @@ public class Supporters
         this.add("IPhonelover XD").withDate(2, 28);
         this.add("Klalorathy", "...").withDate(2, 29);
         this.add("technodwarf", "https://www.youtube.com/@technodwarf").withDate(2, 29);
-        this.add("LINKYAM9").withDate(3, 1);
+        this.add("Linkyam9").withDate(3, 1);
         this.add("Hermeticlock", "https://www.youtube.com/channel/UCbeyfcexbuO7NalTJn9akTw").withDate(3, 1);
         this.add("ぶろう").withDate(3, 1);
         this.add("Naos", "...").withDate(3, 1);
