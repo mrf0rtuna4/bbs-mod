@@ -139,6 +139,13 @@ public class Supporters
         this.add("银蝶餐饮工作室").withDate(4, 19);
         this.add("-叶落空留白-").withDate(4, 19);
         this.add("明光凯").withDate(4, 20);
+        this.add("JzAa饺子", "https://space.bilibili.com/1048696948").withDate(4, 25);
+        this.add("梓轩", "https://space.bilibili.com/1048696948").withDate(4, 25);
+        this.add("omo", "...", "...").withDate(4, 25);
+        this.add("我的世界萧鲲", "https://www.kuaishou.com/profile/3xxtz6m845v7pmg").withDate(4, 26);
+        this.add("搞笑男", "https://www.kuaishou.com/profile/3x3m75n5hat7wx2").withDate(4, 26);
+        this.add("HYN").withDate(4, 26);
+        this.add("Fanconma").withDate(4, 27);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -229,6 +236,33 @@ public class Supporters
         this.add("sollymcwolly").withDate(4, 23);
         this.add("Kaguno").withDate(4, 25);
         this.add("Si-ko").withDate(4, 25);
+        this.add("LuanLGH").withDate(4, 26);
+        this.add("TristanNLD", "...").withDate(4, 26);
+        this.add("Endiversum").withDate(4, 26);
+        this.add("Old Account").withDate(4, 26);
+        this.add("Austin").withDate(4, 26);
+        this.add("Furious Clash", "...").withDate(4, 26);
+        this.add("Shawn H.").withDate(4, 26);
+        this.add("LittleLightz").withDate(4, 26);
+        this.add("Slightly Insulting Productions").withDate(4, 26);
+        this.add("GarzyField", "...").withDate(4, 26);
+        this.add("Gabriel Dametto").withDate(4, 26);
+        this.add("Ninja2die").withDate(4, 26);
+        this.add("Anniken").withDate(4, 26);
+        this.add("Dysthy").withDate(4, 26);
+        this.add("DonFuria").withDate(4, 26);
+        this.add("Pedro M.").withDate(4, 26);
+        this.add("Diss4").withDate(4, 26);
+        this.add("Pipat P.").withDate(4, 27);
+        this.add("고대고래 xOz6").withDate(4, 27);
+        this.add("Monana time").withDate(4, 27);
+        this.add("LFM").withDate(4, 27);
+        this.add("PoopSolider").withDate(4, 27);
+        this.add("TheGamerstree").withDate(4, 27);
+        this.add("Юрий М.").withDate(4, 27);
+        this.add("Freddy Liu").withDate(4, 27);
+        this.add("깃발 김").withDate(4, 27);
+        this.add("Julien R.").withDate(4, 27);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
