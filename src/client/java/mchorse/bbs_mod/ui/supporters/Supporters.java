@@ -157,7 +157,7 @@ public class Supporters
         this.add("Mor14").withDate(2, 23);
         this.add("B13 Pictures").withDate(2, 23);
         this.add("Satorik").withDate(2, 23);
-        this.add("SkedgyEdgy", "https://www.youtube.com/skedgyedgy", "...").withDate(2, 23);
+        this.add("SkedgyEdgy", "https://www.youtube.com/skedgyedgy", "textures/banners/skedgyedgy.png").withDate(2, 23);
         this.add("MrBurNik", "https://www.youtube.com/channel/UCnmttzfQHsBw0GefMToNwpA").withDate(2, 23);
         this.add("Joziah3", "https://www.youtube.com/channel/UC8cnHS3Ub_EEzuaESD8E-ow").withDate(2, 24);
         this.add("CreeperGoldMC").withDate(2, 24);
@@ -237,7 +237,7 @@ public class Supporters
         this.add("Kaguno").withDate(4, 25);
         this.add("Si-ko").withDate(4, 25);
         this.add("LuanLGH").withDate(4, 26);
-        this.add("TristanNLD", "...").withDate(4, 26);
+        this.add("TristanNLD", "https://www.youtube.com/channel/UCIx2ao8z9bryI7rvIl5Yszg").withDate(4, 26);
         this.add("Endiversum").withDate(4, 26);
         this.add("Old Account").withDate(4, 26);
         this.add("Austin").withDate(4, 26);
@@ -245,7 +245,7 @@ public class Supporters
         this.add("Shawn H.").withDate(4, 26);
         this.add("LittleLightz").withDate(4, 26);
         this.add("Slightly Insulting Productions").withDate(4, 26);
-        this.add("GarzyField", "...").withDate(4, 26);
+        this.add("GarzyField", "https://www.youtube.com/@GarzyField").withDate(4, 26);
         this.add("Gabriel Dametto").withDate(4, 26);
         this.add("Ninja2die").withDate(4, 26);
         this.add("Anniken").withDate(4, 26);
@@ -255,7 +255,7 @@ public class Supporters
         this.add("Diss4").withDate(4, 26);
         this.add("Pipat P.").withDate(4, 27);
         this.add("고대고래 xOz6").withDate(4, 27);
-        this.add("Monana time").withDate(4, 27);
+        this.add("Monanatime").withDate(4, 27);
         this.add("LFM").withDate(4, 27);
         this.add("PoopSolider").withDate(4, 27);
         this.add("TheGamerstree").withDate(4, 27);
@@ -263,12 +263,19 @@ public class Supporters
         this.add("Freddy Liu").withDate(4, 27);
         this.add("깃발 김").withDate(4, 27);
         this.add("Julien R.").withDate(4, 27);
+        this.add("Tuguim").withDate(4, 27);
+
+        /* Boosty */
+        this.add("MRkoteich").withDate(4, 27);
+        this.add("Mait53").withDate(4, 27);
+        this.add("Osas").withDate(4, 27);
+        this.add("JhonParker").withDate(4, 27);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
         this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
         this.add("Clesten", "https://www.youtube.com/@clesten9475").withDate(3, 6);
-        this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "...").withDate(4, 8);
+        this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "textures/banners/afegor.png").withDate(4, 8);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
 
         int afdian = 5;
