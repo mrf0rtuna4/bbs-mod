@@ -244,7 +244,7 @@ public class Supporters
         this.add("Furious Clash", "...").withDate(4, 26);
         this.add("Shawn H.").withDate(4, 26);
         this.add("LittleLightz").withDate(4, 26);
-        this.add("Slightly Insulting Productions").withDate(4, 26);
+        this.add("Slightly Insulting").withDate(4, 26);
         this.add("GarzyField", "https://www.youtube.com/@GarzyField").withDate(4, 26);
         this.add("Gabriel Dametto").withDate(4, 26);
         this.add("Ninja2die").withDate(4, 26);
@@ -253,7 +253,7 @@ public class Supporters
         this.add("DonFuria").withDate(4, 26);
         this.add("Pedro M.").withDate(4, 26);
         this.add("Diss4").withDate(4, 26);
-        this.add("Pipat P.").withDate(4, 27);
+        this.add("Chicky").withDate(4, 27);
         this.add("고대고래 xOz6").withDate(4, 27);
         this.add("Monanatime").withDate(4, 27);
         this.add("LFM").withDate(4, 27);
@@ -272,6 +272,9 @@ public class Supporters
         this.add("JhonParker").withDate(4, 27);
         this.add("Stylent", "...").withDate(4, 28);
         this.add("The Mine Pixel Cool Studio").withDate(4, 28);
+        this.add("KIZRUM").withDate(4, 28);
+        this.add("KrabovayPolochka").withDate(4, 28);
+        this.add("ЦитРусня").withDate(4, 28);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
