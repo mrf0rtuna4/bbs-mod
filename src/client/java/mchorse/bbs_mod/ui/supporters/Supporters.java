@@ -270,6 +270,8 @@ public class Supporters
         this.add("Mait53").withDate(4, 27);
         this.add("Osas").withDate(4, 27);
         this.add("JhonParker").withDate(4, 27);
+        this.add("Stylent", "...").withDate(4, 28);
+        this.add("The Mine Pixel Cool Studio").withDate(4, 28);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
