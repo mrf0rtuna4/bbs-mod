@@ -280,6 +280,7 @@ public class Supporters
         this.add("LENb3").withDate(4, 28);
         this.add("crack_arab").withDate(4, 29);
         this.add("Babidgon24").withDate(4, 29);
+        this.add("Skorvod").withDate(4, 29);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
