@@ -275,6 +275,11 @@ public class Supporters
         this.add("KIZRUM").withDate(4, 28);
         this.add("KrabovayPolochka").withDate(4, 28);
         this.add("ЦитРусня").withDate(4, 28);
+        this.add("Emilianov").withDate(4, 28);
+        this.add("FeRiN_Tiamilox").withDate(4, 28);
+        this.add("LENb3").withDate(4, 28);
+        this.add("crack_arab").withDate(4, 29);
+        this.add("Babidgon24").withDate(4, 29);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
