@@ -144,8 +144,11 @@ public class Supporters
         this.add("omo", "...", "...").withDate(4, 25);
         this.add("我的世界萧鲲", "https://www.kuaishou.com/profile/3xxtz6m845v7pmg").withDate(4, 26);
         this.add("搞笑男", "https://www.kuaishou.com/profile/3x3m75n5hat7wx2").withDate(4, 26);
+        this.add("小老头8").withDate(4, 26);
+        this.add("老鱿鱼").withDate(4, 26);
         this.add("HYN").withDate(4, 26);
         this.add("Fanconma").withDate(4, 27);
+        this.add("夜洛伊ALOYI").withDate(4, 28);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -281,6 +284,9 @@ public class Supporters
         this.add("crack_arab").withDate(4, 29);
         this.add("Babidgon24").withDate(4, 29);
         this.add("Skorvod").withDate(4, 29);
+        this.add("Василий С.").withDate(4, 29);
+        this.add("Sizomuni").withDate(4, 29);
+        this.add("donquixotea").withDate(4, 29);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
