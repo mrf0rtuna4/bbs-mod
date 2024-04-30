@@ -267,6 +267,29 @@ public class Supporters
         this.add("깃발 김").withDate(4, 27);
         this.add("Julien R.").withDate(4, 27);
         this.add("Tuguim").withDate(4, 27);
+        this.add("Veasper").withDate(4, 27);
+        this.add("Blue spaget").withDate(4, 27);
+        this.add("Haxies").withDate(4, 27);
+        this.add("alvaro piña 2036").withDate(4, 27);
+        this.add("German M.").withDate(4, 28);
+        this.add("corrie").withDate(4, 28);
+        this.add("ElMrFloppa").withDate(4, 28);
+        this.add("Moretingz").withDate(4, 28);
+        this.add("Pgth 12").withDate(4, 28);
+        this.add("sanGGara 11").withDate(4, 28);
+        this.add("Swiftbit").withDate(4, 28);
+        this.add("XandarHD").withDate(4, 28);
+        this.add("AlexiosTheSixth").withDate(4, 28);
+        this.add("Colino _").withDate(4, 28);
+        this.add("Nekoma").withDate(4, 29);
+        this.add("AhmedSEGA").withDate(4, 29);
+        this.add("Sbriser").withDate(4, 29);
+        this.add("Dominik J.").withDate(4, 29);
+        this.add("Innova Creation").withDate(4, 30);
+        this.add("Monkey Kev").withDate(4, 30);
+
+        // Thank you very much for donation! 😊 Is ... the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is ... the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
         this.add("MRkoteich").withDate(4, 27);
