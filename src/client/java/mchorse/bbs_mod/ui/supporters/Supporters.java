@@ -313,6 +313,9 @@ public class Supporters
         this.add("Sizomuni").withDate(4, 29);
         this.add("donquixotea").withDate(4, 29);
         this.add("Mudyi").withDate(4, 30);
+        this.add("ElLatuk").withDate(4, 30);
+        this.add("Бинди").withDate(5, 1);
+        this.add("Filliks&Line").withDate(5, 1);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
