@@ -316,6 +316,8 @@ public class Supporters
         this.add("ElLatuk").withDate(4, 30);
         this.add("Бинди").withDate(5, 1);
         this.add("Filliks&Line").withDate(5, 1);
+        this.add("BCFuril").withDate(5, 1);
+        this.add("Slippers_friend").withDate(5, 1);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
