@@ -297,7 +297,7 @@ public class Supporters
         /* Boosty */
         this.add("MRkoteich").withDate(4, 27);
         this.add("Mait53").withDate(4, 27);
-        this.add("Osas").withDate(4, 27);
+        this.add("osas.exe").withDate(4, 27);
         this.add("JhonParker").withDate(4, 27);
         this.add("Stylent", "...").withDate(4, 28);
         this.add("The Mine Pixel Cool Studio").withDate(4, 28);
