@@ -269,6 +269,7 @@ public class Supporters
         this.add("Tuguim").withDate(4, 27);
         this.add("Veasper").withDate(4, 27);
         this.add("Blue spaget").withDate(4, 27);
+        this.add("LittleFilms").withDate(4, 27);
         this.add("Haxies").withDate(4, 27);
         this.add("alvaro piña 2036").withDate(4, 27);
         this.add("German M.").withDate(4, 28);
@@ -313,11 +314,12 @@ public class Supporters
         this.add("Sizomuni").withDate(4, 29);
         this.add("donquixotea").withDate(4, 29);
         this.add("Mudyi").withDate(4, 30);
-        this.add("ElLatuk").withDate(4, 30);
+        this.add("ellatuk").withDate(4, 30);
         this.add("Бинди").withDate(5, 1);
         this.add("Filliks&Line").withDate(5, 1);
         this.add("BCFuril").withDate(5, 1);
         this.add("Slippers_friend").withDate(5, 1);
+        this.add("Just Fect").withDate(5, 1);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
