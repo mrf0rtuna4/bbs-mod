@@ -143,12 +143,15 @@ public class Supporters
         this.add("梓轩", "https://space.bilibili.com/1048696948").withDate(4, 25);
         this.add("omo", "...", "...").withDate(4, 25);
         this.add("我的世界萧鲲", "https://www.kuaishou.com/profile/3xxtz6m845v7pmg").withDate(4, 26);
-        this.add("搞笑男", "https://www.kuaishou.com/profile/3x3m75n5hat7wx2").withDate(4, 26);
+        this.add("我的世界浴帽", "https://www.kuaishou.com/profile/3x3m75n5hat7wx2").withDate(4, 26);
         this.add("小老头8").withDate(4, 26);
         this.add("老鱿鱼").withDate(4, 26);
         this.add("HYN").withDate(4, 26);
         this.add("Fanconma").withDate(4, 27);
         this.add("夜洛伊ALOYI").withDate(4, 28);
+        this.add("零子aqa").withDate(4, 29);
+        this.add("戴特RinO").withDate(4, 30);
+        this.add("Unsu1table").withDate(4, 30);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
