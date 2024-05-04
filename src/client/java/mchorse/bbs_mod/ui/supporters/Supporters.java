@@ -223,6 +223,7 @@ public class Supporters
         this.add("JohnJoyBillion").withDate(4, 13);
         this.add("이TV 달").withDate(4, 13);
         this.add("Terry Bleuh", "https://www.youtube.com/@TerryBleuh/featured").withDate(4, 15);
+        this.add("Gebe").withDate(4, 15);
         this.add("2TK_craft").withDate(4, 17);
         this.add("poplistic").withDate(4, 17);
         this.add("mrPixBro").withDate(4, 18);
@@ -293,6 +294,7 @@ public class Supporters
         this.add("Monkey Kev").withDate(4, 30);
         this.add("Francisco Sepulveda").withDate(4, 30);
         this.add("Nassou Oasis").withDate(4, 30);
+        this.add("MiuxuE").withDate(5, 4);
 
         // Thank you very much for donation! 😊 Is ... the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is ... the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
