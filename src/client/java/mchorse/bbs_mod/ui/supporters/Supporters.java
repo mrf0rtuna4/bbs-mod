@@ -348,7 +348,8 @@ public class Supporters
         this.add("Just Fect").withDate(5, 1);
         this.add("mr.ifu").withDate(5, 2);
         this.add("Тимобус 223").withDate(5, 3);
-        this.add("Jabochca_Soviet").withDate(5, 4);
+        this.add("Jabochca_Soviet").withDate(5, 5);
+        this.add("Venya Play").withDate(5, 5);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
