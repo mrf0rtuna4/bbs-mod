@@ -285,7 +285,7 @@ public class Supporters
         this.add("Swiftbit").withDate(4, 28);
         this.add("XandarHD").withDate(4, 28);
         this.add("AlexiosTheSixth").withDate(4, 28);
-        this.add("Colino _").withDate(4, 28);
+        this.add("Colino").withDate(4, 28);
         this.add("Nekoma").withDate(4, 29);
         this.add("AhmedSEGA").withDate(4, 29);
         this.add("Sbriser").withDate(4, 29);
@@ -294,10 +294,31 @@ public class Supporters
         this.add("Monkey Kev").withDate(4, 30);
         this.add("Francisco Sepulveda").withDate(4, 30);
         this.add("Nassou Oasis").withDate(4, 30);
-        this.add("MiuxuE").withDate(5, 4);
+        this.add("Tralla").withDate(4, 30);
+        this.add("Punk Pink").withDate(4, 30);
+        this.add("Bitzel").withDate(5, 1);
+        this.add("Autruliem").withDate(5, 1);
+        this.add("Miner's Cave").withDate(5, 1);
+        this.add("PabeloNotEscobar").withDate(5, 1);
+        this.add("Dilon H.").withDate(5, 1);
+        this.add("BlueChicken 32").withDate(5, 1);
+        this.add("James M.").withDate(5, 1);
+        this.add("0xb7").withDate(5, 2);
+        this.add("MiuxuE").withDate(5, 2);
+        this.add("Juanes23").withDate(5, 2);
+        this.add("Alex P.").withDate(5, 2);
+        this.add("long xiao").withDate(5, 2);
+        this.add("Kauan C.").withDate(5, 2);
+        this.add("Gatha").withDate(5, 2);
+        this.add("T4 Productions").withDate(5, 2);
+        this.add("MineCrafty").withDate(5, 3);
+        this.add("Tomy 's").withDate(5, 4);
+        this.add("Mathayus").withDate(5, 4);
+        this.add("MandyMiss").withDate(5, 5);
+        this.add("Liam Floyd").withDate(5, 5);
 
-        // Thank you very much for donation! 😊 Is ... the name you want to be included in BBS mod?
-        // Thank you very much for donation! 😊 Is ... the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
+        // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
         this.add("MRkoteich").withDate(4, 27);
@@ -325,6 +346,9 @@ public class Supporters
         this.add("BCFuril").withDate(5, 1);
         this.add("Slippers_friend").withDate(5, 1);
         this.add("Just Fect").withDate(5, 1);
+        this.add("mr.ifu").withDate(5, 2);
+        this.add("Тимобус 223").withDate(5, 3);
+        this.add("Jabochca_Soviet").withDate(5, 4);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
