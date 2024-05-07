@@ -38,7 +38,7 @@ public class Supporters
         this.add("凤天", "https://space.bilibili.com/22348510").withDate(3, 3);
         this.add("萱萱-3z", "https://space.bilibili.com/601994215", "textures/banners/xuanxuan.png").withDate(3, 3);
         this.add("白某人是个萌新").withDate(3, 3);
-        this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "...").withDate(3, 3);
+        this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "textures/banners/mengqi.png").withDate(3, 3);
         this.add("Adfbulin").withDate(3, 3);
         this.add("方草块Minna").withDate(3, 3);
         this.add("Zhesheng_1818", "https://www.youtube.com/@MetalStorm_Studio").withDate(3, 3);
@@ -83,7 +83,7 @@ public class Supporters
         this.add("Repeater", "...").withDate(3, 13);
         this.add("小博ace").withDate(3, 13);
         this.add("EliSATfe_").withDate(3, 13);
-        this.add("愉悦的hehe11", "https://space.bilibili.com/3334737", "...").withDate(3, 14);
+        this.add("愉悦的hehe11", "https://space.bilibili.com/3334737", "textures/banners/hehe11.png").withDate(3, 14);
         this.add("FenrirKK").withDate(3, 14);
         this.add("乐笑虾").withDate(3, 14);
         this.add("brisk_citrus凉柑").withDate(3, 14);
@@ -133,7 +133,7 @@ public class Supporters
         this.add("逢山栖影", "https://space.bilibili.com/453945116").withDate(4, 10);
         this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
         this.add("诺麟煌").withDate(4, 12);
-        this.add("陈佬C", "https://space.bilibili.com/87026021", "...").withDate(4, 13);
+        this.add("陈佬C", "https://space.bilibili.com/87026021", "textures/banners/chen_lao_c.png").withDate(4, 13);
         this.add("omo仙贝", "https://space.bilibili.com/1959304255", "...").withDate(4, 16);
         this.add("叶落空留白").withDate(4, 18);
         this.add("银蝶餐饮工作室").withDate(4, 19);
