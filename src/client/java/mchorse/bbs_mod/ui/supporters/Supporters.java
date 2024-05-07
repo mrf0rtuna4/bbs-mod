@@ -310,10 +310,10 @@ public class Supporters
         this.add("long xiao").withDate(5, 2);
         this.add("Kauan C.").withDate(5, 2);
         this.add("Gatha").withDate(5, 2);
-        this.add("T4 Productions").withDate(5, 2);
+        this.add("Tahyme").withDate(5, 2);
         this.add("MineCrafty").withDate(5, 3);
         this.add("Tomy 's").withDate(5, 4);
-        this.add("Mathayus").withDate(5, 4);
+        this.add("V0IDCreates").withDate(5, 4);
         this.add("MandyMiss").withDate(5, 5);
         this.add("Liam Floyd").withDate(5, 5);
 
@@ -350,6 +350,7 @@ public class Supporters
         this.add("Тимобус 223").withDate(5, 3);
         this.add("Jabochca_Soviet").withDate(5, 5);
         this.add("Venya Play").withDate(5, 5);
+        this.add("K.I.N - Prod.").withDate(5, 6);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
