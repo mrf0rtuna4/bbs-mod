@@ -7,7 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Supporters
+public class
+Supporters
 {
     private List<Supporter> supporters = new ArrayList<>();
 
@@ -245,8 +246,8 @@ public class Supporters
         this.add("Si-ko").withDate(4, 25);
         this.add("LuanLGH").withDate(4, 26);
         this.add("TristanNLD", "https://www.youtube.com/channel/UCIx2ao8z9bryI7rvIl5Yszg").withDate(4, 26);
-        this.add("Endiversum").withDate(4, 26);
-        this.add("Old Account").withDate(4, 26);
+        this.add("CheesyKirah").withDate(4, 26);
+        this.add("szoki").withDate(4, 26);
         this.add("Austin").withDate(4, 26);
         this.add("Furious Clash", "...").withDate(4, 26);
         this.add("Shawn H.").withDate(4, 26);
@@ -280,7 +281,7 @@ public class Supporters
         this.add("Augusto").withDate(4, 28);
         this.add("ElMrFloppa").withDate(4, 28);
         this.add("Moretingz").withDate(4, 28);
-        this.add("Pgth 12").withDate(4, 28);
+        this.add("MCPA Team").withDate(4, 28);
         this.add("sanGGara 11").withDate(4, 28);
         this.add("Swiftbit").withDate(4, 28);
         this.add("XandarHD").withDate(4, 28);
@@ -316,6 +317,14 @@ public class Supporters
         this.add("V0IDCreates").withDate(5, 4);
         this.add("MandyMiss").withDate(5, 5);
         this.add("Liam Floyd").withDate(5, 5);
+        this.add("구름 고양").withDate(5, 5);
+        this.add("Tafukoni").withDate(5, 5);
+        this.add("FrostAngelWolf").withDate(5, 6);
+        this.add("The Gaming Caterpillar").withDate(5, 6);
+        this.add("ItsGlac").withDate(5, 6);
+        this.add("Rexiipher").withDate(5, 6);
+        this.add("Hugo s.").withDate(5, 7);
+        this.add("Blindedjourneyman").withDate(5, 7);
 
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -351,6 +360,8 @@ public class Supporters
         this.add("Jabochca_Soviet").withDate(5, 5);
         this.add("Venya Play").withDate(5, 5);
         this.add("K.I.N - Prod.").withDate(5, 6);
+        this.add("KlashRaick").withDate(5, 7);
+        this.add("Алексей Б.").withDate(5, 7);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
