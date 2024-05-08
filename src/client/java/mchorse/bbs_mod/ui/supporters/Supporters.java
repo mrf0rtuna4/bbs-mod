@@ -171,7 +171,7 @@ Supporters
         this.add("Roma on YouTube").withDate(2, 24);
         this.add("Markus").withDate(2, 24);
         this.add("JesseMauve", "https://www.youtube.com/@JesseMauve/videos").withDate(2, 24);
-        this.add("DrGugl").withDate(2, 24);
+        this.add("Gugli").withDate(2, 24);
         this.add("theFallEquinox").withDate(2, 24);
         this.add("Pixe_GUM").withDate(2, 25);
         this.add("RunnyHero").withDate(2, 25);
@@ -309,7 +309,7 @@ Supporters
         this.add("Juanes23").withDate(5, 2);
         this.add("Alex P.").withDate(5, 2);
         this.add("long xiao").withDate(5, 2);
-        this.add("Kauan C.").withDate(5, 2);
+        this.add("1Frezzy").withDate(5, 2);
         this.add("Gatha").withDate(5, 2);
         this.add("Tahyme").withDate(5, 2);
         this.add("MineCrafty").withDate(5, 3);
@@ -320,11 +320,13 @@ Supporters
         this.add("구름 고양").withDate(5, 5);
         this.add("Tafukoni").withDate(5, 5);
         this.add("FrostAngelWolf").withDate(5, 6);
-        this.add("The Gaming Caterpillar").withDate(5, 6);
+        this.add("Intelligent Idiot").withDate(5, 6);
         this.add("ItsGlac").withDate(5, 6);
         this.add("Rexiipher").withDate(5, 6);
         this.add("Hugo s.").withDate(5, 7);
-        this.add("Blindedjourneyman").withDate(5, 7);
+        this.add("Blindedtrvlr").withDate(5, 7);
+        this.add("zexticss").withDate(5, 7);
+        this.add("AMVS Universe", "https://www.youtube.com/@AMVSUniverse1/featured", "...").withDate(5, 8);
 
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -361,7 +363,9 @@ Supporters
         this.add("Venya Play").withDate(5, 5);
         this.add("K.I.N - Prod.").withDate(5, 6);
         this.add("KlashRaick").withDate(5, 7);
-        this.add("Алексей Б.").withDate(5, 7);
+        this.add("Lastochkin").withDate(5, 7);
+        this.add("RayMelhor").withDate(5, 8);
+        this.add("Andre").withDate(5, 8);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
