@@ -20,7 +20,7 @@ Supporters
         this.add("毫无人性的大麦纸", "https://space.bilibili.com/591074", "...").withDate(2, 29);
         this.add("Afica").withDate(2, 29);
         this.add("XiaoTu_MC", "https://v.douyin.com/iNwM4XEr/", "...").withDate(3, 1);
-        this.add("一身白装小兵这个").withDate(3, 1);
+        this.add("白板弱者", "...").withDate(3, 1);
         this.add("Rainbow Stars").withDate(3, 1);
         this.add("开智同学").withDate(3, 2);
         this.add("Fight凡子").withDate(3, 2);
@@ -153,6 +153,10 @@ Supporters
         this.add("零子aqa").withDate(4, 29);
         this.add("戴特RinO").withDate(4, 30);
         this.add("Unsu1table").withDate(4, 30);
+        this.add("幻灵吖phantom").withDate(5, 3);
+        this.add("初夏少树").withDate(5, 5);
+        this.add("韶光").withDate(5, 8);
+        this.add("卷帘门金金爆", "https://space.bilibili.com/52665509").withDate(5, 9);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -366,6 +370,7 @@ Supporters
         this.add("Lastochkin").withDate(5, 7);
         this.add("RayMelhor").withDate(5, 8);
         this.add("Andre").withDate(5, 8);
+        this.add("_KvardSeries_").withDate(5, 9);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
