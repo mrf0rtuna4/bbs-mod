@@ -330,7 +330,7 @@ Supporters
         this.add("Hugo s.").withDate(5, 7);
         this.add("Blindedtrvlr").withDate(5, 7);
         this.add("zexticss").withDate(5, 7);
-        this.add("AMVS Universe", "https://www.youtube.com/@AMVSUniverse1/featured", "...").withDate(5, 8);
+        this.add("AMVS Universe", "https://www.youtube.com/@AMVSUniverse1/featured", "textures/banners/amvs.png").withDate(5, 8);
 
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
