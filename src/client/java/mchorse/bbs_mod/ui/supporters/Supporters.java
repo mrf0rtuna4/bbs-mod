@@ -304,7 +304,7 @@ Supporters
         this.add("Autruliem").withDate(5, 1);
         this.add("Miner's Cave").withDate(5, 1);
         this.add("PabeloNotEscobar").withDate(5, 1);
-        this.add("Dilon H.").withDate(5, 1);
+        this.add("Dilon Hoare").withDate(5, 1);
         this.add("BlueChicken 32").withDate(5, 1);
         this.add("James M.").withDate(5, 1);
         this.add("0xb7").withDate(5, 2);
@@ -331,7 +331,6 @@ Supporters
         this.add("zexticss").withDate(5, 7);
         this.add("AMVS Universe", "https://www.youtube.com/@AMVSUniverse1/featured", "textures/banners/amvs.png").withDate(5, 8);
         this.add("minegamerr").withDate(5, 8);
-        this.add("_KvardSeries_").withDate(5, 9);
         this.add("【OMGDays】").withDate(5, 10);
 
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
@@ -372,6 +371,10 @@ Supporters
         this.add("Lastochkin").withDate(5, 7);
         this.add("RayMelhor").withDate(5, 8);
         this.add("Andre").withDate(5, 8);
+        this.add("_KvardSeries_").withDate(5, 9);
+        this.add("paynqqwr").withDate(5, 9);
+        this.add("Toxin").withDate(5, 10);
+        this.add("Dimak Lapkin").withDate(5, 10);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
