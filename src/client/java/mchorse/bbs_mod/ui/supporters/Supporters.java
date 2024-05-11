@@ -240,7 +240,6 @@ Supporters
         this.add("jDeV7").withDate(4, 21);
         this.add("BBPC").withDate(4, 21);
         this.add("NEXT ENTERTAINMENT STUDIOS").withDate(4, 21);
-        this.add("ZoGa", "...", "...").withDate(4, 22);
         this.add("Jivalon").withDate(4, 22);
         this.add("Croc").withDate(4, 22);
         this.add("P1asmaDev", "...").withDate(4, 23);
@@ -327,10 +326,13 @@ Supporters
         this.add("Intelligent Idiot").withDate(5, 6);
         this.add("ItsGlac").withDate(5, 6);
         this.add("Rexiipher").withDate(5, 6);
-        this.add("Hugo s.").withDate(5, 7);
+        // this.add("Hugo s.").withDate(5, 7);
         this.add("Blindedtrvlr").withDate(5, 7);
         this.add("zexticss").withDate(5, 7);
         this.add("AMVS Universe", "https://www.youtube.com/@AMVSUniverse1/featured", "textures/banners/amvs.png").withDate(5, 8);
+        this.add("minegamerr").withDate(5, 8);
+        this.add("_KvardSeries_").withDate(5, 9);
+        this.add("【OMGDays】").withDate(5, 10);
 
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -370,13 +372,13 @@ Supporters
         this.add("Lastochkin").withDate(5, 7);
         this.add("RayMelhor").withDate(5, 8);
         this.add("Andre").withDate(5, 8);
-        this.add("_KvardSeries_").withDate(5, 9);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
         this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
         this.add("Clesten", "https://www.youtube.com/@clesten9475").withDate(3, 6);
         this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "textures/banners/afegor.png").withDate(4, 8);
+        this.add("ZoGa", "...", "...").withDate(4, 22);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
 
         int afdian = 5;
