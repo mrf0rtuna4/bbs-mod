@@ -373,8 +373,9 @@ Supporters
         this.add("Andre").withDate(5, 8);
         this.add("_KvardSeries_").withDate(5, 9);
         this.add("paynqqwr").withDate(5, 9);
-        this.add("Toxin").withDate(5, 10);
+        this.add("_K0ks1k").withDate(5, 10);
         this.add("Dimak Lapkin").withDate(5, 10);
+        this.add("XlebkinS").withDate(5, 12);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
