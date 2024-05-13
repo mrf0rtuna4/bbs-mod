@@ -310,7 +310,7 @@ Supporters
         this.add("0xb7").withDate(5, 2);
         this.add("MiuxuE").withDate(5, 2);
         this.add("Juanes23").withDate(5, 2);
-        this.add("Alex P.").withDate(5, 2);
+        this.add("yauhyeah").withDate(5, 2);
         this.add("long xiao").withDate(5, 2);
         this.add("1Frezzy").withDate(5, 2);
         this.add("Gatha").withDate(5, 2);
