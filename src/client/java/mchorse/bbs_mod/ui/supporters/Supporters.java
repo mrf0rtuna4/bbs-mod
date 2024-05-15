@@ -180,7 +180,7 @@ Supporters
         this.add("Pixe_GUM").withDate(2, 25);
         this.add("RunnyHero").withDate(2, 25);
         this.add("Chunk7", "...", "...").withDate(2, 25);
-        this.add("Kludge").withDate(2, 25);
+        this.add("Kludge", "https://www.youtube.com/@kluudge").withDate(2, 25);
         this.add("seb024YT").withDate(2, 27);
         this.add("良辰 薛").withDate(2, 27);
         this.add("PracticeTyping").withDate(2, 27);
