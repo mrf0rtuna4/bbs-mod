@@ -157,6 +157,18 @@ Supporters
         this.add("初夏少树").withDate(5, 5);
         this.add("韶光").withDate(5, 8);
         this.add("卷帘门金金爆", "https://space.bilibili.com/52665509").withDate(5, 9);
+        this.add("千觞Ethan").withDate(5, 11);
+        this.add("Lucas8989").withDate(5, 11);
+        this.add("千年的启示").withDate(5, 11);
+        this.add("酒辞").withDate(5, 11);
+        this.add("块王c").withDate(5, 12);
+        this.add("凉白柑").withDate(5, 13);
+        this.add("Turfore").withDate(5, 13);
+        this.add("汉CM").withDate(5, 14);
+        this.add("lxmgf").withDate(5, 14);
+        this.add("Turmeric茶").withDate(5, 16);
+        this.add("余生酱ovo").withDate(5, 16);
+        this.add("华燃王小灭").withDate(5, 16);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -330,8 +342,24 @@ Supporters
         this.add("Blindedtrvlr").withDate(5, 7);
         this.add("zexticss").withDate(5, 7);
         this.add("AMVS Universe", "https://www.youtube.com/@AMVSUniverse1/featured", "textures/banners/amvs.png").withDate(5, 8);
+        this.add("Odiei zim").withDate(5, 8);
+        this.add("Kyttu").withDate(5, 8);
         this.add("minegamerr").withDate(5, 8);
+        this.add("Miles M.").withDate(5, 8);
+        this.add("Scooter", "https://twitter.com/ScotScooter", "...").withDate(5, 9);
+        this.add("Silverx Productions").withDate(5, 9);
         this.add("【OMGDays】").withDate(5, 10);
+        this.add("Hangert").withDate(5, 10);
+        this.add("Captain F0XYgamingpro").withDate(5, 11);
+        this.add("Hfsiu F.").withDate(5, 11);
+        this.add("gcon").withDate(5, 11);
+        this.add("KudoDerg").withDate(5, 11);
+        this.add("EinfachJoey").withDate(5, 12);
+        this.add("Santiago AAP").withDate(5, 12);
+        this.add("Rüyaperest").withDate(5, 13);
+        this.add("novaplays123").withDate(5, 14);
+        this.add("WiserLake").withDate(5, 15);
+        this.add("Flayming MC", "https://www.youtube.com/channel/UC3b8_VlQVXpu7e0MUPLHdBA", "textures/banners/flayming.png").withDate(5, 16);
 
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -376,6 +404,7 @@ Supporters
         this.add("_K0ks1k").withDate(5, 10);
         this.add("Dimak Lapkin").withDate(5, 10);
         this.add("XlebkinS").withDate(5, 12);
+        this.add("ZombieGamerz").withDate(5, 16);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
