@@ -346,7 +346,7 @@ Supporters
         this.add("Kyttu").withDate(5, 8);
         this.add("minegamerr").withDate(5, 8);
         this.add("Miles M.").withDate(5, 8);
-        this.add("Scooter", "https://twitter.com/ScotScooter", "...").withDate(5, 9);
+        this.add("Scooter", "https://twitter.com/ScotScooter", "textures/banners/scooter.png").withDate(5, 9);
         this.add("Silverx Productions").withDate(5, 9);
         this.add("【OMGDays】").withDate(5, 10);
         this.add("Hangert").withDate(5, 10);
