@@ -328,7 +328,7 @@ Supporters
         this.add("Gatha").withDate(5, 2);
         this.add("Tahyme").withDate(5, 2);
         this.add("MineCrafty").withDate(5, 3);
-        this.add("Tomy 's").withDate(5, 4);
+        this.add("TomyCresyler").withDate(5, 4);
         this.add("V0IDCreates").withDate(5, 4);
         this.add("MandyMiss").withDate(5, 5);
         this.add("Liam Floyd").withDate(5, 5);
@@ -405,6 +405,8 @@ Supporters
         this.add("Dimak Lapkin").withDate(5, 10);
         this.add("XlebkinS").withDate(5, 12);
         this.add("ZombieGamerz").withDate(5, 16);
+        this.add("momfc").withDate(5, 19);
+        this.add("TheMANTLE").withDate(5, 20);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
