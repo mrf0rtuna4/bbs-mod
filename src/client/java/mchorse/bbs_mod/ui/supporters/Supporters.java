@@ -360,9 +360,27 @@ Supporters
         this.add("novaplays123").withDate(5, 14);
         this.add("WiserLake").withDate(5, 15);
         this.add("Flayming MC", "https://www.youtube.com/channel/UC3b8_VlQVXpu7e0MUPLHdBA", "textures/banners/flayming.png").withDate(5, 16);
+        this.add("Storm Clouds").withDate(5, 16);
+        this.add("Thiago A. de S.").withDate(5, 17);
+        this.add("Matthew B.").withDate(5, 17);
+        this.add("LegalCraftPlayz").withDate(5, 17);
+        this.add("NovaDoesGaming").withDate(5, 17);
+        this.add("Aaron").withDate(5, 18);
+        this.add("Gorian cf").withDate(5, 18);
+        this.add("RedstoneWizard08").withDate(5, 18);
+        this.add("Adam").withDate(5, 19);
+        this.add("MixinFlow").withDate(5, 19);
+        this.add("Ben").withDate(5, 19);
+        this.add("Matthew White").withDate(5, 19);
+        this.add("Airb0ll").withDate(5, 19);
+        this.add("CirtusWasHere").withDate(5, 20);
+        this.add("Sam S").withDate(5, 20);
+        this.add("Aesthics").withDate(5, 20);
+        this.add("FavreMySabre").withDate(5, 20);
+        this.add("Hunted", "...").withDate(5, 21);
 
-        // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod?
-        // Thank you very much for donation! 😊 Is ... is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
+        // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
         this.add("MRkoteich").withDate(4, 27);
