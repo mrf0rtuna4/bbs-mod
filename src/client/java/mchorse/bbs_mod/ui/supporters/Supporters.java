@@ -383,7 +383,7 @@ Supporters
         this.add("FavreMySabre", "https://www.youtube.com/channel/UCE8AXzs4x8VDoC58JYppO2g").withDate(5, 20);
         this.add("Hunted", "...").withDate(5, 21);
         this.add("Berko Bey").withDate(5, 21);
-        this.add("Kenji LEPINAY").withDate(5, 21);
+        this.add("Dartsgame").withDate(5, 21);
         this.add(". 루").withDate(5, 22);
         this.add("Dima T.").withDate(5, 22);
         this.add("Kadukos").withDate(5, 22);
@@ -392,8 +392,9 @@ Supporters
         this.add("Bobicraft").withDate(5, 23);
         this.add("Fogarty Fox").withDate(5, 24);
         this.add("MattNight").withDate(5, 25);
+        this.add("akdong2003").withDate(5, 26);
 
-        // Thank you very much for donation! 😊 Is MattNight is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is Donggeun Lee is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
