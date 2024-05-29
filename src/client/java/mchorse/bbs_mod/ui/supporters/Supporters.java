@@ -145,7 +145,7 @@ Supporters
         this.add("omo", "...", "...").withDate(4, 25);
         this.add("我的世界萧鲲", "https://www.kuaishou.com/profile/3xxtz6m845v7pmg").withDate(4, 26);
         this.add("我的世界浴帽", "https://www.kuaishou.com/profile/3x3m75n5hat7wx2").withDate(4, 26);
-        this.add("小老头8").withDate(4, 26);
+        this.add("杨麒").withDate(4, 26);
         this.add("老鱿鱼").withDate(4, 26);
         this.add("HYN").withDate(4, 26);
         this.add("Fanconma").withDate(4, 27);
@@ -378,7 +378,7 @@ Supporters
         this.add("Matthew White").withDate(5, 19);
         this.add("Airb0ll").withDate(5, 19);
         this.add("CitrusWasHere").withDate(5, 20);
-        this.add("Sam S").withDate(5, 20);
+        this.add("Sam Su").withDate(5, 20);
         this.add("Aesthics").withDate(5, 20);
         this.add("FavreMySabre", "https://www.youtube.com/channel/UCE8AXzs4x8VDoC58JYppO2g").withDate(5, 20);
         this.add("Hunted", "...").withDate(5, 21);
@@ -393,8 +393,15 @@ Supporters
         this.add("Fogarty Fox").withDate(5, 24);
         this.add("MattNight").withDate(5, 25);
         this.add("akdong2003").withDate(5, 26);
+        this.add("Misuya_XZ").withDate(5, 26);
+        this.add("Metehan G.").withDate(5, 26);
+        this.add("LogoJK").withDate(5, 26);
+        this.add("Jacob G.").withDate(5, 27);
+        this.add("Will M.").withDate(5, 28);
+        this.add("Isma I.").withDate(5, 28);
+        this.add("Myshr00m").withDate(5, 28);
 
-        // Thank you very much for donation! 😊 Is Donggeun Lee is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is LogoJK is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
@@ -445,6 +452,7 @@ Supporters
         this.add("Найтингейл", "https://www.youtube.com/@19gale").withDate(5, 22);
         this.add("b0b0b0").withDate(5, 23);
         this.add("Zing").withDate(5, 23);
+        this.add("yurafakel").withDate(5, 28);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
