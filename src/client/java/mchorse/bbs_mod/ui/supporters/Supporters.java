@@ -398,7 +398,7 @@ Supporters
         this.add("LogoJK").withDate(5, 26);
         this.add("Jacob G.").withDate(5, 27);
         this.add("Will M.").withDate(5, 28);
-        this.add("Isma I.").withDate(5, 28);
+        this.add("KokunShorts").withDate(5, 28);
         this.add("Myshr00m").withDate(5, 28);
 
         // Thank you very much for donation! 😊 Is LogoJK is the name you want to be included in BBS mod?
@@ -453,6 +453,8 @@ Supporters
         this.add("b0b0b0").withDate(5, 23);
         this.add("Zing").withDate(5, 23);
         this.add("yurafakel").withDate(5, 28);
+        this.add("GooseTeam").withDate(5, 30);
+        this.add("LarsCraftAnimation(Muffin3036)").withDate(5, 30);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
