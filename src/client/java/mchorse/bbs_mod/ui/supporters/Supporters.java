@@ -400,8 +400,14 @@ Supporters
         this.add("Will M.").withDate(5, 28);
         this.add("KokunShorts").withDate(5, 28);
         this.add("Myshr00m").withDate(5, 28);
+        this.add("Dark Cat").withDate(5, 29);
+        this.add("Renardo _").withDate(5, 30);
+        this.add("RealMeal").withDate(5, 31);
+        this.add("Twooearly").withDate(5, 31);
+        this.add("alfajor").withDate(5, 31);
+        this.add("Nguyễn Tiến T.").withDate(6, 1);
 
-        // Thank you very much for donation! 😊 Is LogoJK is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
