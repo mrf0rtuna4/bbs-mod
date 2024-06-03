@@ -170,9 +170,13 @@ Supporters
         this.add("余生酱ovo").withDate(5, 16);
         this.add("华燃王小灭").withDate(5, 16);
         this.add("纽埃柯丝DEV").withDate(5, 18);
+        this.add("FlipZack").withDate(5, 19);
         this.add("牧尘瑞斯muchenruisi").withDate(5, 19);
         this.add("YuSheng_ovo").withDate(5, 20);
         this.add("hulong").withDate(5, 24);
+        this.add("大鱿鱼").withDate(5, 25);
+        this.add("Not_vegetabledog").withDate(5, 29);
+        this.add("节奏梦想").withDate(5, 31);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -406,6 +410,12 @@ Supporters
         this.add("Twooearly").withDate(5, 31);
         this.add("alfajor").withDate(5, 31);
         this.add("Nguyễn Tiến T.").withDate(6, 1);
+        this.add("El_Redstoniano").withDate(6, 1);
+        this.add("ぴり").withDate(6, 2);
+        this.add("Luis Perez V.").withDate(6, 2);
+        this.add("Simon").withDate(6, 2);
+        this.add("SystemLoading").withDate(6, 3);
+        this.add("Many").withDate(6, 3);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -456,11 +466,12 @@ Supporters
         this.add("GensaMine").withDate(5, 21);
         this.add("-AVACH-").withDate(5, 22);
         this.add("Найтингейл", "https://www.youtube.com/@19gale").withDate(5, 22);
-        this.add("b0b0b0").withDate(5, 23);
+        // this.add("b0b0b0").withDate(5, 23); This guy doesn't deserve a mention, because of the leak
         this.add("Zing").withDate(5, 23);
         this.add("yurafakel").withDate(5, 28);
         this.add("GooseTeam").withDate(5, 30);
         this.add("LarsCraftAnimation(Muffin3036)").withDate(5, 30);
+        this.add("Nabemo").withDate(5, 31);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
