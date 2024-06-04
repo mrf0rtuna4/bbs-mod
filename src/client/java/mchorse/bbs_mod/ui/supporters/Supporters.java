@@ -412,7 +412,7 @@ Supporters
         this.add("Nguyễn Tiến T.").withDate(6, 1);
         this.add("El_Redstoniano").withDate(6, 1);
         this.add("ぴり").withDate(6, 2);
-        this.add("Luis Perez V.").withDate(6, 2);
+        this.add("Prezz").withDate(6, 2);
         this.add("Simon").withDate(6, 2);
         this.add("SystemLoading").withDate(6, 3);
         this.add("Many").withDate(6, 3);
