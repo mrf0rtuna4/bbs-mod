@@ -470,7 +470,7 @@ Supporters
         this.add("Zing").withDate(5, 23);
         this.add("yurafakel").withDate(5, 28);
         this.add("GooseTeam").withDate(5, 30);
-        this.add("LarsCraftAnimation(Muffin3036)").withDate(5, 30);
+        this.add("LarsCraftAnimation").withDate(5, 30);
         this.add("Nabemo").withDate(5, 31);
 
         /* Custom */
