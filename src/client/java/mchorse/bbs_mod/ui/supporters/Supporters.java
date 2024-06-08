@@ -472,6 +472,11 @@ Supporters
         this.add("GooseTeam").withDate(5, 30);
         this.add("LarsCraftAnimation").withDate(5, 30);
         this.add("Nabemo").withDate(5, 31);
+        this.add("BeGereshka").withDate(6, 3);
+        this.add("MyStoryProd").withDate(6, 4);
+        this.add("zeldon").withDate(6, 7);
+        this.add("Ahmed SEGA").withDate(6, 7);
+        this.add("Вайт").withDate(6, 7);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
