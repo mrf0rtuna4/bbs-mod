@@ -405,7 +405,7 @@ Supporters
         this.add("KokunShorts").withDate(5, 28);
         this.add("Myshr00m").withDate(5, 28);
         this.add("Dark Cat").withDate(5, 29);
-        this.add("Renardo _").withDate(5, 30);
+        this.add("Renardo").withDate(5, 30);
         this.add("RealMeal").withDate(5, 31);
         this.add("Twooearly").withDate(5, 31);
         this.add("alfajor").withDate(5, 31);
@@ -458,7 +458,7 @@ Supporters
         this.add("_KvardSeries_").withDate(5, 9);
         this.add("paynqqwr").withDate(5, 9);
         this.add("_K0ks1k").withDate(5, 10);
-        this.add("Dimak Lapkin").withDate(5, 10);
+        this.add("Dimak Lapkin", "...").withDate(5, 10);
         this.add("XlebkinS").withDate(5, 12);
         this.add("ZombieGamerz").withDate(5, 16);
         this.add("momfc").withDate(5, 19);
@@ -471,12 +471,16 @@ Supporters
         this.add("yurafakel").withDate(5, 28);
         this.add("GooseTeam").withDate(5, 30);
         this.add("LarsCraftAnimation").withDate(5, 30);
-        this.add("Nabemo").withDate(5, 31);
+        this.add("Nabemo53").withDate(5, 31);
         this.add("BeGereshka").withDate(6, 3);
         this.add("MyStoryProd").withDate(6, 4);
         this.add("zeldon").withDate(6, 7);
         this.add("Ahmed SEGA").withDate(6, 7);
         this.add("Вайт").withDate(6, 7);
+        this.add("FinalFrame").withDate(6, 10);
+        this.add("Komentator").withDate(6, 10);
+        this.add("Danlend_lol").withDate(6, 11);
+        this.add("DOK").withDate(6, 14);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
