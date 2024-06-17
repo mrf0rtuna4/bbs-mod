@@ -477,6 +477,7 @@ Supporters
         this.add("zeldon").withDate(6, 7);
         this.add("Ahmed SEGA").withDate(6, 7);
         this.add("Вайт").withDate(6, 7);
+        this.add("xzeldon").withDate(6, 7);
         this.add("FinalFrame").withDate(6, 10);
         this.add("Komentator").withDate(6, 10);
         this.add("Danlend_lol").withDate(6, 11);
