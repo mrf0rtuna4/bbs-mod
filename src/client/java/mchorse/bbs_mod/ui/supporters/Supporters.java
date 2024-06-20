@@ -417,6 +417,9 @@ Supporters
         this.add("SystemLoading").withDate(6, 3);
         this.add("Many").withDate(6, 3);
 
+
+        this.add("Hugo Lovi").withDate(6, 19);
+
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
@@ -482,6 +485,8 @@ Supporters
         this.add("Komentator").withDate(6, 10);
         this.add("Danlend_lol").withDate(6, 11);
         this.add("DOK").withDate(6, 14);
+        this.add("Сергей Ш.").withDate(6, 17);
+        this.add("Leon").withDate(6, 18);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
