@@ -446,9 +446,9 @@ public class Supporters
         this.add("craftgile").withDate(6, 8);
         this.add("Snamu").withDate(6, 8);
         this.add("FlameTFA").withDate(6, 9);
-        this.add("Skittle's", "...").withDate(6, 9);
+        this.add("StillSkittles", "https://youtube.com/@stillskittles?si=8p3aZL88VeZZwqhK").withDate(6, 9);
         this.add("eocx").withDate(6, 10);
-        this.add("Prospecteur Aguero").withDate(6, 10);
+        this.add("Agnis_").withDate(6, 10);
         this.add("Evoken").withDate(6, 12);
         this.add("Izaak Rawlinson").withDate(6, 13);
         this.add("creeperz653").withDate(6, 13);
@@ -529,6 +529,8 @@ public class Supporters
         this.add("Сергей Ш.").withDate(6, 17);
         this.add("Leon").withDate(6, 18);
         this.add("Clesten", "...", "...").withDate(6, 22);
+        this.add("melow").withDate(6, 23);
+        this.add("fenny013").withDate(6, 23);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
