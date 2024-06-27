@@ -460,11 +460,18 @@ public class Supporters
         this.add("Hugo Lovi").withDate(6, 19);
         this.add("EwLiyah").withDate(6, 20);
         this.add("ศุภวิชญ์ พ.").withDate(6, 21);
+        this.add("jeremy").withDate(6, 23);
+        this.add("Jet Hidden").withDate(6, 23);
+        this.add("cdr").withDate(6, 25);
+        this.add("Iago Manna").withDate(6, 25);
+        this.add("Godricxs").withDate(6, 26);
+        this.add("LOKI OLR", "...").withDate(6, 26);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
+        this.add("Clesten", "https://www.youtube.com/@clesten", "...").withDate(3, 6);
         this.add("MRkoteich").withDate(4, 27);
         this.add("Mait53").withDate(4, 27);
         this.add("osas.exe").withDate(4, 27);
@@ -502,7 +509,7 @@ public class Supporters
         this.add("_KvardSeries_").withDate(5, 9);
         this.add("paynqqwr").withDate(5, 9);
         this.add("_K0ks1k").withDate(5, 10);
-        this.add("Dimak Lapkin", "...").withDate(5, 10);
+        this.add("Dimak Lapkin", "https://www.youtube.com/channel/UCOomCTimgx20zd4Xynuv9sQ").withDate(5, 10);
         this.add("XlebkinS").withDate(5, 12);
         this.add("ZombieGamerz").withDate(5, 16);
         this.add("momfc").withDate(5, 19);
@@ -528,14 +535,13 @@ public class Supporters
         this.add("DOK").withDate(6, 14);
         this.add("Сергей Ш.").withDate(6, 17);
         this.add("Leon").withDate(6, 18);
-        this.add("Clesten", "...", "...").withDate(6, 22);
         this.add("melow").withDate(6, 23);
         this.add("fenny013").withDate(6, 23);
+        this.add("onleew").withDate(6, 25);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
         this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
-        this.add("Clesten", "https://www.youtube.com/@clesten9475").withDate(3, 6);
         this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "textures/banners/afegor.png").withDate(4, 8);
         this.add("ZoGa", "...", "...").withDate(4, 22);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
