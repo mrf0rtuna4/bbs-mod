@@ -538,6 +538,8 @@ public class Supporters
         this.add("melow").withDate(6, 23);
         this.add("fenny013").withDate(6, 23);
         this.add("onleew").withDate(6, 25);
+        this.add("Hellbug_U").withDate(6, 29);
+        this.add("Krimor").withDate(6, 30);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
