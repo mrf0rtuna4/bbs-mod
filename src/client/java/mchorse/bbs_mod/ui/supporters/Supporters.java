@@ -360,7 +360,7 @@ public class Supporters
         this.add("TomyCresyler").withDate(5, 4);
         this.add("V0IDCreates").withDate(5, 4);
         this.add("MandyMiss").withDate(5, 5);
-        this.add("Liam Floyd").withDate(5, 5);
+        this.add("Liam Floyd", "https://x.com/mistergriimm").withDate(5, 5);
         this.add("구름 고양").withDate(5, 5);
         this.add("Tafukoni").withDate(5, 5);
         this.add("FrostAngelWolf").withDate(5, 6);
@@ -465,7 +465,13 @@ public class Supporters
         this.add("cdr").withDate(6, 25);
         this.add("Iago Manna").withDate(6, 25);
         this.add("Godricxs").withDate(6, 26);
+        // this.add("Rusted_AK", "...").withDate(6, 26);
         this.add("LOKIOLR", "https://youtube.com/@lokiolr").withDate(6, 26);
+        this.add("zenozz BTS", "...").withDate(6, 28);
+        this.add("Works").withDate(7, 1);
+        this.add("Neotrix").withDate(7, 2);
+        this.add("Nederlander_Khan").withDate(7, 3);
+        this.add("REHDM").withDate(7, 3);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -496,6 +502,7 @@ public class Supporters
         this.add("Filliks&Line").withDate(5, 1);
         this.add("BCFuril").withDate(5, 1);
         this.add("Slippers_friend").withDate(5, 1);
+        this.add("TheBendy").withDate(5, 1);
         this.add("Just Fect").withDate(5, 1);
         this.add("mr.ifu").withDate(5, 2);
         this.add("Тимобус 223").withDate(5, 3);
@@ -522,6 +529,7 @@ public class Supporters
         this.add("yurafakel").withDate(5, 28);
         this.add("GooseTeam").withDate(5, 30);
         this.add("LarsCraftAnimation").withDate(5, 30);
+        this.add("Goose Team").withDate(5, 30);
         this.add("Nabemo53").withDate(5, 31);
         this.add("BeGereshka").withDate(6, 3);
         this.add("MyStoryProd").withDate(6, 4);
@@ -540,6 +548,7 @@ public class Supporters
         this.add("onleew").withDate(6, 25);
         this.add("Hellbug_U").withDate(6, 29);
         this.add("Krimor").withDate(6, 30);
+        this.add("Murlovich").withDate(7, 3);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
