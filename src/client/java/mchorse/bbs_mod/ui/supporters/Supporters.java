@@ -550,6 +550,7 @@ public class Supporters
         this.add("Hellbug_U").withDate(6, 29);
         this.add("Krimor").withDate(6, 30);
         this.add("Murlovich").withDate(7, 3);
+        this.add("VladisCrafter").withDate(7, 5);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
