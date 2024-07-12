@@ -450,7 +450,7 @@ public class Supporters
         this.add("eocx").withDate(6, 10);
         this.add("Agnis_").withDate(6, 10);
         this.add("Evoken").withDate(6, 12);
-        this.add("Izaak Rawlinson").withDate(6, 13);
+        this.add("TheUncertainKing").withDate(6, 13);
         this.add("creeperz653").withDate(6, 13);
         this.add("KeiBoogie").withDate(6, 14);
         this.add("Mystievous").withDate(6, 14);
@@ -536,7 +536,7 @@ public class Supporters
         this.add("MyStoryProd").withDate(6, 4);
         this.add("zeldon").withDate(6, 7);
         this.add("Ahmed SEGA").withDate(6, 7);
-        this.add("Вайт").withDate(6, 7);
+        this.add("IWaithI").withDate(6, 7);
         this.add("xzeldon").withDate(6, 7);
         this.add("FinalFrame").withDate(6, 10);
         this.add("Komentator").withDate(6, 10);
