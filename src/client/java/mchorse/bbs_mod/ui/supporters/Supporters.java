@@ -551,6 +551,9 @@ public class Supporters
         this.add("Krimor").withDate(6, 30);
         this.add("Murlovich").withDate(7, 3);
         this.add("VladisCrafter").withDate(7, 5);
+        this.add("Никита П.").withDate(7, 12);
+        this.add("DimaStad").withDate(7, 14);
+        this.add("RAMZES141").withDate(7, 14);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
