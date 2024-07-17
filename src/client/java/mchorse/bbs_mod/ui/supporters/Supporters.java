@@ -473,6 +473,26 @@ public class Supporters
         this.add("Nederlander_Khan").withDate(7, 3);
         this.add("REHDM").withDate(7, 3);
         this.add("GoldenNooby").withDate(7, 4);
+        this.add("wa tashi").withDate(7, 4);
+        this.add("Hoàng H.").withDate(7, 7);
+        this.add("Cube Clown").withDate(7, 7);
+        this.add("Le Hoang Gia Bao").withDate(7, 8);
+        this.add("panfontanna").withDate(7, 8);
+        this.add("ViaTrip").withDate(7, 8);
+        this.add("FlyZ3r").withDate(7, 9);
+        this.add("Billicraft").withDate(7, 10);
+        this.add("Chris").withDate(7, 10);
+        this.add("Sam E.").withDate(7, 11);
+        this.add("ซี บีโอเอสเอส").withDate(7, 11);
+        this.add("Movie Shitheads").withDate(7, 12);
+        this.add("Luckman42").withDate(7, 13);
+        this.add("CAKE!").withDate(7, 14);
+        this.add("MENYX").withDate(7, 15);
+        this.add("Filipfico").withDate(7, 15);
+        this.add("Budder Productions").withDate(7, 16);
+        this.add("P1nkEy3").withDate(7, 17);
+        this.add("Benlikestomine").withDate(7, 17);
+        this.add("Custom").withDate(7, 17);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -554,6 +574,10 @@ public class Supporters
         this.add("Никита П.").withDate(7, 12);
         this.add("DimaStad").withDate(7, 14);
         this.add("RAMZES141").withDate(7, 14);
+        this.add("wolfifurr").withDate(7, 15);
+        this.add("QZero").withDate(7, 16);
+        this.add("4ePHiT").withDate(7, 17);
+        this.add("lil roxx").withDate(7, 17);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
