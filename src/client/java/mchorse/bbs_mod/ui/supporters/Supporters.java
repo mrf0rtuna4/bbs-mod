@@ -493,6 +493,7 @@ public class Supporters
         this.add("P1nkEy3").withDate(7, 17);
         this.add("BenlikesSharks").withDate(7, 17);
         this.add("Custom").withDate(7, 17);
+        this.add("Alex G.").withDate(7, 19);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
