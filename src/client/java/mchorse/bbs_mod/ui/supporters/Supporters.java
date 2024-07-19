@@ -491,7 +491,7 @@ public class Supporters
         this.add("Filipfico").withDate(7, 15);
         this.add("Budder Productions").withDate(7, 16);
         this.add("P1nkEy3").withDate(7, 17);
-        this.add("Benlikestomine").withDate(7, 17);
+        this.add("BenlikesSharks").withDate(7, 17);
         this.add("Custom").withDate(7, 17);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
