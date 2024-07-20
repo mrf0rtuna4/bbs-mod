@@ -490,7 +490,7 @@ public class Supporters
         this.add("MENYX").withDate(7, 15);
         this.add("Filipfico").withDate(7, 15);
         this.add("Budder Productions").withDate(7, 16);
-        this.add("P1nkEy3").withDate(7, 17);
+        this.add("Pink").withDate(7, 17);
         this.add("BenlikesSharks").withDate(7, 17);
         this.add("Custom").withDate(7, 17);
         this.add("Alex G.").withDate(7, 19);
