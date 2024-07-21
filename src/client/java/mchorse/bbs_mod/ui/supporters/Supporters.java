@@ -170,7 +170,7 @@ public class Supporters
         this.add("华燃王小灭").withDate(5, 16);
         this.add("纽埃柯丝DEV").withDate(5, 18);
         this.add("FlipZack").withDate(5, 19);
-        this.add("牧尘瑞斯muchenruisi").withDate(5, 19);
+        this.add("牧尘瑞斯muchenruisi", "https://v.kuaishou.com/Kqp32n").withDate(5, 19);
         this.add("YuSheng_ovo").withDate(5, 20);
         this.add("hulong").withDate(5, 24);
         this.add("大鱿鱼").withDate(5, 25);
@@ -197,6 +197,24 @@ public class Supporters
         this.add("喵不二本喵").withDate(6, 18);
         this.add("Bit3").withDate(6, 18);
         this.add("依潮水").withDate(6, 21);
+        this.add("GoldenEggs").withDate(6, 22);
+        this.add("QQ-oo~ee~oo").withDate(6, 23);
+        this.add("一粒石头", "https://space.bilibili.com/279251784").withDate(6, 24);
+        this.add("不在摸鱼之默栖").withDate(6, 25);
+        this.add("aikesi X").withDate(6, 25);
+        this.add("LabFie1d").withDate(6, 26);
+        this.add("XINGCHNEG").withDate(6, 26);
+        this.add("FanYe").withDate(6, 27);
+        this.add("骑单车の茂茂").withDate(6, 27);
+        this.add("Minecraft寒辰龙").withDate(6, 29);
+        this.add("yuanyuanzhishui").withDate(6, 30);
+        this.add("NirvanaTPG").withDate(7, 5);
+        this.add("CharJang").withDate(7, 8);
+        this.add("Star_dark").withDate(7, 10);
+        this.add("jixin").withDate(7, 12);
+        this.add("Godyum").withDate(7, 16);
+        this.add("于小黑想重开").withDate(7, 17);
+        this.add("海曦").withDate(7, 21);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -493,7 +511,11 @@ public class Supporters
         this.add("Pink").withDate(7, 17);
         this.add("BenlikesSharks").withDate(7, 17);
         this.add("Custom").withDate(7, 17);
-        this.add("Alex G.").withDate(7, 19);
+        this.add("Alex Gorcas").withDate(7, 19);
+        this.add("PizzaStudios").withDate(7, 20);
+        this.add("Ibrahim A.").withDate(7, 20);
+        this.add("BrainCells").withDate(7, 20);
+        this.add("Sebastian R.").withDate(7, 20);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
