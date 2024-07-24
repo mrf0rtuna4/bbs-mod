@@ -516,8 +516,11 @@ public class Supporters
         this.add("Ibrahim A.").withDate(7, 20);
         this.add("BrainCells").withDate(7, 20);
         this.add("Sebastian Ruditz").withDate(7, 20);
+        this.add("Mii Mimlam").withDate(7, 22);
+        this.add("Blue").withDate(7, 23);
+        this.add("Ez Ez").withDate(7, 23);
 
-        // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is Ez Ez is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
