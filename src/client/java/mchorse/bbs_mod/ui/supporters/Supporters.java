@@ -215,6 +215,10 @@ public class Supporters
         this.add("Godyum").withDate(7, 16);
         this.add("于小黑想重开").withDate(7, 17);
         this.add("海曦").withDate(7, 21);
+        this.add("假人偶咯").withDate(7, 24);
+        this.add("ALK阿狸控").withDate(7, 25);
+        this.add("牧子鱼").withDate(7, 25);
+        this.add("想摆烂的卡洛诺斯").withDate(7, 26);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -522,6 +526,13 @@ public class Supporters
         this.add("Ez Ez").withDate(7, 23);
         this.add("Liam Vinokurov").withDate(7, 24);
         this.add("TooFfion").withDate(7, 25);
+        this.add("Catolo FW").withDate(7, 26);
+        this.add("José Caballero").withDate(7, 26);
+        this.add("Biggerest").withDate(7, 26);
+        this.add("Wonder Studios").withDate(7, 27);
+        this.add("HibridNil").withDate(7, 27);
+        this.add("CT Me").withDate(7, 27);
+        this.add("Amsther").withDate(7, 27);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -609,6 +620,8 @@ public class Supporters
         this.add("lil roxx").withDate(7, 17);
         this.add("WIN_Den").withDate(7, 18);
         this.add("Allorific").withDate(7, 19);
+        this.add("Enotiy").withDate(7, 26);
+        this.add("Library Keeper").withDate(7, 26);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
