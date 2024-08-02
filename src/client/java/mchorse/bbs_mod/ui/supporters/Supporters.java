@@ -176,7 +176,7 @@ public class Supporters
         this.add("大鱿鱼").withDate(5, 25);
         this.add("Not_vegetabledog").withDate(5, 29);
         this.add("节奏梦想").withDate(5, 31);
-        this.add("ENDNULL").withDate(6, 3);
+        this.add("ENDNULL", "https://space.bilibili.com/505118990", "...").withDate(6, 3);
         this.add("布咕鸟不谷").withDate(6, 4);
         this.add("绚烂的白色").withDate(6, 6);
         // this.add("发电用户_yk").withDate(6, 7);
@@ -219,6 +219,8 @@ public class Supporters
         this.add("ALK阿狸控").withDate(7, 25);
         this.add("牧子鱼").withDate(7, 25);
         this.add("想摆烂的卡洛诺斯").withDate(7, 26);
+        this.add("while1cry").withDate(7, 31);
+        this.add("xu_zai").withDate(7, 31);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -533,6 +535,12 @@ public class Supporters
         this.add("HibridNil").withDate(7, 27);
         this.add("CT Me").withDate(7, 27);
         this.add("Amsther").withDate(7, 27);
+        this.add("Sammy_Boy_Br 123").withDate(7, 28);
+        this.add("Tse Tin").withDate(7, 29);
+        this.add("Minaduk1").withDate(7, 30);
+        this.add("Riggih A.").withDate(7, 30);
+        this.add("T4ddyGamesBR", "https://www.youtube.com/@BUNGas99").withDate(7, 30);
+        this.add("ChillinWithDylan", "https://www.youtube.com/channel/UCM8yL498_xlj-oOMAjM7CPA").withDate(7, 31);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -622,6 +630,7 @@ public class Supporters
         this.add("Allorific").withDate(7, 19);
         this.add("Enotiy").withDate(7, 26);
         this.add("Library Keeper").withDate(7, 26);
+        this.add("dofimus").withDate(8, 1);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
