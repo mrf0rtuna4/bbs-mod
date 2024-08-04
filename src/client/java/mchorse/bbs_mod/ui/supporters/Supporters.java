@@ -68,7 +68,7 @@ public class Supporters
         this.add("WATERMELON").withDate(3, 4);
         this.add("无铭_Null").withDate(3, 4);
         this.add("silent", "https://space.bilibili.com/514637376").withDate(3, 4);
-        this.add("Usaky舞麒", "https://space.bilibili.com/673732587", "...").withDate(3, 4);
+        this.add("Usaky舞麒", "https://space.bilibili.com/673732587", "textures/banners/usakywuqi.png").withDate(3, 4);
         this.add("流风LFloy", "...", "...").withDate(3, 4);
         this.add("南风不知我意").withDate(3, 4);
         this.add("临夜Livie", "https://space.bilibili.com/1544935486").withDate(3, 5);
@@ -625,7 +625,7 @@ public class Supporters
         this.add("wolfifurr").withDate(7, 15);
         this.add("QZero").withDate(7, 16);
         this.add("4ePHiT").withDate(7, 17);
-        this.add("lil roxx").withDate(7, 17);
+        this.add("gammuk").withDate(7, 17);
         this.add("WIN_Den").withDate(7, 18);
         this.add("Allorific").withDate(7, 19);
         this.add("Enotiy").withDate(7, 26);
