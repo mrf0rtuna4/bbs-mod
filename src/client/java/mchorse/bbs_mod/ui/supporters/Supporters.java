@@ -471,7 +471,7 @@ public class Supporters
         this.add("Snamu").withDate(6, 8);
         this.add("FlameTFA").withDate(6, 9);
         this.add("StillSkittles", "https://youtube.com/@stillskittles?si=8p3aZL88VeZZwqhK").withDate(6, 9);
-        this.add("eocx").withDate(6, 10);
+        this.add("eocx", "...").withDate(6, 10);
         this.add("Agnis_").withDate(6, 10);
         this.add("Evoken").withDate(6, 12);
         this.add("TheUncertainKing").withDate(6, 13);
