@@ -631,6 +631,7 @@ public class Supporters
         this.add("Enotiy").withDate(7, 26);
         this.add("Library Keeper").withDate(7, 26);
         this.add("dofimus").withDate(8, 1);
+        this.add("Shkarkusha").withDate(8, 4);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
