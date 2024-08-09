@@ -552,8 +552,10 @@ public class Supporters
         this.add("ToMiiX").withDate(8, 7);
         this.add("Neko").withDate(8, 8);
         this.add("Udjs Jdjd").withDate(8, 8);
+        this.add("Joel A.").withDate(8, 9);
+        this.add("Saint D.").withDate(8, 9);
 
-        // Thank you very much for donation! 😊 Is Shaw Oscar is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
