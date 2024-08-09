@@ -39,7 +39,7 @@ public class Supporters
         this.add("萱萱-3z", "https://space.bilibili.com/601994215", "textures/banners/xuanxuan.png").withDate(3, 3);
         this.add("白某人是个萌新", "...").withDate(3, 3);
         this.add("萌起MENGQI", "https://space.bilibili.com/2130239542", "textures/banners/mengqi.png").withDate(3, 3);
-        this.add("Adfbulin").withDate(3, 3);
+        this.add("Adfbulin", "https://space.bilibili.com/390313973").withDate(3, 3);
         this.add("方草块Minna").withDate(3, 3);
         this.add("Zhesheng_1818", "https://www.youtube.com/@MetalStorm_Studio").withDate(3, 3);
         this.add("暗影苦力怕 iter", "https://space.bilibili.com/472637101", "...").withDate(3, 3);
@@ -176,7 +176,7 @@ public class Supporters
         this.add("大鱿鱼").withDate(5, 25);
         this.add("Not_vegetabledog").withDate(5, 29);
         this.add("节奏梦想").withDate(5, 31);
-        this.add("ENDNULL", "https://space.bilibili.com/505118990", "...").withDate(6, 3);
+        this.add("ENDNULL", "https://space.bilibili.com/505118990", "textures/banners/ENDNULL.png").withDate(6, 3);
         this.add("布咕鸟不谷").withDate(6, 4);
         this.add("绚烂的白色").withDate(6, 6);
         // this.add("发电用户_yk").withDate(6, 7);
@@ -221,6 +221,10 @@ public class Supporters
         this.add("想摆烂的卡洛诺斯").withDate(7, 26);
         this.add("while1cry").withDate(7, 31);
         this.add("xu_zai").withDate(7, 31);
+        this.add("孤蔑冰空").withDate(8, 3);
+        this.add("dnc").withDate(8, 8);
+        this.add("Miraitowa").withDate(8, 8);
+        this.add("寒炎五月").withDate(8, 8);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -541,8 +545,15 @@ public class Supporters
         this.add("Riggih A.").withDate(7, 30);
         this.add("T4ddyGamesBR", "https://www.youtube.com/@BUNGas99").withDate(7, 30);
         this.add("ChillinWithDylan", "https://www.youtube.com/channel/UCM8yL498_xlj-oOMAjM7CPA").withDate(7, 31);
+        this.add("Shaw O.").withDate(8, 3);
+        this.add("Furrosuti").withDate(8, 3);
+        this.add("DannyTheOne").withDate(8, 3);
+        this.add("MST Masatu").withDate(8, 4);
+        this.add("ToMiiX").withDate(8, 7);
+        this.add("Neko").withDate(8, 8);
+        this.add("Udjs Jdjd").withDate(8, 8);
 
-        // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
+        // Thank you very much for donation! 😊 Is Shaw Oscar is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
@@ -632,6 +643,7 @@ public class Supporters
         this.add("Library Keeper").withDate(7, 26);
         this.add("dofimus").withDate(8, 1);
         this.add("Shkarkusha").withDate(8, 4);
+        this.add("korupey").withDate(8, 8);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
