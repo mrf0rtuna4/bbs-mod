@@ -265,7 +265,7 @@ public class Supporters
         this.add("wangyupu").withDate(3, 2);
         this.add("Wone_J", "https://space.bilibili.com/13505331").withDate(3, 2);
         this.add("资 云").withDate(3, 4);
-        this.add("Michael Creeper_", "https://twitter.com/MichaelCreeper", "...").withDate(3, 5);
+        this.add("Michael Creeper_", "https://twitter.com/MichaelCreeper", "textures/banners/michaelcreeper_.png").withDate(3, 5);
         this.add("Sundown Story").withDate(3, 5);
         this.add("NotSafe", "https://www.youtube.com/@NotSafe/videos", "textures/banners/notsafe.png").withDate(3, 8);
         this.add("sniffierpond").withDate(3, 10);
@@ -554,12 +554,13 @@ public class Supporters
         this.add("Udjs Jdjd").withDate(8, 8);
         this.add("Joel A.").withDate(8, 9);
         this.add("Saint D.").withDate(8, 9);
+        this.add("Snifferish", "https://www.youtube.com/@Snifferish").withDate(8, 9);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
 
         /* Boosty */
-        this.add("Clesten", "https://www.youtube.com/@clesten", "...").withDate(3, 6);
+        this.add("Clesten", "https://www.youtube.com/@clesten", "textures/banners/clesten.png").withDate(3, 6);
         this.add("MRkoteich").withDate(4, 27);
         this.add("Mait53").withDate(4, 27);
         this.add("osas.exe").withDate(4, 27);
