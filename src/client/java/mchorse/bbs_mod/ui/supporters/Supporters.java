@@ -640,7 +640,7 @@ public class Supporters
         this.add("QZero").withDate(7, 16);
         this.add("4ePHiT").withDate(7, 17);
         this.add("gammuk").withDate(7, 17);
-        this.add("WIN_Den").withDate(7, 18);
+        this.add("EsoKuro").withDate(7, 18);
         this.add("Allorific").withDate(7, 19);
         this.add("Enotiy").withDate(7, 26);
         this.add("Library Keeper").withDate(7, 26);
