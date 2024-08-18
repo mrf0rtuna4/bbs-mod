@@ -16,7 +16,7 @@ public class Supporters
         /* Afdian */
         this.add("76823999").withDate(2, 29);
         this.add("Silly_Sheep_").withDate(2, 29);
-        this.add("毫无人性的大麦纸", "https://space.bilibili.com/591074", "...").withDate(2, 29);
+        this.add("毫无人性的大麦纸", "https://space.bilibili.com/591074", "textures/banners/maizhi.png").withDate(2, 29);
         this.add("Afica").withDate(2, 29);
         this.add("XiaoTu_MC", "https://v.douyin.com/iNwM4XEr/", "...").withDate(3, 1);
         this.add("白板弱者", "...").withDate(3, 1);
@@ -32,7 +32,7 @@ public class Supporters
         this.add("ERroooooR", "https://space.bilibili.com/3546579457805118/").withDate(3, 3);
         this.add("澪L1ng", "https://space.bilibili.com/23839756", "textures/banners/l1ng.png").withDate(3, 3);
         this.add("爆风BooM", "https://space.bilibili.com/308180216").withDate(3, 3);
-        this.add("Seven_Chad", "https://twitter.com/seven_chad", "...").withDate(3, 3);
+        this.add("Seven_Chad", "https://twitter.com/seven_chad", "textures/banners/seven_chad.png").withDate(3, 3);
         this.add("九纳森九斯达", "https://space.bilibili.com/17696710").withDate(3, 3);
         this.add("Deal").withDate(3, 3);
         this.add("凤天", "https://space.bilibili.com/22348510").withDate(3, 3);
@@ -69,7 +69,7 @@ public class Supporters
         this.add("无铭_Null").withDate(3, 4);
         this.add("silent", "https://space.bilibili.com/514637376").withDate(3, 4);
         this.add("Usaky舞麒", "https://space.bilibili.com/673732587", "textures/banners/usakywuqi.png").withDate(3, 4);
-        this.add("流风LFloy", "...", "...").withDate(3, 4);
+        this.add("流风LFloy", "...", "textures/banners/liufeng.png").withDate(3, 4);
         this.add("南风不知我意").withDate(3, 4);
         this.add("临夜Livie", "https://space.bilibili.com/1544935486").withDate(3, 5);
         this.add("小猪之最", "https://space.bilibili.com/381671770", "...").withDate(3, 6);
@@ -104,16 +104,16 @@ public class Supporters
         this.add("飒爽师叔", "https://space.bilibili.com/22219285").withDate(3, 19);
         this.add("yeek").withDate(3, 20);
         this.add("mc47382").withDate(3, 20);
-        this.add("浪濤", "https://space.bilibili.com/289923315", "...").withDate(3, 20);
+        this.add("浪濤", "https://space.bilibili.com/289923315", "textures/banners/langtao.png").withDate(3, 20);
         this.add("附魔粒子", "https://space.bilibili.com/45637223", "...").withDate(3, 22);
-        this.add("涅泪", "https://space.bilibili.com/326657199", "...").withDate(3, 22);
+        this.add("涅泪", "https://space.bilibili.com/326657199", "textures/banners/nielei.png").withDate(3, 22);
         this.add("冰林L", "https://space.bilibili.com/497979931").withDate(3, 23);
         this.add("问学巨酱", "https://space.bilibili.com/635615190").withDate(3, 23);
         this.add("慕华lingzi").withDate(3, 23);
         this.add("靈音Nemloi").withDate(3, 23);
         this.add("风尘WD").withDate(3, 23);
         this.add("QingDame").withDate(3, 23);
-        this.add("月影Yancie", "https://space.bilibili.com/3186399", "...").withDate(3, 24);
+        this.add("月影Yancie", "https://space.bilibili.com/3186399", "textures/banners/yancie.png").withDate(3, 24);
         this.add("凉茶是帅哥").withDate(3, 24);
         this.add("Ender_Moring UOP").withDate(3, 25);
         this.add("lighting").withDate(3, 25);
@@ -135,14 +135,13 @@ public class Supporters
         this.add("咕咕丸", "https://space.bilibili.com/46023616").withDate(4, 10);
         this.add("诺麟煌").withDate(4, 12);
         this.add("陈佬C", "https://space.bilibili.com/87026021", "textures/banners/chen_lao_c.png").withDate(4, 13);
-        this.add("omo仙贝", "https://space.bilibili.com/1959304255", "...").withDate(4, 16);
+        this.add("omo仙贝", "https://space.bilibili.com/1959304255", "textures/banners/omo.png").withDate(4, 16);
         this.add("叶落空留白").withDate(4, 18);
         this.add("银蝶餐饮工作室").withDate(4, 19);
         this.add("-叶落空留白-").withDate(4, 19);
         this.add("明光凯").withDate(4, 20);
         this.add("JzAa饺子", "https://space.bilibili.com/1048696948").withDate(4, 25);
         this.add("梓轩", "https://space.bilibili.com/1048696948").withDate(4, 25);
-        this.add("omo", "...", "...").withDate(4, 25);
         this.add("我的世界萧鲲", "https://www.kuaishou.com/profile/3xxtz6m845v7pmg").withDate(4, 26);
         this.add("我的世界浴帽", "https://www.kuaishou.com/profile/3x3m75n5hat7wx2").withDate(4, 26);
         this.add("杨麒").withDate(4, 26);
@@ -163,7 +162,6 @@ public class Supporters
         this.add("酒辞").withDate(5, 11);
         this.add("块王c").withDate(5, 12);
         this.add("Turfore").withDate(5, 13);
-        this.add("汉CM").withDate(5, 14);
         this.add("lxmgf").withDate(5, 14);
         this.add("Turmeric茶").withDate(5, 16);
         this.add("余生酱ovo").withDate(5, 16);
@@ -652,7 +650,7 @@ public class Supporters
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
         this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
         this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "textures/banners/afegor.png").withDate(4, 8);
-        this.add("ZoGa", "...", "...").withDate(4, 22);
+        this.add("ZoGa", "...", "textures/banners/zogatop1animator.png").withDate(4, 22);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
 
         int afdian = 5;
