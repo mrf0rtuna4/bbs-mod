@@ -560,7 +560,7 @@ public class Supporters
         this.add("Joel A.").withDate(8, 9);
         this.add("Saint D.").withDate(8, 9);
         this.add("hyperboy 761").withDate(8, 10);
-        this.add("UYoung").withDate(8, 11);
+        this.add("ZeniStudios").withDate(8, 11);
         this.add("Marco D.", "...").withDate(8, 11);
         this.add("Snifferish", "https://www.youtube.com/@Snifferish").withDate(8, 12);
         this.add("DerEntspannte").withDate(8, 13);
