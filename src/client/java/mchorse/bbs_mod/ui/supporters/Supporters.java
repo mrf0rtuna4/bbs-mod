@@ -223,6 +223,13 @@ public class Supporters
         this.add("dnc").withDate(8, 8);
         this.add("Miraitowa").withDate(8, 8);
         this.add("寒炎五月").withDate(8, 8);
+        this.add("BaiZe-白泽").withDate(8, 8);
+        this.add("小贤").withDate(8, 11);
+        this.add("Starfrost").withDate(8, 11);
+        this.add("OMGDays", "...").withDate(8, 12);
+        this.add("瓦合-SAME").withDate(8, 13);
+        this.add("YMRSL").withDate(8, 14);
+        this.add("zhoubanxian233").withDate(8, 16);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -552,7 +559,13 @@ public class Supporters
         this.add("Udjs Jdjd").withDate(8, 8);
         this.add("Joel A.").withDate(8, 9);
         this.add("Saint D.").withDate(8, 9);
-        this.add("Snifferish", "https://www.youtube.com/@Snifferish").withDate(8, 9);
+        this.add("hyperboy 761").withDate(8, 10);
+        this.add("UYoung").withDate(8, 11);
+        this.add("Marco D.", "...").withDate(8, 11);
+        this.add("Snifferish", "https://www.youtube.com/@Snifferish").withDate(8, 12);
+        this.add("DerEntspannte").withDate(8, 13);
+        this.add("Dark Corners", "https://www.youtube.com/@DarkCornersTV").withDate(8, 14);
+        this.add("Infy").withDate(8, 15);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
