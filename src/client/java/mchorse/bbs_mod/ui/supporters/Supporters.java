@@ -575,7 +575,6 @@ public class Supporters
         this.add("SpyQu", "https://www.youtube.com/@SpyQu").withDate(8, 25);
         this.add("The Coastal Tavern").withDate(8, 26);
         this.add("Leo A.").withDate(9, 1);
-        this.add("Benjamin W.").withDate(9, 6);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
