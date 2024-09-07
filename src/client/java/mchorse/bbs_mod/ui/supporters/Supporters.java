@@ -230,6 +230,11 @@ public class Supporters
         this.add("瓦合-SAME").withDate(8, 13);
         this.add("YMRSL").withDate(8, 14);
         this.add("zhoubanxian233").withDate(8, 16);
+        this.add("瓶盖PING", "https://space.bilibili.com/79043581").withDate(8, 19);
+        this.add("Amel_Lam献督").withDate(8, 21);
+        this.add("阿秩rank").withDate(8, 29);
+        this.add("卿冬与千").withDate(8, 29);
+        this.add("SqrtPi_").withDate(8, 30);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -412,7 +417,7 @@ public class Supporters
         this.add("Silverx Productions").withDate(5, 9);
         this.add("【OMGDays】").withDate(5, 10);
         this.add("Hangert").withDate(5, 10);
-        this.add("Captain F0XYgamingpro").withDate(5, 11);
+        this.add("C4ptainF0xy").withDate(5, 11);
         this.add("Hfsiu F.").withDate(5, 11);
         this.add("gcon").withDate(5, 11);
         this.add("KudoDerg").withDate(5, 11);
@@ -566,6 +571,11 @@ public class Supporters
         this.add("DerEntspannte").withDate(8, 13);
         this.add("Dark Corners", "https://www.youtube.com/@DarkCornersTV").withDate(8, 14);
         this.add("Infy").withDate(8, 15);
+        this.add("Problems YT").withDate(8, 21);
+        this.add("SpyQu", "https://www.youtube.com/@SpyQu").withDate(8, 25);
+        this.add("The Coastal Tavern").withDate(8, 26);
+        this.add("Leo A.").withDate(9, 1);
+        this.add("Benjamin W.").withDate(9, 6);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -659,6 +669,9 @@ public class Supporters
         this.add("Shkarkusha").withDate(8, 4);
         this.add("korupey").withDate(8, 8);
         this.add("Hosti1338").withDate(8, 29);
+        this.add("Hosti1338").withDate(8, 29);
+        this.add("Mel1x").withDate(9, 5);
+        this.add("Eda Hari").withDate(9, 5);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);

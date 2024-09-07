@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(RenderLayer.class)
 public class RenderLayerMixin
 {
-    @Inject(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;startDrawing()V", ordinal = 0))
+    @Inject(method = "draw", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;startDrawing()V", ordinal = 0, shift = At.Shift.AFTER))
     public void onDraw(BufferBuilder buffer, VertexSorter sorter, CallbackInfo info)
     {
         CustomVertexConsumerProvider.drawLayer((RenderLayer) (Object) this);
