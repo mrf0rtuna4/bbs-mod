@@ -419,7 +419,7 @@ public class Supporters
         this.add("Hangert").withDate(5, 10);
         this.add("C4ptainF0xy").withDate(5, 11);
         this.add("Hfsiu F.").withDate(5, 11);
-        this.add("gcon").withDate(5, 11);
+        this.add("inhisarlideliyakup").withDate(5, 11);
         this.add("KudoDerg").withDate(5, 11);
         this.add("EinfachJoey").withDate(5, 12);
         this.add("Santiago AAP").withDate(5, 12);
