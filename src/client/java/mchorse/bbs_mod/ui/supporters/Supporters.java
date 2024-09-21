@@ -235,6 +235,9 @@ public class Supporters
         this.add("阿秩rank").withDate(8, 29);
         this.add("卿冬与千").withDate(8, 29);
         this.add("SqrtPi_").withDate(8, 30);
+        this.add("小啊雨大王").withDate(9, 9);
+        this.add("FoFTG", "https://space.bilibili.com/26032219/", "...").withDate(9, 9);
+        this.add("WHYHW2297").withDate(9, 9);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -576,7 +579,7 @@ public class Supporters
         this.add("The Coastal Tavern").withDate(8, 26);
         this.add("Leo A.").withDate(9, 1);
         this.add("Nothing Count").withDate(9, 14);
-        this.add("MegaBlaster XYZ").withDate(9, 14);
+        this.add("Mr. Blaster").withDate(9, 14);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -670,9 +673,9 @@ public class Supporters
         this.add("Shkarkusha").withDate(8, 4);
         this.add("korupey").withDate(8, 8);
         this.add("Hosti1338").withDate(8, 29);
-        this.add("Hosti1338").withDate(8, 29);
         this.add("Mel1x").withDate(9, 5);
         this.add("Eda Hari").withDate(9, 5);
+        this.add("CTU4").withDate(9, 5);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
