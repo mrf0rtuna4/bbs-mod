@@ -426,7 +426,7 @@ public class Supporters
         this.add("KudoDerg").withDate(5, 11);
         this.add("EinfachJoey").withDate(5, 12);
         this.add("Santiago AAP").withDate(5, 12);
-        this.add("Rüyaperest").withDate(5, 13);
+        this.add("Rüyaperest", "https://www.youtube.com/@Ruyaperest", "textures/banners/ruyaperest.png").withDate(5, 13);
         this.add("novaplays123").withDate(5, 14);
         this.add("WiserLake").withDate(5, 15);
         this.add("Flayming MC", "https://www.youtube.com/channel/UC3b8_VlQVXpu7e0MUPLHdBA", "textures/banners/flayming.png").withDate(5, 16);
