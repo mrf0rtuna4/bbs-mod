@@ -522,7 +522,7 @@ public class Supporters
         this.add("ViaTrip").withDate(7, 8);
         this.add("FlyZ3r").withDate(7, 9);
         this.add("Billicraft").withDate(7, 10);
-        this.add("Chris").withDate(7, 10);
+        this.add("Game").withDate(7, 10);
         this.add("Sam E.").withDate(7, 11);
         this.add("ซี บีโอเอสเอส").withDate(7, 11);
         this.add("Movie Shitheads").withDate(7, 12);
