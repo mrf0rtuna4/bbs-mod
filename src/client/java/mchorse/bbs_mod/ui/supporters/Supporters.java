@@ -294,7 +294,7 @@ public class Supporters
         this.add("Pimpochka Games", "https://pimpochka.games/", "textures/banners/pimpochka_games.png").withDate(3, 25);
         this.add("Nioum").withDate(3, 27);
         this.add("D. Janvier").withDate(3, 27);
-        this.add("Malley").withDate(4, 1);
+        this.add("FinalBlock Studios", "https://finalblockstudios.com/", "textures/banners/finalblock_studios.png").withDate(4, 1);
         this.add("FunkyFight", "https://www.youtube.com/@FunkyFight", "textures/banners/funkyfight.png").withDate(4, 2);
         this.add("FaithStudios").withDate(4, 2);
         this.add("Ivan Dmitriyev").withDate(4, 4);
@@ -579,7 +579,15 @@ public class Supporters
         this.add("The Coastal Tavern").withDate(8, 26);
         this.add("Leo A.").withDate(9, 1);
         this.add("Nothing Count").withDate(9, 14);
-        this.add("Mr. Blaster").withDate(9, 14);
+        this.add("Mr. Blaster").withDate(9, 15);
+        this.add("Paresh Solanki").withDate(9, 21);
+        this.add("BALOO").withDate(9, 22);
+        this.add("NurDeko").withDate(9, 22);
+        this.add("Hakan şef").withDate(9, 23);
+        this.add("KiLAB").withDate(9, 23);
+        this.add("Ferit B.").withDate(9, 24);
+        this.add("MarioCraft31").withDate(9, 25);
+        this.add("Donepi").withDate(9, 29);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -670,6 +678,7 @@ public class Supporters
         this.add("Enotiy").withDate(7, 26);
         this.add("Library Keeper").withDate(7, 26);
         this.add("dofimus").withDate(8, 1);
+        this.add("Дмитрий М.").withDate(8, 3);
         this.add("Shkarkusha").withDate(8, 4);
         this.add("korupey").withDate(8, 8);
         this.add("Hosti1338").withDate(8, 29);
