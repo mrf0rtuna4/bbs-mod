@@ -583,9 +583,9 @@ public class Supporters
         this.add("Paresh Solanki").withDate(9, 21);
         this.add("BALOO").withDate(9, 22);
         this.add("NurDeko").withDate(9, 22);
-        this.add("Hakan şef").withDate(9, 23);
+        this.add("Hakan_Sef").withDate(9, 23);
         this.add("KiLAB").withDate(9, 23);
-        this.add("Ferit B.").withDate(9, 24);
+        this.add("Ferited").withDate(9, 24);
         this.add("MarioCraft31").withDate(9, 25);
         this.add("Donepi").withDate(9, 29);
 
