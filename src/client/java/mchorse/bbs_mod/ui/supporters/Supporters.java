@@ -560,7 +560,7 @@ public class Supporters
         this.add("ChillinWithDylan", "https://www.youtube.com/channel/UCM8yL498_xlj-oOMAjM7CPA").withDate(7, 31);
         this.add("Shaw O.").withDate(8, 3);
         this.add("Furrosuti").withDate(8, 3);
-        this.add("DannyTheOne").withDate(8, 3);
+        this.add("nerotvlive").withDate(8, 3);
         this.add("MST Masatu").withDate(8, 4);
         this.add("ToMiiX").withDate(8, 7);
         this.add("Neko").withDate(8, 8);
