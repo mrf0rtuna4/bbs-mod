@@ -685,6 +685,9 @@ public class Supporters
         this.add("Mel1x").withDate(9, 5);
         this.add("Eda Hari").withDate(9, 5);
         this.add("CTU4").withDate(9, 5);
+        this.add("Solov").withDate(10, 10);
+        this.add("dadadaeo").withDate(10, 19);
+        this.add("_Nerds_").withDate(10, 20);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
