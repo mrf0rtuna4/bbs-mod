@@ -238,6 +238,9 @@ public class Supporters
         this.add("小啊雨大王").withDate(9, 9);
         this.add("FoFTG", "https://space.bilibili.com/26032219/", "...").withDate(9, 9);
         this.add("WHYHW2297").withDate(9, 9);
+        this.add("天men").withDate(10, 4);
+        this.add("寄水晶").withDate(10, 8);
+        this.add("Easecation").withDate(11, 8);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -517,7 +520,7 @@ public class Supporters
         this.add("wa tashi").withDate(7, 4);
         this.add("Hoàng H.").withDate(7, 7);
         this.add("Cube Clown").withDate(7, 7);
-        this.add("Le Hoang Gia Bao").withDate(7, 8);
+        this.add("Zeros").withDate(7, 8);
         this.add("panfontanna").withDate(7, 8);
         this.add("ViaTrip").withDate(7, 8);
         this.add("FlyZ3r").withDate(7, 9);
@@ -578,7 +581,7 @@ public class Supporters
         this.add("SpyQu", "https://www.youtube.com/@SpyQu").withDate(8, 25);
         this.add("The Coastal Tavern").withDate(8, 26);
         this.add("Leo A.").withDate(9, 1);
-        this.add("Nothing Count").withDate(9, 14);
+        this.add("marlow").withDate(9, 14);
         this.add("Mr. Blaster").withDate(9, 15);
         this.add("Paresh Solanki").withDate(9, 21);
         this.add("BALOO").withDate(9, 22);
@@ -588,6 +591,29 @@ public class Supporters
         this.add("Ferited").withDate(9, 24);
         this.add("MarioCraft31").withDate(9, 25);
         this.add("Donepi").withDate(9, 29);
+        this.add("Exhaustes Yami", "https://lnk.bio/exhausted").withDate(10, 3);
+        this.add("Checkpoint").withDate(10, 3);
+        this.add("Miauzinha The Kitty").withDate(10, 6);
+        this.add("Verpixelt").withDate(10, 6);
+        this.add("Feytown").withDate(10, 6);
+        this.add("wesley-PC").withDate(10, 7);
+        this.add("Corujinh4").withDate(10, 7);
+        this.add("hhharleyy").withDate(10, 8);
+        this.add("Nala K.").withDate(10, 10);
+        this.add("Hafidz J.").withDate(10, 14);
+        this.add("Alemanni").withDate(10, 24);
+        this.add("zeyxon 24").withDate(10, 27);
+        this.add("fankung555", "...").withDate(10, 30);
+        this.add("Ace").withDate(11, 1);
+        this.add("Stalling Set").withDate(11, 2);
+        this.add("Creative Studio").withDate(11, 3);
+        this.add("Kevin K.").withDate(11, 7);
+        this.add("Arctic Taco Gaming").withDate(11, 8);
+        this.add("Addison Nichols").withDate(11, 9);
+        this.add("Joll", "https://www.youtube.com/channel/UClcqpZhHYcoRADrYmaGqVZA").withDate(11, 11);
+        this.add("AlGowzXD").withDate(11, 15);
+        this.add("Sean").withDate(11, 19);
+        this.add("Pistachio Jay").withDate(11, 21);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -688,6 +714,9 @@ public class Supporters
         this.add("Solov").withDate(10, 10);
         this.add("dadadaeo").withDate(10, 19);
         this.add("_Nerds_").withDate(10, 20);
+        this.add("Metla").withDate(10, 29);
+        this.add("lizuun").withDate(11, 4);
+        this.add("Mylozh").withDate(11, 7);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
