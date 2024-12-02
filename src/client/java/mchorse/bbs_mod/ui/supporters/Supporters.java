@@ -544,7 +544,7 @@ public class Supporters
         this.add("Sebastian Ruditz").withDate(7, 20);
         this.add("Caméléon Gamer").withDate(7, 21);
         this.add("Mii").withDate(7, 22);
-        this.add("PistachioJay").withDate(7, 23);
+        this.add("TimesLooper").withDate(7, 23);
         this.add("Ez Ez").withDate(7, 23);
         this.add("Liam Vinokurov").withDate(7, 24);
         this.add("TooFfion").withDate(7, 25);
