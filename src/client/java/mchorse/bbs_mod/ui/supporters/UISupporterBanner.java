@@ -43,7 +43,7 @@ public class UISupporterBanner extends UIElement
     public static UIElement createLinkEntry(Supporter supporter)
     {
         return UI.row(
-            UI.label(IKey.raw(supporter.name), 20).labelAnchor(0F, 0.5F),
+            UI.label(IKey.constant(supporter.name), 20).labelAnchor(0F, 0.5F),
             UISupporterBanner.createLinkIcon(supporter)
         );
     }
