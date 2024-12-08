@@ -238,9 +238,10 @@ public class Supporters
         this.add("小啊雨大王").withDate(9, 9);
         this.add("FoFTG", "https://space.bilibili.com/26032219/", "...").withDate(9, 9);
         this.add("WHYHW2297").withDate(9, 9);
-        this.add("天men").withDate(10, 4);
+        this.add("tianmen").withDate(10, 4);
         this.add("寄水晶").withDate(10, 8);
         this.add("Easecation").withDate(11, 8);
+        this.add("The_Crispy", "https://space.bilibili.com/3546733667682452").withDate(12, 1);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -613,7 +614,9 @@ public class Supporters
         this.add("Joll", "https://www.youtube.com/channel/UClcqpZhHYcoRADrYmaGqVZA").withDate(11, 11);
         this.add("AlGowzXD").withDate(11, 15);
         this.add("Sean").withDate(11, 19);
-        this.add("Pistachio Jay").withDate(11, 21);
+        this.add("Moon Light").withDate(12, 3);
+        this.add("Gabriel Meister").withDate(12, 3);
+        this.add("PasteleFaerie", "https://www.youtube.com/channel/UC44uOBI-7Kh5gCl3JJ_vDsw").withDate(12, 8);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
