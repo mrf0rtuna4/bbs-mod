@@ -3,7 +3,7 @@
 	"animations": {},
 	"model": {
 		"groups": {
-			"lower_torso": {
+			"torso_lower": {
 				"origin": [0, 18, 0],
 				"parent": "torso",
 				"cubes": [
