@@ -604,7 +604,7 @@ public class Supporters
         this.add("Hafidz J.").withDate(10, 14);
         this.add("Alemanni").withDate(10, 24);
         this.add("zeyxon 24").withDate(10, 27);
-        this.add("fankung555", "...").withDate(10, 30);
+        this.add("fanku", "https://ytjobs.co/talent/profile/22147").withDate(10, 30);
         this.add("Ace").withDate(11, 1);
         this.add("Stalling Set").withDate(11, 2);
         this.add("Creative Studio").withDate(11, 3);
