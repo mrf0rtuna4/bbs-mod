@@ -722,6 +722,7 @@ public class Supporters
         this.add("Mylozh").withDate(11, 7);
         this.add("perdibay").withDate(11, 28);
         this.add("mrmax").withDate(12, 3);
+        this.add("Dranick").withDate(12, 12);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
