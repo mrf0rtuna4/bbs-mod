@@ -718,7 +718,7 @@
 				]
 			},
 			"low_body": {
-				"origin": [0, 24, 0],
+				"origin": [0, 12, 0],
 				"parent": "anchor"
 			},
 			"right_knee": {
