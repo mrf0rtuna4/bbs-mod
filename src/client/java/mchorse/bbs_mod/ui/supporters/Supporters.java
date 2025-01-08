@@ -670,6 +670,7 @@ public class Supporters
         this.add("GensaMine").withDate(5, 21);
         this.add("-AVACH-").withDate(5, 22);
         this.add("Найтингейл", "https://www.youtube.com/@19gale").withDate(5, 22);
+        this.add("Filin").withDate(5, 22);
         // this.add("b0b0b0").withDate(5, 23); This guy doesn't deserve a mention, because of the leak
         this.add("Zing").withDate(5, 23);
         this.add("yurafakel").withDate(5, 28);
