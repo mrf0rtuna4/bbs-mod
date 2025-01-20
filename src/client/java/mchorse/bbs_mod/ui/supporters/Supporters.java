@@ -241,8 +241,13 @@ public class Supporters
         this.add("tianmen").withDate(10, 4);
         this.add("寄水晶").withDate(10, 8);
         this.add("Easecation").withDate(11, 8);
-        this.add("The_Crispy", "https://space.bilibili.com/3546733667682452").withDate(12, 16);
-        this.add("九思").withDate(12, 1);
+        this.add("The_Crispy", "https://space.bilibili.com/3546733667682452").withDate(12, 1);
+        this.add("九思").withDate(12, 16);
+        this.add("因为42").withDate(12, 23);
+        this.add("吾乃曲奇PigeonCookie").withDate(12, 26);
+        this.add("Raccoon Spoon").withDate(12, 30);
+        this.add("李来福AnlBE").withDate(2025, 1, 6);
+        this.add("酋长_chief").withDate(2025, 1, 14);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -618,6 +623,10 @@ public class Supporters
         this.add("Moon Light").withDate(12, 3);
         this.add("Gabriel Meister").withDate(12, 3);
         this.add("PasteleFaerie", "https://www.youtube.com/channel/UC44uOBI-7Kh5gCl3JJ_vDsw").withDate(12, 8);
+        this.add("Sonic0810").withDate(12, 10);
+        this.add("Michael Flowers").withDate(12, 12);
+        this.add("RedNgt").withDate(12, 31);
+        this.add("유튜브 댕댕이", "...").withDate(2025, 1, 8);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -725,6 +734,8 @@ public class Supporters
         this.add("perdibay").withDate(11, 28);
         this.add("mrmax").withDate(12, 3);
         this.add("Dranick").withDate(12, 12);
+        this.add("Lu_t1k").withDate(12, 14);
+        this.add("Agleepi", "https://www.youtube.com/@agleepi", "...").withDate(2025, 1, 20);
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
