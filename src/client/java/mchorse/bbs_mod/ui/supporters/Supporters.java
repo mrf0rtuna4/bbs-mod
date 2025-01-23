@@ -679,7 +679,6 @@ public class Supporters
         this.add("GensaMine").withDate(5, 21);
         this.add("-AVACH-").withDate(5, 22);
         this.add("Найтингейл", "https://www.youtube.com/@19gale").withDate(5, 22);
-        this.add("Filin").withDate(5, 22);
         // this.add("b0b0b0").withDate(5, 23); This guy doesn't deserve a mention, because of the leak
         this.add("Zing").withDate(5, 23);
         this.add("yurafakel").withDate(5, 28);
@@ -733,8 +732,9 @@ public class Supporters
         this.add("Mylozh").withDate(11, 7);
         this.add("perdibay").withDate(11, 28);
         this.add("mrmax").withDate(12, 3);
-        this.add("Dranick").withDate(12, 12);
-        this.add("Lu_t1k").withDate(12, 14);
+        this.add("Dranick").withDate(12, 24);
+        this.add("Lu_t1k").withDate(12, 24);
+        this.add("Filin").withDate(12, 24);
         this.add("Agleepi", "https://www.youtube.com/@agleepi", "...").withDate(2025, 1, 20);
 
         /* Custom */
