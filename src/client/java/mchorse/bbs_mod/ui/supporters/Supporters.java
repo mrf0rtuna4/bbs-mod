@@ -248,6 +248,11 @@ public class Supporters
         this.add("Raccoon Spoon").withDate(12, 30);
         this.add("李来福AnlBE").withDate(2025, 1, 6);
         this.add("酋长_chief").withDate(2025, 1, 14);
+        this.add("Wi2ter").withDate(2025, 1, 21);
+        this.add("Wi2ter").withDate(2025, 1, 21);
+        this.add("清歌栀耳").withDate(2025, 1, 22);
+        this.add("臻选黄昏蛋").withDate(2025, 1, 29);
+        this.add("Nootviri").withDate(2025, 1, 31);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -627,6 +632,7 @@ public class Supporters
         this.add("Michael Flowers").withDate(12, 12);
         this.add("RedNgt").withDate(12, 31);
         this.add("유튜브 댕댕이", "...").withDate(2025, 1, 8);
+        this.add("Pizzaronee", "https://www.youtube.com/@pizzaroneee").withDate(2025, 1, 22);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
