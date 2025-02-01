@@ -633,6 +633,7 @@ public class Supporters
         this.add("RedNgt").withDate(12, 31);
         this.add("유튜브 댕댕이", "...").withDate(2025, 1, 8);
         this.add("Pizzaronee", "https://www.youtube.com/@pizzaroneee").withDate(2025, 1, 22);
+        this.add("ณัฐวุฒิ ทวาแสน").withDate(2025, 1, 31);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
