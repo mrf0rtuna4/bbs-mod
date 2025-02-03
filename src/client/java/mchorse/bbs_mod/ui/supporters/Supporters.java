@@ -749,6 +749,7 @@ public class Supporters
         this.add("Rasty", "https://www.youtube.com/@RastyStudio").withDate(3, 6);
         this.add("Afegor (Alyokhin Dmitrii)", "https://www.youtube.com/@Afegor", "textures/banners/afegor.png").withDate(4, 8);
         this.add("ZoGa", "...", "textures/banners/zogatop1animator.png").withDate(4, 22);
+        this.add("qualet", "https://www.youtube.com/@qualet", "textures/banners/QUALET_QUALET_QUALET_QUALET_QUALET_QUALET_QUALET_QUALET_QUALET_QUALET.png").withDate(2025, 2, 3);
         this.add("McHorse", "https://www.youtube.com/channel/UCSLuDXxxql4EVK_Ktd6PNbw", "textures/banners/mchorse.png");
 
         int afdian = 5;
