@@ -1,13 +1,13 @@
-package mchorse.bbs_mod.cubic;
+package mchorse.bbs_mod.cubic.model.bobj;
 
+import mchorse.bbs_mod.bobj.BOBJBone;
+import mchorse.bbs_mod.cubic.CubicModelAnimator;
+import mchorse.bbs_mod.cubic.MolangHelper;
 import mchorse.bbs_mod.cubic.data.animation.Animation;
 import mchorse.bbs_mod.cubic.data.animation.AnimationChannel;
 import mchorse.bbs_mod.cubic.data.animation.AnimationInterpolation;
 import mchorse.bbs_mod.cubic.data.animation.AnimationPart;
 import mchorse.bbs_mod.cubic.data.animation.AnimationVector;
-import mchorse.bbs_mod.cubic.data.model.Model;
-import mchorse.bbs_mod.cubic.data.model.ModelGroup;
-import mchorse.bbs_mod.math.molang.expressions.MolangExpression;
 import mchorse.bbs_mod.utils.Axis;
 import mchorse.bbs_mod.utils.interps.Lerps;
 import mchorse.bbs_mod.utils.pose.Transform;
@@ -15,32 +15,11 @@ import org.joml.Vector3d;
 
 import java.util.List;
 
-public class CubicModelAnimator
+public class BOBJModelAnimator
 {
     private static Vector3d p = new Vector3d();
     private static Vector3d s = new Vector3d();
     private static Vector3d r = new Vector3d();
-
-    /**
-     * Get value from given value of a keyframe (end or start)
-     *
-     * This method is responsible for processing keyframe value, because
-     * for some reason constant values are exported in radians, while molang
-     * expressions are in degrees
-     *
-     * Plus X and Y axis of rotation are inverted for some reason ...
-     */
-    public static double getValue(MolangExpression value, MolangHelper.Component component, Axis axis)
-    {
-        double out = value.get();
-
-        if (component == MolangHelper.Component.SCALE)
-        {
-            out = out - 1;
-        }
-
-        return out;
-    }
 
     public static Vector3d interpolateList(Vector3d vector, AnimationChannel channel, float frame, MolangHelper.Component component)
     {
@@ -62,9 +41,9 @@ public class CubicModelAnimator
 
         if (frame < first.time * 20)
         {
-            output.x = getValue(first.getStart(Axis.X), component, Axis.X);
-            output.y = getValue(first.getStart(Axis.Y), component, Axis.Y);
-            output.z = getValue(first.getStart(Axis.Z), component, Axis.Z);
+            output.x = MolangHelper.getValue(first.getStart(Axis.X), component, Axis.X);
+            output.y = MolangHelper.getValue(first.getStart(Axis.Y), component, Axis.Y);
+            output.z = MolangHelper.getValue(first.getStart(Axis.Z), component, Axis.Z);
 
             return output;
         }
@@ -91,26 +70,26 @@ public class CubicModelAnimator
 
         AnimationVector last = keyframes.get(keyframes.size() - 1);
 
-        output.x = getValue(last.getStart(Axis.X), component, Axis.X);
-        output.y = getValue(last.getStart(Axis.Y), component, Axis.Y);
-        output.z = getValue(last.getStart(Axis.Z), component, Axis.Z);
+        output.x = MolangHelper.getValue(last.getStart(Axis.X), component, Axis.X);
+        output.y = MolangHelper.getValue(last.getStart(Axis.Y), component, Axis.Y);
+        output.z = MolangHelper.getValue(last.getStart(Axis.Z), component, Axis.Z);
 
         return output;
     }
 
-    public static void animate(Model model, Animation animation, float frame, float blend, boolean skipInitial)
+    public static void animate(BOBJModel model, Animation animation, float frame, float blend, boolean skipInitial)
     {
-        for (ModelGroup group : model.topGroups)
+        for (BOBJBone orderedBone : model.getArmature().orderedBones)
         {
-            animateGroup(group, animation, frame, blend, skipInitial);
+            animateGroup(orderedBone, animation, frame, blend, skipInitial);
         }
     }
 
-    private static void animateGroup(ModelGroup group, Animation animation, float frame, float blend, boolean skipInitial)
+    private static void animateGroup(BOBJBone group, Animation animation, float frame, float blend, boolean skipInitial)
     {
         boolean applied = false;
 
-        AnimationPart part = animation.parts.get(group.id);
+        AnimationPart part = animation.parts.get(group.name);
 
         if (part != null)
         {
@@ -121,28 +100,23 @@ public class CubicModelAnimator
 
         if (!applied && !skipInitial)
         {
-            Transform initial = group.initial;
-            Transform current = group.current;
+            Transform initial = Transform.DEFAULT;
+            Transform current = group.transform;
 
             current.translate.lerp(initial.translate, blend);
             current.scale.lerp(initial.scale, blend);
             current.rotate.lerp(initial.rotate, blend);
         }
-
-        for (ModelGroup childGroup : group.children)
-        {
-            animateGroup(childGroup, animation, frame, blend, skipInitial);
-        }
     }
 
-    private static void applyGroupAnimation(ModelGroup group, AnimationPart animation, float frame, float blend)
+    private static void applyGroupAnimation(BOBJBone group, AnimationPart animation, float frame, float blend)
     {
         Vector3d position = interpolateList(p, animation.position, frame, MolangHelper.Component.POSITION);
         Vector3d scale = interpolateList(s, animation.scale, frame, MolangHelper.Component.SCALE);
         Vector3d rotation = interpolateList(r, animation.rotation, frame, MolangHelper.Component.ROTATION);
 
-        Transform initial = group.initial;
-        Transform current = group.current;
+        Transform initial = Transform.DEFAULT;
+        Transform current = group.transform;
 
         current.translate.x = Lerps.lerp(current.translate.x, (float) position.x + initial.translate.x, blend);
         current.translate.y = Lerps.lerp(current.translate.y, (float) position.y + initial.translate.y, blend);
