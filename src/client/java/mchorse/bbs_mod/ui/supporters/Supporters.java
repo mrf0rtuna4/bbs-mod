@@ -126,6 +126,7 @@ public class Supporters
         this.add("穷思鸡", "https://space.bilibili.com/9661047", "...").withDate(3, 27);
         this.add("轩的游戏日志", "https://space.bilibili.com/175442023").withDate(3, 30);
         this.add("Saki_Rong").withDate(4, 2);
+        this.add("zoombie").withDate(4, 3);
         this.add("Q").withDate(4, 5);
         this.add("ms影月").withDate(4, 6);
         this.add("夏月琳櫻").withDate(4, 6);
