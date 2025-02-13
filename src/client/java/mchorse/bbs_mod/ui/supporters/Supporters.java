@@ -254,6 +254,8 @@ public class Supporters
         this.add("清歌栀耳").withDate(2025, 1, 22);
         this.add("臻选黄昏蛋").withDate(2025, 1, 29);
         this.add("Nootviri").withDate(2025, 1, 31);
+        this.add("shuai123").withDate(2025, 2, 9);
+        this.add("李世言", "...").withDate(2025, 2, 10);
 
         /* Patreon */
         this.add("terbin", "https://www.youtube.com/channel/UCD4X2slLdD_WJxlW03JPVQQ", "...").withDate(2, 23);
@@ -635,6 +637,15 @@ public class Supporters
         this.add("유튜브 댕댕이", "...").withDate(2025, 1, 8);
         this.add("Pizzaronee", "https://www.youtube.com/@pizzaroneee").withDate(2025, 1, 22);
         this.add("ณัฐวุฒิ ทวาแสน").withDate(2025, 1, 31);
+        this.add("Kubilay Kaan A.").withDate(2025, 2, 3);
+        this.add("Why Not").withDate(2025, 2, 3);
+        this.add("Duy Hoàng l.").withDate(2025, 2, 4);
+        this.add("Mayjk").withDate(2025, 2, 5);
+        this.add("Quackers Clone").withDate(2025, 2, 6);
+        this.add("Jay R.").withDate(2025, 2, 6);
+        this.add("Cujo").withDate(2025, 2, 6);
+        this.add("Luke W.").withDate(2025, 2, 7);
+        this.add("ImHarry").withDate(2025, 2, 9);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod? Also, you can provide a link to your social media account (like YouTube, Twitter, TikTok, etc.)
@@ -744,6 +755,7 @@ public class Supporters
         this.add("Lu_t1k").withDate(12, 24);
         this.add("Filin").withDate(12, 24);
         this.add("Agleepi", "https://www.youtube.com/@agleepi", "...").withDate(2025, 1, 20);
+        this.add("AGGRESSIVE-COOVIR-21!").withDate(2025, 2, 10); /* <3 */
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
