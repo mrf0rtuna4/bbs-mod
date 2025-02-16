@@ -639,12 +639,12 @@ public class Supporters
         this.add("ณัฐวุฒิ ทวาแสน").withDate(2025, 1, 31);
         this.add("Kubilay Kaan A.").withDate(2025, 2, 3);
         this.add("Why Not").withDate(2025, 2, 3);
-        this.add("Duy Hoàng l.").withDate(2025, 2, 4);
+        this.add("DorikiTheSimp").withDate(2025, 2, 4);
         this.add("Mayjk").withDate(2025, 2, 5);
         this.add("Quackers Clone").withDate(2025, 2, 6);
         this.add("Jay R.").withDate(2025, 2, 6);
         this.add("Cujo").withDate(2025, 2, 6);
-        this.add("Luke W.").withDate(2025, 2, 7);
+        this.add("SpookGaming").withDate(2025, 2, 7);
         this.add("ImHarry").withDate(2025, 2, 9);
 
         // Thank you very much for donation! 😊 Is $ is the name you want to be included in BBS mod?
