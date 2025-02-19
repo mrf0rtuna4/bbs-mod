@@ -756,6 +756,7 @@ public class Supporters
         this.add("Filin").withDate(12, 24);
         this.add("Agleepi", "https://www.youtube.com/@agleepi", "...").withDate(2025, 1, 20);
         this.add("AGGRESSIVE-COOVIR-21!").withDate(2025, 2, 10); /* <3 */
+        this.add("osmiq", "https://twitter.com/osmiq0", "...").withDate(2025, 2, 19); /* <3 */
 
         /* Custom */
         this.add("Hrymka", "...", "textures/banners/hrymka.png").withDate(3, 6);
