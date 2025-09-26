@@ -18,12 +18,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -90,7 +93,6 @@ public class GunProjectileEntity extends ProjectileEntity implements IEntityForm
         }
     }
 
-    @Override
     protected void initDataTracker()
     {}
 
@@ -144,6 +146,11 @@ public class GunProjectileEntity extends ProjectileEntity implements IEntityForm
     public boolean shouldRender(double distance)
     {
         return true;
+    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+
     }
 
     @Override
@@ -320,7 +327,7 @@ public class GunProjectileEntity extends ProjectileEntity implements IEntityForm
         DamageSource source = this.getDamageSources().magic();
 
         int fireTicks = entity.getFireTicks();
-        boolean deflectsArrows = entity.getType().isIn(EntityTypeTags.DEFLECTS_ARROWS);
+        boolean deflectsArrows = entity.getType().isIn(EntityTypeTags.DEFLECTS_PROJECTILES);
 
         if (this.isOnFire() && !deflectsArrows)
         {
@@ -344,8 +351,11 @@ public class GunProjectileEntity extends ProjectileEntity implements IEntityForm
 
                 if (owner instanceof LivingEntity)
                 {
-                    EnchantmentHelper.onUserDamaged(livingEntity, owner);
-                    EnchantmentHelper.onTargetDamaged((LivingEntity)owner, livingEntity);
+                    ServerWorld serverWorld = (ServerWorld) livingEntity.getWorld();
+                    DamageSource damageSource = serverWorld.getDamageSources().mobAttack((LivingEntity) owner);
+
+
+                    EnchantmentHelper.onTargetDamaged(serverWorld, owner, damageSource, ItemStack.EMPTY);
                 }
 
                 this.onHit(livingEntity);

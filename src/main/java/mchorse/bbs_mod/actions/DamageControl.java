@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
@@ -44,7 +45,8 @@ public class DamageControl
             }
         }
 
-        this.blocks.add(new BlockCapture(new BlockPos(pos), state, entity == null ? null : entity.createNbtWithId()));
+        RegistryWrapper.WrapperLookup lookup = this.world.getRegistryManager();
+        NbtCompound tag = entity == null ? null : entity.createNbtWithId(lookup);
     }
 
     public void addEntity(Entity entity)
@@ -65,9 +67,13 @@ public class DamageControl
 
             if (block.blockEntity != null)
             {
-                BlockEntity blockEntity = BlockEntity.createFromNbt(block.pos, block.lastState, block.blockEntity);
+                RegistryWrapper.WrapperLookup registries = world.getRegistryManager();;
+                BlockEntity blockEntity = BlockEntity.createFromNbt(block.pos, block.lastState, block.blockEntity, registries);
 
-                this.world.addBlockEntity(blockEntity);
+                if (blockEntity != null)
+                {
+                    this.world.addBlockEntity(blockEntity);
+                }
             }
         }
 

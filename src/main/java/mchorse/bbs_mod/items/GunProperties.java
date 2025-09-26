@@ -15,6 +15,7 @@ import mchorse.bbs_mod.utils.MathUtils;
 import mchorse.bbs_mod.utils.interps.Interpolation;
 import mchorse.bbs_mod.utils.interps.Interpolations;
 import mchorse.bbs_mod.utils.pose.Transform;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -70,7 +71,7 @@ public class GunProperties extends ModelProperties
 
     public static GunProperties get(ItemStack stack)
     {
-        NbtCompound nbt = stack.getNbt();
+        NbtCompound nbt = (NbtCompound) stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, new NbtCompound());
         GunProperties properties = new GunProperties();
 
         if (nbt == null)
@@ -103,7 +104,7 @@ public class GunProperties extends ModelProperties
         Transform tp = properties.getTransformThirdPerson();
         Transform fp = properties.getTransformFirstPerson();
 
-        value.particle = new Identifier("minecraft:falling_water");
+        value.particle = Identifier.ofVanilla("minecraft:falling_water");
         projectileForm.settings.set(value);
         projectileForm.frequency.set(1);
         projectileForm.offsetX.set(0.1F);

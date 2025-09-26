@@ -31,7 +31,6 @@ public class SuperFakePlayerNetworkHandler extends ServerPlayNetworkHandler
             super(NetworkSide.CLIENTBOUND);
         }
 
-        @Override
         public void setPacketListener(PacketListener packetListener)
         {}
     }

@@ -15,9 +15,12 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.Stream;
 
 public class ModelBlockEntity extends BlockEntity
 {
@@ -69,26 +72,25 @@ public class ModelBlockEntity extends BlockEntity
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
-    @Override
     public NbtCompound toInitialChunkDataNbt()
     {
-        return createNbt();
+        // теперь createNbt требует RegistryWrapper
+        return createNbt(this.world != null ? this.world.getRegistryManager() : RegistryWrapper.WrapperLookup.of(Stream.empty()));
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt)
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries)
     {
-        super.writeNbt(nbt);
+        super.writeNbt(nbt, registries);
 
         MapType data = this.properties.toData();
-
         DataStorageUtils.writeToNbtCompound(nbt, "Properties", data);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt)
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries)
     {
-        super.readNbt(nbt);
+        super.readNbt(nbt, registries);
 
         BaseType baseType = DataStorageUtils.readFromNbtCompound(nbt, "Properties");
 

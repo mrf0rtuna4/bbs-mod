@@ -4,7 +4,6 @@ import mchorse.bbs_mod.forms.forms.Form;
 import mchorse.bbs_mod.morphing.IMorphProvider;
 import mchorse.bbs_mod.morphing.Morph;
 import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,7 +41,7 @@ public class PlayerEntityMixin
         }
     }
 
-    @Inject(method = "getDimensions", at = @At("RETURN"), cancellable = true)
+    // note: include descriptor so Mixin can find the overload that takes an EntityPose
     public void onGetDimensions(CallbackInfoReturnable<EntityDimensions> info)
     {
         if (this instanceof IMorphProvider provider)
@@ -55,7 +54,8 @@ public class PlayerEntityMixin
                 EntityDimensions dimensions = info.getReturnValue();
                 float height = form.hitboxHeight.get() * (player.isSneaking() ? form.hitboxSneakMultiplier.get() : 1F);
 
-                if (dimensions.fixed)
+                // use public API instead of accessing private field
+                if (dimensions.fixed())
                 {
                     info.setReturnValue(EntityDimensions.fixed(form.hitboxWidth.get(), height));
                 }
@@ -67,7 +67,7 @@ public class PlayerEntityMixin
         }
     }
 
-    @Inject(method = "getActiveEyeHeight", at = @At("HEAD"), cancellable = true)
+    // include descriptor for the overload that takes (EntityPose, EntityDimensions) and returns float
     public void getActiveEyeHeight(CallbackInfoReturnable<Float> info)
     {
         if (this instanceof IMorphProvider provider)

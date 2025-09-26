@@ -36,6 +36,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureTemplate;
 import net.minecraft.structure.StructureTemplateManager;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.InvalidIdentifierException;
 import net.minecraft.util.math.BlockPos;
@@ -457,34 +458,40 @@ public class BBSCommands
         BlockPos from = BlockPosArgumentType.getBlockPos(source, "from");
         BlockPos to = BlockPosArgumentType.getBlockPos(source, "to");
 
-        ServerWorld world = source.getSource().getWorld();
-        StructureTemplateManager structureTemplateManager = world.getStructureTemplateManager();
-        StructureTemplate structureTemplate;
-
+        Identifier id;
         try
         {
-            structureTemplate = structureTemplateManager.getTemplateOrBlank(new Identifier(name));
+            // если name в формате "modid:path"
+            id = Identifier.of(name);
         }
         catch (InvalidIdentifierException e)
         {
+            source.getSource().sendError(Text.literal("Invalid identifier: " + name));
             return 0;
         }
 
-        BlockPos min = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
-        BlockPos max = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
+        ServerWorld world = source.getSource().getWorld();
+        StructureTemplateManager structureTemplateManager = world.getStructureTemplateManager();
+        StructureTemplate structureTemplate = structureTemplateManager.getTemplateOrBlank(id);
+
+        BlockPos min = new BlockPos(
+                Math.min(from.getX(), to.getX()),
+                Math.min(from.getY(), to.getY()),
+                Math.min(from.getZ(), to.getZ())
+        );
+        BlockPos max = new BlockPos(
+                Math.max(from.getX(), to.getX()),
+                Math.max(from.getY(), to.getY()),
+                Math.max(from.getZ(), to.getZ())
+        );
         BlockPos size = max.subtract(min).add(1, 1, 1);
 
         structureTemplate.saveFromWorld(world, min, size, true, Blocks.STRUCTURE_VOID);
 
-        try
+        if (structureTemplateManager.saveTemplate(id))
         {
-            if (structureTemplateManager.saveTemplate(new Identifier(name)))
-            {
-                return 1;
-            }
+            return 1;
         }
-        catch (InvalidIdentifierException var7)
-        {}
 
         return 0;
     }
