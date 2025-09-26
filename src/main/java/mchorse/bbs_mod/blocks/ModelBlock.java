@@ -12,6 +12,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -22,7 +23,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
@@ -30,6 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.Nullable;
 
 public class ModelBlock extends Block implements BlockEntityProvider, Waterloggable
@@ -44,7 +45,7 @@ public class ModelBlock extends Block implements BlockEntityProvider, Waterlogga
         super(settings);
 
         this.setDefaultState(getDefaultState()
-            .with(Properties.WATERLOGGED, false));
+                .with(Properties.WATERLOGGED, false));
     }
 
     @Override
@@ -58,27 +59,34 @@ public class ModelBlock extends Block implements BlockEntityProvider, Waterlogga
     public BlockState getPlacementState(ItemPlacementContext ctx)
     {
         return this.getDefaultState()
-            .with(Properties.WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER));
+                .with(Properties.WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).isOf(Fluids.WATER));
     }
 
-    @Override
-    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state)
+    public ItemStack getPickStack(BlockView worldView, BlockPos pos, BlockState state)
     {
-        BlockEntity entity = world.getBlockEntity(pos);
+        BlockEntity entity = worldView.getBlockEntity(pos);
 
         if (entity instanceof ModelBlockEntity modelBlock)
         {
+            // safety: only obtain registries if we actually have a World instance (server or client world).
+            if (!(worldView instanceof World world))
+            {
+                return super.getPickStack((WorldView) worldView, pos, state);
+            }
+
             ItemStack stack = new ItemStack(this);
-            NbtCompound compound = new NbtCompound();
 
-            compound.put("BlockEntityTag", modelBlock.createFromNbt());
-            stack.set(DataComponentTypes.CUSTOM_DATA, compound);
+            // create NBT with registries from world
+            RegistryWrapper.WrapperLookup registries = world.getRegistryManager();
+            NbtCompound blockEntityTag = modelBlock.createNbtWithId(registries);
 
+            // put block entity NBT into item via DataComponentTypes.BLOCK_ENTITY_DATA (wrapped in NbtComponent)
+            stack.set(DataComponentTypes.BLOCK_ENTITY_DATA, NbtComponent.of(blockEntityTag));
 
             return stack;
         }
 
-        return super.getPickStack(world, pos, state);
+        return super.getPickStack((WorldView) worldView, pos, state);
     }
 
     @Override
@@ -112,20 +120,19 @@ public class ModelBlock extends Block implements BlockEntityProvider, Waterlogga
         return new ModelBlockEntity(pos, state);
     }
 
+    // NOTE: some mappings/versions have different onUse signatures.
+    // In your environment the superclass method expects: onUse(BlockState, World, BlockPos, PlayerEntity, BlockHitResult)
+    // so we override that variant and don't use Hand here.
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit)
     {
-        if (hand == Hand.MAIN_HAND)
+        if (player instanceof ServerPlayerEntity serverPlayer)
         {
-            if (player instanceof ServerPlayerEntity serverPlayer)
-            {
-                ServerNetwork.sendClickedModelBlock(serverPlayer, pos);
-            }
-
+            ServerNetwork.sendClickedModelBlock(serverPlayer, pos);
             return ActionResult.SUCCESS;
         }
 
-        return super.onUse(state, world, pos, player, hand, hit);
+        return super.onUse(state, world, pos, player, hit);
     }
 
     /* Waterloggable implementation */
@@ -144,10 +151,13 @@ public class ModelBlock extends Block implements BlockEntityProvider, Waterlogga
             if (be instanceof ModelBlockEntity model)
             {
                 ItemStack stack = new ItemStack(this);
-                NbtCompound wrapper = new NbtCompound();
 
-                wrapper.put("BlockEntityTag", model.createNbtWithId());
-                stack.setNbt(wrapper);
+                // obtain registries from world (we are server-side here)
+                RegistryWrapper.WrapperLookup registries = world.getRegistryManager();
+                NbtCompound wrapper = model.createNbtWithId(registries);
+
+                // store BE NBT into item through component
+                stack.set(DataComponentTypes.BLOCK_ENTITY_DATA, NbtComponent.of(wrapper));
 
                 ItemScatterer.spawn(world, pos, DefaultedList.ofSize(1, stack));
             }
